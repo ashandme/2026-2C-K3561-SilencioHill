@@ -36,26 +36,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/balcony-ladder-bottom.fbx;Models/kenney_retro-urban-kit/balcony-ladder-bottom
-
-#begin Models/kenney_retro-urban-kit/balcony-ladder-bottom.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/balcony-ladder-bottom.fbx;Models/kenney_retro-urban-kit/balcony-ladder-bottom
+/build:Models/kenney_retro-urban-kit/balcony-ladder-bottom.fbx
 
 #begin Models/kenney_retro-urban-kit/balcony-ladder-top.fbx
 /importer:FbxImporter
@@ -74,26 +55,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/balcony-ladder-top.fbx;Models/kenney_retro-urban-kit/balcony-ladder-top
-
-#begin Models/kenney_retro-urban-kit/balcony-ladder-top.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/balcony-ladder-top.fbx;Models/kenney_retro-urban-kit/balcony-ladder-top
+/build:Models/kenney_retro-urban-kit/balcony-ladder-top.fbx
 
 #begin Models/kenney_retro-urban-kit/balcony-type-a.fbx
 /importer:FbxImporter
@@ -112,26 +74,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/balcony-type-a.fbx;Models/kenney_retro-urban-kit/balcony-type-a
-
-#begin Models/kenney_retro-urban-kit/balcony-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/balcony-type-a.fbx;Models/kenney_retro-urban-kit/balcony-type-a
+/build:Models/kenney_retro-urban-kit/balcony-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/cliff-corner.fbx
 /importer:FbxImporter
@@ -150,26 +93,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/cliff-corner.fbx;Models/kenney_retro-urban-kit/cliff-corner
-
-#begin Models/kenney_retro-urban-kit/cliff-corner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/cliff-corner.fbx;Models/kenney_retro-urban-kit/cliff-corner
+/build:Models/kenney_retro-urban-kit/cliff-corner.fbx
 
 #begin Models/kenney_retro-urban-kit/cliff-side.fbx
 /importer:FbxImporter
@@ -188,26 +112,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/cliff-side.fbx;Models/kenney_retro-urban-kit/cliff-side
-
-#begin Models/kenney_retro-urban-kit/cliff-side.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/cliff-side.fbx;Models/kenney_retro-urban-kit/cliff-side
+/build:Models/kenney_retro-urban-kit/cliff-side.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-awning-small.fbx
 /importer:FbxImporter
@@ -226,26 +131,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-awning-small.fbx;Models/kenney_retro-urban-kit/detail-awning-small
-
-#begin Models/kenney_retro-urban-kit/detail-awning-small.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-awning-small.fbx;Models/kenney_retro-urban-kit/detail-awning-small
+/build:Models/kenney_retro-urban-kit/detail-awning-small.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-awning-wide.fbx
 /importer:FbxImporter
@@ -264,26 +150,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-awning-wide.fbx;Models/kenney_retro-urban-kit/detail-awning-wide
-
-#begin Models/kenney_retro-urban-kit/detail-awning-wide.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-awning-wide.fbx;Models/kenney_retro-urban-kit/detail-awning-wide
+/build:Models/kenney_retro-urban-kit/detail-awning-wide.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-barrier-strong-damaged.fbx
 /importer:FbxImporter
@@ -302,26 +169,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-strong-damaged.fbx;Models/kenney_retro-urban-kit/detail-barrier-strong-damaged
-
-#begin Models/kenney_retro-urban-kit/detail-barrier-strong-damaged.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-strong-damaged.fbx;Models/kenney_retro-urban-kit/detail-barrier-strong-damaged
+/build:Models/kenney_retro-urban-kit/detail-barrier-strong-damaged.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-barrier-strong-type-a.fbx
 /importer:FbxImporter
@@ -340,26 +188,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-strong-type-a.fbx;Models/kenney_retro-urban-kit/detail-barrier-strong-type-a
-
-#begin Models/kenney_retro-urban-kit/detail-barrier-strong-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-strong-type-a.fbx;Models/kenney_retro-urban-kit/detail-barrier-strong-type-a
+/build:Models/kenney_retro-urban-kit/detail-barrier-strong-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-barrier-strong-type-b.fbx
 /importer:FbxImporter
@@ -378,26 +207,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-strong-type-b.fbx;Models/kenney_retro-urban-kit/detail-barrier-strong-type-b
-
-#begin Models/kenney_retro-urban-kit/detail-barrier-strong-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-strong-type-b.fbx;Models/kenney_retro-urban-kit/detail-barrier-strong-type-b
+/build:Models/kenney_retro-urban-kit/detail-barrier-strong-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-barrier-type-a.fbx
 /importer:FbxImporter
@@ -416,26 +226,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-type-a.fbx;Models/kenney_retro-urban-kit/detail-barrier-type-a
-
-#begin Models/kenney_retro-urban-kit/detail-barrier-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-type-a.fbx;Models/kenney_retro-urban-kit/detail-barrier-type-a
+/build:Models/kenney_retro-urban-kit/detail-barrier-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-barrier-type-b.fbx
 /importer:FbxImporter
@@ -454,26 +245,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-type-b.fbx;Models/kenney_retro-urban-kit/detail-barrier-type-b
-
-#begin Models/kenney_retro-urban-kit/detail-barrier-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-barrier-type-b.fbx;Models/kenney_retro-urban-kit/detail-barrier-type-b
+/build:Models/kenney_retro-urban-kit/detail-barrier-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-beam.fbx
 /importer:FbxImporter
@@ -492,26 +264,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-beam.fbx;Models/kenney_retro-urban-kit/detail-beam
-
-#begin Models/kenney_retro-urban-kit/detail-beam.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-beam.fbx;Models/kenney_retro-urban-kit/detail-beam
+/build:Models/kenney_retro-urban-kit/detail-beam.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-bench.fbx
 /importer:FbxImporter
@@ -530,26 +283,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-bench.fbx;Models/kenney_retro-urban-kit/detail-bench
-
-#begin Models/kenney_retro-urban-kit/detail-bench.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-bench.fbx;Models/kenney_retro-urban-kit/detail-bench
+/build:Models/kenney_retro-urban-kit/detail-bench.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-block.fbx
 /importer:FbxImporter
@@ -568,26 +302,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-block.fbx;Models/kenney_retro-urban-kit/detail-block
-
-#begin Models/kenney_retro-urban-kit/detail-block.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-block.fbx;Models/kenney_retro-urban-kit/detail-block
+/build:Models/kenney_retro-urban-kit/detail-block.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-bricks-type-a.fbx
 /importer:FbxImporter
@@ -606,26 +321,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-bricks-type-a.fbx;Models/kenney_retro-urban-kit/detail-bricks-type-a
-
-#begin Models/kenney_retro-urban-kit/detail-bricks-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-bricks-type-a.fbx;Models/kenney_retro-urban-kit/detail-bricks-type-a
+/build:Models/kenney_retro-urban-kit/detail-bricks-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-bricks-type-b.fbx
 /importer:FbxImporter
@@ -644,26 +340,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-bricks-type-b.fbx;Models/kenney_retro-urban-kit/detail-bricks-type-b
-
-#begin Models/kenney_retro-urban-kit/detail-bricks-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-bricks-type-b.fbx;Models/kenney_retro-urban-kit/detail-bricks-type-b
+/build:Models/kenney_retro-urban-kit/detail-bricks-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-cables-type-a.fbx
 /importer:FbxImporter
@@ -682,26 +359,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-cables-type-a.fbx;Models/kenney_retro-urban-kit/detail-cables-type-a
-
-#begin Models/kenney_retro-urban-kit/detail-cables-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-cables-type-a.fbx;Models/kenney_retro-urban-kit/detail-cables-type-a
+/build:Models/kenney_retro-urban-kit/detail-cables-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-cables-type-b.fbx
 /importer:FbxImporter
@@ -720,26 +378,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-cables-type-b.fbx;Models/kenney_retro-urban-kit/detail-cables-type-b
-
-#begin Models/kenney_retro-urban-kit/detail-cables-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-cables-type-b.fbx;Models/kenney_retro-urban-kit/detail-cables-type-b
+/build:Models/kenney_retro-urban-kit/detail-cables-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-dumpster-closed.fbx
 /importer:FbxImporter
@@ -758,26 +397,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-dumpster-closed.fbx;Models/kenney_retro-urban-kit/detail-dumpster-closed
-
-#begin Models/kenney_retro-urban-kit/detail-dumpster-closed.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-dumpster-closed.fbx;Models/kenney_retro-urban-kit/detail-dumpster-closed
+/build:Models/kenney_retro-urban-kit/detail-dumpster-closed.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-dumpster-open.fbx
 /importer:FbxImporter
@@ -796,26 +416,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-dumpster-open.fbx;Models/kenney_retro-urban-kit/detail-dumpster-open
-
-#begin Models/kenney_retro-urban-kit/detail-dumpster-open.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-dumpster-open.fbx;Models/kenney_retro-urban-kit/detail-dumpster-open
+/build:Models/kenney_retro-urban-kit/detail-dumpster-open.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-light-double.fbx
 /importer:FbxImporter
@@ -834,26 +435,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-light-double.fbx;Models/kenney_retro-urban-kit/detail-light-double
-
-#begin Models/kenney_retro-urban-kit/detail-light-double.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-light-double.fbx;Models/kenney_retro-urban-kit/detail-light-double
+/build:Models/kenney_retro-urban-kit/detail-light-double.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-light-single.fbx
 /importer:FbxImporter
@@ -872,26 +454,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-light-single.fbx;Models/kenney_retro-urban-kit/detail-light-single
-
-#begin Models/kenney_retro-urban-kit/detail-light-single.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-light-single.fbx;Models/kenney_retro-urban-kit/detail-light-single
+/build:Models/kenney_retro-urban-kit/detail-light-single.fbx
 
 #begin Models/kenney_retro-urban-kit/detail-light-traffic.fbx
 /importer:FbxImporter
@@ -910,26 +473,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-light-traffic.fbx;Models/kenney_retro-urban-kit/detail-light-traffic
-
-#begin Models/kenney_retro-urban-kit/detail-light-traffic.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/detail-light-traffic.fbx;Models/kenney_retro-urban-kit/detail-light-traffic
+/build:Models/kenney_retro-urban-kit/detail-light-traffic.fbx
 
 #begin Models/kenney_retro-urban-kit/door-type-a.fbx
 /importer:FbxImporter
@@ -948,26 +492,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/door-type-a.fbx;Models/kenney_retro-urban-kit/door-type-a
-
-#begin Models/kenney_retro-urban-kit/door-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/door-type-a.fbx;Models/kenney_retro-urban-kit/door-type-a
+/build:Models/kenney_retro-urban-kit/door-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/door-type-b.fbx
 /importer:FbxImporter
@@ -986,26 +511,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/door-type-b.fbx;Models/kenney_retro-urban-kit/door-type-b
-
-#begin Models/kenney_retro-urban-kit/door-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/door-type-b.fbx;Models/kenney_retro-urban-kit/door-type-b
+/build:Models/kenney_retro-urban-kit/door-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/grass-corner-inner.fbx
 /importer:FbxImporter
@@ -1024,26 +530,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass-corner-inner.fbx;Models/kenney_retro-urban-kit/grass-corner-inner
-
-#begin Models/kenney_retro-urban-kit/grass-corner-inner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass-corner-inner.fbx;Models/kenney_retro-urban-kit/grass-corner-inner
+/build:Models/kenney_retro-urban-kit/grass-corner-inner.fbx
 
 #begin Models/kenney_retro-urban-kit/grass-corner.fbx
 /importer:FbxImporter
@@ -1062,26 +549,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass-corner.fbx;Models/kenney_retro-urban-kit/grass-corner
-
-#begin Models/kenney_retro-urban-kit/grass-corner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass-corner.fbx;Models/kenney_retro-urban-kit/grass-corner
+/build:Models/kenney_retro-urban-kit/grass-corner.fbx
 
 #begin Models/kenney_retro-urban-kit/grass-hill.fbx
 /importer:FbxImporter
@@ -1100,26 +568,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass-hill.fbx;Models/kenney_retro-urban-kit/grass-hill
-
-#begin Models/kenney_retro-urban-kit/grass-hill.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass-hill.fbx;Models/kenney_retro-urban-kit/grass-hill
+/build:Models/kenney_retro-urban-kit/grass-hill.fbx
 
 #begin Models/kenney_retro-urban-kit/grass.fbx
 /importer:FbxImporter
@@ -1138,36 +587,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass.fbx;Models/kenney_retro-urban-kit/grass
-
-#begin Models/kenney_retro-urban-kit/grass.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/grass.fbx;Models/kenney_retro-urban-kit/grass
-
-#begin Models/kenney_retro-urban-kit/License.txt
-/importer:
-/processor:
-/build:Models/kenney_retro-urban-kit/License.txt;Models/kenney_retro-urban-kit/License
-
-#begin Models/kenney_retro-urban-kit/License.txt
-/importer:
-/processor:
-/build:Models/kenney_retro-urban-kit/License.txt;Models/kenney_retro-urban-kit/License
+/build:Models/kenney_retro-urban-kit/grass.fbx
 
 #begin Models/kenney_retro-urban-kit/pallet-small.fbx
 /importer:FbxImporter
@@ -1186,26 +606,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/pallet-small.fbx;Models/kenney_retro-urban-kit/pallet-small
-
-#begin Models/kenney_retro-urban-kit/pallet-small.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/pallet-small.fbx;Models/kenney_retro-urban-kit/pallet-small
+/build:Models/kenney_retro-urban-kit/pallet-small.fbx
 
 #begin Models/kenney_retro-urban-kit/pallet.fbx
 /importer:FbxImporter
@@ -1224,26 +625,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/pallet.fbx;Models/kenney_retro-urban-kit/pallet
-
-#begin Models/kenney_retro-urban-kit/pallet.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/pallet.fbx;Models/kenney_retro-urban-kit/pallet
+/build:Models/kenney_retro-urban-kit/pallet.fbx
 
 #begin Models/kenney_retro-urban-kit/planks.fbx
 /importer:FbxImporter
@@ -1262,26 +644,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/planks.fbx;Models/kenney_retro-urban-kit/planks
-
-#begin Models/kenney_retro-urban-kit/planks.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/planks.fbx;Models/kenney_retro-urban-kit/planks
+/build:Models/kenney_retro-urban-kit/planks.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-center.fbx
 /importer:FbxImporter
@@ -1300,26 +663,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-center.fbx;Models/kenney_retro-urban-kit/road-asphalt-center
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-center.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-center.fbx;Models/kenney_retro-urban-kit/road-asphalt-center
+/build:Models/kenney_retro-urban-kit/road-asphalt-center.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-corner-inner.fbx
 /importer:FbxImporter
@@ -1338,26 +682,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-corner-inner.fbx;Models/kenney_retro-urban-kit/road-asphalt-corner-inner
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-corner-inner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-corner-inner.fbx;Models/kenney_retro-urban-kit/road-asphalt-corner-inner
+/build:Models/kenney_retro-urban-kit/road-asphalt-corner-inner.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-corner-outer.fbx
 /importer:FbxImporter
@@ -1376,26 +701,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-corner-outer.fbx;Models/kenney_retro-urban-kit/road-asphalt-corner-outer
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-corner-outer.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-corner-outer.fbx;Models/kenney_retro-urban-kit/road-asphalt-corner-outer
+/build:Models/kenney_retro-urban-kit/road-asphalt-corner-outer.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-corner.fbx
 /importer:FbxImporter
@@ -1414,26 +720,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-corner.fbx;Models/kenney_retro-urban-kit/road-asphalt-corner
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-corner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-corner.fbx;Models/kenney_retro-urban-kit/road-asphalt-corner
+/build:Models/kenney_retro-urban-kit/road-asphalt-corner.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-damaged.fbx
 /importer:FbxImporter
@@ -1452,26 +739,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-damaged.fbx;Models/kenney_retro-urban-kit/road-asphalt-damaged
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-damaged.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-damaged.fbx;Models/kenney_retro-urban-kit/road-asphalt-damaged
+/build:Models/kenney_retro-urban-kit/road-asphalt-damaged.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-pavement.fbx
 /importer:FbxImporter
@@ -1490,26 +758,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-pavement.fbx;Models/kenney_retro-urban-kit/road-asphalt-pavement
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-pavement.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-pavement.fbx;Models/kenney_retro-urban-kit/road-asphalt-pavement
+/build:Models/kenney_retro-urban-kit/road-asphalt-pavement.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-side.fbx
 /importer:FbxImporter
@@ -1528,26 +777,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-side.fbx;Models/kenney_retro-urban-kit/road-asphalt-side
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-side.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-side.fbx;Models/kenney_retro-urban-kit/road-asphalt-side
+/build:Models/kenney_retro-urban-kit/road-asphalt-side.fbx
 
 #begin Models/kenney_retro-urban-kit/road-asphalt-straight.fbx
 /importer:FbxImporter
@@ -1566,26 +796,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-straight.fbx;Models/kenney_retro-urban-kit/road-asphalt-straight
-
-#begin Models/kenney_retro-urban-kit/road-asphalt-straight.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-asphalt-straight.fbx;Models/kenney_retro-urban-kit/road-asphalt-straight
+/build:Models/kenney_retro-urban-kit/road-asphalt-straight.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-center.fbx
 /importer:FbxImporter
@@ -1604,26 +815,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-center.fbx;Models/kenney_retro-urban-kit/road-dirt-center
-
-#begin Models/kenney_retro-urban-kit/road-dirt-center.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-center.fbx;Models/kenney_retro-urban-kit/road-dirt-center
+/build:Models/kenney_retro-urban-kit/road-dirt-center.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-corner-inner.fbx
 /importer:FbxImporter
@@ -1642,26 +834,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-corner-inner.fbx;Models/kenney_retro-urban-kit/road-dirt-corner-inner
-
-#begin Models/kenney_retro-urban-kit/road-dirt-corner-inner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-corner-inner.fbx;Models/kenney_retro-urban-kit/road-dirt-corner-inner
+/build:Models/kenney_retro-urban-kit/road-dirt-corner-inner.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-corner-outer.fbx
 /importer:FbxImporter
@@ -1680,26 +853,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-corner-outer.fbx;Models/kenney_retro-urban-kit/road-dirt-corner-outer
-
-#begin Models/kenney_retro-urban-kit/road-dirt-corner-outer.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-corner-outer.fbx;Models/kenney_retro-urban-kit/road-dirt-corner-outer
+/build:Models/kenney_retro-urban-kit/road-dirt-corner-outer.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-corner.fbx
 /importer:FbxImporter
@@ -1718,26 +872,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-corner.fbx;Models/kenney_retro-urban-kit/road-dirt-corner
-
-#begin Models/kenney_retro-urban-kit/road-dirt-corner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-corner.fbx;Models/kenney_retro-urban-kit/road-dirt-corner
+/build:Models/kenney_retro-urban-kit/road-dirt-corner.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-damaged.fbx
 /importer:FbxImporter
@@ -1756,26 +891,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-damaged.fbx;Models/kenney_retro-urban-kit/road-dirt-damaged
-
-#begin Models/kenney_retro-urban-kit/road-dirt-damaged.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-damaged.fbx;Models/kenney_retro-urban-kit/road-dirt-damaged
+/build:Models/kenney_retro-urban-kit/road-dirt-damaged.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-pavement.fbx
 /importer:FbxImporter
@@ -1794,26 +910,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-pavement.fbx;Models/kenney_retro-urban-kit/road-dirt-pavement
-
-#begin Models/kenney_retro-urban-kit/road-dirt-pavement.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-pavement.fbx;Models/kenney_retro-urban-kit/road-dirt-pavement
+/build:Models/kenney_retro-urban-kit/road-dirt-pavement.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-side.fbx
 /importer:FbxImporter
@@ -1832,26 +929,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-side.fbx;Models/kenney_retro-urban-kit/road-dirt-side
-
-#begin Models/kenney_retro-urban-kit/road-dirt-side.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-side.fbx;Models/kenney_retro-urban-kit/road-dirt-side
+/build:Models/kenney_retro-urban-kit/road-dirt-side.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-straight.fbx
 /importer:FbxImporter
@@ -1870,26 +948,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-straight.fbx;Models/kenney_retro-urban-kit/road-dirt-straight
-
-#begin Models/kenney_retro-urban-kit/road-dirt-straight.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-straight.fbx;Models/kenney_retro-urban-kit/road-dirt-straight
+/build:Models/kenney_retro-urban-kit/road-dirt-straight.fbx
 
 #begin Models/kenney_retro-urban-kit/road-dirt-tile.fbx
 /importer:FbxImporter
@@ -1908,26 +967,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-tile.fbx;Models/kenney_retro-urban-kit/road-dirt-tile
-
-#begin Models/kenney_retro-urban-kit/road-dirt-tile.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/road-dirt-tile.fbx;Models/kenney_retro-urban-kit/road-dirt-tile
+/build:Models/kenney_retro-urban-kit/road-dirt-tile.fbx
 
 #begin Models/kenney_retro-urban-kit/roof-metal-poles.fbx
 /importer:FbxImporter
@@ -1946,26 +986,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/roof-metal-poles.fbx;Models/kenney_retro-urban-kit/roof-metal-poles
-
-#begin Models/kenney_retro-urban-kit/roof-metal-poles.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/roof-metal-poles.fbx;Models/kenney_retro-urban-kit/roof-metal-poles
+/build:Models/kenney_retro-urban-kit/roof-metal-poles.fbx
 
 #begin Models/kenney_retro-urban-kit/roof-metal-type-a.fbx
 /importer:FbxImporter
@@ -1984,26 +1005,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/roof-metal-type-a.fbx;Models/kenney_retro-urban-kit/roof-metal-type-a
-
-#begin Models/kenney_retro-urban-kit/roof-metal-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/roof-metal-type-a.fbx;Models/kenney_retro-urban-kit/roof-metal-type-a
+/build:Models/kenney_retro-urban-kit/roof-metal-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/roof-metal-type-b.fbx
 /importer:FbxImporter
@@ -2022,26 +1024,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/roof-metal-type-b.fbx;Models/kenney_retro-urban-kit/roof-metal-type-b
-
-#begin Models/kenney_retro-urban-kit/roof-metal-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/roof-metal-type-b.fbx;Models/kenney_retro-urban-kit/roof-metal-type-b
+/build:Models/kenney_retro-urban-kit/roof-metal-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/scaffolding-floor.fbx
 /importer:FbxImporter
@@ -2060,26 +1043,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/scaffolding-floor.fbx;Models/kenney_retro-urban-kit/scaffolding-floor
-
-#begin Models/kenney_retro-urban-kit/scaffolding-floor.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/scaffolding-floor.fbx;Models/kenney_retro-urban-kit/scaffolding-floor
+/build:Models/kenney_retro-urban-kit/scaffolding-floor.fbx
 
 #begin Models/kenney_retro-urban-kit/scaffolding-poles.fbx
 /importer:FbxImporter
@@ -2098,26 +1062,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/scaffolding-poles.fbx;Models/kenney_retro-urban-kit/scaffolding-poles
-
-#begin Models/kenney_retro-urban-kit/scaffolding-poles.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/scaffolding-poles.fbx;Models/kenney_retro-urban-kit/scaffolding-poles
+/build:Models/kenney_retro-urban-kit/scaffolding-poles.fbx
 
 #begin Models/kenney_retro-urban-kit/scaffolding-structure.fbx
 /importer:FbxImporter
@@ -2136,38 +1081,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/scaffolding-structure.fbx;Models/kenney_retro-urban-kit/scaffolding-structure
-
-#begin Models/kenney_retro-urban-kit/scaffolding-structure.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/scaffolding-structure.fbx;Models/kenney_retro-urban-kit/scaffolding-structure
-
-#begin Models/kenney_retro-urban-kit/Textures/asphalt.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/asphalt.png;Models/kenney_retro-urban-kit/Textures/asphalt
+/build:Models/kenney_retro-urban-kit/scaffolding-structure.fbx
 
 #begin Models/kenney_retro-urban-kit/Textures/asphalt.png
 /importer:TextureImporter
@@ -2193,18 +1107,6 @@
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/bars.png;Models/kenney_retro-urban-kit/Textures/bars
 
-#begin Models/kenney_retro-urban-kit/Textures/bars.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/bars.png;Models/kenney_retro-urban-kit/Textures/bars
-
 #begin Models/kenney_retro-urban-kit/Textures/concrete.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2216,30 +1118,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/concrete.png;Models/kenney_retro-urban-kit/Textures/concrete
-
-#begin Models/kenney_retro-urban-kit/Textures/concrete.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/concrete.png;Models/kenney_retro-urban-kit/Textures/concrete
-
-#begin Models/kenney_retro-urban-kit/Textures/dirt.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/dirt.png;Models/kenney_retro-urban-kit/Textures/dirt
 
 #begin Models/kenney_retro-urban-kit/Textures/dirt.png
 /importer:TextureImporter
@@ -2265,18 +1143,6 @@
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/doors.png;Models/kenney_retro-urban-kit/Textures/doors
 
-#begin Models/kenney_retro-urban-kit/Textures/doors.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/doors.png;Models/kenney_retro-urban-kit/Textures/doors
-
 #begin Models/kenney_retro-urban-kit/Textures/grass.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2288,30 +1154,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/grass.png;Models/kenney_retro-urban-kit/Textures/grass
-
-#begin Models/kenney_retro-urban-kit/Textures/grass.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/grass.png;Models/kenney_retro-urban-kit/Textures/grass
-
-#begin Models/kenney_retro-urban-kit/Textures/metal_wall.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/metal_wall.png;Models/kenney_retro-urban-kit/Textures/metal_wall
 
 #begin Models/kenney_retro-urban-kit/Textures/metal_wall.png
 /importer:TextureImporter
@@ -2337,18 +1179,6 @@
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/metal.png;Models/kenney_retro-urban-kit/Textures/metal
 
-#begin Models/kenney_retro-urban-kit/Textures/metal.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/metal.png;Models/kenney_retro-urban-kit/Textures/metal
-
 #begin Models/kenney_retro-urban-kit/Textures/planks.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2360,30 +1190,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/planks.png;Models/kenney_retro-urban-kit/Textures/planks
-
-#begin Models/kenney_retro-urban-kit/Textures/planks.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/planks.png;Models/kenney_retro-urban-kit/Textures/planks
-
-#begin Models/kenney_retro-urban-kit/Textures/rock.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/rock.png;Models/kenney_retro-urban-kit/Textures/rock
 
 #begin Models/kenney_retro-urban-kit/Textures/rock.png
 /importer:TextureImporter
@@ -2409,18 +1215,6 @@
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/roof_plates.png;Models/kenney_retro-urban-kit/Textures/roof_plates
 
-#begin Models/kenney_retro-urban-kit/Textures/roof_plates.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/roof_plates.png;Models/kenney_retro-urban-kit/Textures/roof_plates
-
 #begin Models/kenney_retro-urban-kit/Textures/roof.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2432,30 +1226,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/roof.png;Models/kenney_retro-urban-kit/Textures/roof
-
-#begin Models/kenney_retro-urban-kit/Textures/roof.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/roof.png;Models/kenney_retro-urban-kit/Textures/roof
-
-#begin Models/kenney_retro-urban-kit/Textures/signs.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/signs.png;Models/kenney_retro-urban-kit/Textures/signs
 
 #begin Models/kenney_retro-urban-kit/Textures/signs.png
 /importer:TextureImporter
@@ -2481,18 +1251,6 @@
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/tiles.png;Models/kenney_retro-urban-kit/Textures/tiles
 
-#begin Models/kenney_retro-urban-kit/Textures/tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/tiles.png;Models/kenney_retro-urban-kit/Textures/tiles
-
 #begin Models/kenney_retro-urban-kit/Textures/treeA.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2504,30 +1262,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/treeA.png;Models/kenney_retro-urban-kit/Textures/treeA
-
-#begin Models/kenney_retro-urban-kit/Textures/treeA.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/treeA.png;Models/kenney_retro-urban-kit/Textures/treeA
-
-#begin Models/kenney_retro-urban-kit/Textures/treeB.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/treeB.png;Models/kenney_retro-urban-kit/Textures/treeB
 
 #begin Models/kenney_retro-urban-kit/Textures/treeB.png
 /importer:TextureImporter
@@ -2553,18 +1287,6 @@
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/truck_alien.png;Models/kenney_retro-urban-kit/Textures/truck_alien
 
-#begin Models/kenney_retro-urban-kit/Textures/truck_alien.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/truck_alien.png;Models/kenney_retro-urban-kit/Textures/truck_alien
-
 #begin Models/kenney_retro-urban-kit/Textures/truck.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2576,30 +1298,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/truck.png;Models/kenney_retro-urban-kit/Textures/truck
-
-#begin Models/kenney_retro-urban-kit/Textures/truck.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/truck.png;Models/kenney_retro-urban-kit/Textures/truck
-
-#begin Models/kenney_retro-urban-kit/Textures/wall_garage.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/wall_garage.png;Models/kenney_retro-urban-kit/Textures/wall_garage
 
 #begin Models/kenney_retro-urban-kit/Textures/wall_garage.png
 /importer:TextureImporter
@@ -2625,18 +1323,6 @@
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/wall_lines.png;Models/kenney_retro-urban-kit/Textures/wall_lines
 
-#begin Models/kenney_retro-urban-kit/Textures/wall_lines.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/wall_lines.png;Models/kenney_retro-urban-kit/Textures/wall_lines
-
 #begin Models/kenney_retro-urban-kit/Textures/wall.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2648,30 +1334,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/kenney_retro-urban-kit/Textures/wall.png;Models/kenney_retro-urban-kit/Textures/wall
-
-#begin Models/kenney_retro-urban-kit/Textures/wall.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/wall.png;Models/kenney_retro-urban-kit/Textures/wall
-
-#begin Models/kenney_retro-urban-kit/Textures/windows.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Models/kenney_retro-urban-kit/Textures/windows.png;Models/kenney_retro-urban-kit/Textures/windows
 
 #begin Models/kenney_retro-urban-kit/Textures/windows.png
 /importer:TextureImporter
@@ -2702,26 +1364,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-large.fbx;Models/kenney_retro-urban-kit/tree-large
-
-#begin Models/kenney_retro-urban-kit/tree-large.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-large.fbx;Models/kenney_retro-urban-kit/tree-large
+/build:Models/kenney_retro-urban-kit/tree-large.fbx
 
 #begin Models/kenney_retro-urban-kit/tree-park-large.fbx
 /importer:FbxImporter
@@ -2740,26 +1383,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-park-large.fbx;Models/kenney_retro-urban-kit/tree-park-large
-
-#begin Models/kenney_retro-urban-kit/tree-park-large.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-park-large.fbx;Models/kenney_retro-urban-kit/tree-park-large
+/build:Models/kenney_retro-urban-kit/tree-park-large.fbx
 
 #begin Models/kenney_retro-urban-kit/tree-park-pine-large.fbx
 /importer:FbxImporter
@@ -2778,26 +1402,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-park-pine-large.fbx;Models/kenney_retro-urban-kit/tree-park-pine-large
-
-#begin Models/kenney_retro-urban-kit/tree-park-pine-large.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-park-pine-large.fbx;Models/kenney_retro-urban-kit/tree-park-pine-large
+/build:Models/kenney_retro-urban-kit/tree-park-pine-large.fbx
 
 #begin Models/kenney_retro-urban-kit/tree-pine-large.fbx
 /importer:FbxImporter
@@ -2816,26 +1421,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-pine-large.fbx;Models/kenney_retro-urban-kit/tree-pine-large
-
-#begin Models/kenney_retro-urban-kit/tree-pine-large.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-pine-large.fbx;Models/kenney_retro-urban-kit/tree-pine-large
+/build:Models/kenney_retro-urban-kit/tree-pine-large.fbx
 
 #begin Models/kenney_retro-urban-kit/tree-pine-small.fbx
 /importer:FbxImporter
@@ -2854,26 +1440,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-pine-small.fbx;Models/kenney_retro-urban-kit/tree-pine-small
-
-#begin Models/kenney_retro-urban-kit/tree-pine-small.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-pine-small.fbx;Models/kenney_retro-urban-kit/tree-pine-small
+/build:Models/kenney_retro-urban-kit/tree-pine-small.fbx
 
 #begin Models/kenney_retro-urban-kit/tree-shrub.fbx
 /importer:FbxImporter
@@ -2892,26 +1459,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-shrub.fbx;Models/kenney_retro-urban-kit/tree-shrub
-
-#begin Models/kenney_retro-urban-kit/tree-shrub.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-shrub.fbx;Models/kenney_retro-urban-kit/tree-shrub
+/build:Models/kenney_retro-urban-kit/tree-shrub.fbx
 
 #begin Models/kenney_retro-urban-kit/tree-small.fbx
 /importer:FbxImporter
@@ -2930,26 +1478,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-small.fbx;Models/kenney_retro-urban-kit/tree-small
-
-#begin Models/kenney_retro-urban-kit/tree-small.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/tree-small.fbx;Models/kenney_retro-urban-kit/tree-small
+/build:Models/kenney_retro-urban-kit/tree-small.fbx
 
 #begin Models/kenney_retro-urban-kit/truck-flat.fbx
 /importer:FbxImporter
@@ -2968,26 +1497,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-flat.fbx;Models/kenney_retro-urban-kit/truck-flat
-
-#begin Models/kenney_retro-urban-kit/truck-flat.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-flat.fbx;Models/kenney_retro-urban-kit/truck-flat
+/build:Models/kenney_retro-urban-kit/truck-flat.fbx
 
 #begin Models/kenney_retro-urban-kit/truck-green-cargo.fbx
 /importer:FbxImporter
@@ -3006,26 +1516,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-green-cargo.fbx;Models/kenney_retro-urban-kit/truck-green-cargo
-
-#begin Models/kenney_retro-urban-kit/truck-green-cargo.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-green-cargo.fbx;Models/kenney_retro-urban-kit/truck-green-cargo
+/build:Models/kenney_retro-urban-kit/truck-green-cargo.fbx
 
 #begin Models/kenney_retro-urban-kit/truck-green.fbx
 /importer:FbxImporter
@@ -3044,26 +1535,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-green.fbx;Models/kenney_retro-urban-kit/truck-green
-
-#begin Models/kenney_retro-urban-kit/truck-green.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-green.fbx;Models/kenney_retro-urban-kit/truck-green
+/build:Models/kenney_retro-urban-kit/truck-green.fbx
 
 #begin Models/kenney_retro-urban-kit/truck-grey-cargo.fbx
 /importer:FbxImporter
@@ -3082,26 +1554,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-grey-cargo.fbx;Models/kenney_retro-urban-kit/truck-grey-cargo
-
-#begin Models/kenney_retro-urban-kit/truck-grey-cargo.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-grey-cargo.fbx;Models/kenney_retro-urban-kit/truck-grey-cargo
+/build:Models/kenney_retro-urban-kit/truck-grey-cargo.fbx
 
 #begin Models/kenney_retro-urban-kit/truck-grey.fbx
 /importer:FbxImporter
@@ -3120,26 +1573,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-grey.fbx;Models/kenney_retro-urban-kit/truck-grey
-
-#begin Models/kenney_retro-urban-kit/truck-grey.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/truck-grey.fbx;Models/kenney_retro-urban-kit/truck-grey
+/build:Models/kenney_retro-urban-kit/truck-grey.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-column-painted.fbx
 /importer:FbxImporter
@@ -3158,26 +1592,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-column-painted.fbx;Models/kenney_retro-urban-kit/wall-a-column-painted
-
-#begin Models/kenney_retro-urban-kit/wall-a-column-painted.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-column-painted.fbx;Models/kenney_retro-urban-kit/wall-a-column-painted
+/build:Models/kenney_retro-urban-kit/wall-a-column-painted.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-column.fbx
 /importer:FbxImporter
@@ -3196,26 +1611,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-column.fbx;Models/kenney_retro-urban-kit/wall-a-column
-
-#begin Models/kenney_retro-urban-kit/wall-a-column.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-column.fbx;Models/kenney_retro-urban-kit/wall-a-column
+/build:Models/kenney_retro-urban-kit/wall-a-column.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-corner-painted.fbx
 /importer:FbxImporter
@@ -3234,26 +1630,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-corner-painted.fbx;Models/kenney_retro-urban-kit/wall-a-corner-painted
-
-#begin Models/kenney_retro-urban-kit/wall-a-corner-painted.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-corner-painted.fbx;Models/kenney_retro-urban-kit/wall-a-corner-painted
+/build:Models/kenney_retro-urban-kit/wall-a-corner-painted.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-corner.fbx
 /importer:FbxImporter
@@ -3272,26 +1649,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-corner.fbx;Models/kenney_retro-urban-kit/wall-a-corner
-
-#begin Models/kenney_retro-urban-kit/wall-a-corner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-corner.fbx;Models/kenney_retro-urban-kit/wall-a-corner
+/build:Models/kenney_retro-urban-kit/wall-a-corner.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-detail-painted.fbx
 /importer:FbxImporter
@@ -3310,26 +1668,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-detail-painted.fbx;Models/kenney_retro-urban-kit/wall-a-detail-painted
-
-#begin Models/kenney_retro-urban-kit/wall-a-detail-painted.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-detail-painted.fbx;Models/kenney_retro-urban-kit/wall-a-detail-painted
+/build:Models/kenney_retro-urban-kit/wall-a-detail-painted.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-detail.fbx
 /importer:FbxImporter
@@ -3348,26 +1687,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-detail.fbx;Models/kenney_retro-urban-kit/wall-a-detail
-
-#begin Models/kenney_retro-urban-kit/wall-a-detail.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-detail.fbx;Models/kenney_retro-urban-kit/wall-a-detail
+/build:Models/kenney_retro-urban-kit/wall-a-detail.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-diagonal.fbx
 /importer:FbxImporter
@@ -3386,26 +1706,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-diagonal.fbx;Models/kenney_retro-urban-kit/wall-a-diagonal
-
-#begin Models/kenney_retro-urban-kit/wall-a-diagonal.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-diagonal.fbx;Models/kenney_retro-urban-kit/wall-a-diagonal
+/build:Models/kenney_retro-urban-kit/wall-a-diagonal.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-door.fbx
 /importer:FbxImporter
@@ -3424,26 +1725,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-door.fbx;Models/kenney_retro-urban-kit/wall-a-door
-
-#begin Models/kenney_retro-urban-kit/wall-a-door.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-door.fbx;Models/kenney_retro-urban-kit/wall-a-door
+/build:Models/kenney_retro-urban-kit/wall-a-door.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-flat-garage.fbx
 /importer:FbxImporter
@@ -3462,26 +1744,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat-garage.fbx;Models/kenney_retro-urban-kit/wall-a-flat-garage
-
-#begin Models/kenney_retro-urban-kit/wall-a-flat-garage.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat-garage.fbx;Models/kenney_retro-urban-kit/wall-a-flat-garage
+/build:Models/kenney_retro-urban-kit/wall-a-flat-garage.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-flat-painted.fbx
 /importer:FbxImporter
@@ -3500,26 +1763,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat-painted.fbx;Models/kenney_retro-urban-kit/wall-a-flat-painted
-
-#begin Models/kenney_retro-urban-kit/wall-a-flat-painted.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat-painted.fbx;Models/kenney_retro-urban-kit/wall-a-flat-painted
+/build:Models/kenney_retro-urban-kit/wall-a-flat-painted.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-flat-window.fbx
 /importer:FbxImporter
@@ -3538,26 +1782,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat-window.fbx;Models/kenney_retro-urban-kit/wall-a-flat-window
-
-#begin Models/kenney_retro-urban-kit/wall-a-flat-window.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat-window.fbx;Models/kenney_retro-urban-kit/wall-a-flat-window
+/build:Models/kenney_retro-urban-kit/wall-a-flat-window.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-flat.fbx
 /importer:FbxImporter
@@ -3576,26 +1801,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat.fbx;Models/kenney_retro-urban-kit/wall-a-flat
-
-#begin Models/kenney_retro-urban-kit/wall-a-flat.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-flat.fbx;Models/kenney_retro-urban-kit/wall-a-flat
+/build:Models/kenney_retro-urban-kit/wall-a-flat.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-garage.fbx
 /importer:FbxImporter
@@ -3614,26 +1820,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-garage.fbx;Models/kenney_retro-urban-kit/wall-a-garage
-
-#begin Models/kenney_retro-urban-kit/wall-a-garage.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-garage.fbx;Models/kenney_retro-urban-kit/wall-a-garage
+/build:Models/kenney_retro-urban-kit/wall-a-garage.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-low-painted.fbx
 /importer:FbxImporter
@@ -3652,26 +1839,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-low-painted.fbx;Models/kenney_retro-urban-kit/wall-a-low-painted
-
-#begin Models/kenney_retro-urban-kit/wall-a-low-painted.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-low-painted.fbx;Models/kenney_retro-urban-kit/wall-a-low-painted
+/build:Models/kenney_retro-urban-kit/wall-a-low-painted.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-low.fbx
 /importer:FbxImporter
@@ -3690,26 +1858,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-low.fbx;Models/kenney_retro-urban-kit/wall-a-low
-
-#begin Models/kenney_retro-urban-kit/wall-a-low.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-low.fbx;Models/kenney_retro-urban-kit/wall-a-low
+/build:Models/kenney_retro-urban-kit/wall-a-low.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-open.fbx
 /importer:FbxImporter
@@ -3728,26 +1877,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-open.fbx;Models/kenney_retro-urban-kit/wall-a-open
-
-#begin Models/kenney_retro-urban-kit/wall-a-open.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-open.fbx;Models/kenney_retro-urban-kit/wall-a-open
+/build:Models/kenney_retro-urban-kit/wall-a-open.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-painted-diagonal.fbx
 /importer:FbxImporter
@@ -3766,26 +1896,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-painted-diagonal.fbx;Models/kenney_retro-urban-kit/wall-a-painted-diagonal
-
-#begin Models/kenney_retro-urban-kit/wall-a-painted-diagonal.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-painted-diagonal.fbx;Models/kenney_retro-urban-kit/wall-a-painted-diagonal
+/build:Models/kenney_retro-urban-kit/wall-a-painted-diagonal.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-painted.fbx
 /importer:FbxImporter
@@ -3804,26 +1915,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-painted.fbx;Models/kenney_retro-urban-kit/wall-a-painted
-
-#begin Models/kenney_retro-urban-kit/wall-a-painted.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-painted.fbx;Models/kenney_retro-urban-kit/wall-a-painted
+/build:Models/kenney_retro-urban-kit/wall-a-painted.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-roof-detailed.fbx
 /importer:FbxImporter
@@ -3842,26 +1934,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof-detailed.fbx;Models/kenney_retro-urban-kit/wall-a-roof-detailed
-
-#begin Models/kenney_retro-urban-kit/wall-a-roof-detailed.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof-detailed.fbx;Models/kenney_retro-urban-kit/wall-a-roof-detailed
+/build:Models/kenney_retro-urban-kit/wall-a-roof-detailed.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-roof-slant-detailed.fbx
 /importer:FbxImporter
@@ -3880,26 +1953,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof-slant-detailed.fbx;Models/kenney_retro-urban-kit/wall-a-roof-slant-detailed
-
-#begin Models/kenney_retro-urban-kit/wall-a-roof-slant-detailed.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof-slant-detailed.fbx;Models/kenney_retro-urban-kit/wall-a-roof-slant-detailed
+/build:Models/kenney_retro-urban-kit/wall-a-roof-slant-detailed.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-roof-slant.fbx
 /importer:FbxImporter
@@ -3918,26 +1972,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof-slant.fbx;Models/kenney_retro-urban-kit/wall-a-roof-slant
-
-#begin Models/kenney_retro-urban-kit/wall-a-roof-slant.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof-slant.fbx;Models/kenney_retro-urban-kit/wall-a-roof-slant
+/build:Models/kenney_retro-urban-kit/wall-a-roof-slant.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-roof.fbx
 /importer:FbxImporter
@@ -3956,26 +1991,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof.fbx;Models/kenney_retro-urban-kit/wall-a-roof
-
-#begin Models/kenney_retro-urban-kit/wall-a-roof.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-roof.fbx;Models/kenney_retro-urban-kit/wall-a-roof
+/build:Models/kenney_retro-urban-kit/wall-a-roof.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a-window.fbx
 /importer:FbxImporter
@@ -3994,26 +2010,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-window.fbx;Models/kenney_retro-urban-kit/wall-a-window
-
-#begin Models/kenney_retro-urban-kit/wall-a-window.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a-window.fbx;Models/kenney_retro-urban-kit/wall-a-window
+/build:Models/kenney_retro-urban-kit/wall-a-window.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-a.fbx
 /importer:FbxImporter
@@ -4032,26 +2029,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a.fbx;Models/kenney_retro-urban-kit/wall-a
-
-#begin Models/kenney_retro-urban-kit/wall-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-a.fbx;Models/kenney_retro-urban-kit/wall-a
+/build:Models/kenney_retro-urban-kit/wall-a.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-column.fbx
 /importer:FbxImporter
@@ -4070,26 +2048,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-column.fbx;Models/kenney_retro-urban-kit/wall-b-column
-
-#begin Models/kenney_retro-urban-kit/wall-b-column.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-column.fbx;Models/kenney_retro-urban-kit/wall-b-column
+/build:Models/kenney_retro-urban-kit/wall-b-column.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-corner.fbx
 /importer:FbxImporter
@@ -4108,26 +2067,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-corner.fbx;Models/kenney_retro-urban-kit/wall-b-corner
-
-#begin Models/kenney_retro-urban-kit/wall-b-corner.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-corner.fbx;Models/kenney_retro-urban-kit/wall-b-corner
+/build:Models/kenney_retro-urban-kit/wall-b-corner.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-detail-painted.fbx
 /importer:FbxImporter
@@ -4146,26 +2086,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-detail-painted.fbx;Models/kenney_retro-urban-kit/wall-b-detail-painted
-
-#begin Models/kenney_retro-urban-kit/wall-b-detail-painted.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-detail-painted.fbx;Models/kenney_retro-urban-kit/wall-b-detail-painted
+/build:Models/kenney_retro-urban-kit/wall-b-detail-painted.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-diagonal.fbx
 /importer:FbxImporter
@@ -4184,26 +2105,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-diagonal.fbx;Models/kenney_retro-urban-kit/wall-b-diagonal
-
-#begin Models/kenney_retro-urban-kit/wall-b-diagonal.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-diagonal.fbx;Models/kenney_retro-urban-kit/wall-b-diagonal
+/build:Models/kenney_retro-urban-kit/wall-b-diagonal.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-door.fbx
 /importer:FbxImporter
@@ -4222,26 +2124,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-door.fbx;Models/kenney_retro-urban-kit/wall-b-door
-
-#begin Models/kenney_retro-urban-kit/wall-b-door.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-door.fbx;Models/kenney_retro-urban-kit/wall-b-door
+/build:Models/kenney_retro-urban-kit/wall-b-door.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-flat-garage.fbx
 /importer:FbxImporter
@@ -4260,26 +2143,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-flat-garage.fbx;Models/kenney_retro-urban-kit/wall-b-flat-garage
-
-#begin Models/kenney_retro-urban-kit/wall-b-flat-garage.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-flat-garage.fbx;Models/kenney_retro-urban-kit/wall-b-flat-garage
+/build:Models/kenney_retro-urban-kit/wall-b-flat-garage.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-flat-window.fbx
 /importer:FbxImporter
@@ -4298,26 +2162,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-flat-window.fbx;Models/kenney_retro-urban-kit/wall-b-flat-window
-
-#begin Models/kenney_retro-urban-kit/wall-b-flat-window.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-flat-window.fbx;Models/kenney_retro-urban-kit/wall-b-flat-window
+/build:Models/kenney_retro-urban-kit/wall-b-flat-window.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-flat.fbx
 /importer:FbxImporter
@@ -4336,26 +2181,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-flat.fbx;Models/kenney_retro-urban-kit/wall-b-flat
-
-#begin Models/kenney_retro-urban-kit/wall-b-flat.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-flat.fbx;Models/kenney_retro-urban-kit/wall-b-flat
+/build:Models/kenney_retro-urban-kit/wall-b-flat.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-garage.fbx
 /importer:FbxImporter
@@ -4374,26 +2200,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-garage.fbx;Models/kenney_retro-urban-kit/wall-b-garage
-
-#begin Models/kenney_retro-urban-kit/wall-b-garage.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-garage.fbx;Models/kenney_retro-urban-kit/wall-b-garage
+/build:Models/kenney_retro-urban-kit/wall-b-garage.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-low.fbx
 /importer:FbxImporter
@@ -4412,26 +2219,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-low.fbx;Models/kenney_retro-urban-kit/wall-b-low
-
-#begin Models/kenney_retro-urban-kit/wall-b-low.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-low.fbx;Models/kenney_retro-urban-kit/wall-b-low
+/build:Models/kenney_retro-urban-kit/wall-b-low.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-open.fbx
 /importer:FbxImporter
@@ -4450,26 +2238,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-open.fbx;Models/kenney_retro-urban-kit/wall-b-open
-
-#begin Models/kenney_retro-urban-kit/wall-b-open.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-open.fbx;Models/kenney_retro-urban-kit/wall-b-open
+/build:Models/kenney_retro-urban-kit/wall-b-open.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-roof-detailed.fbx
 /importer:FbxImporter
@@ -4488,26 +2257,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof-detailed.fbx;Models/kenney_retro-urban-kit/wall-b-roof-detailed
-
-#begin Models/kenney_retro-urban-kit/wall-b-roof-detailed.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof-detailed.fbx;Models/kenney_retro-urban-kit/wall-b-roof-detailed
+/build:Models/kenney_retro-urban-kit/wall-b-roof-detailed.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-roof-slant-detailed.fbx
 /importer:FbxImporter
@@ -4526,26 +2276,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof-slant-detailed.fbx;Models/kenney_retro-urban-kit/wall-b-roof-slant-detailed
-
-#begin Models/kenney_retro-urban-kit/wall-b-roof-slant-detailed.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof-slant-detailed.fbx;Models/kenney_retro-urban-kit/wall-b-roof-slant-detailed
+/build:Models/kenney_retro-urban-kit/wall-b-roof-slant-detailed.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-roof-slant.fbx
 /importer:FbxImporter
@@ -4564,26 +2295,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof-slant.fbx;Models/kenney_retro-urban-kit/wall-b-roof-slant
-
-#begin Models/kenney_retro-urban-kit/wall-b-roof-slant.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof-slant.fbx;Models/kenney_retro-urban-kit/wall-b-roof-slant
+/build:Models/kenney_retro-urban-kit/wall-b-roof-slant.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-roof.fbx
 /importer:FbxImporter
@@ -4602,26 +2314,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof.fbx;Models/kenney_retro-urban-kit/wall-b-roof
-
-#begin Models/kenney_retro-urban-kit/wall-b-roof.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-roof.fbx;Models/kenney_retro-urban-kit/wall-b-roof
+/build:Models/kenney_retro-urban-kit/wall-b-roof.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b-window.fbx
 /importer:FbxImporter
@@ -4640,26 +2333,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-window.fbx;Models/kenney_retro-urban-kit/wall-b-window
-
-#begin Models/kenney_retro-urban-kit/wall-b-window.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b-window.fbx;Models/kenney_retro-urban-kit/wall-b-window
+/build:Models/kenney_retro-urban-kit/wall-b-window.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-b.fbx
 /importer:FbxImporter
@@ -4678,26 +2352,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b.fbx;Models/kenney_retro-urban-kit/wall-b
-
-#begin Models/kenney_retro-urban-kit/wall-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-b.fbx;Models/kenney_retro-urban-kit/wall-b
+/build:Models/kenney_retro-urban-kit/wall-b.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-broken-type-a.fbx
 /importer:FbxImporter
@@ -4716,26 +2371,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-broken-type-a.fbx;Models/kenney_retro-urban-kit/wall-broken-type-a
-
-#begin Models/kenney_retro-urban-kit/wall-broken-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-broken-type-a.fbx;Models/kenney_retro-urban-kit/wall-broken-type-a
+/build:Models/kenney_retro-urban-kit/wall-broken-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-broken-type-b.fbx
 /importer:FbxImporter
@@ -4754,26 +2390,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-broken-type-b.fbx;Models/kenney_retro-urban-kit/wall-broken-type-b
-
-#begin Models/kenney_retro-urban-kit/wall-broken-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-broken-type-b.fbx;Models/kenney_retro-urban-kit/wall-broken-type-b
+/build:Models/kenney_retro-urban-kit/wall-broken-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-c-flat-low.fbx
 /importer:FbxImporter
@@ -4792,26 +2409,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-c-flat-low.fbx;Models/kenney_retro-urban-kit/wall-c-flat-low
-
-#begin Models/kenney_retro-urban-kit/wall-c-flat-low.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-c-flat-low.fbx;Models/kenney_retro-urban-kit/wall-c-flat-low
+/build:Models/kenney_retro-urban-kit/wall-c-flat-low.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-c-flat.fbx
 /importer:FbxImporter
@@ -4830,26 +2428,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-c-flat.fbx;Models/kenney_retro-urban-kit/wall-c-flat
-
-#begin Models/kenney_retro-urban-kit/wall-c-flat.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-c-flat.fbx;Models/kenney_retro-urban-kit/wall-c-flat
+/build:Models/kenney_retro-urban-kit/wall-c-flat.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-fence.fbx
 /importer:FbxImporter
@@ -4868,26 +2447,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-fence.fbx;Models/kenney_retro-urban-kit/wall-fence
-
-#begin Models/kenney_retro-urban-kit/wall-fence.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-fence.fbx;Models/kenney_retro-urban-kit/wall-fence
+/build:Models/kenney_retro-urban-kit/wall-fence.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-steps-type-a.fbx
 /importer:FbxImporter
@@ -4906,26 +2466,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-steps-type-a.fbx;Models/kenney_retro-urban-kit/wall-steps-type-a
-
-#begin Models/kenney_retro-urban-kit/wall-steps-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-steps-type-a.fbx;Models/kenney_retro-urban-kit/wall-steps-type-a
+/build:Models/kenney_retro-urban-kit/wall-steps-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-steps-type-b.fbx
 /importer:FbxImporter
@@ -4944,26 +2485,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-steps-type-b.fbx;Models/kenney_retro-urban-kit/wall-steps-type-b
-
-#begin Models/kenney_retro-urban-kit/wall-steps-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-steps-type-b.fbx;Models/kenney_retro-urban-kit/wall-steps-type-b
+/build:Models/kenney_retro-urban-kit/wall-steps-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-type-a.fbx
 /importer:FbxImporter
@@ -4982,26 +2504,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-type-a.fbx;Models/kenney_retro-urban-kit/wall-type-a
-
-#begin Models/kenney_retro-urban-kit/wall-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-type-a.fbx;Models/kenney_retro-urban-kit/wall-type-a
+/build:Models/kenney_retro-urban-kit/wall-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/wall-type-b.fbx
 /importer:FbxImporter
@@ -5020,26 +2523,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-type-b.fbx;Models/kenney_retro-urban-kit/wall-type-b
-
-#begin Models/kenney_retro-urban-kit/wall-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/wall-type-b.fbx;Models/kenney_retro-urban-kit/wall-type-b
+/build:Models/kenney_retro-urban-kit/wall-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/window-small-type-a.fbx
 /importer:FbxImporter
@@ -5058,26 +2542,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-small-type-a.fbx;Models/kenney_retro-urban-kit/window-small-type-a
-
-#begin Models/kenney_retro-urban-kit/window-small-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-small-type-a.fbx;Models/kenney_retro-urban-kit/window-small-type-a
+/build:Models/kenney_retro-urban-kit/window-small-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/window-small-type-b.fbx
 /importer:FbxImporter
@@ -5096,26 +2561,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-small-type-b.fbx;Models/kenney_retro-urban-kit/window-small-type-b
-
-#begin Models/kenney_retro-urban-kit/window-small-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-small-type-b.fbx;Models/kenney_retro-urban-kit/window-small-type-b
+/build:Models/kenney_retro-urban-kit/window-small-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/window-wide-type-a.fbx
 /importer:FbxImporter
@@ -5134,26 +2580,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-a.fbx;Models/kenney_retro-urban-kit/window-wide-type-a
-
-#begin Models/kenney_retro-urban-kit/window-wide-type-a.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-a.fbx;Models/kenney_retro-urban-kit/window-wide-type-a
+/build:Models/kenney_retro-urban-kit/window-wide-type-a.fbx
 
 #begin Models/kenney_retro-urban-kit/window-wide-type-b.fbx
 /importer:FbxImporter
@@ -5172,26 +2599,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-b.fbx;Models/kenney_retro-urban-kit/window-wide-type-b
-
-#begin Models/kenney_retro-urban-kit/window-wide-type-b.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-b.fbx;Models/kenney_retro-urban-kit/window-wide-type-b
+/build:Models/kenney_retro-urban-kit/window-wide-type-b.fbx
 
 #begin Models/kenney_retro-urban-kit/window-wide-type-c.fbx
 /importer:FbxImporter
@@ -5210,26 +2618,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-c.fbx;Models/kenney_retro-urban-kit/window-wide-type-c
-
-#begin Models/kenney_retro-urban-kit/window-wide-type-c.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-c.fbx;Models/kenney_retro-urban-kit/window-wide-type-c
+/build:Models/kenney_retro-urban-kit/window-wide-type-c.fbx
 
 #begin Models/kenney_retro-urban-kit/window-wide-type-d.fbx
 /importer:FbxImporter
@@ -5248,26 +2637,7 @@
 /processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-d.fbx;Models/kenney_retro-urban-kit/window-wide-type-d
-
-#begin Models/kenney_retro-urban-kit/window-wide-type-d.fbx
-/importer:FbxImporter
-/processor:ModelProcessor
-/processorParam:ColorKeyColor=0,0,0,0
-/processorParam:ColorKeyEnabled=True
-/processorParam:DefaultEffect=BasicEffect
-/processorParam:GenerateMipmaps=True
-/processorParam:GenerateTangentFrames=False
-/processorParam:PremultiplyTextureAlpha=True
-/processorParam:PremultiplyVertexColors=True
-/processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
-/processorParam:SwapWindingOrder=False
-/processorParam:TextureFormat=Compressed
-/build:Models/kenney_retro-urban-kit/window-wide-type-d.fbx;Models/kenney_retro-urban-kit/window-wide-type-d
+/build:Models/kenney_retro-urban-kit/window-wide-type-d.fbx
 
 #begin Models/tgc-logo/tgc-logo.fbx
 /importer:FbxImporter
