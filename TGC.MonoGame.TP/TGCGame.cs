@@ -19,7 +19,7 @@ public class TGCGame : Game
     public const string ContentFolderSounds = "Sounds/";
     public const string ContentFolderSpriteFonts = "SpriteFonts/";
     public const string ContentFolderTextures = "Textures/";
-    
+
     private readonly GraphicsDeviceManager _graphics;
 
     private FreeCamera cam;
@@ -32,6 +32,9 @@ public class TGCGame : Game
     private SpriteBatch _spriteBatch;
     //private Matrix _view;
     private Matrix _world;
+
+    // New: font for drawing camera position
+    private SpriteFont _font;
 
     /// <summary>
     ///     Constructor del juego.
@@ -108,6 +111,11 @@ public class TGCGame : Game
         }*/
         _tilemap.LoadContent(Content);
         _propmap.LoadFromJson("Content/props.json", Content);
+
+        // Load a SpriteFont to draw the camera position.
+        // Ensure a SpriteFont named "DefaultFont.spritefont" exists under Content/SpriteFonts.
+        _font = Content.Load<SpriteFont>(ContentFolderSpriteFonts + "CascadiaCode/CascadiaCodePL");
+
         base.LoadContent();
     }
 
@@ -149,11 +157,16 @@ public class TGCGame : Game
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
 
-        /*foreach (var mesh in _model.Meshes)
-        {
-            _effect.Parameters["World"].SetValue(mesh.ParentBone.Transform * _world);
-            mesh.Draw();
-        }*/
+
+        // Draw camera position in top-left corner.
+        // Compute camera world position by inverting the view matrix.
+        var camPos = Matrix.Invert(cam.View).Translation;
+        var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}", camPos.X, camPos.Y, camPos.Z);
+
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+        _spriteBatch.DrawString(_font, camText, new Vector2(10f, 10f), Color.White);
+        _spriteBatch.End();
+
         _propmap.Draw(cam.View, _projection);
 
         _tilemap.Draw(cam.View, _projection);

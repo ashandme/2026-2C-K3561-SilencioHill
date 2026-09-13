@@ -35,6 +35,7 @@ namespace TGC.MonoGame.TP
             /*_props.Add(new Prop(treeModel, shader, new Vector3(0, 0, 140)));
             _props.Add(new Prop(treeModel, shader, new Vector3(125, 0, 15), scale: new Vector3(1.5f)));
             _props.Add(new Prop(truckflat, shader, new Vector3(-100, 0, 0), rotation: new Vector3(0, MathHelper.ToRadians(90), 0)));
+            _props.Add(new Prop(truckflat, shader, new Vector3(-100, 0, 0), rotation: new Vector3(0, MathHelper.ToRadians(90), 0)));
             _props.Add(new Prop(bench, shader, new Vector3(20, 0, 20)));
             _props.Add(new Prop(lightSingle, shader, new Vector3(30, 0, 15)));
             _props.Add(new Prop(dumpster, shader, new Vector3(-10, 0, 5)));
@@ -65,7 +66,7 @@ namespace TGC.MonoGame.TP
                     $"Asegurate de que 'props.json' tenga 'Copy to Output Directory' en 'PreserveNewest' / 'Copy if newer'."
                 );
             }
-            var jsonText = File.ReadAllText(filePath);
+            var jsonText = File.ReadAllText(fullPath);
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var mapData = JsonSerializer.Deserialize<MapData>(jsonText, options);
 
@@ -85,11 +86,11 @@ namespace TGC.MonoGame.TP
                     _loadedEffects[item.EffectPath] = effect;
                 }
 
-                // Si no tiene color en el JSON, generamos uno aleatorio
-                var color = item.Color ?? new Vector3(_random.NextSingle(), _random.NextSingle(), _random.NextSingle());
+                var color = item.ColorVector ?? new Vector3(_random.NextSingle(), _random.NextSingle(), _random.NextSingle());
 
-                // Se pasan directo Position, Rotation y Scale sin ParseVector3
-                _props.Add(new Prop(model, effect, item.Position, item.Rotation, item.Scale, color));
+                _props.Add(new Prop(model, effect, item.PositionVector,
+                    item.RotationVector,
+                    item.ScaleVector, color));
             }
         }
 

@@ -1,28 +1,20 @@
 {
   "Props": [
     {
-      "ModelPath": "Models/kenney_retro-urban-kit/truck-flat",
+      "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
       "EffectPath": "Effects/BasicShader",
-      "Position": { "X": 10.0, "Y": 0.0, "Z": 15.0 },
-      "Rotation": { "X": 0.0, "Y": 10.0, "Z": 0.0 },
-      "Scale": { "X": 1.0, "Y": 1.0, "Z": 1.0 },
-      "Color": { "X": 1.0, "Y": 0.65, "Z": 0.2 }
+      "Position": [10.0, 0.0, -105.0],
+      "Rotation": [0.0, 100.0, 0.0],
+      "Scale": [1.0, 1.0, 1.0],
+      "Color": [1.0, 0.65, 0.2]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
       "EffectPath": "Effects/BasicShader",
-      "Position": { "X": -15.0, "Y": 0.0, "Z": 10.0 },
-      "Rotation": { "X": 0.0, "Y": 0.0, "Z": 0.0 },
-        "Scale": {
-            "X": 2.0,
-            "Y": 2.0,
-            "Z": 2.0
-        },
-        "Color": {
-            "X": 0.0,
-            "Y": 1.0,
-            "Z": 0.0
-        }
+      "Position": [-15.0, 0.0, 1000.0],
+      "Rotation": [0.0, 0.0, 0.0],
+        "Scale": [2.0, 2.0, 2.0],
+        "Color": [0.0, 1.0, 0.0]
     }
   ]
 }
