@@ -84,7 +84,7 @@ namespace TGC.MonoGame.TP
                 var color = item.Color ?? new Vector3(_random.NextSingle(), _random.NextSingle(), _random.NextSingle());
 
                 // Se pasan directo Position, Rotation y Scale sin ParseVector3
-                _props.Add(new Prop(model, effect, item.Position, color, item.Rotation, item.Scale));
+                _props.Add(new Prop(model, effect, item.Position, item.Rotation, item.Scale, color));
             }
         }
 

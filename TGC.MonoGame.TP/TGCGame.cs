@@ -25,7 +25,7 @@ public class TGCGame : Game
     private FreeCamera cam;
     private Map _map;
     private Effect _effect;
-    private Model _model;
+    //private Model _model;
     private Matrix _projection;
     private float _rotation;
     private SpriteBatch _spriteBatch;
@@ -88,7 +88,7 @@ public class TGCGame : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // Cargo el modelo del logo.
-        _model = Content.Load<Model>(ContentFolder3D + "tgc-logo/tgc-logo");
+        //_model = Content.Load<Model>(ContentFolder3D + "tgc-logo/tgc-logo");
 
         // Cargo un efecto basico propio declarado en el Content pipeline.
         // En el juego no pueden usar BasicEffect de MG, deben usar siempre efectos propios.
@@ -96,14 +96,14 @@ public class TGCGame : Game
 
         // Asigno el efecto que cargue a cada parte del mesh.
         // Un modelo puede tener mas de 1 mesh internamente.
-        foreach (var mesh in _model.Meshes)
+        /*foreach (var mesh in _model.Meshes)
         {
             // Un mesh puede tener mas de 1 mesh part (cada 1 puede tener su propio efecto).
             foreach (var meshPart in mesh.MeshParts)
             {
                 meshPart.Effect = _effect;
             }
-        }
+        }*/
         _map.LoadContent(Content);
         base.LoadContent();
     }
@@ -146,11 +146,11 @@ public class TGCGame : Game
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
 
-        foreach (var mesh in _model.Meshes)
+        /*foreach (var mesh in _model.Meshes)
         {
             _effect.Parameters["World"].SetValue(mesh.ParentBone.Transform * _world);
             mesh.Draw();
-        }
+        }*/
         _map.Draw(cam.View, _projection);
     }
 
