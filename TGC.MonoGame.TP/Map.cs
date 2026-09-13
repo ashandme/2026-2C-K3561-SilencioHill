@@ -55,11 +55,16 @@ namespace TGC.MonoGame.TP
         }
         public void LoadFromJson(string filePath, ContentManager content)
         {
-            _props.Clear();
+            //_props.Clear();
+            var fullPath = Path.Combine(AppContext.BaseDirectory, filePath);
 
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException($"no existe o no tiene permisos: {filePath}");
-
+            if (!File.Exists(fullPath))
+            {
+                throw new FileNotFoundException(
+                    $"No se encontró el archivo de configuración en: {fullPath}\n" +
+                    $"Asegurate de que 'props.json' tenga 'Copy to Output Directory' en 'PreserveNewest' / 'Copy if newer'."
+                );
+            }
             var jsonText = File.ReadAllText(filePath);
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var mapData = JsonSerializer.Deserialize<MapData>(jsonText, options);

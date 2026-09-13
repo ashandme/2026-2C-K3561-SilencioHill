@@ -23,7 +23,8 @@ public class TGCGame : Game
     private readonly GraphicsDeviceManager _graphics;
 
     private FreeCamera cam;
-    private Map _map;
+    private Map _tilemap;
+    private Map _propmap;
     private Effect _effect;
     //private Model _model;
     private Matrix _projection;
@@ -70,7 +71,8 @@ public class TGCGame : Game
         _world = Matrix.Identity;
         //_view = Matrix.CreateLookAt(Vector3.UnitZ * 150, Vector3.Zero, Vector3.Up);
         _projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 1, 1000);
-        _map = new Map();
+        _tilemap = new Map();
+        _propmap = new Map();
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         cam = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         //cam.FarPlane = 15100.0f;
@@ -104,7 +106,8 @@ public class TGCGame : Game
                 meshPart.Effect = _effect;
             }
         }*/
-        _map.LoadContent(Content);
+        _tilemap.LoadContent(Content);
+        _propmap.LoadFromJson("Content/props.json", Content);
         base.LoadContent();
     }
 
@@ -151,7 +154,9 @@ public class TGCGame : Game
             _effect.Parameters["World"].SetValue(mesh.ParentBone.Transform * _world);
             mesh.Draw();
         }*/
-        _map.Draw(cam.View, _projection);
+        _propmap.Draw(cam.View, _projection);
+
+        _tilemap.Draw(cam.View, _projection);
     }
 
     /// <summary>
