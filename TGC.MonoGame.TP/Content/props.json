@@ -1,20 +1,36 @@
 {
-  "Props": [
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [10.0, 0.0, -105.0],
-      "Rotation": [0.0, 100.0, 0.0],
-      "Scale": [1.0, 1.0, 1.0],
-      "Color": [1.0, 0.65, 0.2]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [-15.0, 0.0, 1000.0],
-      "Rotation": [0.0, 0.0, 0.0],
-        "Scale": [2.0, 2.0, 2.0],
-        "Color": [0.0, 1.0, 0.0]
-    }
+    "Props": [
+        {
+            "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 10.0, 0.0, 435.0 ],
+            "Rotation": [ 0.0, 100.0, 0.0 ],
+            "Scale": [ 1.0, 1.0, 1.0 ],
+            "Color": [ 1.0, 0.65, 0.2 ]
+        },
+        {
+            "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 15.0, 0.0, 1000.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 1.0, 1.0, 1.0 ],
+            "Color": [ 0.0, 1.0, 0.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-large",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 400.0, 0.0, 1000.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 1.0, 1.0, 1.0 ],
+            "Color": [ 0.0, 1.0, 0.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_retro-urban-kit/wall-a",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 200.0, 0.0, 300.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 2.0, 3.0, 1.0 ],
+            "Color": [ 1.0, 0.0, 0.0 ]
+        }
   ]
 }

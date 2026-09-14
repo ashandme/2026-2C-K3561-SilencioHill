@@ -36,6 +36,12 @@ public class TGCGame : Game
     // New: font for drawing camera position
     private SpriteFont _font;
 
+    // New: control whether the camera text is shown
+    private bool _showCameraPosition = true;
+
+    // New: previous keyboard state to detect key presses (edge)
+    private KeyboardState _previousKeyboardState;
+
     /// <summary>
     ///     Constructor del juego.
     /// </summary>
@@ -79,6 +85,10 @@ public class TGCGame : Game
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         cam = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         //cam.FarPlane = 15100.0f;
+
+        // Inicializar estado previo del teclado para detectar pulsaciones.
+        _previousKeyboardState = Keyboard.GetState();
+
         base.Initialize();
     }
 
@@ -129,16 +139,27 @@ public class TGCGame : Game
         // Aca deberiamos poner toda la logica de actualizacion del juego.
 
         // Capturar Input teclado
-        if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+        var ks = Keyboard.GetState();
+        if (ks.IsKeyDown(Keys.Escape))
         {
             //Salgo del juego.
             Exit();
         }
+
+        // Detectar pulsacion de la tecla X para alternar la opcion de mostrar la posicion de la camara.
+        if (ks.IsKeyDown(Keys.X) && !_previousKeyboardState.IsKeyDown(Keys.X))
+        {
+            _showCameraPosition = !_showCameraPosition;
+        }
+
         cam.Update(gameTime);
         // Basado en el tiempo que paso se va generando una rotacion.
         _rotation += Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
 
         _world = Matrix.CreateRotationY(_rotation);
+
+        // Actualizar el estado previo del teclado al final del Update.
+        _previousKeyboardState = ks;
 
         base.Update(gameTime);
     }
@@ -149,27 +170,28 @@ public class TGCGame : Game
     /// </summary>
     protected override void Draw(GameTime gameTime)
     {
-        // Aca deberiamos poner toda la logia de renderizado del juego.
-        GraphicsDevice.Clear(Color.Aquamarine);
+        // Limpiar color y depth buffer
+        GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, new Color(0.1f,0.0f,0.3f), 1.0f, 0);
 
-        // Para dibujar le modelo necesitamos pasarle informacion que el efecto esta esperando.
+        // Pasar parametros al shader
         _effect.Parameters["View"].SetValue(cam.View);
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
 
-
         // Draw camera position in top-left corner.
         // Compute camera world position by inverting the view matrix.
-        var camPos = Matrix.Invert(cam.View).Translation;
-        var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}", camPos.X, camPos.Y, camPos.Z);
+        if (_showCameraPosition)
+        {
+            var camPos = Matrix.Invert(cam.View).Translation;
+            var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}", camPos.X, camPos.Y, camPos.Z);
+            _tilemap.Draw(cam.View, _projection);
+            _propmap.Draw(cam.View, _projection);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            _spriteBatch.DrawString(_font, camText, new Vector2(10f, 10f), Color.White);
+            _spriteBatch.End();
 
-        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-        _spriteBatch.DrawString(_font, camText, new Vector2(10f, 10f), Color.White);
-        _spriteBatch.End();
-
-        _propmap.Draw(cam.View, _projection);
-
-        _tilemap.Draw(cam.View, _projection);
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+        }
     }
 
     /// <summary>
