@@ -24,24 +24,26 @@ public class TGCGame : Game
 
     private FreeCamera cam;
     private Map _tilemap;
-    private Map _propmap;
-    private Map _insidepropmap;
+    private MapJson _propmap;
+    private MapJson _insidepropmap;
     private Effect _effect;
     //private Model _model;
     private Matrix _projection;
-    private float _rotation;
     private SpriteBatch _spriteBatch;
     //private Matrix _view;
     private Matrix _world;
 
     // New: font for drawing camera position
     private SpriteFont _font;
-
     // PARA MOSTRAR SOLO LOS PROPS DE INTERIOR (X) O TODO (default)
     private bool _showInsideOnly = false;
 
     // New: previous keyboard state to detect key presses (edge)
     private KeyboardState _previousKeyboardState;
+
+    // Añadir campos para estado de recarga (en la clase)
+    private string _reloadStatus = "";
+    private double _reloadStatusTimer = 0;
 
     /// <summary>
     ///     Constructor del juego.
@@ -80,10 +82,10 @@ public class TGCGame : Game
         // Configuramos nuestras matrices de la escena.
         _world = Matrix.Identity;
         //_view = Matrix.CreateLookAt(Vector3.UnitZ * 150, Vector3.Zero, Vector3.Up);
-        _projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 1, 1000);
+        _projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 1, 2000);
         _tilemap = new Map();
-        _propmap = new Map();
-        _insidepropmap = new Map(); // <-- inicializar para evitar null reference
+        _propmap = new MapJson();
+        _insidepropmap = new MapJson(); // <-- inicializar para evitar null reference
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         cam = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         //cam.FarPlane = 15100.0f;
@@ -138,7 +140,7 @@ public class TGCGame : Game
     /// </summary>
     protected override void Update(GameTime gameTime)
     {
-        // Aca deberiamos poner toda la logica de actualizacion del juego.
+        // Aca deveriamos poner toda la logica de actualizacion del juego.
 
         // Capturar Input teclado
         var ks = Keyboard.GetState();
@@ -147,19 +149,35 @@ public class TGCGame : Game
             //Salgo del juego.
             Exit();
         }
-
-        // Detectar pulsacion de la tecla X para alternar el modo de dibujo:
-        // false (por defecto): dibujar tilemap + propmap
-        // true: dibujar solo insidepropmap
-        if (ks.IsKeyDown(Keys.X) && !_previousKeyboardState.IsKeyDown(Keys.X))
+        // F1: SWITCH DIBUJAR EXTERIOR/INTERIOR
+        if (ks.IsKeyDown(Keys.F1) && !_previousKeyboardState.IsKeyDown(Keys.F1))
         {
             _showInsideOnly = !_showInsideOnly;
         }
 
-        cam.Update(gameTime);
-        // Basado en el tiempo que paso se va generando una rotacion.
-        _rotation += Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
+        // F2: PARA RECARGAR LOS JSON (EN VS NO FUNCA)
+        if (ks.IsKeyDown(Keys.F2) && !_previousKeyboardState.IsKeyDown(Keys.F2))
+        {
+            try
+            {
+                _propmap.LoadFromJson("Content/props.json", Content);
+                _insidepropmap.LoadFromJson("Content/insideprops.json", Content);
+                _reloadStatus = "Reload OK";
+                _reloadStatusTimer = 2.0; // mostrar 2 segundos
+            }
+            catch (Exception ex)
+            {
+                _reloadStatus = "Reload ERROR: " + ex.Message;
+                _reloadStatusTimer = 5.0;
+            }
+        }
+        if (_reloadStatusTimer > 0)
+        {
+            _reloadStatusTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (_reloadStatusTimer <= 0) _reloadStatus = "";
+        }
 
+        cam.Update(gameTime);
         // Actualizar el estado previo del teclado al final del Update.
         _previousKeyboardState = ks;
 
@@ -191,14 +209,15 @@ public class TGCGame : Game
             _propmap.Draw(cam.View, _projection);
         }
         else
-        {   
-            // dibujar solo inside pero en wireframe (triángulos como líneas)
+        {
             _insidepropmap.DrawWireframe(GraphicsDevice, cam.View, _projection);
         }
-
-        // Dibujar HUD / texto de cámara encima
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
         _spriteBatch.DrawString(_font, camText, new Vector2(10f, 10f), Color.White);
+        if (!string.IsNullOrEmpty(_reloadStatus))
+        {
+            _spriteBatch.DrawString(_font, _reloadStatus, new Vector2(10f, 30f), Color.Yellow);
+        }
         _spriteBatch.End();
 
         // Restaurar el Depth/Stencil para que el Z-buffer funcione correctamente tras usar SpriteBatch
