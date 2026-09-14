@@ -180,8 +180,11 @@ namespace TGC.MonoGame.TP
 
                 var color = item.ColorVector ?? new Vector3(_random.NextSingle(), _random.NextSingle(), _random.NextSingle());
 
+                // Convert rotation from degrees (in JSON) to radians for internal use
+                var rotationRadians = item.RotationVector * (MathF.PI / 180f);
+
                 _props.Add(new Prop(model, effect, item.PositionVector,
-                    item.RotationVector,
+                    rotationRadians,
                     item.ScaleVector, color));
             }
         }
@@ -193,6 +196,15 @@ namespace TGC.MonoGame.TP
             {
                 // Si cada prop tiene color propio o compartís uno genérico:
                 prop.Draw(view, projection);
+            }
+        }
+
+        // Nuevo: dibujar todo el map en modo wireframe
+        public void DrawWireframe(GraphicsDevice graphicsDevice, Matrix view, Matrix projection)
+        {
+            foreach (var prop in _props)
+            {
+                prop.DrawWireframe(graphicsDevice, view, projection);
             }
         }
     }

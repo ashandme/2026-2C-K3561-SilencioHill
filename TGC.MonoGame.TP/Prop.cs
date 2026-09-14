@@ -68,4 +68,37 @@ internal class Prop
             mesh.Draw();
         }
     }
+
+    // Nuevo: dibuja la prop en modo wireframe (triangles como líneas)
+    public void DrawWireframe(GraphicsDevice graphicsDevice, Matrix view, Matrix projection)
+    {
+        // Guardar estado anterior para restaurar al final
+        var prevRaster = graphicsDevice.RasterizerState;
+        var prevDepth = graphicsDevice.DepthStencilState;
+
+        // Usamos el mismo effect pero con WireFrame
+        var world = GetWorldMatrix();
+        Effect.Parameters["View"]?.SetValue(view);
+        Effect.Parameters["Projection"]?.SetValue(projection);
+        Effect.Parameters["DiffuseColor"]?.SetValue(Color);
+
+        // Rasterizer para wireframe y sin culling
+        var wire = new RasterizerState
+        {
+            FillMode = FillMode.WireFrame,
+            CullMode = CullMode.None
+        };
+        graphicsDevice.RasterizerState = wire;
+
+        foreach (var mesh in Model.Meshes)
+        {
+            var boneTransform = _boneTransforms[mesh.ParentBone.Index];
+            Effect.Parameters["World"]?.SetValue(boneTransform * world);
+            mesh.Draw();
+        }
+
+        // Restaurar estados
+        graphicsDevice.RasterizerState = prevRaster;
+        graphicsDevice.DepthStencilState = prevDepth;
+    }
 }

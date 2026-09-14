@@ -25,6 +25,7 @@ public class TGCGame : Game
     private FreeCamera cam;
     private Map _tilemap;
     private Map _propmap;
+    private Map _insidepropmap;
     private Effect _effect;
     //private Model _model;
     private Matrix _projection;
@@ -36,8 +37,8 @@ public class TGCGame : Game
     // New: font for drawing camera position
     private SpriteFont _font;
 
-    // New: control whether the camera text is shown
-    private bool _showCameraPosition = true;
+    // PARA MOSTRAR SOLO LOS PROPS DE INTERIOR (X) O TODO (default)
+    private bool _showInsideOnly = false;
 
     // New: previous keyboard state to detect key presses (edge)
     private KeyboardState _previousKeyboardState;
@@ -82,6 +83,7 @@ public class TGCGame : Game
         _projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 1, 1000);
         _tilemap = new Map();
         _propmap = new Map();
+        _insidepropmap = new Map(); // <-- inicializar para evitar null reference
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         cam = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         //cam.FarPlane = 15100.0f;
@@ -121,7 +123,7 @@ public class TGCGame : Game
         }*/
         _tilemap.LoadContent(Content);
         _propmap.LoadFromJson("Content/props.json", Content);
-
+        _insidepropmap.LoadFromJson("Content/insideprops.json", Content);
         // Load a SpriteFont to draw the camera position.
         // Ensure a SpriteFont named "DefaultFont.spritefont" exists under Content/SpriteFonts.
         _font = Content.Load<SpriteFont>(ContentFolderSpriteFonts + "CascadiaCode/CascadiaCodePL");
@@ -146,17 +148,17 @@ public class TGCGame : Game
             Exit();
         }
 
-        // Detectar pulsacion de la tecla X para alternar la opcion de mostrar la posicion de la camara.
+        // Detectar pulsacion de la tecla X para alternar el modo de dibujo:
+        // false (por defecto): dibujar tilemap + propmap
+        // true: dibujar solo insidepropmap
         if (ks.IsKeyDown(Keys.X) && !_previousKeyboardState.IsKeyDown(Keys.X))
         {
-            _showCameraPosition = !_showCameraPosition;
+            _showInsideOnly = !_showInsideOnly;
         }
 
         cam.Update(gameTime);
         // Basado en el tiempo que paso se va generando una rotacion.
         _rotation += Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
-
-        _world = Matrix.CreateRotationY(_rotation);
 
         // Actualizar el estado previo del teclado al final del Update.
         _previousKeyboardState = ks;
@@ -178,20 +180,29 @@ public class TGCGame : Game
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
 
-        // Draw camera position in top-left corner.
         // Compute camera world position by inverting the view matrix.
-        if (_showCameraPosition)
+        var camPos = Matrix.Invert(cam.View).Translation;
+        var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}", camPos.X, camPos.Y, camPos.Z);
+
+        // CAMBIA INTERIOR/EXTERIOR
+        if (!_showInsideOnly)
         {
-            var camPos = Matrix.Invert(cam.View).Translation;
-            var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}", camPos.X, camPos.Y, camPos.Z);
             _tilemap.Draw(cam.View, _projection);
             _propmap.Draw(cam.View, _projection);
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            _spriteBatch.DrawString(_font, camText, new Vector2(10f, 10f), Color.White);
-            _spriteBatch.End();
-
-            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
         }
+        else
+        {   
+            // dibujar solo inside pero en wireframe (triángulos como líneas)
+            _insidepropmap.DrawWireframe(GraphicsDevice, cam.View, _projection);
+        }
+
+        // Dibujar HUD / texto de cámara encima
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+        _spriteBatch.DrawString(_font, camText, new Vector2(10f, 10f), Color.White);
+        _spriteBatch.End();
+
+        // Restaurar el Depth/Stencil para que el Z-buffer funcione correctamente tras usar SpriteBatch
+        GraphicsDevice.DepthStencilState = DepthStencilState.Default;
     }
 
     /// <summary>

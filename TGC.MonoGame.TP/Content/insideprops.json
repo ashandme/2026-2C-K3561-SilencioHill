@@ -1,0 +1,68 @@
+{
+  "Props": [
+    {
+      "ModelPath": "Models/Assets/Inside",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 0.0, 0.0, 0.0 ],
+      "Rotation": [ 0.0, 0.0, 0.0 ],
+      "Scale": [ 0.1, 0.1, 0.1 ],
+      "Color": [ 1.0, 1.0, 1.0 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/chair",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 2.0, 0.0, 3.0 ],
+      "Rotation": [ 0.0, 45.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 1.0, 0.2, 0.2 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/chair",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ -2.0, 135.0, -3.0 ],
+      "Rotation": [ 0.0, -30.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.2, 0.6, 1.0 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 4.0, 0.0, 0.0 ],
+      "Rotation": [ 0.0, 90.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.8, 0.8, 0.2 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 80.0, 135.0, 480.0 ],
+      "Rotation": [ 0.0, 90.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.6, 0.2, 0.8 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 80.0, 135.0, 280.0 ],
+      "Rotation": [ 0.0, 90.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.6, 0.2, 0.8 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/table",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 0.0, 0.0, 4.0 ],
+      "Rotation": [ 0.0, 0.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.5, 0.3, 0.1 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/table",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 0.0, 135.0, 4.0 ],
+      "Rotation": [ 0.0, 0.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.2, 0.8, 0.3 ]
+    }
+  ]
+}
