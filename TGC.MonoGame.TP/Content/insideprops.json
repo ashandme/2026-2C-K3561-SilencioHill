@@ -11,8 +11,8 @@
     {
       "ModelPath": "Models/kenney_furniture-kit/chair",
       "EffectPath": "Effects/BasicShader",
-      "Position": [ -20.0, 0.0, 40.0 ],
-      "Rotation": [ 0.0, 45.0, 0.0 ],
+      "Position": [ -20.0, 0.0, 50.0 ],
+      "Rotation": [ 0.0, 125.0, 0.0 ],
       "Scale": [ 10, 10, 10 ],
       "Color": [ 1.0, 0.2, 0.2 ]
     },
@@ -31,6 +31,14 @@
       "Rotation": [ 0.0, 180.0, 0.0 ],
       "Scale": [ 10, 10, 10 ],
       "Color": [ 0.4, 0.0, 0.3 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/lampRoundFloor",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 10.0, 0.0, 770.0 ],
+      "Rotation": [ 0.0, 180.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.9, 0.9, 0.4 ]
     },
     {
       "ModelPath": "Models/kenney_furniture-kit/loungeSofa",
@@ -68,6 +76,14 @@
       "ModelPath": "Models/kenney_furniture-kit/kitchenFridgeLarge",
       "EffectPath": "Effects/BasicShader",
       "Position": [ 255.0, 0.0, 125.0 ],
+      "Rotation": [ 0.0, 90.0, 0.0 ],
+      "Scale": [ 10, 10, 10 ],
+      "Color": [ 0.9, 0.8, 0.2 ]
+    },
+    {
+      "ModelPath": "Models/kenney_furniture-kit/kitchenStoveElectric",
+      "EffectPath": "Effects/BasicShader",
+      "Position": [ 245.0, 0.0, 65.0 ],
       "Rotation": [ 0.0, 90.0, 0.0 ],
       "Scale": [ 10, 10, 10 ],
       "Color": [ 0.9, 0.8, 0.2 ]
@@ -145,9 +161,9 @@
       "Color": [ 0.6, 0.2, 0.8 ]
     },
     {
-      "ModelPath": "Models/kenney_furniture-kit/table",
+      "ModelPath": "Models/kenney_furniture-kit/tableRound",
       "EffectPath": "Effects/BasicShader",
-      "Position": [ 0.0, 0.0, 4.0 ],
+      "Position": [ 0.0, 25.0, 100.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 10, 10, 10 ],
       "Color": [ 0.5, 0.3, 0.1 ]
