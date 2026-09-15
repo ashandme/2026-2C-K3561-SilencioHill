@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 // ROBADO DE SAMPLES
-namespace TGC.MonoGame.Samples.Cameras
+namespace TGC.MonoGame.TP.Cameras
 {
     internal class FreeCamera : Camera
     {
@@ -16,7 +16,7 @@ namespace TGC.MonoGame.Samples.Cameras
         private Vector2 _pastMousePosition;
         private float _pitch;
 
-        // Angles
+        // Angles1
         private float _yaw = -90f;
 
         public FreeCamera(float aspectRatio, Vector3 position, Point screenCenter)

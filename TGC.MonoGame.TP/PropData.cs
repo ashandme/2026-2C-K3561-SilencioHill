@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TGC.MonoGame.TP;
 
+/* Para manejar la deserialización de JSON
+ * definimos una clase que represente la estructura del archivo JSON */
 public class MapData
 {
     public List<PropData> Props { get; set; } = new();

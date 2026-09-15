@@ -7,12 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TGC.MonoGame.TP
 {
-    // MapJson inherits Map and provides JSON loading functionality
+    // Conviene definir una clase específica para cargar mapas desde JSON
     internal class MapJson : Map
     {
-        public void LoadFromJson(string filePath, ContentManager content)
+        public int LoadFromJson(string filePath, ContentManager content)
         {
-            // Clear previous props so reload replaces the content
             _props.Clear();
 
             var fullPath = Path.Combine(AppContext.BaseDirectory, filePath);
@@ -26,7 +25,7 @@ namespace TGC.MonoGame.TP
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var mapData = JsonSerializer.Deserialize<MapData>(jsonText, options);
 
-            if (mapData?.Props == null) return;
+            if (mapData?.Props == null) return 0;
 
             foreach (var item in mapData.Props)
             {
@@ -43,12 +42,17 @@ namespace TGC.MonoGame.TP
                 }
 
                 var color = item.ColorVector ?? new Vector3(_random.NextSingle(), _random.NextSingle(), _random.NextSingle());
-                var rotationRadians = item.RotationVector * (MathF.PI / 180f);
+                var rotationRadians = DegreesToRadians(item.RotationVector);
 
                 _props.Add(new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color));
             }
+
+            return _props.Count;
         }
+
+        private static Vector3 DegreesToRadians(Vector3 degrees) =>
+            degrees * (MathF.PI / 180f);
     }
 }

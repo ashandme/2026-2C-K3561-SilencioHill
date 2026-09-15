@@ -8,7 +8,6 @@ namespace TGC.MonoGame.TP
 {
     internal class Map
     {
-        // Made protected so subclasses (MapJson) can reuse them
         protected readonly List<Prop> _props = new();
         protected readonly Dictionary<string, Model> _loadedModels = new();
         protected readonly Dictionary<string, Effect> _loadedEffects = new();
@@ -126,13 +125,22 @@ namespace TGC.MonoGame.TP
             }
         }
 
-        // Nuevo: dibujar todo el map en modo wireframe delegando a Prop.DrawWireframe
         public void DrawWireframe(GraphicsDevice graphicsDevice, Matrix view, Matrix projection)
         {
+            // Save and set once per map draw (avoid per-prop state churn)
+            var prevRaster = graphicsDevice.RasterizerState;
+            var prevDepth = graphicsDevice.DepthStencilState;
+            graphicsDevice.RasterizerState = Prop.WireframeRasterizer;
+
             foreach (var prop in _props)
             {
-                prop.DrawWireframe(graphicsDevice, view, projection);
+                // Use the no-state draw which sets only shader params and issues draw calls
+                prop.DrawWireframeNoState(view, projection);
             }
+
+            // Restore previous states once
+            graphicsDevice.RasterizerState = prevRaster;
+            graphicsDevice.DepthStencilState = prevDepth;
         }
     }
 }
