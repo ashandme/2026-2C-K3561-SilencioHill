@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 // ROBADO DE SAMPLES
-namespace TGC.MonoGame.Samples.Cameras
+namespace TGC.MonoGame.TP.Cameras
 {
     /// <summary>
     ///     The minimum behavior that a camera should have.

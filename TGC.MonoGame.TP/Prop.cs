@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TGC.MonoGame.TP;
-// CLASE PARA MANEJAR LOS MODELOS QUE IMPORTAMOS
 internal class Prop
 {
     public Model Model { get; }
@@ -15,10 +14,17 @@ internal class Prop
     public Vector3 Position { get; set; }
     public Vector3 Rotation { get; set; }
     public Vector3 Scale { get; set; } = Vector3.One;
-    public Vector3 Color { get; set; } // <- faltaba esta propiedad
+    public Vector3 Color { get; set; }
     private readonly Matrix[] _boneTransforms;
 
     private static readonly Random _random = new Random();
+
+    // Reusable RasterizerState for wireframe (crea uno por problemas de performance si se crea uno por cada prop)!!!
+    public static readonly RasterizerState WireframeRasterizer = new RasterizerState
+    {
+        FillMode = FillMode.WireFrame,
+        CullMode = CullMode.None
+    };
 
     public Prop(Model model, Effect effect, Vector3 position, Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
     {
@@ -27,7 +33,7 @@ internal class Prop
         Position = position;
         Rotation = rotation ?? Vector3.Zero;
         Scale = scale ?? Vector3.One;
-        Color = color ?? RandomColor(); // ahora "color" existe como parametro
+        Color = color ?? RandomColor();
         foreach (var mesh in Model.Meshes)
         {
             foreach (var part in mesh.MeshParts)
@@ -59,7 +65,7 @@ internal class Prop
         var world = GetWorldMatrix();
         Effect.Parameters["View"]?.SetValue(view);
         Effect.Parameters["Projection"]?.SetValue(projection);
-        Effect.Parameters["DiffuseColor"]?.SetValue(Color); // usa el color propio de la instancia
+        Effect.Parameters["DiffuseColor"]?.SetValue(Color);
 
         foreach (var mesh in Model.Meshes)
         {
@@ -68,27 +74,12 @@ internal class Prop
             mesh.Draw();
         }
     }
-
-    // Nuevo: dibuja la prop en modo wireframe (triangles como líneas)
-    public void DrawWireframe(GraphicsDevice graphicsDevice, Matrix view, Matrix projection)
+    public void DrawWireframeNoState(Matrix view, Matrix projection)
     {
-        // Guardar estado anterior para restaurar al final
-        var prevRaster = graphicsDevice.RasterizerState;
-        var prevDepth = graphicsDevice.DepthStencilState;
-
-        // Usamos el mismo effect pero con WireFrame
         var world = GetWorldMatrix();
         Effect.Parameters["View"]?.SetValue(view);
         Effect.Parameters["Projection"]?.SetValue(projection);
         Effect.Parameters["DiffuseColor"]?.SetValue(Color);
-
-        // Rasterizer para wireframe y sin culling
-        var wire = new RasterizerState
-        {
-            FillMode = FillMode.WireFrame,
-            CullMode = CullMode.None
-        };
-        graphicsDevice.RasterizerState = wire;
 
         foreach (var mesh in Model.Meshes)
         {
@@ -96,8 +87,14 @@ internal class Prop
             Effect.Parameters["World"]?.SetValue(boneTransform * world);
             mesh.Draw();
         }
-
-        // Restaurar estados
+    }
+    public void DrawWireframe(GraphicsDevice graphicsDevice, Matrix view, Matrix projection)
+    {
+        // This method maintained for compatibility but not ideal when called per-prop.
+        var prevRaster = graphicsDevice.RasterizerState;
+        var prevDepth = graphicsDevice.DepthStencilState;
+        graphicsDevice.RasterizerState = WireframeRasterizer;
+        DrawWireframeNoState(view, projection);
         graphicsDevice.RasterizerState = prevRaster;
         graphicsDevice.DepthStencilState = prevDepth;
     }

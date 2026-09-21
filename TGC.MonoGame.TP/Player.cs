@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using TGC.MonoGame.Samples.Cameras;
+using TGC.MonoGame.TP.Cameras;
 
 namespace TGC.MonoGame.TP
 {
