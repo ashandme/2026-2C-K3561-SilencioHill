@@ -22,7 +22,10 @@ public class TGCGame : Game
 
     private readonly GraphicsDeviceManager _graphics;
 
-    private FreeCamera cam;
+    private FreeCamera _spectatorCam;
+    private Player _player;
+    private bool _playerMode = false; // false = espectador (default), true = player
+    private Camera ActiveCamera => _playerMode ? (Camera)_player : _spectatorCam;
     private Map _tilemap;
     private Map _propmap;
     private Map _insidepropmap;
@@ -84,9 +87,10 @@ public class TGCGame : Game
         _tilemap = new Map();
         _propmap = new Map();
         _insidepropmap = new Map(); // <-- inicializar para evitar null reference
+       
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
-        cam = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
-        //cam.FarPlane = 15100.0f;
+        _spectatorCam = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
+        _player = new Player(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
 
         // Inicializar estado previo del teclado para detectar pulsaciones.
         _previousKeyboardState = Keyboard.GetState();
@@ -155,8 +159,12 @@ public class TGCGame : Game
         {
             _showInsideOnly = !_showInsideOnly;
         }
+        if (ks.IsKeyDown(Keys.F3) && !_previousKeyboardState.IsKeyDown(Keys.F3))
+        {
+        _playerMode = !_playerMode;
+        }
 
-        cam.Update(gameTime);
+        ActiveCamera.Update(gameTime); 
         // Basado en el tiempo que paso se va generando una rotacion.
         _rotation += Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
 
@@ -176,24 +184,24 @@ public class TGCGame : Game
         GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, new Color(0.1f,0.0f,0.3f), 1.0f, 0);
 
         // Pasar parametros al shader
-        _effect.Parameters["View"].SetValue(cam.View);
+        _effect.Parameters["View"].SetValue(ActiveCamera.View);
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
 
         // Compute camera world position by inverting the view matrix.
-        var camPos = Matrix.Invert(cam.View).Translation;
+        var camPos = Matrix.Invert(ActiveCamera.View).Translation;
         var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}", camPos.X, camPos.Y, camPos.Z);
 
         // CAMBIA INTERIOR/EXTERIOR
         if (!_showInsideOnly)
         {
-            _tilemap.Draw(cam.View, _projection);
-            _propmap.Draw(cam.View, _projection);
+            _tilemap.Draw(ActiveCamera.View, _projection);
+            _propmap.Draw(ActiveCamera.View, _projection);
         }
         else
         {   
             // dibujar solo inside pero en wireframe (triángulos como líneas)
-            _insidepropmap.DrawWireframe(GraphicsDevice, cam.View, _projection);
+            _insidepropmap.DrawWireframe(GraphicsDevice, ActiveCamera.View, _projection);
         }
 
         // Dibujar HUD / texto de cámara encima

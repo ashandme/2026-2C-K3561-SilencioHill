@@ -11,7 +11,7 @@ namespace TGC.MonoGame.Samples.Cameras
         private readonly bool _lockMouse;
 
         private readonly Point _screenCenter;
-        private bool _changed;
+        protected bool _changed;
 
         private Vector2 _pastMousePosition;
         private float _pitch;
@@ -58,7 +58,7 @@ namespace TGC.MonoGame.Samples.Cameras
             }
         }
 
-        private void ProcessKeyboard(float elapsedTime)
+        protected virtual void ProcessKeyboard(float elapsedTime)
         {
             var keyboardState = Keyboard.GetState();
 
