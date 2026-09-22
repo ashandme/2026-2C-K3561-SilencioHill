@@ -16,7 +16,6 @@ namespace TGC.MonoGame.TP
 
         private string _status = "";
         private double _statusTimer = 0.0;
-
         public HudRenderer(SpriteBatch spriteBatch, SpriteFont font, GraphicsDevice graphicsDevice, int margin = 10,
             Color? leftColor = null, Color? rightColor = null, string defaultRightText = "READY")
         {

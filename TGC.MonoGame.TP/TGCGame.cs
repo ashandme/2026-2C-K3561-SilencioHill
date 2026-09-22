@@ -20,10 +20,12 @@ public class TGCGame : Game
 
     private readonly GraphicsDeviceManager _graphics;
 
-    private FreeCamera _spectatorCam;
+    // Replace FreeCamera with Player so player inventories can be used
     private Player _player;
-    private bool _playerMode = false; // false = espectador (default), true = player
-    private Camera ActiveCamera => _playerMode ? (Camera)_player : _spectatorCam;
+    private bool _playerMode = true; // true = player, false = spectator (default was spectator before)
+    private FreeCamera _spectator;
+
+    private Camera ActiveCamera => _playerMode ? (Camera)_player : (Camera)_player;
 
     private Map _tilemap;
     private MapJson _propmap;
@@ -72,8 +74,8 @@ public class TGCGame : Game
         _insidepropmap = new MapJson();
 
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
-        _spectatorCam = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         _player = new Player(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
+        _spectator = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 50, 150), screenCenter);
 
         _input = new InputManager();
 
@@ -99,7 +101,13 @@ public class TGCGame : Game
         // create HUD helper (uses shared SpriteBatch and font)
         _hud = new HudRenderer(_spriteBatch, _font, GraphicsDevice);
 
-        base.LoadContent();
+        // CARGAR ITEMS
+        var candleModel = Content.Load<Model>(ContentFolder3D + "Assets/Candle");
+        var linternaModel = Content.Load<Model>(ContentFolder3D + "Assets/Linterna");
+        var startingCandle = new CandleItem(candleModel);
+        var startingLinterna = new FlashlightItem(linternaModel);
+        _player.PickupItem(startingLinterna);
+        _player.PickupItem(startingCandle);
     }
 
     /// <summary>
@@ -144,7 +152,15 @@ public class TGCGame : Game
             _playerMode = !_playerMode;
         }
 
-        ActiveCamera.Update(gameTime);
+        // Update the active camera: player or spectator
+        if (_playerMode)
+        {
+            _player.Update(gameTime);
+        }
+        else
+        {
+            _spectator.Update(gameTime);
+        }
 
         // Let HUD manage its own timer
         _hud.Update(gameTime);
@@ -160,26 +176,35 @@ public class TGCGame : Game
     {
         GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, ClearColor, 1.0f, 0);
 
-        _effect.Parameters["View"].SetValue(ActiveCamera.View);
+        // Use active camera for world rendering (player or spectator)
+        var activeView = _playerMode ? _player.View : _spectator.View;
+        _effect.Parameters["View"].SetValue(activeView);
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
 
-        var camPos = Matrix.Invert(ActiveCamera.View).Translation;
-        var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}",
-            camPos.X, camPos.Y, camPos.Z, _playerMode ? "Player" : "Espectador");
+        var camPos = Matrix.Invert(activeView).Translation;
+        var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}", 
+            camPos.X, camPos.Y, camPos.Z, _playerMode ? "Player" : "Spectator");
 
         if (!_showInsideOnly)
         {
-            _tilemap.Draw(ActiveCamera.View, _projection);
-            _propmap.Draw(ActiveCamera.View, _projection);
+            _tilemap.Draw(activeView, _projection);
+            _propmap.Draw(activeView, _projection);
         }
         else
         {
-            _insidepropmap.DrawWireframe(GraphicsDevice, ActiveCamera.View, _projection);
+            _insidepropmap.DrawWireframe(GraphicsDevice, activeView, _projection);
         }
 
-        // HUD draws camera info on left and status (or READY) on right
         _hud.Draw(camText);
+
+        // DIBUJAR EL ITEM
+        if (_playerMode)
+        {
+            //_hud.DrawHeldItem(_player, _effect, _projection, GraphicsDevice.Viewport);
+        }
+
+        base.Draw(gameTime);
     }
 
     /// <summary>
