@@ -34,16 +34,16 @@ internal class Prop
         Rotation = rotation ?? Vector3.Zero;
         Scale = scale ?? Vector3.One;
         Color = color ?? RandomColor();
-        foreach (var mesh in Model.Meshes)
-        {
-            foreach (var part in mesh.MeshParts)
-            {
-                part.Effect = Effect;
-            }
-        }
+        // NOTE: Do not assign mesh.MeshParts[].Effect here. Model is a shared resource
+        // and assigning effects in the constructor will overwrite effects for other
+        // instances that reuse the same Model. Effects (and textures) should be set
+        // just before drawing so the shared shader instance can be reused.
         _boneTransforms = new Matrix[Model.Bones.Count];
         Model.CopyAbsoluteBoneTransformsTo(_boneTransforms);
     }
+
+    // Optional per-prop texture (set by caller). If null, shader should use its default.
+    public Texture2D? Texture { get; set; }
 
     private static Vector3 RandomColor()
     {
@@ -63,14 +63,40 @@ internal class Prop
     public void Draw(Matrix view, Matrix projection)
     {
         var world = GetWorldMatrix();
-        Effect.Parameters["View"]?.SetValue(view);
-        Effect.Parameters["Projection"]?.SetValue(projection);
-        Effect.Parameters["DiffuseColor"]?.SetValue(Color);
+        // Set effect parameters for this prop. Avoid cloning the effect per-prop; reuse
+        // the shared effect and update its parameters before drawing.
+        if (Effect != null)
+        {
+            Effect.Parameters["View"]?.SetValue(view);
+            Effect.Parameters["Projection"]?.SetValue(projection);
+            Effect.Parameters["DiffuseColor"]?.SetValue(Color);
+
+            // If this prop has a texture, try common parameter names. ShaderHelper
+            // already attempts names when preparing effects; here we set texture at
+            // draw-time so multiple props can reuse the same effect instance.
+            if (Texture != null)
+            {
+                Effect.Parameters["ModelTexture"]?.SetValue(Texture);
+                Effect.Parameters["Texture"]?.SetValue(Texture);
+                Effect.Parameters["DiffuseMap"]?.SetValue(Texture);
+            }
+        }
 
         foreach (var mesh in Model.Meshes)
         {
             var boneTransform = _boneTransforms[mesh.ParentBone.Index];
-            Effect.Parameters["World"]?.SetValue(boneTransform * world);
+
+            // Before drawing, assign the shared effect instance to each mesh part so
+            // the draw call uses the current parameters (world/view/proj/texture).
+            if (Effect != null)
+            {
+                foreach (var part in mesh.MeshParts)
+                {
+                    part.Effect = Effect;
+                }
+                Effect.Parameters["World"]?.SetValue(boneTransform * world);
+            }
+
             mesh.Draw();
         }
     }
