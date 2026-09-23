@@ -161,6 +161,49 @@ namespace TGC.MonoGame.TP
         // Public accessor to avoid reflection
         public Item CurrentItem => GetCurrentItem();
 
+        // Draw the currently held item attached to the camera.
+        // effect: shared effect instance to use for rendering the item
+        public void DrawHeldItem(Effect effect, Matrix projection, GraphicsDevice graphicsDevice)
+        {
+            var current = GetCurrentItem();
+            if (current == null) return;
+
+            // Do not draw when player state forbids it
+            if (State == PlayerState.Undetectable) return;
+
+            // Save previous states and set HUD-friendly states
+            var prevRaster = graphicsDevice.RasterizerState;
+            var prevBlend = graphicsDevice.BlendState;
+            var prevDepth = graphicsDevice.DepthStencilState;
+
+            graphicsDevice.RasterizerState = HudRasterizer;
+            graphicsDevice.BlendState = BlendState.AlphaBlend;
+
+            // Compute camera basis and world matrix for the held item
+            var camPos = Position;
+            var camFront = FrontDirection;
+            var camUp = UpDirection;
+            var camRight = RightDirection;
+
+            // Camera-local offset defined per item (X=right, Y=up, Z=forward)
+            var offset = current.CameraLocalOffset;
+            var worldPos = camPos + camRight * offset.X + camUp * offset.Y + camFront * offset.Z;
+
+            // Orient item to camera basis
+            var orientation = Matrix.CreateWorld(worldPos, camFront, camUp);
+
+            // No extra local rotation/scale here; items can override DrawModel if needed
+            var world = orientation;
+
+            // Delegate actual mesh drawing to the item (it will set World/View/Projection and assign effects)
+            current.DrawModel(effect, world, View, projection);
+
+            // Restore previous device states
+            graphicsDevice.RasterizerState = prevRaster;
+            graphicsDevice.BlendState = prevBlend;
+            graphicsDevice.DepthStencilState = prevDepth;
+        }
+
         private Item GetCurrentItem() =>
             _currentItemIndex >= 0 && _currentItemIndex < _inventory.Length
                 ? _inventory[_currentItemIndex]

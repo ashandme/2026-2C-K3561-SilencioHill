@@ -104,8 +104,30 @@ public class TGCGame : Game
         // CARGAR ITEMS
         var candleModel = Content.Load<Model>(ContentFolder3D + "Assets/Candle");
         var linternaModel = Content.Load<Model>(ContentFolder3D + "Assets/Linterna");
+        // Load flashlight texture and the BasicTexture effect used to draw it
+        // TODO: REFACTORIZAR PARA QUE EL ITEM FLASHLIGHT TENGA SU PROPIO EFFECT Y TEXTURE, Y NO DEPENDA DEL JUEGO
+        Texture2D flashlightTexture = null;
+        Effect basicTextureEffect = null;
+        try
+        {
+            flashlightTexture = Content.Load<Texture2D>(ContentFolderTextures + "FlashlightTexture");
+        }
+        catch (Exception)
+        {
+            // ignore: texture optional
+        }
+
+        try
+        {
+            basicTextureEffect = Content.Load<Effect>(ContentFolderEffects + "BasicTexture");
+        }
+        catch (Exception)
+        {
+            // ignore: effect optional
+        }
+
         var startingCandle = new CandleItem(candleModel);
-        var startingLinterna = new FlashlightItem(linternaModel);
+        var startingLinterna = new FlashlightItem(linternaModel, flashlightTexture, basicTextureEffect);
         _player.PickupItem(startingLinterna);
         _player.PickupItem(startingCandle);
     }
@@ -174,6 +196,7 @@ public class TGCGame : Game
     /// </summary>
     protected override void Draw(GameTime gameTime)
     {
+        // 1) Clear color + depth and draw opaque scene normally
         GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, ClearColor, 1.0f, 0);
 
         // Use active camera for world rendering (player or spectator)
@@ -193,15 +216,18 @@ public class TGCGame : Game
         }
         else
         {
-            _insidepropmap.DrawWireframe(GraphicsDevice, activeView, _projection);
+            _insidepropmap.Draw(activeView, _projection);
         }
 
         _hud.Draw(camText);
 
+        // 2) Draw held item on top: clear only depth buffer so the held item is not occluded by scene geometry
+        GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Black, 1f, 0);
+
         // DIBUJAR EL ITEM
         if (_playerMode)
         {
-            //_hud.DrawHeldItem(_player, _effect, _projection, GraphicsDevice.Viewport);
+            _player.DrawHeldItem(_effect, _projection, GraphicsDevice);
         }
 
         base.Draw(gameTime);
