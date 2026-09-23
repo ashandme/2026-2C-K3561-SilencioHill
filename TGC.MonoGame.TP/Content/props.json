@@ -2,7 +2,8 @@
   "Props": [
     {
       "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/metal",
       "Position": [ 10.0, 0.0, 435.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],

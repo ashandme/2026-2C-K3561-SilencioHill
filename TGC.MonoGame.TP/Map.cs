@@ -11,6 +11,7 @@ namespace TGC.MonoGame.TP
         protected readonly List<Prop> _props = new();
         protected readonly Dictionary<string, Model> _loadedModels = new();
         protected readonly Dictionary<string, Effect> _loadedEffects = new();
+        protected readonly Dictionary<string, Texture2D> _loadedTextures = new();
         protected readonly Random _random = new();
 
         // Add these fields inside the Map class (near other texture/asset fields)
@@ -21,16 +22,7 @@ namespace TGC.MonoGame.TP
         {
             // Cargas los shaders y modelos UNA sola vez
             var shader = content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicShader");
-            Effect basicTextureShader = null;
-            try
-            {
-                basicTextureShader = content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicTexture");
-            }
-            catch (Exception)
-            {
-                // Si no existe BasicTexture, seguiremos usando BasicShader como fallback.
-                basicTextureShader = null;
-            }
+            var basicTextureShader = content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicTexture");
 
             var treeModel = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/tree-pine-small");
             var treeModelLarge = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/tree-pine-large");
@@ -44,36 +36,13 @@ namespace TGC.MonoGame.TP
             var wallFence = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/wall-fence");
 
             // Load grass texture and tree textures
-            Texture2D? grassTexture = null;
-            try
-            {
-                grassTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "grass");
-            }
-            catch (Exception)
-            {
-                grassTexture = null;
-            }
-            Texture2D? treeATexture = null;
-            try
-            {
-                treeATexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "treeA");
-            }
-            catch (Exception)
-            {
-                treeATexture = null;
-            }
-            Texture2D? treeBTexture = null;
-            try
-            {
-                treeBTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "treeB");
-            }
-            catch (Exception)
-            {
-                treeBTexture = null;
-            }
-
+            Texture2D grassTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "grass");
+            Texture2D treeATexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "treeA");
+            Texture2D treeBTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "treeB");
+            Texture2D wallTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "wall");
             var baseEffect = basicTextureShader ?? shader;
 
+            Effect? wallEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, wallTexture);
             Effect? grassEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, grassTexture);
             Effect? treeAEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, treeATexture);
             Effect? treeBEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, treeBTexture);
@@ -82,7 +51,7 @@ namespace TGC.MonoGame.TP
             float grassSize = 100f;
 
             MapBuilder.BuildGrassGrid(_props, grass, grassEffect, grassTexture, gridSize, grassSize);
-            MapBuilder.BuildFences(_props, wallFence, shader, gridSize, grassSize);
+            MapBuilder.BuildFences(_props, wallFence, wallEffect, gridSize, grassSize);
 
             int treeCount = 30;
             const float worldMax = 1500f;

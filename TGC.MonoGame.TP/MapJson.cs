@@ -41,12 +41,36 @@ namespace TGC.MonoGame.TP
                     _loadedEffects[item.EffectPath] = effect;
                 }
 
+                // Load optional texture specified in JSON and cache it
+                Texture2D? texture = null;
+                if (!string.IsNullOrEmpty(item.TexturePath))
+                {
+                    if (!_loadedTextures.TryGetValue(item.TexturePath, out var cachedTex))
+                    {
+                        try
+                        {
+                            cachedTex = content.Load<Texture2D>(item.TexturePath);
+                        }
+                        catch (Exception)
+                        {
+                            cachedTex = null;
+                        }
+
+                        if (cachedTex != null)
+                            _loadedTextures[item.TexturePath] = cachedTex;
+                    }
+
+                    texture = cachedTex;
+                }
+
                 var color = item.ColorVector ?? new Vector3(_random.NextSingle(), _random.NextSingle(), _random.NextSingle());
                 var rotationRadians = DegreesToRadians(item.RotationVector);
 
-                _props.Add(new Prop(model, effect, item.PositionVector,
+                var p = new Prop(model, effect, item.PositionVector,
                     rotationRadians,
-                    item.ScaleVector, color));
+                    item.ScaleVector, color);
+                if (texture != null) p.Texture = texture;
+                _props.Add(p);
             }
 
             return _props.Count;

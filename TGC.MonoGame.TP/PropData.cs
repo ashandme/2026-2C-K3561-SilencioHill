@@ -16,6 +16,8 @@ public class PropData
 {
     public string ModelPath { get; set; } = string.Empty;
     public string EffectPath { get; set; } = string.Empty;
+        // Optional texture path for the prop (e.g., tree billboard texture)
+    public string TexturePath { get; set; } = string.Empty;
     public float[]? Position { get; set; }
     public float[]? Rotation { get; set; }
     public float[]? Scale { get; set; }
