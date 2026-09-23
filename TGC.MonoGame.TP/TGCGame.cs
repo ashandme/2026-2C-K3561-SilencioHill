@@ -22,6 +22,7 @@ public class TGCGame : Game
 
     // Replace FreeCamera with Player so player inventories can be used
     private Player _player;
+    private Enemy _enemy;
     private bool _playerMode = true; // true = player, false = spectator (default was spectator before)
     private FreeCamera _spectator;
 
@@ -130,6 +131,10 @@ public class TGCGame : Game
         var startingLinterna = new FlashlightItem(linternaModel, flashlightTexture, basicTextureEffect);
         _player.PickupItem(startingLinterna);
         _player.PickupItem(startingCandle);
+
+        // CARGAR ENEMIGO
+        var enemyModel = Content.Load<Model>(ContentFolder3D + "kenney_retro-urban-kit/detail-dumpster-closed"); // ajusta el path al modelo que tengas
+        _enemy = new Enemy(enemyModel, _effect, "Content/enemyRoute.json");   
     }
 
     /// <summary>
@@ -183,7 +188,7 @@ public class TGCGame : Game
         {
             _spectator.Update(gameTime);
         }
-
+        _enemy.Update(gameTime, _player);
         // Let HUD manage its own timer
         _hud.Update(gameTime);
 
@@ -208,11 +213,15 @@ public class TGCGame : Game
         var camPos = Matrix.Invert(activeView).Translation;
         var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}", 
             camPos.X, camPos.Y, camPos.Z, _playerMode ? "Player" : "Spectator");
+            var distanceToEnemy = (_enemy.Position - _player.Position).Length();
+            camText += $"\nEnemy: {_enemy.State} | Dist: {distanceToEnemy:F1} | Angle: {_enemy.DebugAngleToPlayerDegrees(_player):F1}";
+            
 
         if (!_showInsideOnly)
         {
             _tilemap.Draw(activeView, _projection);
             _propmap.Draw(activeView, _projection);
+            _enemy.Draw(activeView, _projection);
         }
         else
         {
