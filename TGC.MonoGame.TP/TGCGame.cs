@@ -1,7 +1,8 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 using TGC.MonoGame.TP.Cameras;
 
 namespace TGC.MonoGame.TP;
@@ -183,11 +184,32 @@ public class TGCGame : Game
         if (_playerMode)
         {
             _player.Update(gameTime);
+            // Delegate item draining to the player
+            _player.UpdateItems(gameTime);
         }
         else
         {
             _spectator.Update(gameTime);
         }
+        // Update scene lighting based on player's flashlight state
+        try
+        {
+            var current = _player.CurrentItem;
+            if (current is FlashlightItem flashlight && flashlight.IsOn && flashlight.AttachToCamera)
+            {
+                SceneLighting.FlashlightEnabled = true;
+                SceneLighting.LightPosition = _player.Position + _player.FrontDirection * 4f;
+            }
+            else
+            {
+                SceneLighting.FlashlightEnabled = false;
+            }
+        }
+        catch
+        {
+            SceneLighting.FlashlightEnabled = false;
+        }
+        // Item draining moved into Player.UpdateItems
         _enemy.Update(gameTime, _player);
         // Let HUD manage its own timer
         _hud.Update(gameTime);
@@ -209,13 +231,13 @@ public class TGCGame : Game
         _effect.Parameters["View"].SetValue(activeView);
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
-
+        // Compute camera (eye) position once and expose to SceneLighting to avoid per-prop inversion
         var camPos = Matrix.Invert(activeView).Translation;
+        SceneLighting.EyePosition = camPos;
         var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}", 
             camPos.X, camPos.Y, camPos.Z, _playerMode ? "Player" : "Spectator");
-            var distanceToEnemy = (_enemy.Position - _player.Position).Length();
-            camText += $"\nEnemy: {_enemy.State} | Dist: {distanceToEnemy:F1} | Angle: {_enemy.DebugAngleToPlayerDegrees(_player):F1}";
-            
+        var distanceToEnemy = (_enemy.Position - _player.Position).Length();
+        camText += $"\nEnemy: {_enemy.State} | Dist: {distanceToEnemy:F1} | Angle: {_enemy.DebugAngleToPlayerDegrees(_player):F1}";
 
         if (!_showInsideOnly)
         {
@@ -229,6 +251,30 @@ public class TGCGame : Game
         }
 
         _hud.Draw(camText);
+
+        // Build right-side HUD overlay with item statuses
+        try
+        {
+            var lines = new System.Collections.Generic.List<string>();
+            foreach (var it in _player.Inventory)
+            {
+                if (it is FlashlightItem f)
+                {
+                    var state = f.IsOn ? "ON" : "OFF";
+                    var time = System.TimeSpan.FromSeconds(f.RemainingSeconds).ToString(@"mm\:ss");
+                    lines.Add($"Flashlight: {state}  {time}");
+                }
+                else if (it is CandleItem c)
+                {
+                    var state = c.IsLit ? "ON" : "OFF";
+                    var time = System.TimeSpan.FromSeconds(c.RemainingSeconds).ToString(@"mm\:ss");
+                    lines.Add($"Candle: {state}  {time}");
+                }
+            }
+
+            _hud.RightOverlay = string.Join("\n", lines);
+        }
+        catch { _hud.RightOverlay = null; }
 
         // 2) Draw held item on top: clear only depth buffer so the held item is not occluded by scene geometry
         GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Black, 1f, 0);

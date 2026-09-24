@@ -16,6 +16,8 @@ namespace TGC.MonoGame.TP
 
         private string _status = "";
         private double _statusTimer = 0.0;
+        // Optional per-frame right-side overlay (e.g., item states). Set by game each frame.
+        public string RightOverlay { get; set; } = null;
         public HudRenderer(SpriteBatch spriteBatch, SpriteFont font, GraphicsDevice graphicsDevice, int margin = 10,
             Color? leftColor = null, Color? rightColor = null, string defaultRightText = "READY")
         {
@@ -47,6 +49,7 @@ namespace TGC.MonoGame.TP
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
+            // Left text (general info)
             if (!string.IsNullOrEmpty(leftText))
             {
                 var lines = leftText.Split(new[] { '\n' }, StringSplitOptions.None);
@@ -58,19 +61,34 @@ namespace TGC.MonoGame.TP
                     y += _font.LineSpacing;
                 }
             }
-            // default
+
+            // Right HUD: status + item indicators appended below status
             var rightText = string.IsNullOrEmpty(_status) ? _defaultRightText : _status;
+            var viewportWidth = _graphicsDevice.Viewport.Width;
+            var yRight = _margin;
+
             if (!string.IsNullOrEmpty(rightText))
             {
                 var lines = rightText.Split(new[] { '\n' }, StringSplitOptions.None);
-                var viewportWidth = _graphicsDevice.Viewport.Width;
-                var y = _margin;
                 foreach (var line in lines)
                 {
                     var size = _font.MeasureString(line);
                     var x = MathF.Max(_margin, viewportWidth - _margin - size.X);
-                    _spriteBatch.DrawString(_font, line, new Vector2(x, y), _rightColor);
-                    y += _font.LineSpacing;
+                    _spriteBatch.DrawString(_font, line, new Vector2(x, yRight), _rightColor);
+                    yRight += _font.LineSpacing;
+                }
+            }
+
+            // Additional per-item status lines are provided via RightOverlay
+            if (!string.IsNullOrEmpty(RightOverlay))
+            {
+                var lines = RightOverlay.Split(new[] { '\n' }, StringSplitOptions.None);
+                foreach (var line in lines)
+                {
+                    var size = _font.MeasureString(line);
+                    var x = MathF.Max(_margin, viewportWidth - _margin - size.X);
+                    _spriteBatch.DrawString(_font, line, new Vector2(x, yRight), _rightColor);
+                    yRight += _font.LineSpacing;
                 }
             }
 

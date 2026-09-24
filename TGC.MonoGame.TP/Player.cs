@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -161,8 +163,38 @@ namespace TGC.MonoGame.TP
         // Public accessor to avoid reflection
         public Item CurrentItem => GetCurrentItem();
 
+        // Return a snapshot of the player's inventory (may contain nulls)
+        public IReadOnlyList<Item> Inventory => Array.AsReadOnly(_inventory);
+
+        // Drain durations for items in inventory (called from Player.Update)
+        public void UpdateItems(GameTime gameTime)
+        {
+            if (gameTime == null) return;
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            for (int i = 0; i < _inventory.Length; i++)
+            {
+                var it = _inventory[i];
+                if (it == null) continue;
+
+                // Flashlight or candle: if active, drain
+                if (it is FlashlightItem f && f.IsOn)
+                {
+                    f.Drain(dt);
+                }
+
+                if (it is CandleItem c && c.IsLit)
+                {
+                    c.Drain(dt);
+                }
+            }
+        }
+
+        // Return a snapshot of the player's inventory (may contain nulls)
+        public Item[] GetInventory() => _inventory.ToArray();
+
         // Draw the currently held item attached to the camera.
-        // effect: shared effect instance to use for rendering the item
+        // Effect: shared effect instance to use for rendering the item
         public void DrawHeldItem(Effect effect, Matrix projection, GraphicsDevice graphicsDevice)
         {
             var current = GetCurrentItem();

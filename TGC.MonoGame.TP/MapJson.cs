@@ -38,6 +38,19 @@ namespace TGC.MonoGame.TP
                 if (!_loadedEffects.TryGetValue(item.EffectPath, out var effect))
                 {
                     effect = content.Load<Effect>(item.EffectPath);
+
+                    // If this effect looks like the Blinn-Phong shader (or exposes
+                    // ambientColor), prepare it with sensible defaults and optional
+                    // texture so props using it will render correctly.
+                    bool looksLikeBlinn = (item.EffectPath?.IndexOf("blinn", StringComparison.OrdinalIgnoreCase) ?? -1) >= 0
+                                          || effect.Parameters["ambientColor"] != null;
+
+                    if (looksLikeBlinn)
+                    {
+                        // Prepare afterwards once texture is known (texture may be null)
+                        // For now store the raw effect; we'll replace with prepared one below
+                    }
+
                     _loadedEffects[item.EffectPath] = effect;
                 }
 
@@ -65,6 +78,16 @@ namespace TGC.MonoGame.TP
 
                 var color = item.ColorVector ?? new Vector3(_random.NextSingle(), _random.NextSingle(), _random.NextSingle());
                 var rotationRadians = DegreesToRadians(item.RotationVector);
+
+                // If this effect is a BlinnPhong variant, create a prepared instance
+                // that has defaults and the optional texture applied.
+                if (effect != null && (effect.Parameters["ambientColor"] != null ||
+                                       (item.EffectPath?.IndexOf("blinn", StringComparison.OrdinalIgnoreCase) ?? -1) >= 0))
+                {
+                    effect = ShaderHelper.PrepareBlinnPhong(effect, texture);
+                    // update cache so subsequent props reuse the prepared effect
+                    _loadedEffects[item.EffectPath] = effect;
+                }
 
                 var p = new Prop(model, effect, item.PositionVector,
                     rotationRadians,

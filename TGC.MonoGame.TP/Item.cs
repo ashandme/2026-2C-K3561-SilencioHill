@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace TGC.MonoGame.TP
 {
@@ -7,6 +8,10 @@ namespace TGC.MonoGame.TP
     {
         public string Name { get; }
         public Model Model { get; }
+
+        // Optional lifetime for items that consume over time (seconds)
+        public float MaxDurationSeconds { get; protected set; } = 0f;
+        public float RemainingSeconds { get; protected set; } = 0f;
 
         // Optional per-item tuning for how the item sits in the hand
         public Vector3 HandScale { get; set; } = Vector3.One;
@@ -16,7 +21,10 @@ namespace TGC.MonoGame.TP
         {
             Name = name;
             Model = model;
+            MaxDurationSeconds = 0f;
+            RemainingSeconds = 0f;
         }
+
         public abstract void Use(Player player);
         public virtual void OnEquip(Player player) { }
         public virtual void OnUnequip(Player player) { }
@@ -36,6 +44,8 @@ namespace TGC.MonoGame.TP
             var localRot = Matrix.CreateFromYawPitchRoll(HandRotationOffset.Y, HandRotationOffset.X, HandRotationOffset.Z);
             var finalWorld = localScale * localRot * world;
 
+            // Allocate boneTransforms once per Item instance could be more efficient.
+            // For held items draws are rare, so keep simple allocation here.
             var boneTransforms = new Matrix[Model.Bones.Count];
             Model.CopyAbsoluteBoneTransformsTo(boneTransforms);
 
@@ -52,6 +62,13 @@ namespace TGC.MonoGame.TP
                 mesh.Draw();
             }
         }
+
+        // Drain remaining time; when reaches zero, the item should switch off in the specific implementation
+        public virtual void Drain(float seconds)
+        {
+            if (RemainingSeconds <= 0f) return;
+            RemainingSeconds = Math.Max(0f, RemainingSeconds - seconds);
+        }
     }
 
     internal class CandleItem : Item
@@ -62,15 +79,27 @@ namespace TGC.MonoGame.TP
             : base("Candle", model)
         {
             IsLit = true;
-            HandScale = Vector3.One * 0.007f; 
+            HandScale = Vector3.One * 0.007f;
+            MaxDurationSeconds = 120f; // default 2 minutes of burn time
+            RemainingSeconds = MaxDurationSeconds;
         }
 
         public override void Use(Player player)
         {
+            if (RemainingSeconds <= 0f) return;
             IsLit = !IsLit;
         }
         public override Vector3 CameraLocalOffset => new Vector3(0.4f, -0.8f, 1.0f);
         public override bool AttachToCamera => false;
+
+        public override void Drain(float seconds)
+        {
+            base.Drain(seconds);
+            if (RemainingSeconds <= 0f)
+            {
+                IsLit = false;
+            }
+        }
     }
 
     internal class FlashlightItem : Item
@@ -80,13 +109,21 @@ namespace TGC.MonoGame.TP
         public Texture2D Texture { get; set; }
         public Effect TextureEffect { get; set; }
 
-        public FlashlightItem(Model model = null, Texture2D texture = null, Effect textureEffect = null) : base("Flashlight", model) {
+        public FlashlightItem(Model model = null, Texture2D texture = null, Effect textureEffect = null) : base("Flashlight", model)
+        {
             HandScale = Vector3.One * 0.002f;
             Texture = texture;
             TextureEffect = textureEffect;
+            IsOn = true;
+            MaxDurationSeconds = 180f; // default 3 minutes battery
+            RemainingSeconds = MaxDurationSeconds;
         }
 
-        public override void Use(Player player) => IsOn = !IsOn;
+        public override void Use(Player player)
+        {
+            if (RemainingSeconds <= 0f) return;
+            IsOn = !IsOn;
+        }
 
         // Flashlight should be attached to camera and always point forward
         public override bool AttachToCamera => true;
@@ -129,5 +166,13 @@ namespace TGC.MonoGame.TP
 
             base.DrawModel(effect, world, view, projection);
         }
+        public override void Drain(float seconds)
+        {
+            base.Drain(seconds);
+            if (RemainingSeconds <= 0f)
+            {
+                IsOn = false;
+            }
         }
+    }
 }
