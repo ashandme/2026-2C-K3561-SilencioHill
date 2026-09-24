@@ -1,11 +1,21 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Concurrent;
 
 namespace TGC.MonoGame.TP
 {
     // Helper that caches EffectParameter lookups to avoid repeated string-based searches
     internal class EffectParameterCache
     {
+        // Shared cache per Effect instance
+        private static readonly ConcurrentDictionary<Effect, EffectParameterCache> _cache = new();
+
+        public static EffectParameterCache Get(Effect effect)
+        {
+            if (effect == null) return null;
+            return _cache.GetOrAdd(effect, e => new EffectParameterCache(e));
+        }
+
         public readonly EffectParameter View;
         public readonly EffectParameter Projection;
         public readonly EffectParameter World;
@@ -28,7 +38,7 @@ namespace TGC.MonoGame.TP
         public readonly EffectParameter LightSpecular0;
         public readonly EffectParameter LightPosition0;
 
-        public EffectParameterCache(Effect effect)
+        private EffectParameterCache(Effect effect)
         {
             if (effect == null) return;
 

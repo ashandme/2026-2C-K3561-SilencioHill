@@ -25,6 +25,13 @@ namespace TGC.MonoGame.TP
             RemainingSeconds = 0f;
         }
 
+        // Public method to add time to the flashlight battery
+        public void AddTime(float seconds)
+        {
+            if (seconds <= 0f) return;
+            RemainingSeconds = Math.Min(MaxDurationSeconds, RemainingSeconds + seconds);
+        }
+
         public abstract void Use(Player player);
         public virtual void OnEquip(Player player) { }
         public virtual void OnUnequip(Player player) { }

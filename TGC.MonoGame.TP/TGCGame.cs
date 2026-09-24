@@ -32,6 +32,7 @@ public class TGCGame : Game
     private Map _tilemap;
     private MapJson _propmap;
     private MapJson _insidepropmap;
+    private InteractionManager _interactionManager;
     private Effect _effect;
     private Matrix _projection;
     private SpriteBatch _spriteBatch;
@@ -78,6 +79,9 @@ public class TGCGame : Game
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         _player = new Player(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         _spectator = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 50, 150), screenCenter);
+
+        // Interaction manager handles ray-based interactions with interactive props
+        _interactionManager = new InteractionManager(_propmap, _insidepropmap);
 
         _input = new InputManager();
 
@@ -214,6 +218,29 @@ public class TGCGame : Game
         // Let HUD manage its own timer
         _hud.Update(gameTime);
 
+        // Interaction: handle interact key in Update using screen-space ray (viewport unproject)
+        try
+        {
+            if (_playerMode && _input.IsInteractPressed())
+            {
+                var vp = GraphicsDevice.Viewport;
+                var cx = vp.Width / 2f;
+                var cy = vp.Height / 2f;
+
+                var nearPoint = vp.Unproject(new Vector3(cx, cy, 0f), _projection, _player.View, Matrix.Identity);
+                var farPoint = vp.Unproject(new Vector3(cx, cy, 1f), _projection, _player.View, Matrix.Identity);
+                var dir = Vector3.Normalize(farPoint - nearPoint);
+                var ray = new Ray(nearPoint, dir);
+
+                var target = _interactionManager.FindInteractiveProp(ray, _showInsideOnly);
+                if (target != null)
+                {
+                    _interactionManager.Interact(target, _player, _showInsideOnly);
+                }
+            }
+        }
+        catch { }
+
         base.Update(gameTime);
     }
 
@@ -275,6 +302,26 @@ public class TGCGame : Game
             _hud.RightOverlay = string.Join("\n", lines);
         }
         catch { _hud.RightOverlay = null; }
+
+        // Interaction handled by InteractionManager
+        try
+        {
+            if (_playerMode && _input.IsInteractPressed())
+            {
+                // Build a ray from camera through screen center
+                var invView = Matrix.Invert(_player.View);
+                var cameraPos = invView.Translation;
+                var forward = _player.FrontDirection;
+                var ray = new Ray(cameraPos, forward);
+
+                var target = _interactionManager.FindInteractiveProp(ray, _showInsideOnly);
+                if (target != null)
+                {
+                    _interactionManager.Interact(target, _player, _showInsideOnly);
+                }
+            }
+        }
+        catch { }
 
         // 2) Draw held item on top: clear only depth buffer so the held item is not occluded by scene geometry
         GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Black, 1f, 0);

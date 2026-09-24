@@ -8,6 +8,16 @@ namespace TGC.MonoGame.TP
 {
     internal class Map
     {
+        // Expose props for external systems (e.g., interaction raycasts)
+        public IReadOnlyList<Prop> GetProps() => _props.AsReadOnly();
+
+        // Remove a prop from the map (e.g., when picked up)
+        public bool RemoveProp(Prop prop)
+        {
+            if (prop == null) return false;
+            return _props.Remove(prop);
+        }
+
         protected readonly List<Prop> _props = new();
         protected readonly Dictionary<string, Model> _loadedModels = new();
         protected readonly Dictionary<string, Effect> _loadedEffects = new();
@@ -73,6 +83,42 @@ namespace TGC.MonoGame.TP
                 edgeBandHighMax,
                 treeAEffect,
                 treeBEffect);
+
+            // Add a battery interactive pickup to the world
+            try
+            {
+                Model batteryModel = null;
+                try
+                {
+                    batteryModel = content.Load<Model>(TGCGame.ContentFolder3D + "Assets/battery");
+                }
+                catch (Exception)
+                {
+                    batteryModel = null;
+                }
+
+                Texture2D metalTexture = null;
+                try
+                {
+                    metalTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "metal");
+                }
+                catch (Exception)
+                {
+                    metalTexture = null;
+                }
+
+                if (batteryModel != null)
+                {
+                    // Use BasicTexture shader if available, otherwise fallback to base shader
+                    var batteryEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, metalTexture);
+
+                    // Place the battery somewhere in the scene (adjust coordinates as needed)
+                    var batteryPos = new Vector3(30f, 0f, 30f);
+                    var battery = new BatteryProp(batteryModel, batteryEffect, batteryPos, "battery_01", addSeconds: 60f);
+                    _props.Add(battery);
+                }
+            }
+            catch { }
         }
 
         public void Draw(Matrix view, Matrix projection)

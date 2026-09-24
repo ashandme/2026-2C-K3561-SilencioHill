@@ -28,6 +28,9 @@ namespace TGC.MonoGame.TP
 
         public bool IsKeyReleased(Keys key) => _current.IsKeyUp(key) && _previous.IsKeyDown(key);
 
+        // Expose quick check for interact (E) key
+        public bool IsInteractPressed() => IsKeyPressed(Keys.E);
+
         public void Reset()
         {
             _previous = Keyboard.GetState();

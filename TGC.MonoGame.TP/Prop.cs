@@ -62,13 +62,45 @@ internal class Prop
                Matrix.CreateTranslation(Position);
     }
 
+    // Ray intersection helper: transforms model bounding sphere to world and tests ray intersection.
+    public bool IntersectsRay(Ray ray, out float distance)
+    {
+        distance = 0f;
+        if (Model == null) return false;
+
+        // Create a bounding sphere from the model (in model space)
+        var sphere = TGC.MonoGame.Samples.Collisions.BoundingVolumesExtensions.CreateSphereFrom(Model);
+
+        var world = GetWorldMatrix();
+        // Transform center by world matrix
+        var center = Vector3.Transform(sphere.Center, world);
+
+        // Approximate world scale by taking column vector lengths
+        var scaleX = new Vector3(world.M11, world.M12, world.M13).Length();
+        var scaleY = new Vector3(world.M21, world.M22, world.M23).Length();
+        var scaleZ = new Vector3(world.M31, world.M32, world.M33).Length();
+        var scale = Math.Max(Math.Max(scaleX, scaleY), scaleZ);
+        var radius = sphere.Radius * scale;
+
+        var worldSphere = new BoundingSphere(center, radius);
+
+        var t = ray.Intersects(worldSphere);
+        if (t.HasValue)
+        {
+            distance = t.Value;
+            return true;
+        }
+
+        return false;
+    }
+
     public void Draw(Matrix view, Matrix projection)
     {
         var world = GetWorldMatrix();
         // Initialize parameter cache lazily
         if (_paramCache == null && Effect != null)
         {
-            _paramCache = new EffectParameterCache(Effect);
+            _paramCache = EffectParameterCache.Get(Effect);
         }
         // Set effect parameters for this prop. Avoid cloning the effect per-prop; reuse
         // the shared effect and update its parameters before drawing.
@@ -93,10 +125,20 @@ internal class Prop
                 // draw-time so multiple props can reuse the same effect instance.
                 if (Texture != null)
                 {
-                    Effect.Parameters["ModelTexture"]?.SetValue(Texture);
-                    Effect.Parameters["Texture"]?.SetValue(Texture);
-                    Effect.Parameters["DiffuseMap"]?.SetValue(Texture);
-                    Effect.Parameters["baseTexture"]?.SetValue(Texture);
+                    if (_paramCache != null)
+                    {
+                        _paramCache.ModelTexture?.SetValue(Texture);
+                        _paramCache.Texture?.SetValue(Texture);
+                        _paramCache.DiffuseMap?.SetValue(Texture);
+                        _paramCache.BaseTexture?.SetValue(Texture);
+                    }
+                    else
+                    {
+                        Effect.Parameters["ModelTexture"]?.SetValue(Texture);
+                        Effect.Parameters["Texture"]?.SetValue(Texture);
+                        Effect.Parameters["DiffuseMap"]?.SetValue(Texture);
+                        Effect.Parameters["baseTexture"]?.SetValue(Texture);
+                    }
                 }
 
                 // Set dynamic per-frame parameters used by Blinn-Phong shader if present
@@ -115,21 +157,21 @@ internal class Prop
                             if (SceneLighting.FlashlightEnabled)
                             {
                                 // Fill first light slot with flashlight info
-                                Effect.Parameters["lightCount"]?.SetValue(1);
-                                Effect.Parameters["lightAmbient[0]"]?.SetValue(new Vector3(0.02f, 0.02f, 0.02f));
-                                Effect.Parameters["lightDiffuse[0]"]?.SetValue(SceneLighting.LightColor);
-                                Effect.Parameters["lightSpecular[0]"]?.SetValue(SceneLighting.LightColor);
-                                Effect.Parameters["lightPosition[0]"]?.SetValue(SceneLighting.LightPosition);
+                                _paramCache?.LightCount?.SetValue(1);
+                                _paramCache?.LightAmbient0?.SetValue(new Vector3(0.02f, 0.02f, 0.02f));
+                                _paramCache?.LightDiffuse0?.SetValue(SceneLighting.LightColor);
+                                _paramCache?.LightSpecular0?.SetValue(SceneLighting.LightColor);
+                                _paramCache?.LightPosition0?.SetValue(SceneLighting.LightPosition);
                             }
                             else
                             {
                                 // No scene lights: set a default single directional/point above camera
                                 var lightPos = eyePos + new Vector3(0, 50f, 50f);
-                                Effect.Parameters["lightCount"]?.SetValue(1);
-                                Effect.Parameters["lightAmbient[0]"]?.SetValue(new Vector3(0.05f, 0.05f, 0.05f));
-                                Effect.Parameters["lightDiffuse[0]"]?.SetValue(new Vector3(1f, 1f, 1f));
-                                Effect.Parameters["lightSpecular[0]"]?.SetValue(new Vector3(1f, 1f, 1f));
-                                Effect.Parameters["lightPosition[0]"]?.SetValue(lightPos);
+                                _paramCache?.LightCount?.SetValue(1);
+                                _paramCache?.LightAmbient0?.SetValue(new Vector3(0.05f, 0.05f, 0.05f));
+                                _paramCache?.LightDiffuse0?.SetValue(new Vector3(1f, 1f, 1f));
+                                _paramCache?.LightSpecular0?.SetValue(new Vector3(1f, 1f, 1f));
+                                _paramCache?.LightPosition0?.SetValue(lightPos);
                             }
                         }
                         catch { }
