@@ -62,6 +62,7 @@ namespace TGC.MonoGame.TP
             LoadWaypoints(waypointsJsonPath);
             Position = _waypoints.Count > 0 ? _waypoints[0] : Vector3.Zero;
             _prop = new Prop(model, effect, Position);
+            _prop.Scale *= 0.1f;
         }
 
         private void LoadWaypoints(string filePath)

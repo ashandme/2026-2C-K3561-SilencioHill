@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TGC.MonoGame.TP.Cameras;
 
 namespace TGC.MonoGame.TP
@@ -19,6 +19,7 @@ namespace TGC.MonoGame.TP
     // Jugador en primera persona: hereda camara/mouse-look de FreeCamera, agrega estados y movimiento restringido al plano XZ
     internal class Player : FreeCamera
     {
+        private InputManager? _inputManager;
         // Estado actual del jugador; solo Player puede modificarlo
         public PlayerState State { get; private set; } = PlayerState.Walking;
 
@@ -56,6 +57,12 @@ namespace TGC.MonoGame.TP
             : base(aspectRatio, position, screenCenter)
         {
             _previousKeyboardState = Keyboard.GetState();
+        }
+
+        // Allow the game to provide a centralized InputManager to the player
+        public void SetInput(InputManager input)
+        {
+            _inputManager = input;
         }
 
         // Lo llama codigo externo (Map/TGCGame) cuando el jugador esta cerca de un escondite
@@ -246,6 +253,11 @@ namespace TGC.MonoGame.TP
         {
             var keyboardState = Keyboard.GetState();
 
+            // Helper delegates that use InputManager when available
+            bool useInputManager = _inputManager != null;
+            Func<Keys, bool> IsDown = k => useInputManager ? _inputManager.IsKeyDown(k) : keyboardState.IsKeyDown(k);
+            Func<Keys, bool> IsPressed = k => useInputManager ? _inputManager.IsKeyPressed(k) : (keyboardState.IsKeyDown(k) && !_previousKeyboardState.IsKeyDown(k));
+
             switch (State)
             {
                 // Sin control mientras dura el timer de atrapado
@@ -256,30 +268,30 @@ namespace TGC.MonoGame.TP
                         State = PlayerState.Walking;
                     }
                     ApplyHeight();
-                    _previousKeyboardState = keyboardState;
+                    if (!useInputManager) _previousKeyboardState = keyboardState;
                     return;
 
                 // Sin movimiento; sale del escondite si se acaba de apretar E
                 case PlayerState.Undetectable:
-                    if (keyboardState.IsKeyDown(Keys.E) && !_previousKeyboardState.IsKeyDown(Keys.E))
+                    if (IsPressed(Keys.E))
                     {
                         State = PlayerState.Walking;
                     }
                     ApplyHeight();
-                    _previousKeyboardState = keyboardState;
+                    if (!useInputManager) _previousKeyboardState = keyboardState;
                     return;
 
                 // Walking/Crouching: entra al escondite si corresponde, si no define postura segun Ctrl
                 default:
-                    if (_nearHidingSpot && keyboardState.IsKeyDown(Keys.E) && !_previousKeyboardState.IsKeyDown(Keys.E))
+                    if (_nearHidingSpot && IsPressed(Keys.E))
                     {
                         State = PlayerState.Undetectable;
                         ApplyHeight();
-                        _previousKeyboardState = keyboardState;
+                        if (!useInputManager) _previousKeyboardState = keyboardState;
                         return;
                     }
 
-                    State = keyboardState.IsKeyDown(Keys.LeftControl)
+                    State = IsDown(Keys.LeftControl)
                         ? PlayerState.Crouching
                         : PlayerState.Walking;
                     break;
@@ -295,25 +307,25 @@ namespace TGC.MonoGame.TP
             var flatFront = Vector3.Normalize(new Vector3(FrontDirection.X, 0, FrontDirection.Z));
             var flatRight = Vector3.Normalize(new Vector3(RightDirection.X, 0, RightDirection.Z));
 
-            if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+            if (IsDown(Keys.W) || IsDown(Keys.Up))
             {
                 Position += flatFront * currentSpeed * elapsedTime;
                 _changed = true;
             }
 
-            if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+            if (IsDown(Keys.S) || IsDown(Keys.Down))
             {
                 Position -= flatFront * currentSpeed * elapsedTime;
                 _changed = true;
             }
 
-            if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
+            if (IsDown(Keys.A) || IsDown(Keys.Left))
             {
                 Position -= flatRight * currentSpeed * elapsedTime;
                 _changed = true;
             }
 
-            if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+            if (IsDown(Keys.D) || IsDown(Keys.Right))
             {
                 Position += flatRight * currentSpeed * elapsedTime;
                 _changed = true;
@@ -322,33 +334,36 @@ namespace TGC.MonoGame.TP
             ApplyHeight();
 
             // F: use current item
-            if (keyboardState.IsKeyDown(Keys.F) && !_previousKeyboardState.IsKeyDown(Keys.F))
+            if (IsPressed(Keys.F))
             {
                 UseCurrentItem();
             }
 
-            if (keyboardState.IsKeyDown(Keys.Q) && !_previousKeyboardState.IsKeyDown(Keys.Q))
+            if (IsPressed(Keys.Q))
             {
                 CycleItem();
             }
             // R: drop current item
-            if (keyboardState.IsKeyDown(Keys.R) && !_previousKeyboardState.IsKeyDown(Keys.R))
+            if (IsPressed(Keys.R))
             {
                 DropCurrentItem();
             }
 
             // 1/2: equip slot 0 / slot 1 (edge)
-            if (keyboardState.IsKeyDown(Keys.D1) && !_previousKeyboardState.IsKeyDown(Keys.D1))
+            if (IsPressed(Keys.D1))
             {
                 EquipIndex(0);
             }
 
-            if (keyboardState.IsKeyDown(Keys.D2) && !_previousKeyboardState.IsKeyDown(Keys.D2))
+            if (IsPressed(Keys.D2))
             {
                 EquipIndex(1);
             }
 
-            _previousKeyboardState = keyboardState;
+            if (!useInputManager)
+            {
+                _previousKeyboardState = keyboardState;
+            }
         }
 
         // Ajusta la altura de la camara (Position.Y) segun el estado actual

@@ -51,7 +51,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/wall_lines",
       "Position": [ 750.0, 0.0, 750.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 9, 11, 9 ],
@@ -67,7 +68,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/roof",
       "Position": [ 750.0, 500, 750.0 ],
       "Rotation": [ 0.0, 0, 0.0 ],
       "Scale": [ 6, 4, 6 ],
@@ -75,7 +77,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/wall",
       "Position": [ 750.0, 0.0, 350 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 5.0, 4, 9 ],

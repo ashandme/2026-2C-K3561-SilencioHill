@@ -6,23 +6,24 @@ namespace TGC.MonoGame.TP
     // Responsible for detecting interactive props under the player's crosshair and executing interactions
     internal class InteractionManager
     {
-        private readonly Map _outsideMap;
-        private readonly Map _insideMap;
+        // Instead of holding maps, accept a provider to obtain active props and a remover for propagation
+        private readonly Func<bool, System.Collections.Generic.IReadOnlyList<Prop>> _propsProvider;
+        private readonly Action<Prop, bool>? _removeAction;
 
-        public InteractionManager(Map outsideMap, Map insideMap)
+        public InteractionManager(Func<bool, System.Collections.Generic.IReadOnlyList<Prop>> propsProvider, Action<Prop, bool>? removeAction = null)
         {
-            _outsideMap = outsideMap;
-            _insideMap = insideMap;
+            _propsProvider = propsProvider ?? throw new ArgumentNullException(nameof(propsProvider));
+            _removeAction = removeAction;
         }
 
         // Find nearest interactive prop under the given ray (searches active map depending on showInsideOnly)
         public InteractiveProp? FindInteractiveProp(Ray ray, bool useInside)
         {
-            var map = useInside ? _insideMap : _outsideMap;
+            var props = _propsProvider(useInside);
             InteractiveProp? best = null;
             float bestDist = float.MaxValue;
 
-            foreach (var prop in map.GetProps())
+            foreach (var prop in props)
             {
                 if (prop is InteractiveProp ip)
                 {
@@ -45,10 +46,9 @@ namespace TGC.MonoGame.TP
         {
             if (prop == null) return false;
             var consumed = prop.OnInteract(player);
-            if (consumed)
+            if (consumed && _removeAction != null)
             {
-                var map = useInside ? _insideMap : _outsideMap;
-                map.RemoveProp(prop);
+                _removeAction(prop, useInside);
             }
             return consumed;
         }

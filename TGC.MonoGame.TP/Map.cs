@@ -27,8 +27,7 @@ namespace TGC.MonoGame.TP
         // Add these fields inside the Map class (near other texture/asset fields)
         internal Microsoft.Xna.Framework.Graphics.Texture2D treeA;
         internal Microsoft.Xna.Framework.Graphics.Texture2D treeB;
-
-        internal void LoadContent(ContentManager content)
+        internal virtual void LoadContent(ContentManager content)
         {
             // Cargas los shaders y modelos UNA sola vez
             var shader = content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicShader");
@@ -148,6 +147,18 @@ namespace TGC.MonoGame.TP
             // Restore previous states once
             graphicsDevice.RasterizerState = prevRaster;
             graphicsDevice.DepthStencilState = prevDepth;
+        }
+        public void UnloadContent()
+        {
+            // Clear props and allow GC to collect models/effects if no other references exist.
+            try
+            {
+                _props.Clear();
+                _loadedModels.Clear();
+                _loadedEffects.Clear();
+                _loadedTextures.Clear();
+            }
+            catch { }
         }
     }
 }

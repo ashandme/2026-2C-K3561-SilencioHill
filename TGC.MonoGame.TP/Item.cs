@@ -76,6 +76,12 @@ namespace TGC.MonoGame.TP
             if (RemainingSeconds <= 0f) return;
             RemainingSeconds = Math.Max(0f, RemainingSeconds - seconds);
         }
+
+        // Provide a HUD-friendly status line for this item. Return null if no status to show.
+        public virtual string GetHudStatus()
+        {
+            return null;
+        }
     }
 
     internal class CandleItem : Item
@@ -85,7 +91,7 @@ namespace TGC.MonoGame.TP
         public CandleItem(Model model)
             : base("Candle", model)
         {
-            IsLit = true;
+            IsLit = false;
             HandScale = Vector3.One * 0.007f;
             MaxDurationSeconds = 120f; // default 2 minutes of burn time
             RemainingSeconds = MaxDurationSeconds;
@@ -106,6 +112,13 @@ namespace TGC.MonoGame.TP
             {
                 IsLit = false;
             }
+        }
+
+        public override string GetHudStatus()
+        {
+            var state = IsLit ? "ON" : "OFF";
+            var time = TimeSpan.FromSeconds(RemainingSeconds).ToString(@"mm\:ss");
+            return $"Candle: {state}  {time}";
         }
     }
 
@@ -180,6 +193,13 @@ namespace TGC.MonoGame.TP
             {
                 IsOn = false;
             }
+        }
+
+        public override string GetHudStatus()
+        {
+            var state = IsOn ? "ON" : "OFF";
+            var time = TimeSpan.FromSeconds(RemainingSeconds).ToString(@"mm\:ss");
+            return $"Flashlight: {state}  {time}";
         }
     }
 }

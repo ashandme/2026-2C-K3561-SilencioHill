@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
 using TGC.MonoGame.TP.Cameras;
 
 namespace TGC.MonoGame.TP;
@@ -27,11 +26,9 @@ public class TGCGame : Game
     private bool _playerMode = true; // true = player, false = spectator (default was spectator before)
     private FreeCamera _spectator;
 
-    private Camera ActiveCamera => _playerMode ? (Camera)_player : (Camera)_player;
+    private Camera ActiveCamera => _playerMode ? (Camera)_player : (Camera)_spectator;
 
-    private Map _tilemap;
-    private MapJson _propmap;
-    private MapJson _insidepropmap;
+    private LevelManager _levelManager;
     private InteractionManager _interactionManager;
     private Effect _effect;
     private Matrix _projection;
@@ -39,7 +36,6 @@ public class TGCGame : Game
     private Matrix _world;
 
     private SpriteFont _font;
-    private bool _showInsideOnly = false;
 
     // HUD helper (manages its own status timer)
     private HudRenderer _hud;
@@ -72,18 +68,22 @@ public class TGCGame : Game
 
         _world = Matrix.Identity;
         _projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 1, 2000);
-        _tilemap = new Map();
-        _propmap = new MapJson();
-        _insidepropmap = new MapJson();
+        _levelManager = new LevelManager();
+        var mapGen = new Map();
+        var mapOutside = new MapJson { filePath = "Content/props.json" };
+        var mapInside = new MapJson { filePath = "Content/insideprops.json" };
+        _levelManager.AddLevel("outside", new Level("outside", [mapGen, mapOutside]));
+        _levelManager.AddLevel("inside", new Level("inside", [mapInside]));
 
         var screenCenter = new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         _player = new Player(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         _spectator = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 50, 150), screenCenter);
 
-        // Interaction manager handles ray-based interactions with interactive props
-        _interactionManager = new InteractionManager(_propmap, _insidepropmap);
-
+        // Create centralized input manager and inject into player
         _input = new InputManager();
+        _player.SetInput(_input);
+        // LevelManager entries are created in Initialize above; actual level loading and
+        // wiring of interaction manager and enemy reference happens in LoadContent.
 
         base.Initialize();
     }
@@ -98,15 +98,19 @@ public class TGCGame : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _effect = Content.Load<Effect>(ContentFolderEffects + "BasicShader");
 
-        _tilemap.LoadContent(Content);
-        _propmap.LoadFromJson("Content/props.json", Content);
-        _insidepropmap.LoadFromJson("Content/insideprops.json", Content);
+        // Load the initial level using LevelManager
+        _levelManager.LoadLevel("outside", Content);
+
+        // Interaction manager uses LevelManager's GetActiveProps/RemoveActiveProp
+        // _interactionManager = new InteractionManager(useInside => _levelManager.GetActiveProps(), (prop, useInside));
+
+        // Keep reference to current enemy via level manager
+        _enemy = _levelManager.Current?.Enemy;
 
         _font = Content.Load<SpriteFont>(ContentFolderSpriteFonts + "CascadiaCode/CascadiaCodePL");
 
         // create HUD helper (uses shared SpriteBatch and font)
         _hud = new HudRenderer(_spriteBatch, _font, GraphicsDevice);
-
         // CARGAR ITEMS
         var candleModel = Content.Load<Model>(ContentFolder3D + "Assets/Candle");
         var linternaModel = Content.Load<Model>(ContentFolder3D + "Assets/Linterna");
@@ -118,28 +122,29 @@ public class TGCGame : Game
         {
             flashlightTexture = Content.Load<Texture2D>(ContentFolderTextures + "FlashlightTexture");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // ignore: texture optional
+            System.Diagnostics.Debug.WriteLine("Failed to load FlashlightTexture: " + ex.Message);
+            flashlightTexture = null;
         }
 
         try
         {
             basicTextureEffect = Content.Load<Effect>(ContentFolderEffects + "BasicTexture");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // ignore: effect optional
+            System.Diagnostics.Debug.WriteLine("Failed to load BasicTexture effect: " + ex.Message);
+            basicTextureEffect = null;
         }
 
         var startingCandle = new CandleItem(candleModel);
         var startingLinterna = new FlashlightItem(linternaModel, flashlightTexture, basicTextureEffect);
         _player.PickupItem(startingLinterna);
         _player.PickupItem(startingCandle);
-
         // CARGAR ENEMIGO
-        var enemyModel = Content.Load<Model>(ContentFolder3D + "kenney_retro-urban-kit/detail-dumpster-closed"); // ajusta el path al modelo que tengas
-        _enemy = new Enemy(enemyModel, _effect, "Content/enemyRoute.json");   
+        var enemyModel = Content.Load<Model>(ContentFolder3D + "Assets/ghost");// ajusta el path al modelo que tengas
+        _enemy = new Enemy(enemyModel, _effect, "Content/enemyRoute.json");
     }
 
     /// <summary>
@@ -157,20 +162,31 @@ public class TGCGame : Game
             Exit();
         }
 
-        // F1: toggle drawing mode (edge-press)
+        // F1: toggle level between outside and inside
         if (_input.IsKeyPressed(Keys.F1))
         {
-            _showInsideOnly = !_showInsideOnly;
+            try
+            {
+                var next = _levelManager.CurrentName == "outside" ? "inside" : "outside";
+                _levelManager.LoadLevel(next, Content);
+                // update enemy reference
+                _enemy = _levelManager.Current?.Enemy;
+            }
+            catch (Exception ex)
+            {
+                _hud.SetStatus("Level switch ERROR: " + ex.Message, ReloadStatusSecondsError);
+            }
         }
 
-        // F2: reload JSON maps and set HUD status
+        // F2: reload current level and set HUD status
         if (_input.IsKeyPressed(Keys.F2))
         {
             try
             {
-                _propmap.LoadFromJson("Content/props.json", Content);
-                _insidepropmap.LoadFromJson("Content/insideprops.json", Content);
+                _levelManager.ReloadCurrent(Content);
                 _hud.SetStatus("Reload OK", ReloadStatusSecondsOk);
+                // refresh enemy reference
+                _enemy = _levelManager.Current?.Enemy;
             }
             catch (Exception ex)
             {
@@ -196,20 +212,14 @@ public class TGCGame : Game
             _spectator.Update(gameTime);
         }
         // Update scene lighting based on player's flashlight state
-        try
+        // Update SceneLighting from player's current item (no exceptions should propagate)
+        var current = _player.CurrentItem;
+        if (current is FlashlightItem flashlight && flashlight.IsOn && flashlight.AttachToCamera)
         {
-            var current = _player.CurrentItem;
-            if (current is FlashlightItem flashlight && flashlight.IsOn && flashlight.AttachToCamera)
-            {
-                SceneLighting.FlashlightEnabled = true;
-                SceneLighting.LightPosition = _player.Position + _player.FrontDirection * 4f;
-            }
-            else
-            {
-                SceneLighting.FlashlightEnabled = false;
-            }
+            SceneLighting.FlashlightEnabled = true;
+            SceneLighting.LightPosition = _player.Position + _player.FrontDirection * 4f;
         }
-        catch
+        else
         {
             SceneLighting.FlashlightEnabled = false;
         }
@@ -219,27 +229,23 @@ public class TGCGame : Game
         _hud.Update(gameTime);
 
         // Interaction: handle interact key in Update using screen-space ray (viewport unproject)
-        try
+        if (_playerMode && _input.IsInteractPressed())
         {
-            if (_playerMode && _input.IsInteractPressed())
-            {
-                var vp = GraphicsDevice.Viewport;
-                var cx = vp.Width / 2f;
-                var cy = vp.Height / 2f;
+            var vp = GraphicsDevice.Viewport;
+            var cx = vp.Width / 2f;
+            var cy = vp.Height / 2f;
 
-                var nearPoint = vp.Unproject(new Vector3(cx, cy, 0f), _projection, _player.View, Matrix.Identity);
-                var farPoint = vp.Unproject(new Vector3(cx, cy, 1f), _projection, _player.View, Matrix.Identity);
-                var dir = Vector3.Normalize(farPoint - nearPoint);
-                var ray = new Ray(nearPoint, dir);
+            var nearPoint = vp.Unproject(new Vector3(cx, cy, 0f), _projection, _player.View, Matrix.Identity);
+            var farPoint = vp.Unproject(new Vector3(cx, cy, 1f), _projection, _player.View, Matrix.Identity);
+            var dir = Vector3.Normalize(farPoint - nearPoint);
+            var ray = new Ray(nearPoint, dir);
 
-                var target = _interactionManager.FindInteractiveProp(ray, _showInsideOnly);
-                if (target != null)
-                {
-                    _interactionManager.Interact(target, _player, _showInsideOnly);
-                }
-            }
+            //var target = _interactionManager.FindInteractiveProp(ray, _levelManager.Current?.IsInside ?? false);
+            //if (target != null)
+            //{
+            //    _interactionManager.Interact(target, _player, _levelManager.Current?.IsInside ?? false);
+            //}
         }
-        catch { }
 
         base.Update(gameTime);
     }
@@ -254,74 +260,34 @@ public class TGCGame : Game
         GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, ClearColor, 1.0f, 0);
 
         // Use active camera for world rendering (player or spectator)
-        var activeView = _playerMode ? _player.View : _spectator.View;
+        var activeView = ActiveCamera.View;
         _effect.Parameters["View"].SetValue(activeView);
         _effect.Parameters["Projection"].SetValue(_projection);
         _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
         // Compute camera (eye) position once and expose to SceneLighting to avoid per-prop inversion
         var camPos = Matrix.Invert(activeView).Translation;
         SceneLighting.EyePosition = camPos;
-        var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}", 
+        var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}",
             camPos.X, camPos.Y, camPos.Z, _playerMode ? "Player" : "Spectator");
         var distanceToEnemy = (_enemy.Position - _player.Position).Length();
         camText += $"\nEnemy: {_enemy.State} | Dist: {distanceToEnemy:F1} | Angle: {_enemy.DebugAngleToPlayerDegrees(_player):F1}";
 
-        if (!_showInsideOnly)
+        // Draw current level via LevelManager
+        if (_levelManager.Current != null)
         {
-            _tilemap.Draw(activeView, _projection);
-            _propmap.Draw(activeView, _projection);
-            _enemy.Draw(activeView, _projection);
+            _levelManager.Current.Draw(activeView, _projection);
         }
         else
         {
-            _insidepropmap.Draw(activeView, _projection);
+            // Fallback: draw nothing
         }
 
-        _hud.Draw(camText);
+        // Let HUD build display strings from live entities
+        // ActiveCamera is a Cameras.Camera; pass actual camera instance
+        _hud.UpdateState(_player, _enemy, ActiveCamera, _playerMode);
+        _hud.Draw();
 
-        // Build right-side HUD overlay with item statuses
-        try
-        {
-            var lines = new System.Collections.Generic.List<string>();
-            foreach (var it in _player.Inventory)
-            {
-                if (it is FlashlightItem f)
-                {
-                    var state = f.IsOn ? "ON" : "OFF";
-                    var time = System.TimeSpan.FromSeconds(f.RemainingSeconds).ToString(@"mm\:ss");
-                    lines.Add($"Flashlight: {state}  {time}");
-                }
-                else if (it is CandleItem c)
-                {
-                    var state = c.IsLit ? "ON" : "OFF";
-                    var time = System.TimeSpan.FromSeconds(c.RemainingSeconds).ToString(@"mm\:ss");
-                    lines.Add($"Candle: {state}  {time}");
-                }
-            }
-
-            _hud.RightOverlay = string.Join("\n", lines);
-        }
-        catch { _hud.RightOverlay = null; }
-
-        // Interaction handled by InteractionManager
-        try
-        {
-            if (_playerMode && _input.IsInteractPressed())
-            {
-                // Build a ray from camera through screen center
-                var invView = Matrix.Invert(_player.View);
-                var cameraPos = invView.Translation;
-                var forward = _player.FrontDirection;
-                var ray = new Ray(cameraPos, forward);
-
-                var target = _interactionManager.FindInteractiveProp(ray, _showInsideOnly);
-                if (target != null)
-                {
-                    _interactionManager.Interact(target, _player, _showInsideOnly);
-                }
-            }
-        }
-        catch { }
+        // Interactions are handled in Update; Draw must not mutate game state.
 
         // 2) Draw held item on top: clear only depth buffer so the held item is not occluded by scene geometry
         GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Black, 1f, 0);

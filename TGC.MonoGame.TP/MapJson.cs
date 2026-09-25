@@ -10,8 +10,9 @@ namespace TGC.MonoGame.TP
     // Conviene definir una clase específica para cargar mapas desde JSON
     internal class MapJson : Map
     {
-        public int LoadFromJson(string filePath, ContentManager content)
-        {
+        public string filePath { get; set; } = string.Empty;
+        internal override void LoadContent(ContentManager content)
+            {
             _props.Clear();
 
             var fullPath = Path.Combine(AppContext.BaseDirectory, filePath);
@@ -25,7 +26,7 @@ namespace TGC.MonoGame.TP
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var mapData = JsonSerializer.Deserialize<MapData>(jsonText, options);
 
-            if (mapData?.Props == null) return 0;
+            if (mapData?.Props == null) return;
 
             foreach (var item in mapData.Props)
             {
@@ -95,8 +96,6 @@ namespace TGC.MonoGame.TP
                 if (texture != null) p.Texture = texture;
                 _props.Add(p);
             }
-
-            return _props.Count;
         }
 
         private static Vector3 DegreesToRadians(Vector3 degrees) =>
