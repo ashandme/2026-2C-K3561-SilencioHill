@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-namespace TGC.MonoGame.TP
+using TGC.MonoGame.TP.PropUtils;
+namespace TGC.MonoGame.TP.LevelUtils
 {
     // Interactive prop: a prop that can be interacted by the player (e.g., pickups, batteries)
     internal class InteractiveProp : Prop

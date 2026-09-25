@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
-namespace TGC.MonoGame.TP;
+namespace TGC.MonoGame.TP.PropUtils;
+
 internal class Prop
 {
-        // Cache of effect parameters for the shared Effect instance (optional)
-        private EffectParameterCache? _paramCache;
+    // Cache of effect parameters for the shared Effect instance (optional)
+    private EffectParameterCache? _paramCache;
     public Model Model { get; }
     public Effect Effect { get; }
     public Vector3 Position { get; set; }
@@ -104,97 +101,97 @@ internal class Prop
         }
         // Set effect parameters for this prop. Avoid cloning the effect per-prop; reuse
         // the shared effect and update its parameters before drawing.
-            if (Effect != null)
+        if (Effect != null)
+        {
+            // Use cached parameters when available
+            if (_paramCache != null)
             {
-                // Use cached parameters when available
+                _paramCache.View?.SetValue(view);
+                _paramCache.Projection?.SetValue(projection);
+                _paramCache.DiffuseColor?.SetValue(Color);
+            }
+            else
+            {
+                Effect.Parameters["View"]?.SetValue(view);
+                Effect.Parameters["Projection"]?.SetValue(projection);
+                Effect.Parameters["DiffuseColor"]?.SetValue(Color);
+            }
+
+            // If this prop has a texture, try common parameter names. ShaderHelper
+            // already attempts names when preparing effects; here we set texture at
+            // draw-time so multiple props can reuse the same effect instance.
+            if (Texture != null)
+            {
                 if (_paramCache != null)
                 {
-                    _paramCache.View?.SetValue(view);
-                    _paramCache.Projection?.SetValue(projection);
-                    _paramCache.DiffuseColor?.SetValue(Color);
+                    _paramCache.ModelTexture?.SetValue(Texture);
+                    _paramCache.Texture?.SetValue(Texture);
+                    _paramCache.DiffuseMap?.SetValue(Texture);
+                    _paramCache.BaseTexture?.SetValue(Texture);
                 }
                 else
                 {
-                    Effect.Parameters["View"]?.SetValue(view);
-                    Effect.Parameters["Projection"]?.SetValue(projection);
-                    Effect.Parameters["DiffuseColor"]?.SetValue(Color);
+                    Effect.Parameters["ModelTexture"]?.SetValue(Texture);
+                    Effect.Parameters["Texture"]?.SetValue(Texture);
+                    Effect.Parameters["DiffuseMap"]?.SetValue(Texture);
+                    Effect.Parameters["baseTexture"]?.SetValue(Texture);
                 }
+            }
 
-                // If this prop has a texture, try common parameter names. ShaderHelper
-                // already attempts names when preparing effects; here we set texture at
-                // draw-time so multiple props can reuse the same effect instance.
-                if (Texture != null)
+            // Set dynamic per-frame parameters used by Blinn-Phong shader if present
+            try
+            {
+                // Use precomputed eye position to avoid per-prop matrix inversion
+                var eyePos = SceneLighting.EyePosition;
+                Effect.Parameters["eyePosition"]?.SetValue(eyePos);
+
+                // Prefer scene-level lighting. The shader now supports multiple lights, so set light arrays.
+                var lightCountParam = Effect.Parameters["lightCount"];
+                if (lightCountParam != null)
                 {
-                    if (_paramCache != null)
+                    try
                     {
-                        _paramCache.ModelTexture?.SetValue(Texture);
-                        _paramCache.Texture?.SetValue(Texture);
-                        _paramCache.DiffuseMap?.SetValue(Texture);
-                        _paramCache.BaseTexture?.SetValue(Texture);
-                    }
-                    else
-                    {
-                        Effect.Parameters["ModelTexture"]?.SetValue(Texture);
-                        Effect.Parameters["Texture"]?.SetValue(Texture);
-                        Effect.Parameters["DiffuseMap"]?.SetValue(Texture);
-                        Effect.Parameters["baseTexture"]?.SetValue(Texture);
-                    }
-                }
-
-                // Set dynamic per-frame parameters used by Blinn-Phong shader if present
-                try
-                {
-                    // Use precomputed eye position to avoid per-prop matrix inversion
-                    var eyePos = SceneLighting.EyePosition;
-                    Effect.Parameters["eyePosition"]?.SetValue(eyePos);
-
-                    // Prefer scene-level lighting. The shader now supports multiple lights, so set light arrays.
-                    var lightCountParam = Effect.Parameters["lightCount"];
-                    if (lightCountParam != null)
-                    {
-                        try
-                        {
-                            if (SceneLighting.FlashlightEnabled)
-                            {
-                                // Fill first light slot with flashlight info
-                                _paramCache?.LightCount?.SetValue(1);
-                                _paramCache?.LightAmbient0?.SetValue(new Vector3(0.02f, 0.02f, 0.02f));
-                                _paramCache?.LightDiffuse0?.SetValue(SceneLighting.LightColor);
-                                _paramCache?.LightSpecular0?.SetValue(SceneLighting.LightColor);
-                                _paramCache?.LightPosition0?.SetValue(SceneLighting.LightPosition);
-                            }
-                            else
-                            {
-                                // No scene lights: set a default single directional/point above camera
-                                var lightPos = eyePos + new Vector3(0, 50f, 50f);
-                                _paramCache?.LightCount?.SetValue(1);
-                                _paramCache?.LightAmbient0?.SetValue(new Vector3(0.05f, 0.05f, 0.05f));
-                                _paramCache?.LightDiffuse0?.SetValue(new Vector3(1f, 1f, 1f));
-                                _paramCache?.LightSpecular0?.SetValue(new Vector3(1f, 1f, 1f));
-                                _paramCache?.LightPosition0?.SetValue(lightPos);
-                            }
-                        }
-                        catch { }
-                    }
-                    else
-                    {
-                        // Fallback for older shader signatures
                         if (SceneLighting.FlashlightEnabled)
                         {
-                            Effect.Parameters["lightPosition"]?.SetValue(SceneLighting.LightPosition);
+                            // Fill first light slot with flashlight info
+                            _paramCache?.LightCount?.SetValue(1);
+                            _paramCache?.LightAmbient0?.SetValue(new Vector3(0.02f, 0.02f, 0.02f));
+                            _paramCache?.LightDiffuse0?.SetValue(SceneLighting.LightColor);
+                            _paramCache?.LightSpecular0?.SetValue(SceneLighting.LightColor);
+                            _paramCache?.LightPosition0?.SetValue(SceneLighting.LightPosition);
                         }
                         else
                         {
+                            // No scene lights: set a default single directional/point above camera
                             var lightPos = eyePos + new Vector3(0, 50f, 50f);
-                            Effect.Parameters["lightPosition"]?.SetValue(lightPos);
+                            _paramCache?.LightCount?.SetValue(1);
+                            _paramCache?.LightAmbient0?.SetValue(new Vector3(0.05f, 0.05f, 0.05f));
+                            _paramCache?.LightDiffuse0?.SetValue(new Vector3(1f, 1f, 1f));
+                            _paramCache?.LightSpecular0?.SetValue(new Vector3(1f, 1f, 1f));
+                            _paramCache?.LightPosition0?.SetValue(lightPos);
                         }
                     }
+                    catch { }
                 }
-                catch
+                else
                 {
-                    // In case view matrix inversion fails, skip setting eye/light
+                    // Fallback for older shader signatures
+                    if (SceneLighting.FlashlightEnabled)
+                    {
+                        Effect.Parameters["lightPosition"]?.SetValue(SceneLighting.LightPosition);
+                    }
+                    else
+                    {
+                        var lightPos = eyePos + new Vector3(0, 50f, 50f);
+                        Effect.Parameters["lightPosition"]?.SetValue(lightPos);
+                    }
                 }
             }
+            catch
+            {
+                // In case view matrix inversion fails, skip setting eye/light
+            }
+        }
 
         foreach (var mesh in Model.Meshes)
         {
@@ -202,31 +199,31 @@ internal class Prop
 
             // Before drawing, assign the shared effect instance to each mesh part so
             // the draw call uses the current parameters (world/view/proj/texture).
-                if (Effect != null)
+            if (Effect != null)
+            {
+                foreach (var part in mesh.MeshParts)
                 {
-                    foreach (var part in mesh.MeshParts)
-                    {
-                        part.Effect = Effect;
-                    }
-
-                    var worldBone = boneTransform * world;
-                    Effect.Parameters["World"]?.SetValue(worldBone);
-
-                    // Also set WorldViewProjection and inverse-transpose world (normals)
-                    var wvp = worldBone * view * projection;
-                    Effect.Parameters["WorldViewProjection"]?.SetValue(wvp);
-
-                    // Inverse-transpose world for normal transformation
-                    try
-                    {
-                        var invTrans = Matrix.Transpose(Matrix.Invert(worldBone));
-                        Effect.Parameters["InverseTransposeWorld"]?.SetValue(invTrans);
-                    }
-                    catch
-                    {
-                        // ignore if the matrix is not invertible
-                    }
+                    part.Effect = Effect;
                 }
+
+                var worldBone = boneTransform * world;
+                Effect.Parameters["World"]?.SetValue(worldBone);
+
+                // Also set WorldViewProjection and inverse-transpose world (normals)
+                var wvp = worldBone * view * projection;
+                Effect.Parameters["WorldViewProjection"]?.SetValue(wvp);
+
+                // Inverse-transpose world for normal transformation
+                try
+                {
+                    var invTrans = Matrix.Transpose(Matrix.Invert(worldBone));
+                    Effect.Parameters["InverseTransposeWorld"]?.SetValue(invTrans);
+                }
+                catch
+                {
+                    // ignore if the matrix is not invertible
+                }
+            }
 
             mesh.Draw();
         }

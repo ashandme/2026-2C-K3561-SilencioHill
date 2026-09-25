@@ -1,8 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using TGC.MonoGame.TP.PropUtils;
 
-namespace TGC.MonoGame.TP
+namespace TGC.MonoGame.TP.LevelUtils
 {
     internal static class MapBuilder
     {

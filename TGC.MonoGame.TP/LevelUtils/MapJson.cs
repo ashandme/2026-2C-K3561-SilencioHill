@@ -1,18 +1,19 @@
-using System;
-using System.IO;
-using System.Text.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.IO;
+using System.Text.Json;
+using TGC.MonoGame.TP.PropUtils;
 
-namespace TGC.MonoGame.TP
+namespace TGC.MonoGame.TP.LevelUtils
 {
     // Conviene definir una clase específica para cargar mapas desde JSON
     internal class MapJson : Map
     {
         public string filePath { get; set; } = string.Empty;
         internal override void LoadContent(ContentManager content)
-            {
+        {
             _props.Clear();
 
             var fullPath = Path.Combine(AppContext.BaseDirectory, filePath);

@@ -365,8 +365,6 @@ namespace TGC.MonoGame.TP
                 _previousKeyboardState = keyboardState;
             }
         }
-
-        // Ajusta la altura de la camara (Position.Y) segun el estado actual
         private void ApplyHeight()
         {
             var targetHeight = State == PlayerState.Walking ? StandHeight : CrouchHeight;

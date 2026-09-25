@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using TGC.MonoGame.TP.Cameras;
+using TGC.MonoGame.TP.LevelUtils;
+using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP;
 
@@ -29,7 +31,6 @@ public class TGCGame : Game
     private Camera ActiveCamera => _playerMode ? (Camera)_player : (Camera)_spectator;
 
     private LevelManager _levelManager;
-    private InteractionManager _interactionManager;
     private Effect _effect;
     private Matrix _projection;
     private SpriteBatch _spriteBatch;
@@ -79,11 +80,8 @@ public class TGCGame : Game
         _player = new Player(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 10, 50), screenCenter);
         _spectator = new FreeCamera(GraphicsDevice.Viewport.AspectRatio, new Vector3(0, 50, 150), screenCenter);
 
-        // Create centralized input manager and inject into player
         _input = new InputManager();
         _player.SetInput(_input);
-        // LevelManager entries are created in Initialize above; actual level loading and
-        // wiring of interaction manager and enemy reference happens in LoadContent.
 
         base.Initialize();
     }
@@ -96,7 +94,7 @@ public class TGCGame : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _effect = Content.Load<Effect>(ContentFolderEffects + "BasicShader");
+        _effect = Content.Load<Effect>(ContentFolderEffects + "BlinnPhong");
 
         // Load the initial level using LevelManager
         _levelManager.LoadLevel("outside", Content);
@@ -218,6 +216,9 @@ public class TGCGame : Game
         {
             SceneLighting.FlashlightEnabled = true;
             SceneLighting.LightPosition = _player.Position + _player.FrontDirection * 4f;
+            _effect.Parameters["lightPosition"].SetValue(SceneLighting.LightPosition);
+            _effect.Parameters["eyePosition"].SetValue(_player.Position);
+
         }
         else
         {
@@ -261,12 +262,12 @@ public class TGCGame : Game
 
         // Use active camera for world rendering (player or spectator)
         var activeView = ActiveCamera.View;
-        _effect.Parameters["View"].SetValue(activeView);
-        _effect.Parameters["Projection"].SetValue(_projection);
-        _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
-        // Compute camera (eye) position once and expose to SceneLighting to avoid per-prop inversion
+        // _effect.Parameters["View"].SetValue(activeView);
+        // _effect.Parameters["Projection"].SetValue(_projection);
+        // _effect.Parameters["DiffuseColor"].SetValue(Color.DarkBlue.ToVector3());
         var camPos = Matrix.Invert(activeView).Translation;
         SceneLighting.EyePosition = camPos;
+
         var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}",
             camPos.X, camPos.Y, camPos.Z, _playerMode ? "Player" : "Spectator");
         var distanceToEnemy = (_enemy.Position - _player.Position).Length();

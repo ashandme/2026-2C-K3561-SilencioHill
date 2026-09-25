@@ -6,26 +6,19 @@
 #define VS_SHADERMODEL vs_4_0_level_9_1
 #define PS_SHADERMODEL ps_4_0_level_9_1
 #endif
-// ROBADO DE SAMPLES
+
 float4x4 WorldViewProjection;
 float4x4 World;
 float4x4 InverseTransposeWorld;
 
-// Support multiple lights (fixed-size array)
-static const int NUM_LIGHTS = 4;
-
-// Per-light colors
-float3 lightAmbient[NUM_LIGHTS];
-float3 lightDiffuse[NUM_LIGHTS];
-float3 lightSpecular[NUM_LIGHTS];
-float3 lightPosition[NUM_LIGHTS];
-int lightCount;
-
-// Material coefficients (single material for the object)
+float3 ambientColor; // Light's Ambient Color
+float3 diffuseColor; // Light's Diffuse Color
+float3 specularColor; // Light's Specular Color
 float KAmbient;
 float KDiffuse;
 float KSpecular;
 float shininess;
+float3 lightPosition;
 float3 eyePosition; // Camera position
 
 texture baseTexture;
@@ -67,33 +60,24 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 
 float4 MainPS(VertexShaderOutput input) : COLOR
 {
-    // Get the texture texel
+    // Base vectors
+    float3 lightDirection = normalize(lightPosition - input.WorldPosition.xyz);
+    float3 viewDirection = normalize(eyePosition - input.WorldPosition.xyz);
+    float3 halfVector = normalize(lightDirection + viewDirection);
+
+	// Get the texture texel
     float4 texelColor = tex2D(textureSampler, input.TextureCoordinates);
 
-    float3 totalAmbient = 0;
-    float3 totalDiffuse = 0;
-    float3 totalSpecular = 0;
+	// Calculate the diffuse light
+    float NdotL = saturate(dot(input.Normal.xyz, lightDirection));
+    float3 diffuseLight = KDiffuse * diffuseColor * NdotL;
 
-    float3 viewDirection = normalize(eyePosition - input.WorldPosition.xyz);
-
-    // Accumulate contribution from each active light
-    for (int i = 0; i < lightCount; i++)
-    {
-        float3 lp = lightPosition[i];
-        float3 lightDir = normalize(lp - input.WorldPosition.xyz);
-        float3 halfVector = normalize(lightDir + viewDirection);
-
-        float NdotL = saturate(dot(input.Normal.xyz, lightDir));
-        totalAmbient += lightAmbient[i] * KAmbient;
-        totalDiffuse += KDiffuse * lightDiffuse[i] * NdotL;
-
-        float NdotH = dot(input.Normal.xyz, halfVector);
-        totalSpecular += sign(NdotL) * KSpecular * lightSpecular[i] * pow(saturate(NdotH), shininess);
-    }
+	// Calculate the specular light
+    float NdotH = dot(input.Normal.xyz, halfVector);
+    float3 specularLight = sign(NdotL) * KSpecular * specularColor * pow(saturate(NdotH), shininess);
 
     // Final calculation
-    float3 lighting = saturate(totalAmbient + totalDiffuse) * texelColor.rgb + totalSpecular;
-    float4 finalColor = float4(lighting, texelColor.a);
+    float4 finalColor = float4(saturate(ambientColor * KAmbient + diffuseLight) * texelColor.rgb + specularLight, texelColor.a);
     return finalColor;
 
 }

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace TGC.MonoGame.TP;
+namespace TGC.MonoGame.TP.PropUtils;
 
 /* Para manejar la deserialización de JSON
  * definimos una clase que represente la estructura del archivo JSON */
@@ -16,7 +15,7 @@ public class PropData
 {
     public string ModelPath { get; set; } = string.Empty;
     public string EffectPath { get; set; } = string.Empty;
-        // Optional texture path for the prop (e.g., tree billboard texture)
+    // Optional texture path for the prop (e.g., tree billboard texture)
     public string TexturePath { get; set; } = string.Empty;
     public float[]? Position { get; set; }
     public float[]? Rotation { get; set; }
