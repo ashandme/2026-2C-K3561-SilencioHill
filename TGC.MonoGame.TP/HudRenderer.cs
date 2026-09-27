@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using TGC.MonoGame.TP.Cameras;
+using TGC.MonoGame.TP.LevelUtils;
 
 namespace TGC.MonoGame.TP
 {
@@ -46,7 +47,7 @@ namespace TGC.MonoGame.TP
         }
 
         // Update HUD state from game entities. Builds leftText and right overlay internally.
-        public void UpdateState(Player player, Enemy enemy, Camera activeCamera, bool playerMode)
+        public void UpdateState(Player player, Enemy enemy, Camera activeCamera, bool playerMode, InteractionManager interactionManager = null)
         {
             try
             {
@@ -60,6 +61,15 @@ namespace TGC.MonoGame.TP
                 {
                     var distanceToEnemy = (enemy.Position - player.Position).Length();
                     camText += $"\nEnemy: {enemy.State} | Dist: {distanceToEnemy:F1} | Angle: {enemy.DebugAngleToPlayerDegrees(player):F1}";
+                }
+                
+                if (interactionManager?.Selected != null)
+                {
+                    camText += $"\nE: Agarrar '{interactionManager.Selected.Id}'";
+                    if (interactionManager.CandidateCount > 1)
+                    {
+                        camText += " | Tab: Alternar";
+                    }
                 }
 
                 _leftText = camText;

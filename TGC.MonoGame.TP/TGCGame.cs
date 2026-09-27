@@ -25,6 +25,7 @@ public class TGCGame : Game
     // Replace FreeCamera with Player so player inventories can be used
     private Player _player;
     private Enemy _enemy;
+    private InteractionManager _interactionManager;
     private bool _playerMode = true; // true = player, false = spectator (default was spectator before)
     private FreeCamera _spectator;
 
@@ -140,9 +141,10 @@ public class TGCGame : Game
         var startingLinterna = new FlashlightItem(linternaModel, flashlightTexture, basicTextureEffect);
         _player.PickupItem(startingLinterna);
         _player.PickupItem(startingCandle);
-        // CARGAR ENEMIGO
-        var enemyModel = Content.Load<Model>(ContentFolder3D + "Assets/ghost");// ajusta el path al modelo que tengas
-        _enemy = new Enemy(enemyModel, _effect, "Content/enemyRoute.json");
+        // No hace falta, ahora se carga en level
+        //var enemyModel = Content.Load<Model>(ContentFolder3D + "Assets/ghost");
+        //_enemy = new Enemy(enemyModel, _effect, "Content/enemyRoute.json");   
+        _interactionManager = new InteractionManager();
     }
 
     /// <summary>
@@ -229,23 +231,19 @@ public class TGCGame : Game
         // Let HUD manage its own timer
         _hud.Update(gameTime);
 
-        // Interaction: handle interact key in Update using screen-space ray (viewport unproject)
-        if (_playerMode && _input.IsInteractPressed())
+       _interactionManager.UpdateCandidates(_player.Position, _levelManager.Current);
+
+        if (_playerMode)
         {
-            var vp = GraphicsDevice.Viewport;
-            var cx = vp.Width / 2f;
-            var cy = vp.Height / 2f;
+            if (_input.IsCyclePressed())
+            {
+                _interactionManager.CycleSelection();
+            }
 
-            var nearPoint = vp.Unproject(new Vector3(cx, cy, 0f), _projection, _player.View, Matrix.Identity);
-            var farPoint = vp.Unproject(new Vector3(cx, cy, 1f), _projection, _player.View, Matrix.Identity);
-            var dir = Vector3.Normalize(farPoint - nearPoint);
-            var ray = new Ray(nearPoint, dir);
-
-            //var target = _interactionManager.FindInteractiveProp(ray, _levelManager.Current?.IsInside ?? false);
-            //if (target != null)
-            //{
-            //    _interactionManager.Interact(target, _player, _levelManager.Current?.IsInside ?? false);
-            //}
+            if (_input.IsInteractPressed())
+            {
+                _interactionManager.Interact(_player, _levelManager.Current);
+            }
         }
 
         base.Update(gameTime);
@@ -285,7 +283,7 @@ public class TGCGame : Game
 
         // Let HUD build display strings from live entities
         // ActiveCamera is a Cameras.Camera; pass actual camera instance
-        _hud.UpdateState(_player, _enemy, ActiveCamera, _playerMode);
+        _hud.UpdateState(_player, _enemy, ActiveCamera, _playerMode, _interactionManager);
         _hud.Draw();
 
         // Interactions are handled in Update; Draw must not mutate game state.

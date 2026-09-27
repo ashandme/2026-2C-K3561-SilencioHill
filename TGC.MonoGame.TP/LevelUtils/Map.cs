@@ -116,6 +116,10 @@ namespace TGC.MonoGame.TP.LevelUtils
                     var batteryPos = new Vector3(30f, 0f, 30f);
                     var battery = new BatteryProp(batteryModel, batteryEffect, batteryPos, "battery_01", addSeconds: 60f);
                     _props.Add(battery);
+                    
+                    var battery2Pos = new Vector3(40f, 0f, 30f);
+                    var battery2 = new BatteryProp(batteryModel, batteryEffect, battery2Pos, "battery_02", addSeconds: 60f);
+                    _props.Add(battery2);
                 }
             }
             catch { }

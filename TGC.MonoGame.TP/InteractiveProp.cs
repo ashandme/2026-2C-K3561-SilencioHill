@@ -7,6 +7,7 @@ namespace TGC.MonoGame.TP.LevelUtils
     internal class InteractiveProp : Prop
     {
         public string Id { get; }
+        public virtual int Priority => 0;
 
         public InteractiveProp(Model model, Effect effect, Vector3 position, string id, Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
             : base(model, effect, position, rotation, scale, color)

@@ -12,7 +12,7 @@ internal class Level
     // the level map should be an array of maps
     private readonly Map[] _maps = new Map[0];
     // TODO: REFACTOR make a single class for Entities (props, enemies, etc.) and have a single list of entities instead of separate maps for props and enemies.
-    public Enemy? Enemy { get; private set; }
+    public Enemy Enemy { get; private set; }
 
     // A simple identifier
     public string Name { get; }
@@ -82,5 +82,14 @@ internal class Level
             allProps.AddRange(_maps[i].GetProps());
         }
         return allProps;
+    }
+
+    public bool RemoveProp(Prop prop)
+    {
+        for (int i = 0; i < _maps.Length; i++)
+        {
+            if (_maps[i].RemoveProp(prop)) return true;
+        }
+        return false;
     }
 }

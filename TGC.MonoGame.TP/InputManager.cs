@@ -31,6 +31,8 @@ namespace TGC.MonoGame.TP
         // Expose quick check for interact (E) key
         public bool IsInteractPressed() => IsKeyPressed(Keys.E);
 
+        public bool IsCyclePressed() => IsKeyPressed(Keys.Tab);
+
         public void Reset()
         {
             _previous = Keyboard.GetState();
