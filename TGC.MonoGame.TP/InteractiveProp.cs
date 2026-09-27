@@ -57,4 +57,22 @@ namespace TGC.MonoGame.TP.LevelUtils
             return false;
         }
     }
+    internal class HidingSpotProp : InteractiveProp
+    {
+        // Punto donde se para el jugador al esconderse (afuera del mesh, no en el centro del prop)
+        public Vector3 HideStandPoint { get; set; }
+        public HidingSpotProp(Model model, Effect effect, Vector3 position, string id)
+            : base(model, effect, position, id) 
+        {
+            HideStandPoint = position; // por defecto, ajustalo al crearlo en Map.cs
+        }
+
+        public override int Priority => 5; // entre pila (0) y puerta (10), ajustable
+
+        public override bool OnInteract(Player player)
+            {
+            player.ToggleHiding(HideStandPoint);
+            return false; // reutilizable: no se saca del mapa como la pila
+            }
+    }
 }

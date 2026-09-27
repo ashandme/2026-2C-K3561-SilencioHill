@@ -75,6 +75,25 @@ namespace TGC.MonoGame.TP
             State = PlayerState.Caught;
             _caughtTimer = CaughtDuration;
         }
+        // Alterna entre escondido/no escondido. Lo llama HidingSpotProp via InteractionManager.
+        private Vector3 _preHidePosition;
+        public void ToggleHiding(Vector3? hidePosition = null)
+        {
+            if (State == PlayerState.Undetectable)
+            {
+                Position = _preHidePosition;
+                State = PlayerState.Walking;
+            }
+            else if (State != PlayerState.Caught)
+            {
+                _preHidePosition = Position;
+                if (hidePosition.HasValue)
+                {
+                    Position = new Vector3(hidePosition.Value.X, Position.Y, hidePosition.Value.Z);
+                }
+                State = PlayerState.Undetectable;
+            }
+        }
 
         public bool PickupItem(Item item)
         {
@@ -273,24 +292,11 @@ namespace TGC.MonoGame.TP
 
                 // Sin movimiento; sale del escondite si se acaba de apretar E
                 case PlayerState.Undetectable:
-                    if (IsPressed(Keys.E))
-                    {
-                        State = PlayerState.Walking;
-                    }
                     ApplyHeight();
                     if (!useInputManager) _previousKeyboardState = keyboardState;
                     return;
-
                 // Walking/Crouching: entra al escondite si corresponde, si no define postura segun Ctrl
                 default:
-                    if (_nearHidingSpot && IsPressed(Keys.E))
-                    {
-                        State = PlayerState.Undetectable;
-                        ApplyHeight();
-                        if (!useInputManager) _previousKeyboardState = keyboardState;
-                        return;
-                    }
-
                     State = IsDown(Keys.LeftControl)
                         ? PlayerState.Crouching
                         : PlayerState.Walking;

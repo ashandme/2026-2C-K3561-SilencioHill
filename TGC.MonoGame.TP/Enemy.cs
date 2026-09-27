@@ -14,6 +14,7 @@ namespace TGC.MonoGame.TP
         Staring,
         Sneaking,
         Attacking,
+        Chasing,
         Fleeing
     }
 
@@ -31,12 +32,17 @@ namespace TGC.MonoGame.TP
         private const float AttackRadius = 50f;
 
         // Cono de vision del jugador (para saber si el jugador ve al enemigo)
-        private const float PlayerSightConeHalfAngleDegrees = 45f;
+        private const float PlayerSightConeHalfAngleDegrees = 30f;
 
         // --- Velocidades ---
         private const float RoamSpeed = 25f;
         private const float SneakSpeed = 15f;
         private const float FleeSpeed = 100f;
+        private const float ChaseSpeed = 75f; 
+        // --- Staring / Chasing ---
+        private const float StaringDuration = 3f;      // segundos que se queda observando antes de perseguir (el "changui")
+        private float _staringTimer;                
+        private const float ChaseGiveUpDistance = 600f;      // si te alejas mas que esto durante la persecucion, abandona
 
         // --- Roaming ---
         private readonly List<Vector3> _waypoints = new();
@@ -93,6 +99,11 @@ namespace TGC.MonoGame.TP
         public void Update(GameTime gameTime, Player player)
         {
             var elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            // Si el jugador esta escondido, el enemigo pierde el rastro 
+            if (player.State == PlayerState.Undetectable && (State == EnemyState.Staring || State == EnemyState.Sneaking || State == EnemyState.Chasing))
+            {
+                State = EnemyState.Roaming;
+            }
 
             switch (State)
             {
@@ -104,6 +115,9 @@ namespace TGC.MonoGame.TP
                     break;
                 case EnemyState.Sneaking:
                     UpdateSneaking(elapsedTime, player);
+                    break;
+                case EnemyState.Chasing:                    
+                    UpdateChasing(elapsedTime, player);
                     break;
                 case EnemyState.Attacking:
                     UpdateAttacking(player);
@@ -120,14 +134,16 @@ namespace TGC.MonoGame.TP
         }
 
         private void UpdateRoaming(float elapsedTime, Player player)
-{
-            var detection = DetectPlayer(player);
-            if (detection != DetectionZone.None)
+        {
+           if (player.State != PlayerState.Undetectable)
             {
-                // El enemigo te detecto (por delante o por el costado/atras).
-                // Si hay contacto visual mutuo -> Staring. Si no lo estas viendo -> Sneaking.
-                State = PlayerCanSeeEnemy(player) ? EnemyState.Staring : EnemyState.Sneaking;
-                return;
+                var detection = DetectPlayer(player);
+                if (detection != DetectionZone.None)
+                {
+                    State = PlayerCanSeeEnemy(player) ? EnemyState.Staring : EnemyState.Sneaking;
+                    _staringTimer = 0f;
+                    return;
+                }
             }
 
             if (_waypoints.Count == 0) return;
@@ -147,10 +163,10 @@ namespace TGC.MonoGame.TP
                 return;
             }
 
-    var direction = Vector3.Normalize(toTarget);
-    FrontDirection = direction;
-    Position += direction * RoamSpeed * elapsedTime;
-}
+            var direction = Vector3.Normalize(toTarget);
+            FrontDirection = direction;
+            Position += direction * RoamSpeed * elapsedTime;
+        }
 
         private void UpdateStaring(float elapsedTime, Player player)
         {
@@ -173,13 +189,24 @@ namespace TGC.MonoGame.TP
             {
                 State = EnemyState.Fleeing;
                 _fleeTimer = 0f;
+                _staringTimer = 0f;
                 return;
             }
 
-            // Se corto el contacto visual (dejaste de mirarlo): pasa a acecharte
             if (!PlayerCanSeeEnemy(player))
             {
+             // Se corto el contacto visual (dejaste de mirarlo): pasa a acecharte
                 State = EnemyState.Sneaking;
+                _staringTimer = 0f;
+                return;
+            }
+
+            // Sigue habiendo contacto visual: cuenta los 3 segundos 
+            _staringTimer += elapsedTime;
+            if (_staringTimer >= StaringDuration)
+            {
+                State = EnemyState.Chasing;
+                _staringTimer = 0f;
             }
         }
 
@@ -210,7 +237,32 @@ namespace TGC.MonoGame.TP
                 Position += flatDirection * SneakSpeed * elapsedTime;
             }
         }
+        private void UpdateChasing(float elapsedTime, Player player)
+        {
+            var toPlayer = player.Position - Position;
+            var distance = toPlayer.Length();
 
+            // Caso 1: te agarra
+            if (distance <= AttackRadius)
+            {
+                State = EnemyState.Attacking;
+                return;
+            }
+
+            // Caso 2: te fuiste muy lejos, abandona la persecucion
+            if (distance > ChaseGiveUpDistance)
+            {
+                State = EnemyState.Roaming;
+                return;
+            }
+
+            var flatDirection = FlattenXZ(toPlayer);
+            if (flatDirection != Vector3.Zero)
+            {
+                FrontDirection = flatDirection;
+                Position += flatDirection * ChaseSpeed * elapsedTime;
+            }
+        }
         private void UpdateAttacking(Player player)
         {
             player.Catch();

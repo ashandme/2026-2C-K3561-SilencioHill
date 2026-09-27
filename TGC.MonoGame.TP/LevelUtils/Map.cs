@@ -123,6 +123,30 @@ namespace TGC.MonoGame.TP.LevelUtils
                 }
             }
             catch { }
+            try
+            {
+                Model hidingModel = null;
+                try
+                {
+                    hidingModel = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/detail-dumpster-closed");
+                }
+                catch (Exception)
+                {
+                    hidingModel = null;
+                }
+
+                if (hidingModel != null)
+                {
+                    var hidingEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, null);
+                    var hidingPos = new Vector3(510f, 0f, 600f);
+                    var hidingSpot = new HidingSpotProp(hidingModel, hidingEffect, hidingPos, "hiding_01");
+                    hidingSpot.Scale *= 0.6f;
+                    hidingSpot.Rotation = new Vector3(0f, MathHelper.ToRadians(90f), 0f);
+                    hidingSpot.HideStandPoint = hidingPos + new Vector3(3f, 0f, 0f);
+                    _props.Add(hidingSpot);
+                }
+            }
+            catch { }
         }
 
         public void Draw(Matrix view, Matrix projection)
