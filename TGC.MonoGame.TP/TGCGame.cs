@@ -142,7 +142,7 @@ public class TGCGame : Game
             basicTextureEffect = null;
         }
 
-        var startingCandle = new CandleItem(candleModel);
+        var startingCandle = new CandleItem(candleModel, flashlightTexture, basicTextureEffect);
         var startingLinterna = new FlashlightItem(linternaModel, flashlightTexture, basicTextureEffect);
         _player.PickupItem(startingLinterna);
         _player.PickupItem(startingCandle);
@@ -272,7 +272,6 @@ public class TGCGame : Game
         // 1) Clear color + depth and draw opaque scene normally
         GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, ClearColor, 1.0f, 0);
 
-        // Use active camera for world rendering (player or spectator)
         var activeView = ActiveCamera.View;
         // _effect.Parameters["View"].SetValue(activeView);
         // _effect.Parameters["Projection"].SetValue(_projection);

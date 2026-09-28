@@ -8,6 +8,8 @@ namespace TGC.MonoGame.TP
     {
         public string Name { get; }
         public Model Model { get; }
+        public Texture2D Texture { get; set; }
+        public Effect TextureEffect { get; set; }
 
         // Optional lifetime for items that consume over time (seconds)
         public float MaxDurationSeconds { get; protected set; } = 0f;
@@ -40,11 +42,11 @@ namespace TGC.MonoGame.TP
         // Camera-local offset: X=right, Y=up, Z=forward (camera local space)
         public virtual Vector3 CameraLocalOffset => Vector3.Zero;
 
-        public virtual void DrawModel(Effect effect, Matrix world, Matrix view, Matrix projection)
+        public virtual void DrawModel(Matrix world, Matrix view, Matrix projection)
         {
-            if (Model == null || effect == null) return;
-            effect.Parameters["View"]?.SetValue(view);
-            effect.Parameters["Projection"]?.SetValue(projection);
+            if (Model == null || TextureEffect == null) return;
+            TextureEffect.Parameters["View"]?.SetValue(view);
+            TextureEffect.Parameters["Projection"]?.SetValue(projection);
 
             // Compute correction from per-item hand scale/rotation offsets
             var localScale = Matrix.CreateScale(HandScale);
@@ -59,11 +61,11 @@ namespace TGC.MonoGame.TP
             foreach (var mesh in Model.Meshes)
             {
                 var meshWorld = boneTransforms[mesh.ParentBone.Index] * finalWorld;
-                effect.Parameters["World"]?.SetValue(meshWorld);
+                TextureEffect.Parameters["World"]?.SetValue(meshWorld);
 
                 foreach (var part in mesh.MeshParts)
                 {
-                    part.Effect = effect;
+                    part.Effect = TextureEffect;
                 }
 
                 mesh.Draw();
@@ -88,9 +90,10 @@ namespace TGC.MonoGame.TP
     {
         public bool IsLit { get; private set; }
 
-        public CandleItem(Model model)
-            : base("Candle", model)
-        {
+        public CandleItem(Model model, Texture2D texture, Effect effect)
+            : base("Candle", model) {
+            Texture = texture;
+            TextureEffect = effect;
             IsLit = false;
             HandScale = Vector3.One * 0.007f;
             MaxDurationSeconds = 120f; // default 2 minutes of burn time
@@ -113,7 +116,6 @@ namespace TGC.MonoGame.TP
                 IsLit = false;
             }
         }
-
         public override string GetHudStatus()
         {
             var state = IsLit ? "ON" : "OFF";
@@ -126,9 +128,6 @@ namespace TGC.MonoGame.TP
     {
         public bool IsOn { get; private set; }
         // Optional texture and effect for drawing the flashlight with a simple texture shader
-        public Texture2D Texture { get; set; }
-        public Effect TextureEffect { get; set; }
-
         public FlashlightItem(Model model = null, Texture2D texture = null, Effect textureEffect = null) : base("Flashlight", model)
         {
             HandScale = Vector3.One * 0.002f;
@@ -149,7 +148,7 @@ namespace TGC.MonoGame.TP
         public override bool AttachToCamera => true;
         public override Vector3 CameraLocalOffset => new Vector3(0.5f, -0.5f, 1.0f);
 
-        public override void DrawModel(Effect effect, Matrix world, Matrix view, Matrix projection)
+        public override void DrawModel(Matrix world, Matrix view, Matrix projection)
         {
             // If we have a texture and a BasicTexture effect, use it to draw the model textured
             if (Model == null) return;
@@ -184,7 +183,7 @@ namespace TGC.MonoGame.TP
                 return;
             }
 
-            base.DrawModel(effect, world, view, projection);
+            base.DrawModel(world, view, projection);
         }
         public override void Drain(float seconds)
         {

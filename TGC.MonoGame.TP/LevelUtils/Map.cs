@@ -85,6 +85,15 @@ namespace TGC.MonoGame.TP.LevelUtils
                 treeBEffect);
 
             // Add a battery interactive pickup to the world
+            Texture2D metalTexture = null;
+            try
+            {
+                metalTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "metal");
+            }
+            catch (Exception)
+            {
+                metalTexture = null;
+            }
             try
             {
                 Model batteryModel = null;
@@ -97,16 +106,6 @@ namespace TGC.MonoGame.TP.LevelUtils
                     batteryModel = null;
                 }
 
-                Texture2D metalTexture = null;
-                try
-                {
-                    metalTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "metal");
-                }
-                catch (Exception)
-                {
-                    metalTexture = null;
-                }
-
                 if (batteryModel != null)
                 {
                     // Use BasicTexture shader if available, otherwise fallback to base shader
@@ -114,11 +113,11 @@ namespace TGC.MonoGame.TP.LevelUtils
 
                     // Place the battery somewhere in the scene (adjust coordinates as needed)
                     var batteryPos = new Vector3(30f, 0f, 30f);
-                    var battery = new BatteryProp(batteryModel, batteryEffect, batteryPos, "battery_01", addSeconds: 60f);
+                    var battery = new BatteryProp(batteryModel, batteryEffect, batteryPos, "battery_01", addSeconds: 30f);
                     _props.Add(battery);
                     
                     var battery2Pos = new Vector3(40f, 0f, 30f);
-                    var battery2 = new BatteryProp(batteryModel, batteryEffect, battery2Pos, "battery_02", addSeconds: 60f);
+                    var battery2 = new BatteryProp(batteryModel, batteryEffect, battery2Pos, "battery_02", addSeconds: 30f);
                     _props.Add(battery2);
                 }
             }
@@ -129,6 +128,7 @@ namespace TGC.MonoGame.TP.LevelUtils
                 try
                 {
                     hidingModel = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/detail-dumpster-closed");
+
                 }
                 catch (Exception)
                 {
@@ -137,7 +137,7 @@ namespace TGC.MonoGame.TP.LevelUtils
 
                 if (hidingModel != null)
                 {
-                    var hidingEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, null);
+                    var hidingEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, metalTexture);
                     var hidingPos = new Vector3(510f, 0f, 600f);
                     var hidingSpot = new HidingSpotProp(hidingModel, hidingEffect, hidingPos, "hiding_01");
                     hidingSpot.Scale *= 0.6f;

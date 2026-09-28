@@ -74,13 +74,13 @@ namespace TGC.MonoGame.TP
             }
 
             // Set some reasonable defaults if the shader declares those parameters
-            TrySetVector3Parameter(effect, "ambientColor", new Vector3(0.1f, 0.1f, 0.1f));
-            TrySetVector3Parameter(effect, "diffuseColor", new Vector3(1f, 1f, 1f));
+            TrySetVector3Parameter(effect, "ambientColor", new Vector3(0.4f, 0.4f, 0.4f));
+            TrySetVector3Parameter(effect, "diffuseColor", new Vector3(0.9f, 0.9f, 0.9f));
             TrySetVector3Parameter(effect, "specularColor", new Vector3(1f, 1f, 1f));
 
-            TrySetFloatParameter(effect, "KAmbient", 0.2f);
-            TrySetFloatParameter(effect, "KDiffuse", 1.0f);
-            TrySetFloatParameter(effect, "KSpecular", 0.5f);
+            TrySetFloatParameter(effect, "KAmbient", 0.7f);
+            TrySetFloatParameter(effect, "KDiffuse", 0.8f);
+            TrySetFloatParameter(effect, "KSpecular", 0.7f);
             TrySetFloatParameter(effect, "shininess", 16f);
 
             // Initialize first light slot and set lightCount to 1 for shaders that support multiple lights
@@ -98,7 +98,7 @@ namespace TGC.MonoGame.TP
             }
 
             TrySetVector3Parameter(effect, "lightAmbient[0]", new Vector3(0.05f, 0.05f, 0.05f));
-            TrySetVector3Parameter(effect, "lightDiffuse[0]", new Vector3(1f, 1f, 1f));
+            TrySetVector3Parameter(effect, "lightDiffuse[0]", new Vector3(0.9f, 0.9f, 0.9f));
             TrySetVector3Parameter(effect, "lightSpecular[0]", new Vector3(1f, 1f, 1f));
 
             // Do not set eyePosition or lightPosition here — those should be updated each frame.

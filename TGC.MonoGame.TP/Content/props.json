@@ -11,7 +11,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/treeA",
       "Position": [ 15.0, 0.0, 1000.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
@@ -19,7 +20,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/planks",
-      "EffectPath": "Effects/BasicShader",
+        "EffectPath": "Effects/BasicTexture",
+        "TexturePath": "Textures/planks",
       "Position": [ 545.0, 0.0, 1300.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
@@ -27,7 +29,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/pallet",
-      "EffectPath": "Effects/BasicShader",
+        "EffectPath": "Effects/BasicTexture",
+        "TexturePath": "Textures/planks",
       "Position": [ 445.0, 0.0, 1300.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],

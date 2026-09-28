@@ -266,7 +266,7 @@ namespace TGC.MonoGame.TP
             var world = orientation;
 
             // Delegate actual mesh drawing to the item (it will set World/View/Projection and assign effects)
-            current.DrawModel(effect, world, View, projection);
+            current.DrawModel(world, View, projection);
 
             // Restore previous device states
             graphicsDevice.RasterizerState = prevRaster;
@@ -397,17 +397,10 @@ namespace TGC.MonoGame.TP
         // aplicar texutra mergeada a la camara (efecto terror)
         public void ApplyCameraTexture(GraphicsDevice graphicsDevice, FullScreenQuad fullScreenQuad, RenderTarget2D sceneRenderTarget, float time)
         {
-            graphicsDevice.SetRenderTarget(null);
-
-            //graphicsDevice.DepthStencilState = DepthStencilState.None;
-
             _horrorEffect.Parameters["time"].SetValue(time);
             _horrorEffect.Parameters["baseTexture"].SetValue(sceneRenderTarget);
 
             fullScreenQuad.Draw(_horrorEffect);
-
-            //graphicsDevice.SetRenderTarget(sceneRenderTarget);
-            graphicsDevice.DepthStencilState = DepthStencilState.Default;
         }
     }
 }
