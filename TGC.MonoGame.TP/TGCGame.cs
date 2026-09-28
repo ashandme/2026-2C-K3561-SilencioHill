@@ -267,6 +267,8 @@ public class TGCGame : Game
     /// </summary>
     protected override void Draw(GameTime gameTime)
     {
+        GraphicsDevice.SetRenderTarget(_sceneRenderTarget);
+        GraphicsDevice.DepthStencilState = DepthStencilState.Default;
         // 1) Clear color + depth and draw opaque scene normally
         GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, ClearColor, 1.0f, 0);
 
@@ -295,8 +297,6 @@ public class TGCGame : Game
 
         // Let HUD build display strings from live entities
         // ActiveCamera is a Cameras.Camera; pass actual camera instance
-        _hud.UpdateState(_player, _enemy, ActiveCamera, _playerMode, _interactionManager);
-        _hud.Draw();
         //GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Black, 1f, 0);
 
         // DIBUJAR EL ITEM
@@ -304,11 +304,22 @@ public class TGCGame : Game
         {
             _player.DrawHeldItem(_effect, _projection, GraphicsDevice);
         }
+        GraphicsDevice.SetRenderTarget(null);
         if (_player.State == PlayerState.Caught)
         {
             _player.ApplyCameraTexture(GraphicsDevice, _fullScreenQuad, _sceneRenderTarget, (float)gameTime.TotalGameTime.TotalSeconds);
         }
-
+        else
+        {
+            // sin shader
+            GraphicsDevice.DepthStencilState = DepthStencilState.None;
+            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+            _spriteBatch.Draw(_sceneRenderTarget, GraphicsDevice.Viewport.Bounds, Color.White);
+            _spriteBatch.End();
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+        }
+        _hud.UpdateState(_player, _enemy, ActiveCamera, _playerMode, _interactionManager);
+        _hud.Draw();
         base.Draw(gameTime);
     }
 
