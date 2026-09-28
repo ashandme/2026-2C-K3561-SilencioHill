@@ -35,7 +35,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-large",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/treeA",
       "Position": [ 400.0, 0.0, 1000.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
@@ -43,7 +44,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/wall",
       "Position": [ 200.0, 0.0, 300.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 2.0, 3.0, 1.0 ],
@@ -60,9 +62,10 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-door",
-      "EffectPath": "Effects/BasicShader",
+        "EffectPath": "Effects/BasicTexture",
+        "TexturePath": "Textures/door",
       "Position": [ 500.0, 0.0, 750.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
+      "Rotation": [ 0.0, 90.0, 0.0 ],
       "Scale": [ 1, 1, 1 ],
       "Color": [ 0.6, 0.4, 0.1 ]
     },
@@ -86,7 +89,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",
-      "EffectPath": "Effects/BasicShader",
+        "EffectPath": "Effects/BasicTexture",
+        "TexturePath": "Textures/roof",
       "Position": [ 750.0, 200, 350 ],
       "Rotation": [ 0.0, 270, 0.0 ],
       "Scale": [ 5, 3, 3 ],
@@ -94,7 +98,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-      "EffectPath": "Effects/BasicShader",
+        "EffectPath": "Effects/BasicTexture",
+        "TexturePath": "Textures/wall",
       "Position": [ 750.0, 0.0, 1150 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 5.0, 4, 9 ],
@@ -102,7 +107,8 @@
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",
-      "EffectPath": "Effects/BasicShader",
+      "EffectPath": "Effects/BasicTexture",
+      "TexturePath": "Textures/roof",
       "Position": [ 750.0, 200, 1150 ],
       "Rotation": [ 0.0, 90, 0.0 ],
       "Scale": [ 5, 3, 3 ],

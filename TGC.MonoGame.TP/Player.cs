@@ -1,11 +1,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using TGC.MonoGame.Samples.Geometries;
 using TGC.MonoGame.TP.Cameras;
-
 namespace TGC.MonoGame.TP
 {
     // Estados posibles del jugador
@@ -30,6 +32,10 @@ namespace TGC.MonoGame.TP
         private const float WalkSpeed = 60f;
         private const float RunSpeed = 110f;
         private const float CrouchSpeed = 30f;
+
+        // efecto y textura de terror para aplicar a la camara (cuando el jugador es atrapado)
+        private Texture2D _horrorOverlay;
+        private Effect _horrorEffect;
 
         // Flag seteado desde afuera cuando el jugador esta cerca de un escondite
         private bool _nearHidingSpot;
@@ -57,6 +63,12 @@ namespace TGC.MonoGame.TP
             : base(aspectRatio, position, screenCenter)
         {
             _previousKeyboardState = Keyboard.GetState();
+        }
+        public void LoadHorrorOverlay(Texture2D texture2D, Effect effect)
+        {
+            _horrorOverlay = texture2D;
+            _horrorEffect = effect;
+            _horrorEffect.Parameters["overlayTexture"].SetValue(_horrorOverlay);
         }
 
         // Allow the game to provide a centralized InputManager to the player
@@ -381,6 +393,21 @@ namespace TGC.MonoGame.TP
                 Position = new Vector3(Position.X, targetY, Position.Z);
                 _changed = true;
             }
+        }
+        // aplicar texutra mergeada a la camara (efecto terror)
+        public void ApplyCameraTexture(GraphicsDevice graphicsDevice, FullScreenQuad fullScreenQuad, RenderTarget2D sceneRenderTarget, float time)
+        {
+            graphicsDevice.SetRenderTarget(null);
+
+            //graphicsDevice.DepthStencilState = DepthStencilState.None;
+
+            _horrorEffect.Parameters["time"].SetValue(time);
+            _horrorEffect.Parameters["baseTexture"].SetValue(sceneRenderTarget);
+
+            fullScreenQuad.Draw(_horrorEffect);
+
+            //graphicsDevice.SetRenderTarget(sceneRenderTarget);
+            graphicsDevice.DepthStencilState = DepthStencilState.Default;
         }
     }
 }

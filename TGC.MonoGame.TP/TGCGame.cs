@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using TGC.MonoGame.Samples.Geometries;
 using TGC.MonoGame.TP.Cameras;
 using TGC.MonoGame.TP.LevelUtils;
 using TGC.MonoGame.TP.PropUtils;
@@ -44,6 +45,10 @@ public class TGCGame : Game
 
     // Input manager centralizes keyboard handling
     private InputManager _input;
+
+    private FullScreenQuad _fullScreenQuad;
+
+    private RenderTarget2D _sceneRenderTarget;
 
     private const int BackBufferMargin = 100;
     private static readonly Color ClearColor = new Color(0.1f, 0.0f, 0.3f);
@@ -143,7 +148,14 @@ public class TGCGame : Game
         _player.PickupItem(startingCandle);
         // No hace falta, ahora se carga en level
         //var enemyModel = Content.Load<Model>(ContentFolder3D + "Assets/ghost");
-        //_enemy = new Enemy(enemyModel, _effect, "Content/enemyRoute.json");   
+        //_enemy = new Enemy(enemyModel, _effect, "Content/enemyRoute.json");
+        // NUEVO: el player tiene una textura y efecto para cargar el efecto terror
+        _player.LoadHorrorOverlay(Content.Load<Texture2D>(ContentFolderTextures + "overlay"), Content.Load<Effect>(ContentFolderEffects + "TextureMerge"));
+        _fullScreenQuad = new FullScreenQuad(GraphicsDevice);
+        _sceneRenderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width,
+                GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24, 0,
+                RenderTargetUsage.DiscardContents);
+        //GraphicsDevice.BlendState = BlendState.Opaque;
         _interactionManager = new InteractionManager();
     }
 
@@ -285,16 +297,16 @@ public class TGCGame : Game
         // ActiveCamera is a Cameras.Camera; pass actual camera instance
         _hud.UpdateState(_player, _enemy, ActiveCamera, _playerMode, _interactionManager);
         _hud.Draw();
-
-        // Interactions are handled in Update; Draw must not mutate game state.
-
-        // 2) Draw held item on top: clear only depth buffer so the held item is not occluded by scene geometry
-        GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Black, 1f, 0);
+        //GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Black, 1f, 0);
 
         // DIBUJAR EL ITEM
         if (_playerMode)
         {
             _player.DrawHeldItem(_effect, _projection, GraphicsDevice);
+        }
+        if (_player.State == PlayerState.Caught)
+        {
+            _player.ApplyCameraTexture(GraphicsDevice, _fullScreenQuad, _sceneRenderTarget, (float)gameTime.TotalGameTime.TotalSeconds);
         }
 
         base.Draw(gameTime);
