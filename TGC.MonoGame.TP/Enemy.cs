@@ -1,9 +1,9 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP
@@ -15,7 +15,8 @@ namespace TGC.MonoGame.TP
         Sneaking,
         Attacking,
         Chasing,
-        Fleeing
+        Fleeing,
+        Invisible
     }
 
     internal class Enemy
@@ -30,6 +31,8 @@ namespace TGC.MonoGame.TP
         private const float RearConeHalfAngleDegrees = 67.5f;  // 135 grados totales
         private const float SneakNoiseDistance = 150f;         // dentro del cono trasero, si se acerca mas que esto hace ruido
         private const float AttackRadius = 50f;
+        private const float SearchAtHidingSpotDuration = 3f; // Tiempo que vigila el escondite antes de desaparecer
+        private float _searchTimer;
 
         // Cono de vision del jugador (para saber si el jugador ve al enemigo)
         private const float PlayerSightConeHalfAngleDegrees = 30f;
@@ -38,10 +41,10 @@ namespace TGC.MonoGame.TP
         private const float RoamSpeed = 25f;
         private const float SneakSpeed = 15f;
         private const float FleeSpeed = 100f;
-        private const float ChaseSpeed = 75f; 
+        private const float ChaseSpeed = 75f;
         // --- Staring / Chasing ---
         private const float StaringDuration = 3f;      // segundos que se queda observando antes de perseguir (el "changui")
-        private float _staringTimer;                
+        private float _staringTimer;
         private const float ChaseGiveUpDistance = 600f;      // si te alejas mas que esto durante la persecucion, abandona
 
         // --- Roaming ---
@@ -61,7 +64,7 @@ namespace TGC.MonoGame.TP
             var flat = new Vector3(v.X, 0f, v.Z);
             return flat.LengthSquared() > 0.0001f ? Vector3.Normalize(flat) : Vector3.Zero;
         }
-        
+
         private readonly Prop _prop;
 
         public Enemy(Model model, Effect effect, string waypointsJsonPath)
@@ -100,9 +103,34 @@ namespace TGC.MonoGame.TP
         {
             var elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             // Si el jugador esta escondido, el enemigo pierde el rastro 
-            if (player.State == PlayerState.Undetectable && (State == EnemyState.Staring || State == EnemyState.Sneaking || State == EnemyState.Chasing))
+            if (player.State == PlayerState.Undetectable)
             {
-                State = EnemyState.Roaming;
+                var distanceToPlayer = Vector3.Distance(Position, player.Position);
+
+                // Caso A: Fuera del radio de deteccion -> Pierde el rastro al instante
+                if (distanceToPlayer > DetectionRadius)
+                {
+                    if (State != EnemyState.Roaming && State != EnemyState.Invisible)
+                    {
+                        State = EnemyState.Roaming;
+                        _searchTimer = 0f;
+                    }
+                }
+                // Caso B: Dentro del radio -> Espera un instante observando y luego se vuelve invisible lejos
+                else if (State != EnemyState.Invisible && State != EnemyState.Roaming)
+                {
+                    _searchTimer += elapsedTime;
+                    if (_searchTimer >= SearchAtHidingSpotDuration)
+                    {
+                        TeleportToFarthestWaypoint(player.Position);
+                        State = EnemyState.Invisible;
+                        _searchTimer = 0f;
+                    }
+                }
+            }
+            else
+            {
+                _searchTimer = 0f;
             }
 
             switch (State)
@@ -116,7 +144,7 @@ namespace TGC.MonoGame.TP
                 case EnemyState.Sneaking:
                     UpdateSneaking(elapsedTime, player);
                     break;
-                case EnemyState.Chasing:                    
+                case EnemyState.Chasing:
                     UpdateChasing(elapsedTime, player);
                     break;
                 case EnemyState.Attacking:
@@ -125,17 +153,21 @@ namespace TGC.MonoGame.TP
                 case EnemyState.Fleeing:
                     UpdateFleeing(elapsedTime, player);
                     break;
+                case EnemyState.Invisible:
+                    // se queda invisible, se mueve y vuelve a estar visible cuando el jugador se aleja lo suficiente
+                    UpdateInvisible(elapsedTime, player);
+                    break;
             }
 
             _prop.Position = Position;
             // Rotar el modelo para que visualmente mire hacia FrontDirection
             var yaw = MathF.Atan2(FrontDirection.X, FrontDirection.Z) - MathHelper.PiOver2;
-            _prop.Rotation = new Vector3(0f, yaw, 0f);  
+            _prop.Rotation = new Vector3(0f, yaw, 0f);
         }
 
         private void UpdateRoaming(float elapsedTime, Player player)
         {
-           if (player.State != PlayerState.Undetectable)
+            if (player.State != PlayerState.Undetectable)
             {
                 var detection = DetectPlayer(player);
                 if (detection != DetectionZone.None)
@@ -154,7 +186,7 @@ namespace TGC.MonoGame.TP
 
             if (distance <= WaypointReachDistance)
             {
-             _waitTimer += elapsedTime;
+                _waitTimer += elapsedTime;
                 if (_waitTimer >= WaypointWaitSeconds)
                 {
                     _waitTimer = 0f;
@@ -195,7 +227,7 @@ namespace TGC.MonoGame.TP
 
             if (!PlayerCanSeeEnemy(player))
             {
-             // Se corto el contacto visual (dejaste de mirarlo): pasa a acecharte
+                // Se corto el contacto visual (dejaste de mirarlo): pasa a acecharte
                 State = EnemyState.Sneaking;
                 _staringTimer = 0f;
                 return;
@@ -252,7 +284,7 @@ namespace TGC.MonoGame.TP
             // Caso 2: te fuiste muy lejos, abandona la persecucion
             if (distance > ChaseGiveUpDistance)
             {
-                State = EnemyState.Roaming;
+                State = EnemyState.Invisible;
                 return;
             }
 
@@ -266,8 +298,8 @@ namespace TGC.MonoGame.TP
         private void UpdateAttacking(Player player)
         {
             player.Catch();
-            State = EnemyState.Fleeing;
-            _fleeTimer = 0f;
+            TeleportToFarthestWaypoint(player.Position);
+            State = EnemyState.Invisible;
         }
 
         private void UpdateFleeing(float elapsedTime, Player player)
@@ -283,6 +315,17 @@ namespace TGC.MonoGame.TP
             }
 
             if (_fleeTimer >= FleeDuration)
+            {
+                State = EnemyState.Roaming;
+            }
+        }
+
+        private void UpdateInvisible(float elapsedTime, Player player)
+        {
+            var distance = Vector3.Distance(Position, player.Position);
+
+            // Solo vuelve a patrullar de forma visible cuando este a una distancia segura
+            if (distance > DetectionRadius)
             {
                 State = EnemyState.Roaming;
             }
@@ -327,16 +370,37 @@ namespace TGC.MonoGame.TP
 
         public void Draw(Matrix view, Matrix projection)
         {
-            _prop.Draw(view, projection);
+            if (State != EnemyState.Invisible)
+                _prop.Draw(view, projection);
         }
         // Debug: angulo actual entre hacia-donde-mira el enemigo y la direccion hacia el jugador
         public float DebugAngleToPlayerDegrees(Player player)
         {
-        var toPlayer = FlattenXZ(player.Position - Position);
+            var toPlayer = FlattenXZ(player.Position - Position);
             if (toPlayer == Vector3.Zero) return -1f;
 
             var dot = Vector3.Dot(FrontDirection, toPlayer);
             return MathHelper.ToDegrees(MathF.Acos(MathHelper.Clamp(dot, -1f, 1f)));
+        }
+        private void TeleportToFarthestWaypoint(Vector3 playerPosition)
+        {
+            if (_waypoints.Count == 0) return;
+
+            var farthestIndex = 0;
+            var maxDistSq = -1f;
+
+            for (int i = 0; i < _waypoints.Count; i++)
+            {
+                var distSq = Vector3.DistanceSquared(_waypoints[i], playerPosition);
+                if (distSq > maxDistSq)
+                {
+                    maxDistSq = distSq;
+                    farthestIndex = i;
+                }
+            }
+
+            _currentWaypointIndex = farthestIndex;
+            Position = _waypoints[_currentWaypointIndex];
         }
     }
 }
