@@ -57,6 +57,20 @@ namespace TGC.MonoGame.TP.LevelUtils
             return false;
         }
     }
+    internal class DoorProp : InteractiveProp
+    {
+        public Vector3 TeleportPosition { get; set; }
+        public Vector3 TeleportRotation { get; set; }
+        public string TargetLevel { get; set; }
+        public DoorProp(Model model, Effect effect, Vector3 position, string id)
+            : base(model, effect, position, id) { }
+        public override int Priority => 10; // higher than stack (0)
+        public override bool OnInteract(Player player)
+        {
+            // When a the player interacts with the door it shows an animation and then teleports the player to a new level with a position and rotation
+            return true; // consumed interaction
+        }
+    }
     internal class HidingSpotProp : InteractiveProp
     {
         // Punto donde se para el jugador al esconderse (afuera del mesh, no en el centro del prop)

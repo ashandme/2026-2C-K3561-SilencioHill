@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using TGC.MonoGame.Samples.Geometries;
 using TGC.MonoGame.TP.Cameras;
+using TGC.MonoGame.TP.Collisions;
 namespace TGC.MonoGame.TP
 {
     // Estados posibles del jugador
@@ -22,6 +23,7 @@ namespace TGC.MonoGame.TP
     internal class Player : FreeCamera
     {
         private InputManager? _inputManager;
+        private CollisionHandler? _collisionHandler;
         // Estado actual del jugador; solo Player puede modificarlo
         public PlayerState State { get; private set; } = PlayerState.Walking;
 
@@ -75,6 +77,11 @@ namespace TGC.MonoGame.TP
         public void SetInput(InputManager input)
         {
             _inputManager = input;
+        }
+
+        public void SetCollisionHandler(CollisionHandler collisionHandler)
+        {
+            _collisionHandler = collisionHandler;
         }
 
         // Lo llama codigo externo (Map/TGCGame) cuando el jugador esta cerca de un escondite
@@ -280,6 +287,12 @@ namespace TGC.MonoGame.TP
                 : null;
 
         // Maquina de estados + movimiento; se ejecuta una vez por frame via FreeCamera.Update()
+        private Vector3 MoveWithCollisions(Vector3 movement)
+        {
+            var desiredPosition = Position + movement;
+            return _collisionHandler?.ResolveMovement(Position, desiredPosition) ?? desiredPosition;
+        }
+
         protected override void ProcessKeyboard(float elapsedTime)
         {
             var keyboardState = Keyboard.GetState();
@@ -327,25 +340,25 @@ namespace TGC.MonoGame.TP
 
             if (IsDown(Keys.W) || IsDown(Keys.Up))
             {
-                Position += flatFront * currentSpeed * elapsedTime;
+                Position = MoveWithCollisions(flatFront * currentSpeed * elapsedTime);
                 _changed = true;
             }
 
             if (IsDown(Keys.S) || IsDown(Keys.Down))
             {
-                Position -= flatFront * currentSpeed * elapsedTime;
+                Position = MoveWithCollisions(-flatFront * currentSpeed * elapsedTime);
                 _changed = true;
             }
 
             if (IsDown(Keys.A) || IsDown(Keys.Left))
             {
-                Position -= flatRight * currentSpeed * elapsedTime;
+                Position = MoveWithCollisions(-flatRight * currentSpeed * elapsedTime);
                 _changed = true;
             }
 
             if (IsDown(Keys.D) || IsDown(Keys.Right))
             {
-                Position += flatRight * currentSpeed * elapsedTime;
+                Position = MoveWithCollisions(flatRight * currentSpeed * elapsedTime);
                 _changed = true;
             }
 

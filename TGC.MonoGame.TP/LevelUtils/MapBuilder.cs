@@ -42,8 +42,13 @@ namespace TGC.MonoGame.TP.LevelUtils
                 var posTop = new Vector3(x * grassSize, 0, -half);
                 var posBottom = new Vector3(x * grassSize, 0, max + half);
 
-                props.Add(new Prop(fenceModel, shader, posTop));
-                props.Add(new Prop(fenceModel, shader, posBottom));
+                var topWall = new Prop(fenceModel, shader, posTop);
+                topWall.Collision.AddPlane(posTop, Vector3.Forward);
+                props.Add(topWall);
+
+                var bottomWall = new Prop(fenceModel, shader, posBottom);
+                bottomWall.Collision.AddPlane(posBottom, Vector3.Backward);
+                props.Add(bottomWall);
             }
 
             // Left and right columns
@@ -52,8 +57,13 @@ namespace TGC.MonoGame.TP.LevelUtils
                 var posLeft = new Vector3(-half, 0, z * grassSize);
                 var posRight = new Vector3(max + half, 0, z * grassSize);
 
-                props.Add(new Prop(fenceModel, shader, posLeft, rotation: rot90));
-                props.Add(new Prop(fenceModel, shader, posRight, rotation: rot90));
+                var leftWall = new Prop(fenceModel, shader, posLeft, rotation: rot90);
+                leftWall.Collision.AddPlane(posLeft, Vector3.Right);
+                props.Add(leftWall);
+
+                var rightWall = new Prop(fenceModel, shader, posRight, rotation: rot90);
+                rightWall.Collision.AddPlane(posRight, Vector3.Left);
+                props.Add(rightWall);
             }
         }
 

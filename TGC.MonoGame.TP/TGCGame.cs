@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using TGC.MonoGame.Samples.Geometries;
 using TGC.MonoGame.TP.Cameras;
+using TGC.MonoGame.TP.Collisions;
 using TGC.MonoGame.TP.LevelUtils;
 using TGC.MonoGame.TP.PropUtils;
 
@@ -45,6 +46,7 @@ public class TGCGame : Game
 
     // Input manager centralizes keyboard handling
     private InputManager _input;
+    private CollisionHandler _collisionHandler;
 
     private FullScreenQuad _fullScreenQuad;
 
@@ -88,6 +90,8 @@ public class TGCGame : Game
 
         _input = new InputManager();
         _player.SetInput(_input);
+        _collisionHandler = new CollisionHandler();
+        _player.SetCollisionHandler(_collisionHandler);
 
         base.Initialize();
     }
@@ -104,6 +108,7 @@ public class TGCGame : Game
 
         // Load the initial level using LevelManager
         _levelManager.LoadLevel("outside", Content);
+        RefreshCollisions();
 
         // Interaction manager uses LevelManager's GetActiveProps/RemoveActiveProp
         // _interactionManager = new InteractionManager(useInside => _levelManager.GetActiveProps(), (prop, useInside));
@@ -181,6 +186,7 @@ public class TGCGame : Game
             {
                 var next = _levelManager.CurrentName == "outside" ? "inside" : "outside";
                 _levelManager.LoadLevel(next, Content);
+                RefreshCollisions();
                 // update enemy reference
                 _enemy = _levelManager.Current?.Enemy;
             }
@@ -196,6 +202,7 @@ public class TGCGame : Game
             try
             {
                 _levelManager.ReloadCurrent(Content);
+                RefreshCollisions();
                 _hud.SetStatus("Reload OK", ReloadStatusSecondsOk);
                 // refresh enemy reference
                 _enemy = _levelManager.Current?.Enemy;
@@ -329,5 +336,10 @@ public class TGCGame : Game
     {
         Content.Unload();
         base.UnloadContent();
+    }
+
+    private void RefreshCollisions()
+    {
+        _collisionHandler.SetProps(_levelManager.Current?.GetProps() ?? Array.Empty<Prop>());
     }
 }

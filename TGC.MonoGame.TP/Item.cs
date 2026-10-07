@@ -7,9 +7,7 @@ namespace TGC.MonoGame.TP
     internal abstract class Item
     {
         public string Name { get; }
-        public Model Model { get; }
-        public Texture2D Texture { get; set; }
-        public Effect TextureEffect { get; set; }
+        public GameMesh? Mesh { get; }
 
         // Optional lifetime for items that consume over time (seconds)
         public float MaxDurationSeconds { get; protected set; } = 0f;
@@ -22,7 +20,7 @@ namespace TGC.MonoGame.TP
         protected Item(string name, Model model = null)
         {
             Name = name;
-            Model = model;
+            Mesh = model == null ? null : new GameMesh(model, null, Vector3.Zero);
             MaxDurationSeconds = 0f;
             RemainingSeconds = 0f;
         }
@@ -44,32 +42,13 @@ namespace TGC.MonoGame.TP
 
         public virtual void DrawModel(Matrix world, Matrix view, Matrix projection)
         {
-            if (Model == null || TextureEffect == null) return;
-            TextureEffect.Parameters["View"]?.SetValue(view);
-            TextureEffect.Parameters["Projection"]?.SetValue(projection);
+            if (Mesh == null || Mesh.Effect == null) return;
 
             // Compute correction from per-item hand scale/rotation offsets
             var localScale = Matrix.CreateScale(HandScale);
             var localRot = Matrix.CreateFromYawPitchRoll(HandRotationOffset.Y, HandRotationOffset.X, HandRotationOffset.Z);
             var finalWorld = localScale * localRot * world;
-
-            // Allocate boneTransforms once per Item instance could be more efficient.
-            // For held items draws are rare, so keep simple allocation here.
-            var boneTransforms = new Matrix[Model.Bones.Count];
-            Model.CopyAbsoluteBoneTransformsTo(boneTransforms);
-
-            foreach (var mesh in Model.Meshes)
-            {
-                var meshWorld = boneTransforms[mesh.ParentBone.Index] * finalWorld;
-                TextureEffect.Parameters["World"]?.SetValue(meshWorld);
-
-                foreach (var part in mesh.MeshParts)
-                {
-                    part.Effect = TextureEffect;
-                }
-
-                mesh.Draw();
-            }
+            Mesh.Draw(finalWorld, view, projection);
         }
 
         // Drain remaining time; when reaches zero, the item should switch off in the specific implementation
@@ -92,8 +71,11 @@ namespace TGC.MonoGame.TP
 
         public CandleItem(Model model, Texture2D texture, Effect effect)
             : base("Candle", model) {
-            Texture = texture;
-            TextureEffect = effect;
+            if (Mesh != null)
+            {
+                Mesh.Texture = texture;
+                Mesh.Effect = effect;
+            }
             IsLit = false;
             HandScale = Vector3.One * 0.007f;
             MaxDurationSeconds = 120f; // default 2 minutes of burn time
@@ -131,8 +113,11 @@ namespace TGC.MonoGame.TP
         public FlashlightItem(Model model = null, Texture2D texture = null, Effect textureEffect = null) : base("Flashlight", model)
         {
             HandScale = Vector3.One * 0.002f;
-            Texture = texture;
-            TextureEffect = textureEffect;
+            if (Mesh != null)
+            {
+                Mesh.Texture = texture;
+                Mesh.Effect = textureEffect;
+            }
             IsOn = true;
             MaxDurationSeconds = 180f; // default 3 minutes battery
             RemainingSeconds = MaxDurationSeconds;
@@ -148,43 +133,6 @@ namespace TGC.MonoGame.TP
         public override bool AttachToCamera => true;
         public override Vector3 CameraLocalOffset => new Vector3(0.5f, -0.5f, 1.0f);
 
-        public override void DrawModel(Matrix world, Matrix view, Matrix projection)
-        {
-            // If we have a texture and a BasicTexture effect, use it to draw the model textured
-            if (Model == null) return;
-
-            if (Texture != null && TextureEffect != null)
-            {
-                TextureEffect.Parameters["View"]?.SetValue(view);
-                TextureEffect.Parameters["Projection"]?.SetValue(projection);
-
-                var localScale = Matrix.CreateScale(HandScale);
-                var localRot = Matrix.CreateFromYawPitchRoll(HandRotationOffset.Y, HandRotationOffset.X, HandRotationOffset.Z);
-                var finalWorld = localScale * localRot * world;
-
-                var boneTransforms = new Matrix[Model.Bones.Count];
-                Model.CopyAbsoluteBoneTransformsTo(boneTransforms);
-
-                foreach (var mesh in Model.Meshes)
-                {
-                    var meshWorld = boneTransforms[mesh.ParentBone.Index] * finalWorld;
-                    TextureEffect.Parameters["World"]?.SetValue(meshWorld);
-                    // BasicTexture.fx expects the texture parameter named "ModelTexture"
-                    TextureEffect.Parameters["ModelTexture"]?.SetValue(Texture);
-
-                    foreach (var part in mesh.MeshParts)
-                    {
-                        part.Effect = TextureEffect;
-                    }
-
-                    mesh.Draw();
-                }
-
-                return;
-            }
-
-            base.DrawModel(world, view, projection);
-        }
         public override void Drain(float seconds)
         {
             base.Drain(seconds);
