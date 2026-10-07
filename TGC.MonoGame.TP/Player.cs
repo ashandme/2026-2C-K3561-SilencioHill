@@ -90,7 +90,7 @@ namespace TGC.MonoGame.TP
         // Lo llama el bicho cuando atrapa al jugador
         public void Catch()
         {
-            if (State == PlayerState.Caught) return;
+            if (State == PlayerState.Caught || State == PlayerState.Undetectable) return;
             State = PlayerState.Caught;
             _caughtTimer = CaughtDuration;
         }

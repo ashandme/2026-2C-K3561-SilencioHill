@@ -32,7 +32,13 @@ namespace TGC.MonoGame.TP
         private const float SneakNoiseDistance = 150f;         // dentro del cono trasero, si se acerca mas que esto hace ruido
         private const float AttackRadius = 50f;
         private const float SearchAtHidingSpotDuration = 3f; // Tiempo que vigila el escondite antes de desaparecer
+        private const float SearchStandDistance = 60f; // se detiene a esta distancia del escondite
         private float _searchTimer;
+        private const float MinInvisibleSeconds = 20f;   // tiempo minimo que pasa ausente
+        private const float MaxInvisibleSeconds = 45f;   // tiempo maximo
+        private const float MinRespawnDistance = 200f;   // no reaparece mas cerca que esto del jugador
+        private readonly Random _random = new();
+        private float _invisibleTimer;
 
         // Cono de vision del jugador (para saber si el jugador ve al enemigo)
         private const float PlayerSightConeHalfAngleDegrees = 30f;
@@ -102,37 +108,21 @@ namespace TGC.MonoGame.TP
         public void Update(GameTime gameTime, Player player)
         {
             var elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            // Si el jugador esta escondido, el enemigo pierde el rastro 
-            if (player.State == PlayerState.Undetectable)
-            {
-                var distanceToPlayer = Vector3.Distance(Position, player.Position);
 
-                // Caso A: Fuera del radio de deteccion -> Pierde el rastro al instante
-                if (distanceToPlayer > DetectionRadius)
-                {
-                    if (State != EnemyState.Roaming && State != EnemyState.Invisible)
-                    {
-                        State = EnemyState.Roaming;
-                        _searchTimer = 0f;
-                    }
-                }
-                // Caso B: Dentro del radio -> Espera un instante observando y luego se vuelve invisible lejos
-                else if (State != EnemyState.Invisible && State != EnemyState.Roaming)
-                {
-                    _searchTimer += elapsedTime;
-                    if (_searchTimer >= SearchAtHidingSpotDuration)
-                    {
-                        TeleportToFarthestWaypoint(player.Position);
-                        State = EnemyState.Invisible;
-                        _searchTimer = 0f;
-                    }
-                }
-            }
-            else
+            // Si el jugador esta escondido, esto manda; si no, corre la maquina de estados normal
+            if (!ReactToHiddenPlayer(elapsedTime, player))
             {
-                _searchTimer = 0f;
+                UpdateCurrentState(elapsedTime, player);
             }
 
+            _prop.Position = Position;
+            // Rotar el modelo para que visualmente mire hacia FrontDirection
+            var yaw = MathF.Atan2(FrontDirection.X, FrontDirection.Z) - MathHelper.PiOver2;
+            _prop.Rotation = new Vector3(0f, yaw, 0f);
+        }
+
+        private void UpdateCurrentState(float elapsedTime, Player player)
+        {
             switch (State)
             {
                 case EnemyState.Roaming:
@@ -154,17 +144,67 @@ namespace TGC.MonoGame.TP
                     UpdateFleeing(elapsedTime, player);
                     break;
                 case EnemyState.Invisible:
-                    // se queda invisible, se mueve y vuelve a estar visible cuando el jugador se aleja lo suficiente
                     UpdateInvisible(elapsedTime, player);
                     break;
             }
-
-            _prop.Position = Position;
-            // Rotar el modelo para que visualmente mire hacia FrontDirection
-            var yaw = MathF.Atan2(FrontDirection.X, FrontDirection.Z) - MathHelper.PiOver2;
-            _prop.Rotation = new Vector3(0f, yaw, 0f);
         }
 
+        // Reaccion al jugador escondido. Devuelve true si el enemigo esta vigilando el escondite
+        // (en ese caso Update no corre la maquina de estados normal)
+        private bool ReactToHiddenPlayer(float elapsedTime, Player player)
+        {
+            if (player.State != PlayerState.Undetectable)
+            {
+                _searchTimer = 0f;
+                return false;
+            }
+
+            var distance = Vector3.Distance(Position, player.Position);
+
+            // Fuera del radio de deteccion: pierde el rastro al instante
+            if (distance > DetectionRadius)
+            {
+                if (State != EnemyState.Roaming && State != EnemyState.Invisible)
+                {
+                    State = EnemyState.Roaming;
+                    _searchTimer = 0f;
+                }
+                return false;
+            }
+
+            // Ya patrullando o invisible: no lo vigila
+            if (State == EnemyState.Roaming || State == EnemyState.Invisible) return false;
+
+            // Dentro del radio: se acerca al escondite, se queda unos instantes y desaparece
+            if (distance <= SearchStandDistance + 10f)
+            {
+                _searchTimer += elapsedTime;   // el timer solo corre cuando ya esta cerca
+            }
+
+            if (_searchTimer >= SearchAtHidingSpotDuration)
+            {
+                _searchTimer = 0f;
+                Vanish(player.Position);
+                return false;
+            }
+
+            WatchHidingSpot(elapsedTime, player);
+            return true;
+        }
+
+        // Mira el escondite y se acerca hasta SearchStandDistance, sin atacar
+        private void WatchHidingSpot(float elapsedTime, Player player)
+        {
+            var toSpot = player.Position - Position;
+            var flat = FlattenXZ(toSpot);
+            if (flat == Vector3.Zero) return;
+
+            FrontDirection = flat;
+            if (toSpot.Length() > SearchStandDistance)
+            {
+                Position += flat * ChaseSpeed * elapsedTime;
+            }
+        }
         private void UpdateRoaming(float elapsedTime, Player player)
         {
             if (player.State != PlayerState.Undetectable)
@@ -225,15 +265,7 @@ namespace TGC.MonoGame.TP
                 return;
             }
 
-            if (!PlayerCanSeeEnemy(player))
-            {
-                // Se corto el contacto visual (dejaste de mirarlo): pasa a acecharte
-                State = EnemyState.Sneaking;
-                _staringTimer = 0f;
-                return;
-            }
-
-            // Sigue habiendo contacto visual: cuenta los 3 segundos 
+            //La chance dura 3s pase lo que pase (aunque te des vuelta)
             _staringTimer += elapsedTime;
             if (_staringTimer >= StaringDuration)
             {
@@ -284,7 +316,7 @@ namespace TGC.MonoGame.TP
             // Caso 2: te fuiste muy lejos, abandona la persecucion
             if (distance > ChaseGiveUpDistance)
             {
-                State = EnemyState.Invisible;
+                Vanish(player.Position);
                 return;
             }
 
@@ -298,8 +330,7 @@ namespace TGC.MonoGame.TP
         private void UpdateAttacking(Player player)
         {
             player.Catch();
-            TeleportToFarthestWaypoint(player.Position);
-            State = EnemyState.Invisible;
+            Vanish(player.Position);
         }
 
         private void UpdateFleeing(float elapsedTime, Player player)
@@ -322,13 +353,46 @@ namespace TGC.MonoGame.TP
 
         private void UpdateInvisible(float elapsedTime, Player player)
         {
-            var distance = Vector3.Distance(Position, player.Position);
-
-            // Solo vuelve a patrullar de forma visible cuando este a una distancia segura
-            if (distance > DetectionRadius)
+            _invisibleTimer -= elapsedTime;
+            if (_invisibleTimer <= 0f)
             {
-                State = EnemyState.Roaming;
+                Reappear(player);
             }
+        }
+        
+        // Desaparece: se va al waypoint mas lejano y queda invisible un tiempo aleatorio
+        
+        private void Vanish(Vector3 playerPosition)
+        {
+            TeleportToFarthestWaypoint(playerPosition);
+            State = EnemyState.Invisible;
+            _invisibleTimer = MinInvisibleSeconds + (float)_random.NextDouble() * (MaxInvisibleSeconds - MinInvisibleSeconds);
+        }
+        
+        // Reaparece en un waypoint lejos del jugador y retoma la patrulla
+
+        private void Reappear(Player player)
+        {
+            var candidates = new List<int>();
+            for (int i = 0; i < _waypoints.Count; i++)
+            {
+                if (Vector3.Distance(_waypoints[i], player.Position) >= MinRespawnDistance)
+                {
+                    candidates.Add(i);
+                }
+            }
+
+            if (candidates.Count > 0)
+            {
+                _currentWaypointIndex = candidates[_random.Next(candidates.Count)];
+                Position = _waypoints[_currentWaypointIndex];
+            }
+            else
+            {
+                TeleportToFarthestWaypoint(player.Position);   // mapa chico: usa el mas lejano
+            }
+
+            State = EnemyState.Roaming;
         }
 
         private enum DetectionZone { None, Front, Rear }
