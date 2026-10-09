@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using TGC.MonoGame.TP.Collisions;
 
-namespace TGC.MonoGame.TP;
+namespace TGC.MonoGame.TP.Entities;
 
 internal class Entity
 {

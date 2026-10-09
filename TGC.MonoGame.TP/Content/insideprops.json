@@ -6,8 +6,30 @@
       "TexturePath": "Textures/wall",
       "Position": [ 0.0, 0.0, 0.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 0.05, 0.05, 0.05 ],
-      "Color": [ 1.0, 1.0, 1.0 ]
+      "Scale": [ 0.1, 0.1, 0.1 ],
+        "Color": [ 1.0, 1.0, 1.0 ],
+        "Collisions": [
+            {
+                "Type": "plane",
+                "Point": [ 2900, 0.0, -2900.0 ],
+                "Normal": [ 1.0, 0.0, 0.0 ]
+            },
+            {
+                "Type": "plane",
+                "Point": [ 2900, 0.0, -2900.0 ],
+                "Normal": [ 0.0, 0.0, 1.0 ]
+            },
+            {
+                "Type": "plane",
+                "Point": [ -2900, 0.0, 7900.0 ],
+                "Normal": [ 1.0, 0.0, 0.0 ]
+            },
+            {
+                "Type": "plane",
+                "Point": [ -2900, 0.0, 7900.0 ],
+                "Normal": [ 0.0, 0.0, 1.0 ]
+            }
+        ]
     },
     {
       "ModelPath": "Models/kenney_furniture-kit/chair",

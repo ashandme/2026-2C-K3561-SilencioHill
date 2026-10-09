@@ -109,9 +109,9 @@ namespace TGC.MonoGame.TP.Cameras
         {
             var mouseState = Mouse.GetState();
 
-            if (mouseState.RightButton.Equals(ButtonState.Pressed))
+            if (_lockMouse)
             {
-                var mouseDelta = mouseState.Position.ToVector2() - _pastMousePosition;
+                var mouseDelta = mouseState.Position.ToVector2() - _screenCenter.ToVector2();
                 mouseDelta *= MouseSensitivity * elapsedTime;
 
                 _yaw += mouseDelta.X;
@@ -130,18 +130,24 @@ namespace TGC.MonoGame.TP.Cameras
                 _changed = true;
                 UpdateCameraVectors();
 
-                if (_lockMouse)
-                {
-                    Mouse.SetPosition(_screenCenter.X, _screenCenter.Y);
-                    Mouse.SetCursor(MouseCursor.Crosshair);
-                }
-                else
-                {
-                    Mouse.SetCursor(MouseCursor.Arrow);
-                }
+                Mouse.SetPosition(_screenCenter.X, _screenCenter.Y);
+                Mouse.SetCursor(MouseCursor.Crosshair);
+            }
+            else if (mouseState.RightButton.Equals(ButtonState.Pressed))
+            {
+                var mouseDelta = mouseState.Position.ToVector2() - _pastMousePosition;
+                mouseDelta *= MouseSensitivity * elapsedTime;
+                _yaw += mouseDelta.X;
+                _pitch -= mouseDelta.Y;
+                _pitch = MathHelper.Clamp(_pitch, -89f, 89f);
+                _changed = true;
+                UpdateCameraVectors();
+                Mouse.SetCursor(MouseCursor.Arrow);
             }
 
-            _pastMousePosition = Mouse.GetState().Position.ToVector2();
+            _pastMousePosition = _lockMouse
+                ? _screenCenter.ToVector2()
+                : Mouse.GetState().Position.ToVector2();
         }
 
         private void UpdateCameraVectors()

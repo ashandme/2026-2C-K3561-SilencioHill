@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework;
 using System;
 
 namespace TGC.MonoGame.TP.Collisions;
@@ -22,14 +21,9 @@ internal sealed class SphereCollisionShape : CollisionShape
         Sphere = new BoundingSphere(center, radius);
     }
 
-    public void SetCenter(Vector3 center)
-    {
-        Sphere = new BoundingSphere(center, Sphere.Radius);
-    }
-
     public override void UpdateTransform(Vector3 position, Vector3 forward)
     {
-        SetCenter(position + LocalCenter);
+        Sphere = new BoundingSphere(position + LocalCenter, Sphere.Radius);
     }
 
     public override bool Intersects(BoundingSphere sphere)
@@ -117,15 +111,16 @@ internal sealed class ConeCollisionShape : CollisionShape
         _invertDirection = invertDirection;
     }
 
+    public override void UpdateTransform(Vector3 position, Vector3 forward)
+    {
+        Origin = position;
+        Direction = _invertDirection ? -forward : forward;
+    }
+
     public void Update(Vector3 origin, Vector3 direction)
     {
         Origin = origin;
         Direction = direction;
-    }
-
-    public override void UpdateTransform(Vector3 position, Vector3 forward)
-    {
-        Update(position, _invertDirection ? -forward : forward);
     }
 
     public override bool Intersects(BoundingSphere sphere)

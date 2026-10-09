@@ -1,6 +1,6 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using TGC.MonoGame.TP.Collisions;
 using TGC.MonoGame.TP.PropUtils;
 

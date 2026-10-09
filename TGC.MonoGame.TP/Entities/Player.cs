@@ -1,15 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using TGC.MonoGame.Samples.Geometries;
 using TGC.MonoGame.TP.Cameras;
 using TGC.MonoGame.TP.Collisions;
-namespace TGC.MonoGame.TP
+namespace TGC.MonoGame.TP.Entities
 {
     // Estados posibles del jugador
     public enum PlayerState
@@ -22,8 +20,8 @@ namespace TGC.MonoGame.TP
     // Jugador en primera persona: hereda camara/mouse-look de FreeCamera, agrega estados y movimiento restringido al plano XZ
     internal class Player : FreeCamera
     {
-        private InputManager? _inputManager;
-        private CollisionHandler? _collisionHandler;
+        private InputManager _inputManager;
+        private CollisionHandler _collisionHandler;
         // Estado actual del jugador; solo Player puede modificarlo
         public PlayerState State { get; private set; } = PlayerState.Walking;
 
@@ -281,6 +279,21 @@ namespace TGC.MonoGame.TP
             graphicsDevice.DepthStencilState = prevDepth;
         }
 
+        public void DrawCenterDot(SpriteBatch spriteBatch, Texture2D pixel)
+        {
+            var viewport = spriteBatch.GraphicsDevice.Viewport;
+            const int dotSize = 4;
+            var bounds = new Rectangle(
+                viewport.Width / 2 - dotSize / 2,
+                viewport.Height / 2 - dotSize / 2,
+                dotSize,
+                dotSize);
+
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            spriteBatch.Draw(pixel, bounds, Color.White);
+            spriteBatch.End();
+        }
+
         private Item GetCurrentItem() =>
             _currentItemIndex >= 0 && _currentItemIndex < _inventory.Length
                 ? _inventory[_currentItemIndex]
@@ -290,7 +303,7 @@ namespace TGC.MonoGame.TP
         private Vector3 MoveWithCollisions(Vector3 movement)
         {
             var desiredPosition = Position + movement;
-            return _collisionHandler?.ResolveMovement(Position, desiredPosition) ?? desiredPosition;
+            return _collisionHandler?.ResolveSphereMovement(Position, desiredPosition, 4f).Position ?? desiredPosition;
         }
 
         protected override void ProcessKeyboard(float elapsedTime)
@@ -300,7 +313,7 @@ namespace TGC.MonoGame.TP
             // Helper delegates that use InputManager when available
             bool useInputManager = _inputManager != null;
             Func<Keys, bool> IsDown = k => useInputManager ? _inputManager.IsKeyDown(k) : keyboardState.IsKeyDown(k);
-            Func<Keys, bool> IsPressed = k => useInputManager ? _inputManager.IsKeyPressed(k) : (keyboardState.IsKeyDown(k) && !_previousKeyboardState.IsKeyDown(k));
+            Func<Keys, bool> IsPressed = k => useInputManager ? _inputManager.IsKeyPressed(k) : keyboardState.IsKeyDown(k) && !_previousKeyboardState.IsKeyDown(k);
 
             switch (State)
             {
@@ -332,7 +345,7 @@ namespace TGC.MonoGame.TP
             var isRunning = State == PlayerState.Walking && keyboardState.IsKeyDown(Keys.LeftShift);
             var currentSpeed = State == PlayerState.Crouching
                 ? CrouchSpeed
-                : (isRunning ? RunSpeed : WalkSpeed);
+                : isRunning ? RunSpeed : WalkSpeed;
 
             // Direcciones sin componente vertical, para no subir/bajar al caminar mirando arriba o abajo
             var flatFront = Vector3.Normalize(new Vector3(FrontDirection.X, 0, FrontDirection.Z));

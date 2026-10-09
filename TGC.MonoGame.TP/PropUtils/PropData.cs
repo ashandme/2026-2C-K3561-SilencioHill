@@ -21,6 +21,7 @@ public class PropData
     public float[]? Rotation { get; set; }
     public float[]? Scale { get; set; }
     public float[]? Color { get; set; }
+    public List<CollisionShapeData> Collisions { get; set; } = new();
 
     // Propiedades calculadas (ignoradas por el parser JSON)
     [JsonIgnore]

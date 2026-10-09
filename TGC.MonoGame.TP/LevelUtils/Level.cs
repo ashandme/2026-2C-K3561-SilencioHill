@@ -3,12 +3,15 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using TGC.MonoGame.TP.Entities.Enemy;
 using TGC.MonoGame.TP.PropUtils;
 namespace TGC.MonoGame.TP.LevelUtils;
 
 // Represents a single level (either outside or inside). Encapsulates its own maps, props and enemy.
 internal class Level
 {
+    // The level should have either a Skybox or a color for the background. For simplicity we will not implement a skybox for now.
+    public Color BackgroundColor { get; set; } = Color.Navy;
     // the level map should be an array of maps
     private readonly Map[] _maps = new Map[0];
     // TODO: REFACTOR make a single class for Entities (props, enemies, etc.) and have a single list of entities instead of separate maps for props and enemies.

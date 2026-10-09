@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TGC.MonoGame.TP.Collisions;
 
-namespace TGC.MonoGame.TP
+namespace TGC.MonoGame.TP.Entities.Enemy
 {
     public enum EnemyState
     {

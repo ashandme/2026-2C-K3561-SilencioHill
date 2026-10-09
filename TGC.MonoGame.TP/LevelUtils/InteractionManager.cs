@@ -1,5 +1,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using TGC.MonoGame.TP.Entities;
+using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP.LevelUtils
 {

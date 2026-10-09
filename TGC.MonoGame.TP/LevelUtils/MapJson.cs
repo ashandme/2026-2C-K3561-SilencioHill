@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Text.Json;
 using TGC.MonoGame.TP.PropUtils;
+using TGC.MonoGame.TP.Collisions;
 
 namespace TGC.MonoGame.TP.LevelUtils
 {
@@ -95,11 +96,51 @@ namespace TGC.MonoGame.TP.LevelUtils
                     rotationRadians,
                     item.ScaleVector, color);
                 if (texture != null) p.Texture = texture;
+                AddCollisions(p, item);
                 _props.Add(p);
             }
         }
 
         private static Vector3 DegreesToRadians(Vector3 degrees) =>
             degrees * (MathF.PI / 180f);
+
+        private static void AddCollisions(Prop prop, PropData data)
+        {
+            var scale = prop.Scale;
+            var position = prop.Position;
+            var radiusScale = MathF.Max(MathF.Abs(scale.X), MathF.Max(MathF.Abs(scale.Y), MathF.Abs(scale.Z)));
+
+            foreach (var collision in data.Collisions)
+            {
+                switch (collision.Type.Trim().ToLowerInvariant())
+                {
+                    case "sphere":
+                        prop.Colliders.Add(new SphereCollisionShape(
+                            position + collision.CenterVector * scale,
+                            collision.Radius * radiusScale));
+                        break;
+
+                    case "aabb":
+                        prop.Colliders.Add(new AabbCollisionShape(
+                            position + collision.MinVector * scale,
+                            position + collision.MaxVector * scale));
+                        break;
+
+                    case "plane":
+                        prop.Colliders.Add(new PlaneCollisionShape(
+                            position + collision.PointVector * scale,
+                            collision.NormalVector));
+                        break;
+
+                    case "cone":
+                        prop.Colliders.Add(new ConeCollisionShape(
+                            position + collision.PointVector * scale,
+                            collision.DirectionVector,
+                            collision.Distance * radiusScale,
+                            collision.HalfAngleDegrees));
+                        break;
+                }
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TGC.MonoGame.TP.Cameras;
+using TGC.MonoGame.TP.Entities;
 using TGC.MonoGame.TP.LevelUtils;
 
 namespace TGC.MonoGame.TP
@@ -46,33 +46,22 @@ namespace TGC.MonoGame.TP
             if (_statusTimer <= 0) _status = "";
         }
 
-        // Update HUD state from game entities. Builds leftText and right overlay internally.
-        public void UpdateState(Player player, Enemy enemy, Camera activeCamera, bool playerMode, InteractionManager interactionManager = null)
+        // Update HUD state from gameplay entities. Debug information is rendered by DebugState.
+        public void UpdateState(Player player, InteractionManager interactionManager = null)
         {
             try
             {
-                // Build camera text
-                var activeView = activeCamera?.View ?? Matrix.Identity;
-                var camPos = Matrix.Invert(activeView).Translation;
-                var camText = string.Format("Camera: X={0:F2} Y={1:F2} Z={2:F2}\nF1: Switch Interior/Exterior | F3: {3}",
-                    camPos.X, camPos.Y, camPos.Z, playerMode ? "Player" : "Spectator");
-
-                if (enemy != null && player != null)
-                {
-                    var distanceToEnemy = (enemy.Position - player.Position).Length();
-                    camText += $"\nEnemy: {enemy.State} | Dist: {distanceToEnemy:F1} | Angle: {enemy.DebugAngleToPlayerDegrees(player):F1}";
-                }
-                
+                var interactionText = "";
                 if (interactionManager?.Selected != null)
                 {
-                    camText += $"\nE: Agarrar '{interactionManager.Selected.Id}'";
+                    interactionText = $"E: Agarrar '{interactionManager.Selected.Id}'";
                     if (interactionManager.CandidateCount > 1)
                     {
-                        camText += " | Tab: Alternar";
+                        interactionText += " | Tab: Alternar";
                     }
                 }
 
-                _leftText = camText;
+                _leftText = interactionText;
 
                 // Build right overlay from player's inventory
                 if (player != null)

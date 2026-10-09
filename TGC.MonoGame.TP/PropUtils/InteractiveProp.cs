@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TGC.MonoGame.TP.PropUtils;
-namespace TGC.MonoGame.TP.LevelUtils
+using TGC.MonoGame.TP.Entities;
+namespace TGC.MonoGame.TP.PropUtils
 {
     // Interactive prop: a prop that can be interacted by the player (e.g., pickups, batteries)
     internal class InteractiveProp : Prop
@@ -34,8 +34,8 @@ namespace TGC.MonoGame.TP.LevelUtils
         {
             _addSeconds = addSeconds;
             _pickedUp = false;
-            this.Rotation = new Vector3(0f, 0f, 0.2f);
-            this.Scale *= 0.2f;
+            Rotation = new Vector3(0f, 0f, 0.2f);
+            Scale *= 0.2f;
         }
 
         public override bool OnInteract(Player player)
