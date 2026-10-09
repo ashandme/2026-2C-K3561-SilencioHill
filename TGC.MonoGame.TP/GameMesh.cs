@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP
 {

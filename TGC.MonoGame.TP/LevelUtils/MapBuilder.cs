@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using TGC.MonoGame.TP.Collisions;
 using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP.LevelUtils
@@ -43,11 +44,11 @@ namespace TGC.MonoGame.TP.LevelUtils
                 var posBottom = new Vector3(x * grassSize, 0, max + half);
 
                 var topWall = new Prop(fenceModel, shader, posTop);
-                topWall.Collision.AddPlane(posTop, Vector3.Forward);
+                topWall.Colliders.Add(new PlaneCollisionShape(posTop, Vector3.Forward));
                 props.Add(topWall);
 
                 var bottomWall = new Prop(fenceModel, shader, posBottom);
-                bottomWall.Collision.AddPlane(posBottom, Vector3.Backward);
+                bottomWall.Colliders.Add(new PlaneCollisionShape(posBottom, Vector3.Backward));
                 props.Add(bottomWall);
             }
 
@@ -58,11 +59,11 @@ namespace TGC.MonoGame.TP.LevelUtils
                 var posRight = new Vector3(max + half, 0, z * grassSize);
 
                 var leftWall = new Prop(fenceModel, shader, posLeft, rotation: rot90);
-                leftWall.Collision.AddPlane(posLeft, Vector3.Right);
+                leftWall.Colliders.Add(new PlaneCollisionShape(posLeft, Vector3.Right));
                 props.Add(leftWall);
 
                 var rightWall = new Prop(fenceModel, shader, posRight, rotation: rot90);
-                rightWall.Collision.AddPlane(posRight, Vector3.Left);
+                rightWall.Colliders.Add(new PlaneCollisionShape(posRight, Vector3.Left));
                 props.Add(rightWall);
             }
         }

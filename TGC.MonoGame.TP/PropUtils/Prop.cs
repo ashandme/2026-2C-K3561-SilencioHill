@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using TGC.MonoGame.TP.Collisions;
 
 namespace TGC.MonoGame.TP.PropUtils;
@@ -8,7 +8,7 @@ namespace TGC.MonoGame.TP.PropUtils;
 internal class Prop
 {
     public GameMesh Mesh { get; }
-    public Collision Collision { get; }
+    public List<CollisionShape> Colliders { get; } = new();
 
     public Model Model => Mesh.Model;
     public Effect Effect => Mesh.Effect;
@@ -41,7 +41,6 @@ internal class Prop
     public Prop(Model model, Effect effect, Vector3 position, Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
     {
         Mesh = new GameMesh(model, effect, position, rotation, scale, color);
-        Collision = new Collision();
     }
 
     public Matrix GetWorldMatrix() => Mesh.GetWorldMatrix();

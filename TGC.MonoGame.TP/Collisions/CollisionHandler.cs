@@ -7,17 +7,16 @@ namespace TGC.MonoGame.TP.Collisions;
 
 internal sealed class CollisionHandler
 {
-    private readonly List<Collision> _collisions = new();
+    private readonly List<CollisionShape> _shapes = new();
 
     public float PlayerRadius { get; set; } = 4f;
 
     public void SetProps(IEnumerable<Prop> props)
     {
-        _collisions.Clear();
+        _shapes.Clear();
         foreach (var prop in props)
         {
-            if (prop.Collision.Shapes.Count > 0)
-                _collisions.Add(prop.Collision);
+            _shapes.AddRange(prop.Colliders);
         }
     }
 
@@ -40,41 +39,14 @@ internal sealed class CollisionHandler
 
     private bool IsBlocked(Vector3 playerPosition)
     {
-        foreach (var collision in _collisions)
+        var playerSphere = new BoundingSphere(playerPosition, PlayerRadius);
+        foreach (var shape in _shapes)
         {
-            foreach (var shape in collision.Shapes)
-            {
-                if (Intersects(shape, playerPosition, PlayerRadius))
-                    return true;
-            }
+            if (shape.Intersects(playerSphere))
+                return true;
         }
 
         return false;
     }
 
-    private static bool Intersects(CollisionShape shape, Vector3 center, float radius)
-    {
-        return shape.Type switch
-        {
-            CollisionShapeType.Sphere =>
-                Vector3.DistanceSquared(center, shape.Sphere.Center) <=
-                MathF.Pow(shape.Sphere.Radius + radius, 2f),
-
-            CollisionShapeType.Aabb =>
-                DistanceSquaredToBox(center, shape.Box) <= radius * radius,
-
-            CollisionShapeType.Plane =>
-                MathF.Abs(shape.Plane.DotCoordinate(center)) <= radius,
-
-            _ => false
-        };
-    }
-
-    private static float DistanceSquaredToBox(Vector3 point, BoundingBox box)
-    {
-        var dx = MathF.Max(box.Min.X - point.X, 0f) + MathF.Max(point.X - box.Max.X, 0f);
-        var dy = MathF.Max(box.Min.Y - point.Y, 0f) + MathF.Max(point.Y - box.Max.Y, 0f);
-        var dz = MathF.Max(box.Min.Z - point.Z, 0f) + MathF.Max(point.Z - box.Max.Z, 0f);
-        return dx * dx + dy * dy + dz * dz;
-    }
 }
