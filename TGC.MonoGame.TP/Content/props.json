@@ -7,7 +7,8 @@
       "Position": [ 10.0, 0.0, 435.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 1.0, 0.65, 0.2 ]
+      "Color": [ 1.0, 0.65, 0.2 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -30.0, 0.0, -25.4 ], "Max": [ 30.0, 54.5, 20.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
@@ -16,7 +17,8 @@
       "Position": [ 15.0, 0.0, 1000.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 0.0, 1.0, 0.0 ]
+      "Color": [ 0.0, 1.0, 0.0 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -6.0, 0.0, -6.0 ], "Max": [ 6.0, 40.0, 6.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/planks",
@@ -25,7 +27,8 @@
       "Position": [ 545.0, 0.0, 1300.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 1.0, 0.0, 0.0 ]
+      "Color": [ 1.0, 0.0, 0.0 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -56.5, 0.0, -28.5 ], "Max": [ 56.5, 20.0, 28.5 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/pallet",
@@ -34,7 +37,8 @@
       "Position": [ 445.0, 0.0, 1300.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 1.0, 0.0, 0.0 ]
+      "Color": [ 1.0, 0.0, 0.0 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -50.0, 0.0, -50.0 ], "Max": [ 50.0, 20.0, 50.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-large",
@@ -43,7 +47,8 @@
       "Position": [ 400.0, 0.0, 1000.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 0.0, 1.0, 0.0 ]
+      "Color": [ 0.0, 1.0, 0.0 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -8.0, 0.0, -8.0 ], "Max": [ 8.0, 170.0, 8.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a",
@@ -52,7 +57,8 @@
       "Position": [ 200.0, 0.0, 300.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 2.0, 3.0, 1.0 ],
-      "Color": [ 1.0, 0.0, 0.0 ]
+      "Color": [ 1.0, 0.0, 0.0 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -50.0, 0.0, -50.0 ], "Max": [ 50.0, 100.0, 50.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
@@ -61,7 +67,8 @@
       "Position": [ 750.0, 0.0, 750.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 9, 11, 9 ],
-      "Color": [ 0.5, 0.5, 0.55 ]
+      "Color": [ 0.5, 0.5, 0.55 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -25.0, 0.0, -25.0 ], "Max": [ 25.0, 50.0, 25.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-door",
@@ -70,7 +77,8 @@
       "Position": [ 500.0, 0.0, 750.0 ],
       "Rotation": [ 0.0, 90.0, 0.0 ],
       "Scale": [ 1, 1, 1 ],
-      "Color": [ 0.6, 0.4, 0.1 ]
+      "Color": [ 0.6, 0.4, 0.1 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -50.0, 0.0, -50.0 ], "Max": [ 50.0, 100.0, 50.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof",
@@ -88,7 +96,8 @@
       "Position": [ 750.0, 0.0, 350 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 5.0, 4, 9 ],
-      "Color": [ 0.5, 0.6, 0.5 ]
+      "Color": [ 0.5, 0.6, 0.5 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -25.0, 0.0, -25.0 ], "Max": [ 25.0, 50.0, 25.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",
@@ -106,7 +115,8 @@
       "Position": [ 750.0, 0.0, 1150 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 5.0, 4, 9 ],
-      "Color": [ 0.5, 0.6, 0.5 ]
+      "Color": [ 0.5, 0.6, 0.5 ],
+      "Collisions": [ { "Type": "aabb", "Min": [ -25.0, 0.0, -25.0 ], "Max": [ 25.0, 50.0, 25.0 ] } ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",

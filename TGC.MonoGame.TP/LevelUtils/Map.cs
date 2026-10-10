@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using TGC.MonoGame.TP.PropUtils;
+using TGC.MonoGame.TP.Collisions;
 
 namespace TGC.MonoGame.TP.LevelUtils
 {
@@ -142,7 +143,7 @@ namespace TGC.MonoGame.TP.LevelUtils
                     var hidingSpot = new HidingSpotProp(hidingModel, hidingEffect, hidingPos, "hiding_01");
                     hidingSpot.Scale *= 0.6f;
                     hidingSpot.Rotation = new Vector3(0f, MathHelper.ToRadians(90f), 0f);
-                    hidingSpot.HideStandPoint = hidingPos + new Vector3(3f, 0f, 0f);
+                    hidingSpot.Colliders.Add(new AabbCollisionShape(new Vector3(494.8f, 0f, 582f), new Vector3(522f, 32.7f, 618f)));
                     _props.Add(hidingSpot);
                 }
             }

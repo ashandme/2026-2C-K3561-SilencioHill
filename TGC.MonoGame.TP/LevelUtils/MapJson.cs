@@ -91,7 +91,7 @@ namespace TGC.MonoGame.TP.LevelUtils
                     // update cache so subsequent props reuse the prepared effect
                     _loadedEffects[item.EffectPath] = effect;
                 }
-
+        
                 var p = new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);

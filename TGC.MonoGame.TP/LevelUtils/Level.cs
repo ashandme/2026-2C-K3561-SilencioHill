@@ -15,17 +15,17 @@ internal class Level
     // the level map should be an array of maps
     private readonly Map[] _maps = new Map[0];
     // TODO: REFACTOR make a single class for Entities (props, enemies, etc.) and have a single list of entities instead of separate maps for props and enemies.
+    private readonly string _enemyRoute;
     public Enemy Enemy { get; private set; }
 
     // A simple identifier
     public string Name { get; }
-
-    public Level(string name, Map[] maps)
+    public Level(string name, Map[] maps, string enemyRoute = "Content/enemyRoute.json")
     {
         Name = name ?? "unnamed";
         _maps = maps ?? new Map[0];
-    }
-
+        _enemyRoute = enemyRoute;
+    } 
     public void LoadLevelContent(ContentManager content)
     {
         for (int i = 0; i < _maps.Length; i++)
@@ -44,7 +44,7 @@ internal class Level
         try
         {
             var enemyModel = content.Load<Model>(TGCGame.ContentFolder3D + "Assets/ghost");
-            Enemy = new Enemy(enemyModel, content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicShader"), "Content/enemyRoute.json");
+            Enemy = new Enemy(enemyModel, content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicShader"), _enemyRoute);
         }
         catch (Exception ex)
         {
@@ -74,7 +74,7 @@ internal class Level
             _maps[i].Draw(view, projection);
         }
 
-        Enemy.Draw(view, projection);
+        Enemy?.Draw(view, projection);
     }
 
     public IReadOnlyList<Prop> GetProps()

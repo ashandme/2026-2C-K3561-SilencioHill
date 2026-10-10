@@ -111,7 +111,13 @@ namespace TGC.MonoGame.TP.LevelUtils
                     posX = random.NextSingle() * worldMax;
                 }
 
-                props.Add(new Prop(model, effect, new Vector3(posX, 0, posZ)));
+                var tree = new Prop(model, effect, new Vector3(posX, 0, posZ));
+                float half = useLarge ? 8f : 6f;
+                float height = useLarge ? 170f : 40f;
+                tree.Colliders.Add(new AabbCollisionShape(
+                    tree.Position + new Vector3(-half, 0, -half),
+                    tree.Position + new Vector3(half, height, half)));
+                props.Add(tree);
             }
         }
     }
