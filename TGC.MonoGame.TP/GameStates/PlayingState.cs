@@ -9,11 +9,13 @@ using TGC.MonoGame.TP.Collisions;
 using TGC.MonoGame.TP.Entities;
 using TGC.MonoGame.TP.Entities.Enemy;
 using TGC.MonoGame.TP.LevelUtils;
+using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP.GameStates;
 
 internal sealed class PlayingState : IGameState
 {
+    private const float InsidePlayerHeightOffset = 50f;
     private readonly GameStateContext _context;
     private readonly GraphicsDevice _graphics;
     private readonly InputManager _input;
@@ -129,7 +131,36 @@ internal sealed class PlayingState : IGameState
         if (_playerMode)
         {
             if (_input.IsCyclePressed()) _interactionManager.CycleSelection();
-            if (_input.IsInteractPressed()) _interactionManager.Interact(_player, _levelManager.Current);
+            if (_input.IsInteractPressed())
+            {
+                if (_interactionManager.Selected is DoorProp door)
+                    UseDoor(door);
+                else
+                    _interactionManager.Interact(_player, _levelManager.Current);
+            }
+        }
+    }
+
+    private void UseDoor(DoorProp door)
+    {
+        if (string.IsNullOrWhiteSpace(door.TargetLevel)) return;
+
+        try
+        {
+            _levelManager.LoadLevel(door.TargetLevel, _context.Content);
+            if (door.TeleportPosition != Vector3.Zero)
+            {
+                var destination = door.TeleportPosition;
+                if (door.TargetLevel.Equals("inside", StringComparison.OrdinalIgnoreCase))
+                    destination.Y += InsidePlayerHeightOffset;
+                _player.Position = destination;
+            }
+            _enemy = _levelManager.Current?.Enemy;
+            RefreshCollisions();
+        }
+        catch (Exception ex)
+        {
+            _hud.SetStatus("Door ERROR: " + ex.Message, 5.0);
         }
     }
 
@@ -172,10 +203,19 @@ internal sealed class PlayingState : IGameState
         {
             var next = _levelManager.CurrentName == "outside" ? "inside" : "outside";
             _levelManager.LoadLevel(next, _context.Content);
+            AdjustPlayerHeightForLevel(next);
             _enemy = _levelManager.Current?.Enemy;
             RefreshCollisions();
         }
         catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
+    }
+
+    private void AdjustPlayerHeightForLevel(string levelName)
+    {
+        var offset = levelName.Equals("inside", StringComparison.OrdinalIgnoreCase)
+            ? InsidePlayerHeightOffset
+            : -InsidePlayerHeightOffset;
+        _player.Position += Vector3.Up * offset;
     }
 
     internal void ReloadLevel()

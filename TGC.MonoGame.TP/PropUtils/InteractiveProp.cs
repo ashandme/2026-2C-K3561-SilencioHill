@@ -67,8 +67,8 @@ namespace TGC.MonoGame.TP.PropUtils
         public override int Priority => 10; // higher than stack (0)
         public override bool OnInteract(Player player)
         {
-            // When a the player interacts with the door it shows an animation and then teleports the player to a new level with a position and rotation
-            return true; // consumed interaction
+            // Level switching is handled by PlayingState, so the door remains reusable.
+            return false;
         }
     }
     internal class HidingSpotProp : InteractiveProp

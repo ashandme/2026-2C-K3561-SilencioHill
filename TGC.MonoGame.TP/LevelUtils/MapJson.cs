@@ -92,9 +92,20 @@ namespace TGC.MonoGame.TP.LevelUtils
                     _loadedEffects[item.EffectPath] = effect;
                 }
         
-                var p = new Prop(model, effect, item.PositionVector,
+                var p = item.InteractiveType.Equals("door", StringComparison.OrdinalIgnoreCase)
+                    ? new DoorProp(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "door" : item.Id)
+                    : new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);
+                if (p is DoorProp door)
+                {
+                    door.Rotation = rotationRadians;
+                    door.Scale = item.ScaleVector;
+                    door.Color = color;
+                    door.TargetLevel = item.TargetLevel;
+                    door.TeleportPosition = item.TeleportPositionVector;
+                    door.TeleportRotation = DegreesToRadians(item.TeleportRotationVector);
+                }
                 if (texture != null) p.Texture = texture;
                 AddCollisions(p, item);
                 _props.Add(p);
@@ -121,9 +132,7 @@ namespace TGC.MonoGame.TP.LevelUtils
                         break;
 
                     case "aabb":
-                        prop.Colliders.Add(new AabbCollisionShape(
-                            position + collision.MinVector * scale,
-                            position + collision.MaxVector * scale));
+                        prop.Colliders.Add(CreateRotatedAabb(collision, position, prop.Rotation, scale));
                         break;
 
                     case "plane":
@@ -141,6 +150,26 @@ namespace TGC.MonoGame.TP.LevelUtils
                         break;
                 }
             }
+        }
+
+        private static CollisionShape CreateRotatedAabb(
+            CollisionShapeData data,
+            Vector3 position,
+            Vector3 rotation,
+            Vector3 scale)
+        {
+            var min = data.MinVector;
+            var max = data.MaxVector;
+            var localCenter = (min + max) * 0.5f;
+            var localExtents = (max - min) * 0.5f;
+            var orientation = Matrix.CreateFromYawPitchRoll(rotation.Y, rotation.X, rotation.Z);
+            var center = position + Vector3.Transform(localCenter * scale, orientation);
+            var extents = new Vector3(
+                MathF.Abs(localExtents.X * scale.X),
+                MathF.Abs(localExtents.Y * scale.Y),
+                MathF.Abs(localExtents.Z * scale.Z));
+
+            return new OrientedBoxCollisionShape(center, extents, orientation);
         }
     }
 }

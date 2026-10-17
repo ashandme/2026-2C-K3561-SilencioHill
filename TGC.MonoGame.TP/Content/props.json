@@ -6,7 +6,7 @@
       "TexturePath": "Textures/metal",
       "Position": [ 10.0, 0.0, 435.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 1.0, 1.0, 1.0 ],
+      "Scale": [ 2.0, 2.0, 2.0 ],
       "Color": [ 1.0, 0.65, 0.2 ],
       "Collisions": [ { "Type": "aabb", "Min": [ -30.0, 0.0, -25.4 ], "Max": [ 30.0, 54.5, 20.0 ] } ]
     },
@@ -71,14 +71,25 @@
       "Collisions": [ { "Type": "aabb", "Min": [ -25.0, 0.0, -25.0 ], "Max": [ 25.0, 50.0, 25.0 ] } ]
     },
     {
-      "ModelPath": "Models/kenney_retro-urban-kit/wall-a-door",
+        "ModelPath": "Models/kenney_retro-urban-kit/wall-a-door",
         "EffectPath": "Effects/BasicTexture",
         "TexturePath": "Textures/door",
-      "Position": [ 500.0, 0.0, 750.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 1, 1, 1 ],
-      "Color": [ 0.6, 0.4, 0.1 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -50.0, 0.0, -50.0 ], "Max": [ 50.0, 100.0, 50.0 ] } ]
+        "Position": [ 520.0, 0.0, 750.0 ],
+        "Rotation": [ 0.0, 90.0, 0.0 ],
+        "Scale": [ 1, 1, 0.2 ],
+        "Color": [ 0.6, 0.4, 0.1 ],
+        "InteractiveType": "door",
+        "Id": "outside_door",
+        "TargetLevel": "inside",
+        "TeleportPosition": [ 150.0, 10.0, -280.0 ],
+        "TeleportRotation": [ 0.0, 180.0, 0.0 ],
+        "Collisions": [
+            {
+                "Type": "aabb",
+                "Min": [ -50.0, 0.0, -50.0 ],
+                "Max": [ 50.0, 100.0, 50.0 ]
+            }
+        ]
     },
     {
       "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof",

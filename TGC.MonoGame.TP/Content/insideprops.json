@@ -7,8 +7,8 @@
       "Position": [ 0.0, 0.0, 0.0 ],
       "Rotation": [ 0.0, 0.0, 0.0 ],
       "Scale": [ 0.1, 0.1, 0.1 ],
-        "Color": [ 1.0, 1.0, 1.0 ],
-        "Collisions": [
+      "Color": [ 1.0, 1.0, 1.0 ],
+      "Collisions": [
             {
                 "Type": "plane",
                 "Point": [ 2900, 0.0, -2900.0 ],
@@ -32,13 +32,13 @@
         ]
     },
     {
-      "ModelPath": "Models/kenney_furniture-kit/chair",
+        "ModelPath": "Models/kenney_furniture-kit/chair",
         "EffectPath": "Effects/BlinnPhong",
         "TexturePath": "Textures/planks",
-      "Position": [ -20.0, 0.0, 50.0 ],
-      "Rotation": [ 0.0, 125.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 1.0, 0.2, 0.2 ]
+        "Position": [ -10.0, 0.0, 50.0 ],
+        "Rotation": [ 0.0, 125.0, 0.0 ],
+        "Scale": [ 10, 10, 10 ],
+        "Color": [ 1.0, 0.2, 0.2 ]
     },
     {
       "ModelPath": "Models/kenney_furniture-kit/televisionModern",

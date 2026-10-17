@@ -22,6 +22,11 @@ public class PropData
     public float[]? Scale { get; set; }
     public float[]? Color { get; set; }
     public List<CollisionShapeData> Collisions { get; set; } = new();
+    public string InteractiveType { get; set; } = string.Empty;
+    public string Id { get; set; } = string.Empty;
+    public string TargetLevel { get; set; } = string.Empty;
+    public float[]? TeleportPosition { get; set; }
+    public float[]? TeleportRotation { get; set; }
 
     // Propiedades calculadas (ignoradas por el parser JSON)
     [JsonIgnore]
@@ -43,4 +48,14 @@ public class PropData
     public Vector3? ColorVector => Color is { Length: >= 3 }
         ? new Vector3(Color[0], Color[1], Color[2])
         : null;
+
+    [JsonIgnore]
+    public Vector3 TeleportPositionVector => TeleportPosition is { Length: >= 3 }
+        ? new Vector3(TeleportPosition[0], TeleportPosition[1], TeleportPosition[2])
+        : Vector3.Zero;
+
+    [JsonIgnore]
+    public Vector3 TeleportRotationVector => TeleportRotation is { Length: >= 3 }
+        ? new Vector3(TeleportRotation[0], TeleportRotation[1], TeleportRotation[2])
+        : Vector3.Zero;
 }

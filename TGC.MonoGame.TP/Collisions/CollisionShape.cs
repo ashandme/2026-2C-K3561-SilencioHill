@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using System;
+using TGC.MonoGame.Samples.Collisions;
 
 namespace TGC.MonoGame.TP.Collisions;
 
@@ -8,6 +9,31 @@ internal abstract class CollisionShape
     public abstract bool Intersects(BoundingSphere sphere);
     public abstract bool Intersects(CollisionShape shape);
     public virtual void UpdateTransform(Vector3 position, Vector3 forward) { }
+}
+
+internal sealed class OrientedBoxCollisionShape : CollisionShape
+{
+    public OrientedBoundingBox Box { get; }
+
+    public OrientedBoxCollisionShape(Vector3 center, Vector3 extents, Matrix orientation)
+    {
+        Box = new OrientedBoundingBox(center, extents)
+        {
+            Orientation = orientation
+        };
+    }
+
+    public override bool Intersects(BoundingSphere sphere)
+    {
+        return Box.Intersects(sphere);
+    }
+
+    public override bool Intersects(CollisionShape shape) => shape switch
+    {
+        SphereCollisionShape sphere => Intersects(sphere.Sphere),
+        OrientedBoxCollisionShape box => Box.Intersects(box.Box),
+        _ => false
+    };
 }
 
 internal sealed class SphereCollisionShape : CollisionShape
