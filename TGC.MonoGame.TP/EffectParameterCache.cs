@@ -1,5 +1,5 @@
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Concurrent;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TGC.MonoGame.TP
 {

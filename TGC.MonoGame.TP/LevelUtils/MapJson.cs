@@ -1,11 +1,11 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using System.Text.Json;
-using TGC.MonoGame.TP.PropUtils;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using TGC.MonoGame.TP.Collisions;
+using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP.LevelUtils
 {
@@ -91,7 +91,7 @@ namespace TGC.MonoGame.TP.LevelUtils
                     // update cache so subsequent props reuse the prepared effect
                     _loadedEffects[item.EffectPath] = effect;
                 }
-        
+
                 var p = item.InteractiveType.Equals("door", StringComparison.OrdinalIgnoreCase)
                     ? new DoorProp(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "door" : item.Id)
                     : new Prop(model, effect, item.PositionVector,

@@ -1,5 +1,5 @@
-using Microsoft.Xna.Framework;
 using System;
+using Microsoft.Xna.Framework;
 using TGC.MonoGame.Samples.Collisions;
 
 namespace TGC.MonoGame.TP.Collisions;

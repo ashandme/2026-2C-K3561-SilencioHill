@@ -1,6 +1,6 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using TGC.MonoGame.TP.Entities;
 
 namespace TGC.MonoGame.TP
@@ -71,7 +71,8 @@ namespace TGC.MonoGame.TP
         public bool IsLit { get; private set; }
 
         public CandleItem(Model model, Texture2D texture, Effect effect)
-            : base("Candle", model) {
+            : base("Candle", model)
+        {
             if (Mesh != null)
             {
                 Mesh.Texture = texture;

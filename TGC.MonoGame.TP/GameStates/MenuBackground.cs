@@ -1,6 +1,6 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using TGC.MonoGame.TP.Entities;
 using TGC.MonoGame.TP.LevelUtils;
 
@@ -18,7 +18,10 @@ internal sealed class MenuBackground
     private readonly Level _level;
     private readonly Player _dummyPlayer;   // solo para que el fantasma tenga a quién "mirar"
     private readonly Matrix _projection;
+    private readonly Random _flickerRandom = new();
     private float _time;
+    private float _flickerTimer;
+    private float _lightIntensity = 10f;
 
     public MenuBackground(GameStateContext context)
     {
@@ -40,6 +43,12 @@ internal sealed class MenuBackground
     public void Update(GameTime gameTime)
     {
         _time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        _flickerTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+        if (_flickerTimer <= 0f)
+        {
+            _flickerTimer = 0.03f + (float)_flickerRandom.NextDouble() * 0.14f;
+            _lightIntensity = 0.55f + (float)_flickerRandom.NextDouble() * 0.45f;
+        }
         _level.Enemy?.Update(gameTime, _dummyPlayer);
     }
 
@@ -50,7 +59,8 @@ internal sealed class MenuBackground
 
         SceneLighting.EyePosition = eye;
         SceneLighting.FlashlightEnabled = true;
-        SceneLighting.LightPosition = eye + new Vector3(0f, 30f, 40f);
+        SceneLighting.LightPosition = eye;
+        SceneLighting.LightColor = new Vector3(_lightIntensity);
 
         _graphics.DepthStencilState = DepthStencilState.Default;
         _graphics.RasterizerState = NoCull;

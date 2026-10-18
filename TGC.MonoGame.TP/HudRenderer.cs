@@ -1,6 +1,7 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using System.Collections.Generic;
 using TGC.MonoGame.TP.Entities;
 using TGC.MonoGame.TP.LevelUtils;
 
@@ -15,6 +16,8 @@ namespace TGC.MonoGame.TP
         private readonly Color _leftColor;
         private readonly Color _rightColor;
         private readonly string _defaultRightText;
+        private readonly Texture2D _pixel;
+        private readonly List<(string Name, float Progress)> _itemProgress = new();
 
         private string _status = "";
         private double _statusTimer = 0.0;
@@ -31,6 +34,8 @@ namespace TGC.MonoGame.TP
             _leftColor = leftColor ?? Color.White;
             _rightColor = rightColor ?? Color.Lime;
             _defaultRightText = defaultRightText;
+            _pixel = new Texture2D(_graphicsDevice, 1, 1);
+            _pixel.SetData(new[] { Color.White });
         }
 
         public void SetStatus(string text, double durationSeconds)
@@ -66,11 +71,11 @@ namespace TGC.MonoGame.TP
                 // Build right overlay from player's inventory
                 if (player != null)
                 {
-                    SetRightOverlayFromInventory(player.Inventory);
+                    UpdateItemProgress(player.Inventory);
                 }
                 else
                 {
-                    RightOverlay = null;
+                    _itemProgress.Clear();
                 }
             }
             catch (Exception ex)
@@ -78,6 +83,49 @@ namespace TGC.MonoGame.TP
                 System.Diagnostics.Debug.WriteLine("HudRenderer.UpdateState failed: " + ex.Message);
                 _leftText = null;
                 RightOverlay = null;
+            }
+        }
+
+        private void UpdateItemProgress(IEnumerable<Item> inventory)
+        {
+            _itemProgress.Clear();
+            foreach (var item in inventory)
+            {
+                if (item == null || item.MaxDurationSeconds <= 0f) continue;
+
+                var progress = MathHelper.Clamp(
+                    item.RemainingSeconds / item.MaxDurationSeconds,
+                    0f,
+                    1f);
+                _itemProgress.Add((item.Name, progress));
+            }
+        }
+
+        private void DrawItemProgressBars(ref float y)
+        {
+            const int barWidth = 150;
+            const int barHeight = 10;
+            const int spacing = 8;
+            var viewportWidth = _graphicsDevice.Viewport.Width;
+
+            foreach (var item in _itemProgress)
+            {
+                var labelSize = _font.MeasureString(item.Name);
+                var labelX = MathF.Max(_margin, viewportWidth - _margin - barWidth);
+                var labelY = y;
+                var barY = labelY + labelSize.Y + 2f;
+
+                _spriteBatch.DrawString(_font, item.Name, new Vector2(labelX, labelY), _rightColor);
+                _spriteBatch.Draw(
+                    _pixel,
+                    new Rectangle((int)labelX, (int)barY, barWidth, barHeight),
+                    Color.DarkGray);
+                _spriteBatch.Draw(
+                    _pixel,
+                    new Rectangle((int)labelX, (int)barY, (int)(barWidth * item.Progress), barHeight),
+                    item.Progress > 0.25f ? Color.LimeGreen : Color.Red);
+
+                y = barY + barHeight + spacing;
             }
         }
 
@@ -103,7 +151,7 @@ namespace TGC.MonoGame.TP
             // Right HUD: status + item indicators appended below status
             var rightText = string.IsNullOrEmpty(_status) ? _defaultRightText : _status;
             var viewportWidth = _graphicsDevice.Viewport.Width;
-            var yRight = _margin;
+            var yRight = (float)_margin;
 
             if (!string.IsNullOrEmpty(rightText))
             {
@@ -130,6 +178,8 @@ namespace TGC.MonoGame.TP
                 }
             }
 
+            DrawItemProgressBars(ref yRight);
+
             _spriteBatch.End();
 
             _graphicsDevice.DepthStencilState = prevDepth;
@@ -137,24 +187,8 @@ namespace TGC.MonoGame.TP
 
         public void SetRightOverlayFromInventory(System.Collections.Generic.IEnumerable<Item> inventory)
         {
-            if (inventory == null) { RightOverlay = null; return; }
-            var lines = new System.Collections.Generic.List<string>();
-            foreach (var it in inventory)
-            {
-                if (it == null) continue;
-                // Prefer polymorphic HUD status if provided by the item
-                var status = it.GetHudStatus();
-                if (!string.IsNullOrEmpty(status))
-                {
-                    lines.Add(status);
-                }
-                else
-                {
-                    lines.Add(it.GetType().Name);
-                }
-            }
-
-            RightOverlay = lines.Count == 0 ? null : string.Join("\n", lines);
+            UpdateItemProgress(inventory);
+            RightOverlay = null;
         }
     }
 }

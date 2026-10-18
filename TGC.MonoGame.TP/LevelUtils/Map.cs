@@ -1,10 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using TGC.MonoGame.TP.PropUtils;
 using TGC.MonoGame.TP.Collisions;
+using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP.LevelUtils
 {
@@ -116,7 +116,7 @@ namespace TGC.MonoGame.TP.LevelUtils
                     var batteryPos = new Vector3(30f, 0f, 30f);
                     var battery = new BatteryProp(batteryModel, batteryEffect, batteryPos, "battery_01", addSeconds: 30f);
                     _props.Add(battery);
-                    
+
                     var battery2Pos = new Vector3(40f, 0f, 30f);
                     var battery2 = new BatteryProp(batteryModel, batteryEffect, battery2Pos, "battery_02", addSeconds: 30f);
                     _props.Add(battery2);

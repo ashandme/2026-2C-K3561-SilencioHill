@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Microsoft.Xna.Framework;
 
 namespace TGC.MonoGame.TP.PropUtils;
 

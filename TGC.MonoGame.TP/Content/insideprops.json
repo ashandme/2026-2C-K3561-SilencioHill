@@ -1,206 +1,275 @@
 {
-  "Props": [
-    {
-      "ModelPath": "Models/Assets/Inside",
-      "EffectPath": "Effects/BlinnPhong",
-      "TexturePath": "Textures/wall",
-      "Position": [ 0.0, 0.0, 0.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 0.1, 0.1, 0.1 ],
-      "Color": [ 1.0, 1.0, 1.0 ],
-      "Collisions": [
-            {
-                "Type": "plane",
-                "Point": [ 2900, 0.0, -2900.0 ],
-                "Normal": [ 1.0, 0.0, 0.0 ]
-            },
-            {
-                "Type": "plane",
-                "Point": [ 2900, 0.0, -2900.0 ],
-                "Normal": [ 0.0, 0.0, 1.0 ]
-            },
-            {
-                "Type": "plane",
-                "Point": [ -2900, 0.0, 7900.0 ],
-                "Normal": [ 1.0, 0.0, 0.0 ]
-            },
-            {
-                "Type": "plane",
-                "Point": [ -2900, 0.0, 7900.0 ],
-                "Normal": [ 0.0, 0.0, 1.0 ]
-            }
-        ]
-    },
-    {
-        "ModelPath": "Models/kenney_furniture-kit/chair",
-        "EffectPath": "Effects/BlinnPhong",
-        "TexturePath": "Textures/planks",
-        "Position": [ -10.0, 0.0, 50.0 ],
-        "Rotation": [ 0.0, 125.0, 0.0 ],
-        "Scale": [ 10, 10, 10 ],
-        "Color": [ 1.0, 0.2, 0.2 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/televisionModern",
-        "EffectPath": "Effects/BlinnPhong",
-        "TexturePath": "Textures/metal",
-      "Position": [ 150.0, 33.0, 750.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.0, 0.0, 0.0 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/table",
-        "EffectPath": "Effects/BlinnPhong",
-        "TexturePath": "Textures/planks",
-      "Position": [ 110.0, 0.0, 770.0 ],
-      "Rotation": [ 0.0, 180.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.4, 0.0, 0.3 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/lampRoundFloor",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 10.0, 0.0, 770.0 ],
-      "Rotation": [ 0.0, 180.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.9, 0.9, 0.4 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/loungeSofa",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 110.0, 0.0, 630.0 ],
-      "Rotation": [ 0.0, 180.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.4, 0.0, 0.3 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/pottedPlant",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 280.0, 0.0, 630.0 ],
-      "Rotation": [ 0.0, 180.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.1, 0.9, 0.3 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/kitchenBar",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 275.0, 0.0, 240.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.9, 0.8, 0.2 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/kitchenBar",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 275.0, 0.0, 195.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.9, 0.8, 0.2 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/kitchenFridgeLarge",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 255.0, 0.0, 125.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.9, 0.8, 0.2 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/kitchenStoveElectric",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 245.0, 0.0, 65.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.9, 0.8, 0.2 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/chair",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ -80.0, 135.0, 300.0 ],
-      "Rotation": [ 0.0, -30.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.2, 0.3, 1.0 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/bathtub",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ -290.0, 0.0, 460.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.2, 0.2, 1.0 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/toilet",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ -150.0, 0.0, 580.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.2, 0.2, 1.0 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/bathroomSink",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ -260.0, 35.0, 390.0 ],
-      "Rotation": [ 0.0, 270.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.2, 0.2, 1.0 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/bathroomMirror",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ -290.0, 40.0, 390.0 ],
-      "Rotation": [ 0.0, 270.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.2, 0.2, 1.0 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/bedSingle",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 80.0, 135.0, 680.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.6, 0.2, 0.8 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/bedSingle",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 80.0, 135.0, 480.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.6, 0.2, 0.8 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/bedSingle",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 80.0, 135.0, 280.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.6, 0.2, 0.8 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/bedSingle",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 80.0, 135.0, 80.0 ],
-      "Rotation": [ 0.0, 90.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.6, 0.2, 0.8 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/tableRound",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 0.0, 25.0, 100.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.5, 0.3, 0.1 ]
-    },
-    {
-      "ModelPath": "Models/kenney_furniture-kit/table",
-      "EffectPath": "Effects/BasicShader",
-      "Position": [ 0.0, 135.0, 4.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 10, 10, 10 ],
-      "Color": [ 0.2, 0.8, 0.3 ]
-    }
-  ]
+    "Props": [
+        {
+            "ModelPath": "Models/Assets/Inside",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/tiles",
+            "Position": [ 0.0, 0.0, 0.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 0.1, 0.1, 0.1 ],
+            "Color": [ 1.0, 1.0, 1.0 ],
+            "Collisions": [
+                {
+                    "Type": "plane",
+                    "Point": [ 2900, 0.0, -2900.0 ],
+                    "Normal": [ 1.0, 0.0, 0.0 ]
+                },
+                {
+                    "Type": "plane",
+                    "Point": [ 2900, 0.0, -2900.0 ],
+                    "Normal": [ 0.0, 0.0, 1.0 ]
+                },
+                {
+                    "Type": "plane",
+                    "Point": [ -2900, 0.0, 7900.0 ],
+                    "Normal": [ 1.0, 0.0, 0.0 ]
+                },
+                {
+                    "Type": "plane",
+                    "Point": [ -2900, 0.0, 7900.0 ],
+                    "Normal": [ 0.0, 0.0, 1.0 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -900, 0.0, 100 ],
+                    "Max": [ -2900, 1000.0, -100 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -100, 0.0, 100 ],
+                    "Max": [ 2900, 1000.0, -100 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ 1100, 0.0, 2900 ],
+                    "Max": [ -2900, 1000.0, 3100 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ 1900, 0.0, 2900 ],
+                    "Max": [ 2900, 1000.0, 3100 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ 100, 0.0, 5900 ],
+                    "Max": [ -2900, 1000.0, 7900.0 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -1100, 0.0, 3400 ],
+                    "Max": [ -900, 1000.0, 3100 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -1100, 0.0, 3600 ],
+                    "Max": [ -900, 1000.0, 5900 ]
+                }
+            ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/floorFull",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Position": [ 300.0, 0.0, -300.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 100, 1, 200 ],
+            "Color": [ 0.2, 0.8, 0.3 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/chair",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Position": [ -10.0, 0.0, 50.0 ],
+            "Rotation": [ 0.0, 125.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 1.0, 0.2, 0.2 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/televisionModern",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Position": [ 150.0, 33.0, 750.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.0, 0.0, 0.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/table",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Position": [ 110.0, 0.0, 770.0 ],
+            "Rotation": [ 0.0, 180.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.4, 0.0, 0.3 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/lampRoundFloor",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 10.0, 0.0, 770.0 ],
+            "Rotation": [ 0.0, 180.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.9, 0.9, 0.4 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/loungeSofa",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/dirt",
+            "Position": [ 110.0, 0.0, 630.0 ],
+            "Rotation": [ 0.0, 180.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.4, 0.0, 0.3 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/pottedPlant",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 280.0, 0.0, 630.0 ],
+            "Rotation": [ 0.0, 180.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.1, 0.9, 0.3 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/kitchenBar",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Position": [ 275.0, 0.0, 240.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.9, 0.8, 0.2 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -5.0, 2.0, 1.0 ]
+                }
+            ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/kitchenBar",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Position": [ 275.0, 0.0, 195.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.9, 0.8, 0.2 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -5.0, 2.0, 1.0 ]
+                }
+            ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/kitchenFridgeLarge",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Position": [ 255.0, 0.0, 125.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.9, 0.8, 0.2 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -5.0, 3.0, 1.0 ]
+                }
+            ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/kitchenStoveElectric",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 245.0, 0.0, 65.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.9, 0.8, 0.2 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/chair",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ -80.0, 135.0, 300.0 ],
+            "Rotation": [ 0.0, -30.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.2, 0.3, 1.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/bathtub",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ -290.0, 0.0, 460.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.2, 0.2, 1.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/toilet",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ -150.0, 0.0, 580.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.2, 0.2, 1.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/bathroomSink",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ -260.0, 35.0, 390.0 ],
+            "Rotation": [ 0.0, 270.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.2, 0.2, 1.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/bathroomMirror",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ -290.0, 40.0, 390.0 ],
+            "Rotation": [ 0.0, 270.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.2, 0.2, 1.0 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 80.0, 135.0, 680.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.6, 0.2, 0.8 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 80.0, 135.0, 480.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.6, 0.2, 0.8 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 80.0, 135.0, 280.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.6, 0.2, 0.8 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 80.0, 135.0, 80.0 ],
+            "Rotation": [ 0.0, 90.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.6, 0.2, 0.8 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/tableRound",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 0.0, 25.0, 100.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.5, 0.3, 0.1 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/table",
+            "EffectPath": "Effects/BasicShader",
+            "Position": [ 0.0, 135.0, 4.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 10, 10, 10 ],
+            "Color": [ 0.2, 0.8, 0.3 ]
+        }
+    ]
 }

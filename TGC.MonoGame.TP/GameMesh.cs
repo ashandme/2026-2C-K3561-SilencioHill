@@ -97,6 +97,14 @@ namespace TGC.MonoGame.TP
         {
             var eyePos = SceneLighting.EyePosition;
             Effect.Parameters["eyePosition"]?.SetValue(eyePos);
+            var lightColor = SceneLighting.LightColor;
+            Effect.Parameters["ambientColor"]?.SetValue(new Vector3(0.08f) * lightColor);
+            Effect.Parameters["diffuseColor"]?.SetValue(lightColor);
+            Effect.Parameters["specularColor"]?.SetValue(lightColor);
+            Effect.Parameters["KAmbient"]?.SetValue(1f);
+            Effect.Parameters["KDiffuse"]?.SetValue(1f);
+            Effect.Parameters["KSpecular"]?.SetValue(0.35f);
+            Effect.Parameters["shininess"]?.SetValue(16f);
             if (Effect.Parameters["lightCount"] != null)
             {
                 _paramCache?.LightCount?.SetValue(1);

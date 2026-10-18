@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
 using TGC.MonoGame.Samples.Geometries;
 using TGC.MonoGame.TP.Cameras;
 using TGC.MonoGame.TP.Collisions;

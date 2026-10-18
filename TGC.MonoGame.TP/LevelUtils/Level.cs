@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 using TGC.MonoGame.TP.Entities.Enemy;
 using TGC.MonoGame.TP.PropUtils;
 namespace TGC.MonoGame.TP.LevelUtils;
@@ -25,7 +25,7 @@ internal class Level
         Name = name ?? "unnamed";
         _maps = maps ?? new Map[0];
         _enemyRoute = enemyRoute;
-    } 
+    }
     public void LoadLevelContent(ContentManager content)
     {
         for (int i = 0; i < _maps.Length; i++)

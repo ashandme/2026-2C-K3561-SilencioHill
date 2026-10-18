@@ -74,8 +74,8 @@ namespace TGC.MonoGame.TP
             }
 
             // Set some reasonable defaults if the shader declares those parameters
-            TrySetVector3Parameter(effect, "ambientColor", new Vector3(0.1f, 0.1f, 0.1f));
-            TrySetVector3Parameter(effect, "diffuseColor", new Vector3(0.5f, 0.5f, 0.5f));
+            TrySetVector3Parameter(effect, "ambientColor", new Vector3(0.2f, 0.2f, 0.2f));
+            TrySetVector3Parameter(effect, "diffuseColor", new Vector3(0.7f, 0.7f, 0.7f));
             TrySetVector3Parameter(effect, "specularColor", new Vector3(1f, 1f, 1f));
 
             TrySetFloatParameter(effect, "KAmbient", 0.7f);
