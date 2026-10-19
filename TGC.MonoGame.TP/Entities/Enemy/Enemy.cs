@@ -21,7 +21,18 @@ namespace TGC.MonoGame.TP.Entities.Enemy
 
     internal class Enemy : Entity
     {
-        public EnemyState State { get; private set; } = EnemyState.Roaming;
+        private EnemyState _state = EnemyState.Roaming;
+        public EnemyState State
+        {
+            get => _state;
+            private set
+            {
+                if (_state == value) return;
+                _state = value;
+                if (value == EnemyState.Staring) Audio.Play("Giggle");
+                else if (value == EnemyState.Sneaking) Audio.Play("Ps");
+            }
+        }
         // --- Deteccion ---
         private const float SneakNoiseDistance = 150f;         // dentro del cono trasero, si se acerca mas que esto hace ruido
         private const float SearchAtHidingSpotDuration = 3f; // Tiempo que vigila el escondite antes de desaparecer

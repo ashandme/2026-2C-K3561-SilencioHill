@@ -5911,3 +5911,50 @@
 /processorParam:TextureFormat=Color
 /build:Textures/windows.png
 
+#begin SFX/Door.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Door.mp3
+
+#begin SFX/Giggle.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Giggle.mp3
+
+#begin SFX/PickUp.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/PickUp.mp3
+
+#begin SFX/Ps.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Ps.mp3
+
+#begin SFX/Stab.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/Stab.mp3
+
+#begin SFX/Menu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/Menu.mp3
+
+#begin SFX/IndoorAmbience.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/IndoorAmbience.mp3
+
+#begin SFX/NighttimeForestAmbience.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/NighttimeForestAmbience.mp3

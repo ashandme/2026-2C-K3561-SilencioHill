@@ -32,6 +32,7 @@ public class TGCGame : Game
 
     protected override void LoadContent()
     {
+        Audio.Init(Content);
         var spriteBatch = new SpriteBatch(GraphicsDevice);
         var font = Content.Load<SpriteFont>("SpriteFonts/CascadiaCode/CascadiaCodePL");
         _states = new GameStateManager();

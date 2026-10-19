@@ -61,6 +61,7 @@ internal sealed class PlayingState : IGameState
         _levelManager.LoadLevel("outside", context.Content);
         RefreshCollisions();
         _enemy = _levelManager.Current?.Enemy;
+        PlayLevelAmbience();
 
         var candle = context.Content.Load<Model>("Models/Assets/Candle");
         var flashlight = context.Content.Load<Model>("Models/Assets/Linterna");
@@ -142,6 +143,7 @@ internal sealed class PlayingState : IGameState
         }
     }
 
+    private void PlayLevelAmbience() => Audio.PlayMusic(_levelManager.CurrentName == "inside" ? "IndoorAmbience" : "NighttimeForestAmbience");
     private void UseDoor(DoorProp door)
     {
         if (string.IsNullOrWhiteSpace(door.TargetLevel)) return;
@@ -149,6 +151,7 @@ internal sealed class PlayingState : IGameState
         try
         {
             _levelManager.LoadLevel(door.TargetLevel, _context.Content);
+            Audio.Play("Door");
             if (door.TeleportPosition != Vector3.Zero)
             {
                 var destination = door.TeleportPosition;
@@ -158,6 +161,7 @@ internal sealed class PlayingState : IGameState
             }
             _enemy = _levelManager.Current?.Enemy;
             RefreshCollisions();
+            PlayLevelAmbience();
         }
         catch (Exception ex)
         {
@@ -225,6 +229,7 @@ internal sealed class PlayingState : IGameState
             AdjustPlayerHeightForLevel(next);
             _enemy = _levelManager.Current?.Enemy;
             RefreshCollisions();
+            PlayLevelAmbience();
         }
         catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
     }

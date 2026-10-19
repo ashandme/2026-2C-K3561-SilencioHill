@@ -117,6 +117,7 @@ namespace TGC.MonoGame.TP.Entities
             if (State == PlayerState.Caught || State == PlayerState.Undetectable) return;
             State = PlayerState.Caught;
             _caughtTimer = CaughtDuration;
+            Audio.Play("Stab");
         }
         // Alterna entre escondido/no escondido. Lo llama HidingSpotProp via InteractionManager.
         private Vector3 _preHidePosition;

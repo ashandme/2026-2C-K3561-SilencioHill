@@ -50,6 +50,7 @@ namespace TGC.MonoGame.TP.PropUtils
                     // Use public API to add time
                     f.AddTime(_addSeconds);
                     _pickedUp = true;
+                    Audio.Play("PickUp");
                     return true;
                 }
             }

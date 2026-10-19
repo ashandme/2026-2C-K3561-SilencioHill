@@ -27,7 +27,11 @@ internal sealed class MainMenuState : IGameState
         });
     }
 
-    public void Enter() => _context.SetMouseVisible(true);
+    public void Enter()
+    {
+        _context.SetMouseVisible(true);
+      Audio.PlayMusic("Menu");
+    }
     public void Exit() => _background.Unload();
 
     public void Update(GameTime gameTime)
