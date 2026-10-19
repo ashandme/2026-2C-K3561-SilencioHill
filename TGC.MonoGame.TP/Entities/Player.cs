@@ -33,6 +33,12 @@ namespace TGC.MonoGame.TP.Entities
         private const float RunSpeed = 110f;
         private const float CrouchSpeed = 30f;
 
+        private bool _stairsAnimationActive;
+        private Vector3 _stairsAnimationStart;
+        private Vector3 _stairsAnimationTarget;
+        private float _stairsAnimationDuration;
+        private float _stairsAnimationElapsed;
+
         // efecto y textura de terror para aplicar a la camara (cuando el jugador es atrapado)
         private Texture2D _horrorOverlay;
         private Effect _horrorEffect;
@@ -64,6 +70,26 @@ namespace TGC.MonoGame.TP.Entities
         {
             _previousKeyboardState = Keyboard.GetState();
         }
+
+        public Vector3 CameraOffset { get; set; }
+
+        public Vector3 CameraPosition => Position + CameraOffset;
+
+        public bool IsStairsAnimating => _stairsAnimationActive;
+
+        public bool StartStairsAnimation(Vector3 targetPosition, float duration)
+        {
+            if (_stairsAnimationActive || duration <= 0f) return false;
+
+            _stairsAnimationStart = Position;
+            _stairsAnimationTarget = targetPosition;
+            _stairsAnimationDuration = duration;
+            _stairsAnimationElapsed = 0f;
+            _stairsAnimationActive = true;
+            FaceTowards(targetPosition);
+            return true;
+        }
+
         public void LoadHorrorOverlay(Texture2D texture2D, Effect effect)
         {
             _horrorOverlay = texture2D;
@@ -255,7 +281,7 @@ namespace TGC.MonoGame.TP.Entities
             graphicsDevice.BlendState = BlendState.AlphaBlend;
 
             // Compute camera basis and world matrix for the held item
-            var camPos = Position;
+            var camPos = CameraPosition;
             var camFront = FrontDirection;
             var camUp = UpDirection;
             var camRight = RightDirection;
@@ -309,6 +335,21 @@ namespace TGC.MonoGame.TP.Entities
         protected override void ProcessKeyboard(float elapsedTime)
         {
             var keyboardState = Keyboard.GetState();
+
+            if (_stairsAnimationActive)
+            {
+                _stairsAnimationElapsed += elapsedTime;
+                var progress = MathHelper.Clamp(_stairsAnimationElapsed / _stairsAnimationDuration, 0f, 1f);
+                Position = Vector3.Lerp(_stairsAnimationStart, _stairsAnimationTarget, progress);
+                FaceTowards(_stairsAnimationTarget);
+
+                if (progress >= 1f)
+                    _stairsAnimationActive = false;
+
+                if (!_inputManagerIsAvailable()) _previousKeyboardState = keyboardState;
+                _changed = true;
+                return;
+            }
 
             // Helper delegates that use InputManager when available
             bool useInputManager = _inputManager != null;
@@ -409,6 +450,8 @@ namespace TGC.MonoGame.TP.Entities
                 _previousKeyboardState = keyboardState;
             }
         }
+
+        private bool _inputManagerIsAvailable() => _inputManager != null;
         private void ApplyHeight()
         {
             var targetHeight = State == PlayerState.Walking ? StandHeight : CrouchHeight;

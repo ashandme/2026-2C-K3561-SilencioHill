@@ -27,6 +27,8 @@ public class PropData
     public string TargetLevel { get; set; } = string.Empty;
     public float[]? TeleportPosition { get; set; }
     public float[]? TeleportRotation { get; set; }
+    public float[]? TargetPosition { get; set; }
+    public float AnimationDuration { get; set; } = 1f;
 
     // Propiedades calculadas (ignoradas por el parser JSON)
     [JsonIgnore]
@@ -57,5 +59,10 @@ public class PropData
     [JsonIgnore]
     public Vector3 TeleportRotationVector => TeleportRotation is { Length: >= 3 }
         ? new Vector3(TeleportRotation[0], TeleportRotation[1], TeleportRotation[2])
+        : Vector3.Zero;
+
+    [JsonIgnore]
+    public Vector3 TargetPositionVector => TargetPosition is { Length: >= 3 }
+        ? new Vector3(TargetPosition[0], TargetPosition[1], TargetPosition[2])
         : Vector3.Zero;
 }

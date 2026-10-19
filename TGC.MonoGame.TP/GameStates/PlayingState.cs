@@ -16,6 +16,7 @@ namespace TGC.MonoGame.TP.GameStates;
 internal sealed class PlayingState : IGameState
 {
     private const float InsidePlayerHeightOffset = 50f;
+    private const float InsideCameraHeightOffset = 40f;
     private readonly GameStateContext _context;
     private readonly GraphicsDevice _graphics;
     private readonly InputManager _input;
@@ -131,7 +132,7 @@ internal sealed class PlayingState : IGameState
         if (_playerMode)
         {
             if (_input.IsCyclePressed()) _interactionManager.CycleSelection();
-            if (_input.IsInteractPressed())
+            if (!_player.IsStairsAnimating && _input.IsInteractPressed())
             {
                 if (_interactionManager.Selected is DoorProp door)
                     UseDoor(door);
@@ -169,6 +170,7 @@ internal sealed class PlayingState : IGameState
         _graphics.SetRenderTarget(_sceneRenderTarget);
         _graphics.DepthStencilState = DepthStencilState.Default;
         _graphics.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, _levelManager.Current?.BackgroundColor ?? new Color(0.0f, 0f, 0.0f), 1f, 0);
+        UpdatePlayerCameraView();
         var view = ActiveCamera.View;
         SceneLighting.EyePosition = Matrix.Invert(view).Translation;
         _levelManager.Current?.Draw(view, _projection);
@@ -185,6 +187,22 @@ internal sealed class PlayingState : IGameState
             _player.DrawCenterDot(_context.SpriteBatch, _crosshairPixel);
     }
 
+    private void UpdatePlayerCameraView()
+    {
+        if (!_playerMode) return;
+
+        _player.CameraOffset = _levelManager.CurrentName?.Equals("inside", StringComparison.OrdinalIgnoreCase) == true
+            ? Vector3.Up * InsideCameraHeightOffset
+            : Vector3.Zero;
+
+        var cameraPosition = _player.CameraPosition;
+
+        _player.View = Matrix.CreateLookAt(
+            cameraPosition,
+            cameraPosition + _player.FrontDirection,
+            _player.UpDirection);
+    }
+
     internal Matrix ActiveView => ActiveCamera.View;
     internal Player DebugPlayer => _player;
     internal Enemy DebugEnemy => _enemy;
@@ -192,6 +210,7 @@ internal sealed class PlayingState : IGameState
 
     internal void DrawCaughtOverlay(GameTime gameTime)
     {
+        _graphics.DepthStencilState = DepthStencilState.None;
         _player.ApplyCameraTexture(_graphics, _fullScreenQuad, _sceneRenderTarget,
             (float)gameTime.TotalGameTime.TotalSeconds);
     }

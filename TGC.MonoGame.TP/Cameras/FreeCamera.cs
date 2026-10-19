@@ -39,6 +39,18 @@ namespace TGC.MonoGame.TP.Cameras
 
         public float MouseSensitivity { get; set; } = 5f;
 
+        public void FaceTowards(Vector3 target)
+        {
+            var direction = target - Position;
+            direction.Y = 0f;
+            if (direction.LengthSquared() < 0.0001f) return;
+
+            direction.Normalize();
+            _yaw = MathHelper.ToDegrees(MathF.Atan2(direction.X, direction.Z));
+            UpdateCameraVectors();
+            CalculateView();
+        }
+
         private void CalculateView()
         {
             View = Matrix.CreateLookAt(Position, Position + FrontDirection, UpDirection);

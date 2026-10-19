@@ -71,6 +71,26 @@ namespace TGC.MonoGame.TP.PropUtils
             return false;
         }
     }
+
+    internal class Stairs : InteractiveProp
+    {
+        public Vector3 TargetPosition { get; set; }
+        public float AnimationDuration { get; set; } = 1f;
+
+        public Stairs(Model model, Effect effect, Vector3 position, string id, Vector3 targetPosition)
+            : base(model, effect, position, id)
+        {
+            TargetPosition = targetPosition;
+        }
+
+        public override int Priority => 8;
+
+        public override bool OnInteract(Player player)
+        {
+            return player.StartStairsAnimation(TargetPosition, AnimationDuration);
+        }
+    }
+
     internal class HidingSpotProp : InteractiveProp
     {
         // Punto donde se para el jugador al esconderse (afuera del mesh, no en el centro del prop)

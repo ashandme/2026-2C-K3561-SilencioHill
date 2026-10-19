@@ -94,6 +94,8 @@ namespace TGC.MonoGame.TP.LevelUtils
 
                 var p = item.InteractiveType.Equals("door", StringComparison.OrdinalIgnoreCase)
                     ? new DoorProp(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "door" : item.Id)
+                    : item.InteractiveType.Equals("stairs", StringComparison.OrdinalIgnoreCase)
+                        ? new Stairs(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "stairs" : item.Id, item.TargetPositionVector)
                     : new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);
@@ -105,6 +107,13 @@ namespace TGC.MonoGame.TP.LevelUtils
                     door.TargetLevel = item.TargetLevel;
                     door.TeleportPosition = item.TeleportPositionVector;
                     door.TeleportRotation = DegreesToRadians(item.TeleportRotationVector);
+                }
+                if (p is Stairs stairs)
+                {
+                    stairs.Rotation = rotationRadians;
+                    stairs.Scale = item.ScaleVector;
+                    stairs.Color = color;
+                    stairs.AnimationDuration = item.AnimationDuration;
                 }
                 if (texture != null) p.Texture = texture;
                 AddCollisions(p, item);
