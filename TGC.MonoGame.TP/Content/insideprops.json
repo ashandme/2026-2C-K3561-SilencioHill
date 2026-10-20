@@ -78,6 +78,21 @@
                     "Type": "aabb",
                     "Min": [ -900, 1350.0, -1100 ],
                     "Max": [ -3000, 2600.0, -1000 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -2000, 1350.0, -100 ],
+                    "Max": [ 2080, 2600.0, 100 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ 2000, 1350.0, -1100 ],
+                    "Max": [ 1900, 2600.0, 7900 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -1800, 1350.0, -100 ],
+                    "Max": [ -2000, 2600.0, 5900 ]
                 }
             ]
         },
@@ -124,7 +139,14 @@
             "Position": [ 110.0, 0.0, 770.0 ],
             "Rotation": [ 0.0, 180.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.4, 0.0, 0.3 ]
+            "Color": [ 0.4, 0.0, 0.3 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -8.0, 5.0, 5.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/lampRoundFloor",
@@ -141,7 +163,14 @@
             "Position": [ 110.0, 0.0, 630.0 ],
             "Rotation": [ 0.0, 180.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.4, 0.0, 0.3 ]
+            "Color": [ 0.4, 0.0, 0.3 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -10.0, 5.0, 5.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/pottedPlant",
@@ -149,7 +178,14 @@
             "Position": [ 280.0, 0.0, 630.0 ],
             "Rotation": [ 0.0, 180.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.1, 0.9, 0.3 ]
+            "Color": [ 0.1, 0.9, 0.3 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -2.0, 5.0, 2.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/kitchenBar",
@@ -237,11 +273,11 @@
             "Rotation": [ 0.0, 90.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
             "Color": [ 0.2, 0.2, 1.0 ],
-            "Colliders": [
+            "Collisions": [
                 {
                     "Type": "aabb",
-                    "Min": [ 0.0, 0.0, -3.0 ],
-                    "Max": [ -5.0, 5.0, 3.0 ]
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -12.0, 5.0, 6.0 ]
                 }
             ]
         },
@@ -251,7 +287,14 @@
             "Position": [ -150.0, 0.0, 580.0 ],
             "Rotation": [ 0.0, 0.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.2, 0.2, 1.0 ]
+            "Color": [ 0.2, 0.2, 1.0 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, 0.0 ],
+                    "Max": [ -3.0, 5.0, -6.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/bathroomSink",
@@ -323,7 +366,7 @@
             "Rotation": [ 0.0, 0.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
             "Color": [ 0.2, 0.8, 0.3 ],
-            "Colliders": [
+            "Collisions": [
                 {
                     "Type": "aabb",
                     "Min": [ 0.0, 0.0, -1.0 ],

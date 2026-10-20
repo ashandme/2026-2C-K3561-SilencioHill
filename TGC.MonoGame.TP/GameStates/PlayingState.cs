@@ -51,7 +51,6 @@ internal sealed class PlayingState : IGameState
         _levelManager = new LevelManager();
         _levelManager.AddLevel("outside", new Level("outside", [new Map(), new MapJson { filePath = "Content/props.json" }]));
         _levelManager.AddLevel("inside", new Level("inside", [new MapJson { filePath = "Content/insideprops.json" }]));
-
         var center = new Point(_graphics.Viewport.Width / 2, _graphics.Viewport.Height / 2);
         _player = new Player(_graphics.Viewport.AspectRatio, new Vector3(0, 10, 50), center);
         _spectator = new FreeCamera(_graphics.Viewport.AspectRatio, new Vector3(0, 50, 150), center);
@@ -60,7 +59,7 @@ internal sealed class PlayingState : IGameState
 
         _levelManager.LoadLevel("outside", context.Content);
         RefreshCollisions();
-        _enemy = _levelManager.Current?.Enemy;
+        ConfigureEnemyForCurrentLevel();
         PlayLevelAmbience();
 
         var candle = context.Content.Load<Model>("Models/Assets/Candle");
@@ -159,7 +158,7 @@ internal sealed class PlayingState : IGameState
                     destination.Y += InsidePlayerHeightOffset;
                 _player.Position = destination;
             }
-            _enemy = _levelManager.Current?.Enemy;
+            ConfigureEnemyForCurrentLevel();
             RefreshCollisions();
             PlayLevelAmbience();
         }
@@ -227,7 +226,7 @@ internal sealed class PlayingState : IGameState
             var next = _levelManager.CurrentName == "outside" ? "inside" : "outside";
             _levelManager.LoadLevel(next, _context.Content);
             AdjustPlayerHeightForLevel(next);
-            _enemy = _levelManager.Current?.Enemy;
+            ConfigureEnemyForCurrentLevel();
             RefreshCollisions();
             PlayLevelAmbience();
         }
@@ -250,10 +249,17 @@ internal sealed class PlayingState : IGameState
         try
         {
             _levelManager.ReloadCurrent(_context.Content);
-            _enemy = _levelManager.Current?.Enemy;
+            ConfigureEnemyForCurrentLevel();
             RefreshCollisions();
         }
         catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
+    }
+
+    private void ConfigureEnemyForCurrentLevel()
+    {
+        _enemy = _levelManager.Current?.Enemy;
+        if (_enemy != null && _levelManager.CurrentName?.Equals("inside", StringComparison.OrdinalIgnoreCase) == true)
+            _enemy.SetScale(_enemy.Scale * 3f);
     }
 
     internal void RefreshCollisions()
