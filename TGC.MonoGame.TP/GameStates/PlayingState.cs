@@ -236,6 +236,9 @@ internal sealed class PlayingState : IGameState
 
     private void AdjustPlayerHeightForLevel(string levelName)
     {
+        if (!levelName.Equals("inside", StringComparison.OrdinalIgnoreCase))
+            _player.SetGroundHeight(0f);
+
         var offset = levelName.Equals("inside", StringComparison.OrdinalIgnoreCase)
             ? InsidePlayerHeightOffset
             : -InsidePlayerHeightOffset;

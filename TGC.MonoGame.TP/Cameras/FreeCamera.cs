@@ -46,7 +46,7 @@ namespace TGC.MonoGame.TP.Cameras
             if (direction.LengthSquared() < 0.0001f) return;
 
             direction.Normalize();
-            _yaw = MathHelper.ToDegrees(MathF.Atan2(direction.X, direction.Z));
+            _yaw = MathHelper.ToDegrees(MathF.Atan2(direction.X, direction.Z)) -90;
             UpdateCameraVectors();
             CalculateView();
         }

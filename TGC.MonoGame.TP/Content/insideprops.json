@@ -52,7 +52,7 @@
                 {
                     "Type": "aabb",
                     "Min": [ 100, 0.0, 5900 ],
-                    "Max": [ -2900, 1000.0, 7900.0 ]
+                    "Max": [ -2900, 2000.0, 7900.0 ]
                 },
                 {
                     "Type": "aabb",
@@ -63,6 +63,21 @@
                     "Type": "aabb",
                     "Min": [ -1100, 0.0, 3600 ],
                     "Max": [ -900, 1000.0, 5900 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ 1900, 0.0, -100 ],
+                    "Max": [ -50, 3000.0, -900 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -110, 1350.0, -1100 ],
+                    "Max": [ 2100, 2600.0, -1000 ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [ -900, 1350.0, -1100 ],
+                    "Max": [ -3000, 2600.0, -1000 ]
                 }
             ]
         },
@@ -71,6 +86,15 @@
             "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/planks",
             "Position": [ 300.0, 0.0, -300.0 ],
+            "Rotation": [ 0.0, 0.0, 0.0 ],
+            "Scale": [ 100, 1, 200 ],
+            "Color": [ 0.2, 0.8, 0.3 ]
+        },
+        {
+            "ModelPath": "Models/kenney_furniture-kit/floorFull",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Position": [ 300.0, 263.0, -300.0 ],
             "Rotation": [ 0.0, 0.0, 0.0 ],
             "Scale": [ 100, 1, 200 ],
             "Color": [ 0.2, 0.8, 0.3 ]
@@ -170,18 +194,26 @@
             "Collisions": [
                 {
                     "Type": "aabb",
-                    "Min": [ 0.0, 0.0, 0.0 ],
-                    "Max": [ -5.0, 3.0, 1.0 ]
+                    "Min": [ 0.0, 0.0, -1.0 ],
+                    "Max": [ -5.0, 5.0, 3.0 ]
                 }
             ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/kitchenStoveElectric",
-            "EffectPath": "Effects/BasicShader",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
             "Position": [ 245.0, 0.0, 65.0 ],
             "Rotation": [ 0.0, 90.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.9, 0.8, 0.2 ]
+            "Color": [ 0.9, 0.8, 0.2 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, -2.0 ],
+                    "Max": [ -5.0, 5.0, 3.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/chair",
@@ -189,7 +221,14 @@
             "Position": [ -80.0, 135.0, 300.0 ],
             "Rotation": [ 0.0, -30.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.2, 0.3, 1.0 ]
+            "Color": [ 0.2, 0.3, 1.0 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, -1.0 ],
+                    "Max": [ -5.0, 5.0, 3.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/bathtub",
@@ -197,7 +236,14 @@
             "Position": [ -290.0, 0.0, 460.0 ],
             "Rotation": [ 0.0, 90.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.2, 0.2, 1.0 ]
+            "Color": [ 0.2, 0.2, 1.0 ],
+            "Colliders": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, -3.0 ],
+                    "Max": [ -5.0, 5.0, 3.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/toilet",
@@ -258,10 +304,17 @@
         {
             "ModelPath": "Models/kenney_furniture-kit/tableRound",
             "EffectPath": "Effects/BasicShader",
-            "Position": [ 0.0, 25.0, 100.0 ],
+            "Position": [ 0.0, 25.0, 140.0 ],
             "Rotation": [ 0.0, 0.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.5, 0.3, 0.1 ]
+            "Color": [ 0.5, 0.3, 0.1 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, -25.0, 0.0 ],
+                    "Max": [ -8.0, 0.0, 8.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/table",
@@ -269,14 +322,21 @@
             "Position": [ 0.0, 135.0, 4.0 ],
             "Rotation": [ 0.0, 0.0, 0.0 ],
             "Scale": [ 10, 10, 10 ],
-            "Color": [ 0.2, 0.8, 0.3 ]
+            "Color": [ 0.2, 0.8, 0.3 ],
+            "Colliders": [
+                {
+                    "Type": "aabb",
+                    "Min": [ 0.0, 0.0, -1.0 ],
+                    "Max": [ -5.0, 5.0, 3.0 ]
+                }
+            ]
         },
         {
             "ModelPath": "Models/kenney_furniture-kit/stairs",
             "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/planks",
             "Position": [ 190.0, 0.0, -50.0 ],
-            "TargetPosition": [ 0.0, 135.0, -50.0 ],
+            "TargetPosition": [ -10.0, 135.0, -50.0 ],
             "AnimationDuration": 2.0,
             "Rotation": [ 0.0, 0.0, 0.0 ],
             "Scale": [ 0, 0, 0 ],

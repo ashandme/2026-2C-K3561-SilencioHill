@@ -75,6 +75,13 @@ namespace TGC.MonoGame.TP.Entities
 
         public Vector3 CameraPosition => Position + CameraOffset;
 
+        public float GroundHeight { get; private set; } = GroundY;
+
+        public void SetGroundHeight(float groundHeight)
+        {
+            GroundHeight = groundHeight;
+        }
+
         public bool IsStairsAnimating => _stairsAnimationActive;
 
         public bool StartStairsAnimation(Vector3 targetPosition, float duration)
@@ -345,7 +352,11 @@ namespace TGC.MonoGame.TP.Entities
                 FaceTowards(_stairsAnimationTarget);
 
                 if (progress >= 1f)
+                {
+                    Position = _stairsAnimationTarget;
+                    GroundHeight = _stairsAnimationTarget.Y - StandHeight;
                     _stairsAnimationActive = false;
+                }
 
                 if (!_inputManagerIsAvailable()) _previousKeyboardState = keyboardState;
                 _changed = true;
@@ -456,7 +467,7 @@ namespace TGC.MonoGame.TP.Entities
         private void ApplyHeight()
         {
             var targetHeight = State == PlayerState.Walking ? StandHeight : CrouchHeight;
-            var targetY = GroundY + targetHeight;
+            var targetY = GroundHeight + targetHeight;
 
             if (Position.Y != targetY)
             {
