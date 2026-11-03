@@ -32,7 +32,7 @@ internal sealed class MenuBackground
         _level = new Level("menu-inside",
             [new MapJson { filePath = "Content/insideprops.json" }],
             "Content/menuRoute.json");
-        _level.LoadLevelContent(context.Content);
+        _level.LoadLevelContent(context.Content, _graphics);
         _level.Enemy?.SetScale(Vector3.One * 0.25f);
 
         // Jugador falso lejísimos: el fantasma se queda siempre en Roaming

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TGC.MonoGame.TP.PropUtils;
 
-namespace TGC.MonoGame.TP
-{
+namespace TGC.MonoGame.TP{
     internal class GameMesh
     {
         private EffectParameterCache? _paramCache;
@@ -18,17 +18,30 @@ namespace TGC.MonoGame.TP
         };
 
         public Model Model { get; }
-        public Effect Effect { get; set; }
+        public PropMaterial Material { get; }
+        public Effect Effect
+        {
+            get => Material.Effect;
+            set => Material.Effect = value;
+        }
         public Vector3 Position { get; set; }
         public Vector3 Rotation { get; set; }
         public Vector3 Scale { get; set; } = Vector3.One;
-        public Vector3 Color { get; set; }
-        public Texture2D? Texture { get; set; }
+        public Vector3 Color
+        {
+            get => Material.Color;
+            set => Material.Color = value;
+        }
+        public Texture2D? Texture
+        {
+            get => Material.Texture;
+            set => Material.Texture = value;
+        }
 
         public GameMesh(Model model, Effect effect, Vector3 position, Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
         {
             Model = model;
-            Effect = effect;
+            Material = new PropMaterial(effect, color: color ?? Vector3.One);
             Position = position;
             Rotation = rotation ?? Vector3.Zero;
             Scale = scale ?? Vector3.One;
@@ -76,6 +89,7 @@ namespace TGC.MonoGame.TP
 
         public void Draw(Matrix world, Matrix view, Matrix projection)
         {
+            Material.Apply();
             _paramCache ??= EffectParameterCache.Get(Effect);
             _paramCache.View?.SetValue(view);
             _paramCache.Projection?.SetValue(projection);

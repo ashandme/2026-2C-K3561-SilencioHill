@@ -49,7 +49,10 @@ internal sealed class PlayingState : IGameState
         _effect = context.Content.Load<Effect>("Effects/BlinnPhong");
 
         _levelManager = new LevelManager();
-        _levelManager.AddLevel("outside", new Level("outside", [new Map(), new MapJson { filePath = "Content/props.json" }]));
+        _levelManager.AddLevel("outside", new Level("outside", [new Map(), new MapJson { filePath = "Content/props.json" }], skyboxSettings: new SkyboxSettings
+        {
+            TextureAsset = "Textures/gradient_sky-night"
+        }));
         _levelManager.AddLevel("inside", new Level("inside", [new MapJson { filePath = "Content/insideprops.json" }]));
         var center = new Point(_graphics.Viewport.Width / 2, _graphics.Viewport.Height / 2);
         _player = new Player(_graphics.Viewport.AspectRatio, new Vector3(0, 10, 50), center);
@@ -57,7 +60,7 @@ internal sealed class PlayingState : IGameState
         _player.SetInput(_input);
         _player.SetCollisionHandler(_collisionHandler);
 
-        _levelManager.LoadLevel("outside", context.Content);
+        _levelManager.LoadLevel("outside", context.Content, _graphics);
         RefreshCollisions();
         ConfigureEnemyForCurrentLevel();
         PlayLevelAmbience();
@@ -149,7 +152,7 @@ internal sealed class PlayingState : IGameState
 
         try
         {
-            _levelManager.LoadLevel(door.TargetLevel, _context.Content);
+            _levelManager.LoadLevel(door.TargetLevel, _context.Content, _graphics);
             Audio.Play("Door");
             if (door.TeleportPosition != Vector3.Zero)
             {
@@ -224,7 +227,7 @@ internal sealed class PlayingState : IGameState
         try
         {
             var next = _levelManager.CurrentName == "outside" ? "inside" : "outside";
-            _levelManager.LoadLevel(next, _context.Content);
+            _levelManager.LoadLevel(next, _context.Content, _graphics);
             AdjustPlayerHeightForLevel(next);
             ConfigureEnemyForCurrentLevel();
             RefreshCollisions();
@@ -248,7 +251,7 @@ internal sealed class PlayingState : IGameState
     {
         try
         {
-            _levelManager.ReloadCurrent(_context.Content);
+            _levelManager.ReloadCurrent(_context.Content, _graphics);
             ConfigureEnemyForCurrentLevel();
             RefreshCollisions();
         }

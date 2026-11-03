@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP
 {
@@ -30,8 +31,10 @@ namespace TGC.MonoGame.TP
             return effect;
         }
 
-        private static bool TrySetTextureParameter(Effect effect, string paramName, Texture2D texture)
+        private static bool TrySetTextureParameter(Effect effect, string paramName, Texture2D? texture)
         {
+            if (texture == null) return false;
+
             try
             {
                 var param = effect.Parameters[paramName];
@@ -47,6 +50,24 @@ namespace TGC.MonoGame.TP
             }
 
             return false;
+        }
+
+        public static void ApplyBlinnPhongParameters(PropMaterial material)
+        {
+            var effect = material.Effect;
+            TrySetTextureParameter(effect, "ModelTexture", material.Texture);
+            TrySetTextureParameter(effect, "Texture", material.Texture);
+            TrySetTextureParameter(effect, "DiffuseMap", material.Texture);
+            TrySetTextureParameter(effect, "BaseTexture", material.Texture);
+            TrySetVector3Parameter(effect, "Color", material.Color);
+            TrySetVector3Parameter(effect, "DiffuseColor", material.Color);
+            TrySetVector3Parameter(effect, "ambientColor", material.AmbientColor);
+            TrySetVector3Parameter(effect, "diffuseColor", material.DiffuseColor);
+            TrySetVector3Parameter(effect, "specularColor", material.SpecularColor);
+            TrySetFloatParameter(effect, "KAmbient", material.AmbientCoefficient);
+            TrySetFloatParameter(effect, "KDiffuse", material.DiffuseCoefficient);
+            TrySetFloatParameter(effect, "KSpecular", material.SpecularCoefficient);
+            TrySetFloatParameter(effect, "shininess", material.Shininess);
         }
 
         // Prepare a Blinn-Phong style effect: clone, set texture (if provided) and sensible

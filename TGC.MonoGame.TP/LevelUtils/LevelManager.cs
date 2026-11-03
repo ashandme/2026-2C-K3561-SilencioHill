@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP.LevelUtils
@@ -17,7 +18,7 @@ namespace TGC.MonoGame.TP.LevelUtils
             _levels[name] = level;
         }
 
-        public void LoadLevel(string name, ContentManager content)
+        public void LoadLevel(string name, ContentManager content, GraphicsDevice graphics)
         {
             if (string.IsNullOrEmpty(name)) return;
             if (!_levels.TryGetValue(name, out var lvl))
@@ -42,7 +43,7 @@ namespace TGC.MonoGame.TP.LevelUtils
             // Load the new one
             try
             {
-                lvl.LoadLevelContent(content);
+                lvl.LoadLevelContent(content, graphics);
                 _current = lvl;
                 CurrentName = name;
             }
@@ -73,14 +74,14 @@ namespace TGC.MonoGame.TP.LevelUtils
             return _current.GetProps();
         }
 
-        public void ReloadCurrent(ContentManager content)
+        public void ReloadCurrent(ContentManager content, GraphicsDevice graphics)
         {
             if (_current == null || string.IsNullOrEmpty(CurrentName)) return;
             try
             {
                 // unload then reload
                 _current.UnloadContent();
-                _current.LoadLevelContent(content);
+                _current.LoadLevelContent(content, graphics);
             }
             catch (Exception ex)
             {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,18 +17,23 @@ internal class Level
     private readonly Map[] _maps = new Map[0];
     // TODO: REFACTOR make a single class for Entities (props, enemies, etc.) and have a single list of entities instead of separate maps for props and enemies.
     private readonly string _enemyRoute;
+    private readonly SkyboxSettings? _skyboxSettings;
+    private Skybox? _skybox;
     public Enemy Enemy { get; private set; }
+    public Skybox? Skybox => _skybox;
 
     // A simple identifier
     public string Name { get; }
-    public Level(string name, Map[] maps, string enemyRoute = "Content/enemyRoute.json")
+    public Level(string name, Map[] maps, string enemyRoute = "Content/enemyRoute.json", SkyboxSettings? skyboxSettings = null)
     {
         Name = name ?? "unnamed";
         _maps = maps ?? new Map[0];
         _enemyRoute = enemyRoute;
+        _skyboxSettings = skyboxSettings;
     }
-    public void LoadLevelContent(ContentManager content)
+    public void LoadLevelContent(ContentManager content, GraphicsDevice graphics)
     {
+        _skybox = _skyboxSettings == null ? null : new Skybox(_skyboxSettings, graphics, content);
         for (int i = 0; i < _maps.Length; i++)
         {
             try
@@ -50,6 +56,8 @@ internal class Level
         {
             System.Diagnostics.Debug.WriteLine($"Level[{Name}].LoadContent: enemy creation failed: " + ex.Message);
             Enemy = null;
+        _skybox?.Dispose();
+        _skybox = null;
         }
     }
 
@@ -69,6 +77,7 @@ internal class Level
 
     public void Draw(Matrix view, Matrix projection)
     {
+        _skybox?.Draw(view, projection);
         for (int i = 0; i < _maps.Length; i++)
         {
             _maps[i].Draw(view, projection);
