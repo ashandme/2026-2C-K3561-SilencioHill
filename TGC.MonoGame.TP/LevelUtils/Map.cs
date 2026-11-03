@@ -150,12 +150,13 @@ namespace TGC.MonoGame.TP.LevelUtils
             catch { }
         }
 
-        public void Draw(Matrix view, Matrix projection)
+        public void Draw(Matrix view, Matrix projection, BoundingFrustum? frustum = null)
         {
             // iterar sobre cada prop y dibujarlo
             foreach (var prop in _props)
             {
-                prop.Draw(view, projection);
+                if (frustum == null || prop.Colliders.Count == 0 || prop.IsVisible(frustum))
+                    prop.Draw(view, projection);
             }
         }
 

@@ -45,6 +45,8 @@ internal class Prop
 
     public Matrix GetWorldMatrix() => Mesh.GetWorldMatrix();
 
+    public bool IsVisible(BoundingFrustum frustum) => Mesh.IsVisible(frustum);
+
     public bool IntersectsRay(Ray ray, out float distance)
     {
         return Mesh.IntersectsRay(ray, out distance);

@@ -78,9 +78,10 @@ internal class Level
     public void Draw(Matrix view, Matrix projection)
     {
         _skybox?.Draw(view, projection);
+        var frustum = new BoundingFrustum(view * projection);
         for (int i = 0; i < _maps.Length; i++)
         {
-            _maps[i].Draw(view, projection);
+            _maps[i].Draw(view, projection, frustum);
         }
 
         Enemy?.Draw(view, projection);

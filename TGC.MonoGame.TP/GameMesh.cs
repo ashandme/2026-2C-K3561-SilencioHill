@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using TGC.MonoGame.TP.PropUtils;
 
 namespace TGC.MonoGame.TP{
@@ -8,6 +9,8 @@ namespace TGC.MonoGame.TP{
     {
         private EffectParameterCache? _paramCache;
         private readonly Matrix[] _boneTransforms;
+        private readonly BoundingSphere _localBoundingSphere;
+        private static readonly Dictionary<Model, BoundingSphere> BoundingSphereCache = new();
 
         private static readonly Random _random = new Random();
 
@@ -48,6 +51,19 @@ namespace TGC.MonoGame.TP{
             Color = color ?? RandomColor();
             _boneTransforms = new Matrix[Model.Bones.Count];
             Model.CopyAbsoluteBoneTransformsTo(_boneTransforms);
+            if (!BoundingSphereCache.TryGetValue(Model, out _localBoundingSphere))
+            {
+                _localBoundingSphere = TGC.MonoGame.Samples.Collisions.BoundingVolumesExtensions.CreateSphereFrom(Model);
+                BoundingSphereCache[Model] = _localBoundingSphere;
+            }
+        }
+
+        public bool IsVisible(BoundingFrustum frustum)
+        {
+            var world = GetWorldMatrix();
+            var localSphere = _localBoundingSphere;
+            localSphere.Transform(ref world, out var worldSphere);
+            return frustum.Intersects(worldSphere);
         }
 
         private static Vector3 RandomColor()
