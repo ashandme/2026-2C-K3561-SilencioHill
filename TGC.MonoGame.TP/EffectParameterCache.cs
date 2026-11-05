@@ -36,6 +36,15 @@ namespace TGC.MonoGame.TP
         public readonly EffectParameter LightDiffuse0;
         public readonly EffectParameter LightSpecular0;
         public readonly EffectParameter LightPosition0;
+        public readonly EffectParameter LightDirection;
+        public readonly EffectParameter LightIsDirectional;
+        public readonly EffectParameter LightIsSpotlight;
+        public readonly EffectParameter SpotInnerCosine;
+        public readonly EffectParameter SpotOuterCosine;
+        public readonly EffectParameter AttenuationConstant;
+        public readonly EffectParameter AttenuationLinear;
+        public readonly EffectParameter AttenuationQuadratic;
+        public readonly EffectParameter UpwardLightScale;
 
         private EffectParameterCache(Effect effect)
         {
@@ -61,6 +70,15 @@ namespace TGC.MonoGame.TP
             LightDiffuse0 = effect.Parameters["lightDiffuse[0]"];
             LightSpecular0 = effect.Parameters["lightSpecular[0]"];
             LightPosition0 = effect.Parameters["lightPosition[0]"];
+            LightDirection = effect.Parameters["lightDirection"];
+            LightIsDirectional = effect.Parameters["lightIsDirectional"];
+            LightIsSpotlight = effect.Parameters["lightIsSpotlight"];
+            SpotInnerCosine = effect.Parameters["spotInnerCosine"];
+            SpotOuterCosine = effect.Parameters["spotOuterCosine"];
+            AttenuationConstant = effect.Parameters["attenuationConstant"];
+            AttenuationLinear = effect.Parameters["attenuationLinear"];
+            AttenuationQuadratic = effect.Parameters["attenuationQuadratic"];
+            UpwardLightScale = effect.Parameters["upwardLightScale"];
         }
     }
 }

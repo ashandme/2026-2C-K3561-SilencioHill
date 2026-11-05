@@ -127,10 +127,19 @@ namespace TGC.MonoGame.TP{
         {
             var eyePos = SceneLighting.EyePosition;
             Effect.Parameters["eyePosition"]?.SetValue(eyePos);
+            _paramCache?.LightDirection?.SetValue(SceneLighting.LightDirection);
+            _paramCache?.LightIsDirectional?.SetValue(SceneLighting.IsDirectional ? 1f : 0f);
+            _paramCache?.LightIsSpotlight?.SetValue(SceneLighting.IsSpotlight ? 1f : 0f);
+            _paramCache?.SpotInnerCosine?.SetValue(SceneLighting.SpotInnerCosine);
+            _paramCache?.SpotOuterCosine?.SetValue(SceneLighting.SpotOuterCosine);
+            _paramCache?.AttenuationConstant?.SetValue(SceneLighting.Attenuation.X);
+            _paramCache?.AttenuationLinear?.SetValue(SceneLighting.Attenuation.Y);
+            _paramCache?.AttenuationQuadratic?.SetValue(SceneLighting.Attenuation.Z);
+            _paramCache?.UpwardLightScale?.SetValue(SceneLighting.UpwardLightScale);
             var lightColor = SceneLighting.LightColor;
-            Effect.Parameters["ambientColor"]?.SetValue(new Vector3(0.08f) * lightColor);
-            Effect.Parameters["diffuseColor"]?.SetValue(lightColor);
-            Effect.Parameters["specularColor"]?.SetValue(lightColor);
+            Effect.Parameters["ambientColor"]?.SetValue(new Vector3(SceneLighting.AmbientIntensity) * lightColor);
+            Effect.Parameters["diffuseColor"]?.SetValue(lightColor * SceneLighting.DiffuseIntensity);
+            Effect.Parameters["specularColor"]?.SetValue(lightColor * SceneLighting.DiffuseIntensity);
             Effect.Parameters["KAmbient"]?.SetValue(1f);
             Effect.Parameters["KDiffuse"]?.SetValue(1f);
             Effect.Parameters["KSpecular"]?.SetValue(0.35f);
@@ -152,6 +161,15 @@ namespace TGC.MonoGame.TP{
                 Effect.Parameters["lightPosition"]?.SetValue(SceneLighting.FlashlightEnabled
                     ? SceneLighting.LightPosition
                     : eyePos + new Vector3(0, 50f, 50f));
+                Effect.Parameters["lightDirection"]?.SetValue(SceneLighting.LightDirection);
+                Effect.Parameters["lightIsDirectional"]?.SetValue(SceneLighting.IsDirectional ? 1f : 0f);
+                Effect.Parameters["lightIsSpotlight"]?.SetValue(SceneLighting.IsSpotlight ? 1f : 0f);
+                Effect.Parameters["spotInnerCosine"]?.SetValue(SceneLighting.SpotInnerCosine);
+                Effect.Parameters["spotOuterCosine"]?.SetValue(SceneLighting.SpotOuterCosine);
+                Effect.Parameters["attenuationConstant"]?.SetValue(SceneLighting.Attenuation.X);
+                Effect.Parameters["attenuationLinear"]?.SetValue(SceneLighting.Attenuation.Y);
+                Effect.Parameters["attenuationQuadratic"]?.SetValue(SceneLighting.Attenuation.Z);
+                Effect.Parameters["upwardLightScale"]?.SetValue(SceneLighting.UpwardLightScale);
             }
         }
 

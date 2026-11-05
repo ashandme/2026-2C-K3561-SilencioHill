@@ -112,14 +112,39 @@ internal sealed class PlayingState : IGameState
         else _spectator.Update(gameTime);
 
         var current = _player.CurrentItem;
+        SceneLighting.FlashlightEnabled = false;
+        SceneLighting.IsDirectional = false;
+        SceneLighting.IsSpotlight = false;
+        SceneLighting.SpotInnerCosine = 0.94f;
+        SceneLighting.SpotOuterCosine = 0.82f;
+        SceneLighting.Attenuation = new Vector3(1f, 0.002f, 0.00002f);
+        SceneLighting.LightColor = Vector3.One;
+        bool isInside = _levelManager.CurrentName?.Equals("inside", StringComparison.OrdinalIgnoreCase) == true;
+        SceneLighting.AmbientIntensity = isInside ? 0.24f : 0.08f;
+        SceneLighting.DiffuseIntensity = isInside ? 0.58f : 1f;
+        SceneLighting.UpwardLightScale = isInside ? 0.35f : 1f;
+        SceneLighting.LightPosition = _player.CameraPosition + new Vector3(0f, 50f, 50f);
+        SceneLighting.LightDirection = _player.FrontDirection;
+
         if (current is FlashlightItem light && light.IsOn && light.AttachToCamera)
         {
             SceneLighting.FlashlightEnabled = true;
-            SceneLighting.LightPosition = _player.Position + _player.FrontDirection * 4f;
-            _effect.Parameters["lightPosition"].SetValue(SceneLighting.LightPosition);
-            _effect.Parameters["eyePosition"].SetValue(_player.Position);
+            SceneLighting.IsSpotlight = true;
+            SceneLighting.SpotInnerCosine = 0.98f;
+            SceneLighting.SpotOuterCosine = 0.88f;
+            SceneLighting.LightPosition = _player.CameraPosition;
+            // This is the direction the flashlight rays travel from the camera.
+            SceneLighting.LightDirection = _player.FrontDirection;
         }
-        else SceneLighting.FlashlightEnabled = false;
+        else if (current is CandleItem candle && candle.IsLit)
+        {
+            SceneLighting.FlashlightEnabled = true;
+            SceneLighting.LightPosition = _player.CameraPosition
+                + _player.RightDirection * candle.CameraLocalOffset.X
+                + _player.UpDirection * candle.CameraLocalOffset.Y
+                + _player.FrontDirection * candle.CameraLocalOffset.Z;
+            SceneLighting.LightColor = new Vector3(1f, 0.65f, 0.12f);
+        }
 
         _enemy?.Update(gameTime, _player);
         if (_player.State == PlayerState.Caught && !_caughtOverlayShown)

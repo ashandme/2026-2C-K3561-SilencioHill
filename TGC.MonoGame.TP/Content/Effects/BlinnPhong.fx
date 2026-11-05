@@ -19,6 +19,15 @@ float KDiffuse;
 float KSpecular;
 float shininess;
 float3 lightPosition;
+float3 lightDirection; // Direction from a surface toward a directional light
+float lightIsDirectional;
+float lightIsSpotlight;
+float spotInnerCosine;
+float spotOuterCosine;
+float attenuationConstant;
+float attenuationLinear;
+float attenuationQuadratic;
+float upwardLightScale;
 float3 eyePosition; // Camera position
 
 texture baseTexture;
@@ -61,20 +70,48 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 float4 MainPS(VertexShaderOutput input) : COLOR
 {
     // Base vectors
-    float3 lightDirection = normalize(lightPosition - input.WorldPosition.xyz);
+    float3 normal = normalize(input.Normal.xyz);
+    float3 toLight = lightPosition - input.WorldPosition.xyz;
+    float lightDistance = length(toLight);
+    float3 surfaceToLight = lightIsDirectional > 0.5
+        ? normalize(lightDirection)
+        : normalize(toLight);
+    float lightFactor = 1.0;
+
+    if (lightIsDirectional <= 0.5)
+    {
+        lightFactor = 1.0 / max(
+            attenuationConstant
+                + attenuationLinear * lightDistance
+                + attenuationQuadratic * lightDistance * lightDistance,
+            0.001);
+
+        if (lightIsSpotlight > 0.5)
+        {
+            float3 lightToSurface = -surfaceToLight;
+            float spotCosine = dot(lightToSurface, normalize(lightDirection));
+            float spotFactor = saturate(
+                (spotCosine - spotOuterCosine)
+                / max(spotInnerCosine - spotOuterCosine, 0.001));
+            lightFactor *= spotFactor;
+        }
+    }
+
     float3 viewDirection = normalize(eyePosition - input.WorldPosition.xyz);
-    float3 halfVector = normalize(lightDirection + viewDirection);
+    float3 halfVector = normalize(surfaceToLight + viewDirection);
 
 	// Get the texture texel
     float4 texelColor = tex2D(textureSampler, input.TextureCoordinates);
 
 	// Calculate the diffuse light
-    float NdotL = saturate(dot(input.Normal.xyz, lightDirection));
-    float3 diffuseLight = KDiffuse * diffuseColor * NdotL;
+    float NdotL = saturate(dot(normal, surfaceToLight));
+    float upwardFactor = lerp(1.0, upwardLightScale, saturate(normal.y));
+    float3 diffuseLight = KDiffuse * diffuseColor * NdotL * lightFactor * upwardFactor;
 
 	// Calculate the specular light
-    float NdotH = dot(input.Normal.xyz, halfVector);
-    float3 specularLight = sign(NdotL) * KSpecular * specularColor * pow(saturate(NdotH), shininess);
+    float NdotH = dot(normal, halfVector);
+    float3 specularLight = sign(NdotL) * KSpecular * specularColor
+        * pow(saturate(NdotH), shininess) * lightFactor * upwardFactor;
 
     // Final calculation
     float4 finalColor = float4(saturate(ambientColor * KAmbient + diffuseLight) * texelColor.rgb + specularLight, 1.0);
