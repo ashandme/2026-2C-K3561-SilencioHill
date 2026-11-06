@@ -30,6 +30,7 @@ internal sealed class PlayingState : IGameState
     private readonly RenderTarget2D _sceneRenderTarget;
     private readonly HudRenderer _hud;
     private readonly InteractionManager _interactionManager;
+    private float _flashAlpha;
     private readonly Texture2D _crosshairPixel;
     private Enemy _enemy;
     private bool _playerMode = true;
@@ -67,14 +68,18 @@ internal sealed class PlayingState : IGameState
 
         var candle = context.Content.Load<Model>("Models/Assets/Candle");
         var flashlight = context.Content.Load<Model>("Models/Assets/Linterna");
+        var cameraModel = context.Content.Load<Model>("Models/Assets/camera");
+        
         Texture2D texture = null;
         Effect textureEffect = null;
         try { texture = context.Content.Load<Texture2D>("Textures/FlashlightTexture"); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
         try { textureEffect = context.Content.Load<Effect>("Effects/BasicTexture"); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
         _player.PickupItem(new FlashlightItem(flashlight, texture, textureEffect));
-        _player.PickupItem(new CandleItem(candle, texture, textureEffect));
+        _player.PickupItem(new CandleItem(candle, texture, textureEffect)); 
         _player.LoadHorrorOverlay(context.Content.Load<Texture2D>("Textures/overlay"), context.Content.Load<Effect>("Effects/TextureMerge"));
-
+        var cameraItem = new CameraItem(cameraModel, texture, textureEffect); 
+        _player.PickupItem(cameraItem);
+        cameraItem.Flash += () => _flashAlpha = 1f;
         _fullScreenQuad = new FullScreenQuad(_graphics);
         _sceneRenderTarget = new RenderTarget2D(_graphics, _graphics.Viewport.Width, _graphics.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
         _hud = new HudRenderer(context.SpriteBatch, context.Font, _graphics);
@@ -156,6 +161,7 @@ internal sealed class PlayingState : IGameState
             return;
         }
         _hud.Update(gameTime);
+        _flashAlpha = MathF.Max(0f, _flashAlpha - (float)gameTime.ElapsedGameTime.TotalSeconds * 2f);
         _interactionManager.UpdateCandidates(_player.Position, _levelManager.Current);
         if (_playerMode)
         {
@@ -214,6 +220,12 @@ internal sealed class PlayingState : IGameState
         _graphics.DepthStencilState = DepthStencilState.Default;
         _hud.UpdateState(_player, _interactionManager);
         _hud.Draw();
+        if (_flashAlpha > 0f)
+        {
+            _context.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            _context.SpriteBatch.Draw(_crosshairPixel, _graphics.Viewport.Bounds, Color.White * _flashAlpha);
+            _context.SpriteBatch.End();
+        }
         if (_playerMode)
             _player.DrawCenterDot(_context.SpriteBatch, _crosshairPixel);
     }

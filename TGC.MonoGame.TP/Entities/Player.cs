@@ -54,7 +54,7 @@ namespace TGC.MonoGame.TP.Entities
         private KeyboardState _previousKeyboardState;
 
         // Inventory: hasta 2 items
-        private readonly Item[] _inventory = new Item[2];
+        private readonly Item[] _inventory = new Item[3];
 
         // Index del item actualmente en mano (-1 = ninguno)
         private int _currentItemIndex = -1;
@@ -203,7 +203,7 @@ namespace TGC.MonoGame.TP.Entities
 
         public void CycleItem()
         {
-            if (_inventory[0] == null && _inventory[1] == null) return;
+            if (Array.TrueForAll(_inventory, i => i == null)) return;
 
             if (_currentItemIndex == -1)
             {
@@ -455,6 +455,11 @@ namespace TGC.MonoGame.TP.Entities
             if (IsPressed(Keys.D2))
             {
                 EquipIndex(1);
+            }
+
+            if (IsPressed(Keys.D3))
+            {
+                EquipIndex(2);
             }
 
             if (!useInputManager)
