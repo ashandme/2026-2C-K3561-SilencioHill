@@ -11,7 +11,9 @@ namespace TGC.MonoGame.TP.LevelUtils
     internal class Map
     {
         // Expose props for external systems (e.g., interaction raycasts)
-        public IReadOnlyList<Prop> GetProps() => _props.AsReadOnly();
+        public IReadOnlyList<Prop> GetProps() => _props;
+
+        public IEnumerable<Prop> EnumerateProps() => _props;
 
         // Remove a prop from the map (e.g., when picked up)
         public bool RemoveProp(Prop prop)
@@ -155,7 +157,7 @@ namespace TGC.MonoGame.TP.LevelUtils
             // iterar sobre cada prop y dibujarlo
             foreach (var prop in _props)
             {
-                if (frustum == null || prop.Colliders.Count == 0 || prop.IsVisible(frustum))
+                if (frustum == null || prop.AlwaysVisible || prop.Colliders.Count == 0 || prop.IsVisible(frustum))
                     prop.Draw(view, projection);
             }
         }

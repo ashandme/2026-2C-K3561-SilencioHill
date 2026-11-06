@@ -32,6 +32,17 @@ internal class Prop
         get => Mesh.Color;
         set => Mesh.Color = value;
     }
+    public bool AlwaysVisible { get; set; }
+    public Vector2 TextureScale
+    {
+        get => Mesh.TextureScale;
+        set => Mesh.TextureScale = value;
+    }
+    public TextureAddressMode TextureAddressMode
+    {
+        get => Mesh.TextureAddressMode;
+        set => Mesh.TextureAddressMode = value;
+    }
     public Texture2D? Texture
     {
         get => Mesh.Texture;

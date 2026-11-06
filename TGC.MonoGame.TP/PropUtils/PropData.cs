@@ -13,6 +13,7 @@ public class MapData
 
 public class PropData
 {
+    public string Name { get; set; } = string.Empty;
     public string ModelPath { get; set; } = string.Empty;
     public string EffectPath { get; set; } = string.Empty;
     // Optional texture path for the prop (e.g., tree billboard texture)
@@ -21,6 +22,9 @@ public class PropData
     public float[]? Rotation { get; set; }
     public float[]? Scale { get; set; }
     public float[]? Color { get; set; }
+    public float[]? TextureScale { get; set; }
+    public string TextureAddressMode { get; set; } = "Wrap";
+    public bool AlwaysVisible { get; set; }
     public List<CollisionShapeData> Collisions { get; set; } = new();
     public string InteractiveType { get; set; } = string.Empty;
     public string Id { get; set; } = string.Empty;
@@ -29,6 +33,37 @@ public class PropData
     public float[]? TeleportRotation { get; set; }
     public float[]? TargetPosition { get; set; }
     public float AnimationDuration { get; set; } = 1f;
+
+    [JsonIgnore]
+    public Vector2 TextureScaleVector => TextureScale is { Length: >= 2 }
+        ? new Vector2(TextureScale[0], TextureScale[1])
+        : Vector2.One;
+
+    public PropData CreateInstance(PropData instance)
+    {
+        return new PropData
+        {
+            Name = Name,
+            ModelPath = ModelPath,
+            EffectPath = EffectPath,
+            TexturePath = TexturePath,
+            Position = instance.Position,
+            Rotation = instance.Rotation,
+            Scale = instance.Scale,
+            Color = Color,
+            TextureScale = TextureScale,
+            TextureAddressMode = TextureAddressMode,
+            AlwaysVisible = AlwaysVisible,
+            Collisions = Collisions,
+            InteractiveType = InteractiveType,
+            Id = Id,
+            TargetLevel = TargetLevel,
+            TeleportPosition = TeleportPosition,
+            TeleportRotation = TeleportRotation,
+            TargetPosition = TargetPosition,
+            AnimationDuration = AnimationDuration
+        };
+    }
 
     // Propiedades calculadas (ignoradas por el parser JSON)
     [JsonIgnore]

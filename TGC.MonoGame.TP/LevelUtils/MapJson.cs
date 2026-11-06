@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Xna.Framework;
@@ -27,11 +28,19 @@ namespace TGC.MonoGame.TP.LevelUtils
             var jsonText = File.ReadAllText(fullPath);
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var mapData = JsonSerializer.Deserialize<MapData>(jsonText, options);
+            var definitions = LoadPropDefinitions(options);
 
             if (mapData?.Props == null) return;
 
-            foreach (var item in mapData.Props)
+            foreach (var mapInstance in mapData.Props)
             {
+                if (!definitions.TryGetValue(mapInstance.Name, out var definition))
+                {
+                    throw new InvalidDataException(
+                        $"Map '{filePath}' references unknown prop definition '{mapInstance.Name}'.");
+                }
+
+                var item = definition.CreateInstance(mapInstance);
                 if (!_loadedModels.TryGetValue(item.ModelPath, out var model))
                 {
                     model = content.Load<Model>(item.ModelPath);
@@ -96,6 +105,8 @@ namespace TGC.MonoGame.TP.LevelUtils
                     ? new DoorProp(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "door" : item.Id)
                     : item.InteractiveType.Equals("stairs", StringComparison.OrdinalIgnoreCase)
                         ? new Stairs(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "stairs" : item.Id, item.TargetPositionVector)
+                    : item.InteractiveType.Equals("hiding", StringComparison.OrdinalIgnoreCase)
+                        ? new HidingSpotProp(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "hiding" : item.Id)
                     : new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);
@@ -115,10 +126,41 @@ namespace TGC.MonoGame.TP.LevelUtils
                     stairs.Color = color;
                     stairs.AnimationDuration = item.AnimationDuration;
                 }
+                p.AlwaysVisible = item.AlwaysVisible;
+                p.TextureScale = item.TextureScaleVector;
+                p.TextureAddressMode = ParseTextureAddressMode(item.TextureAddressMode);
                 if (texture != null) p.Texture = texture;
                 AddCollisions(p, item);
                 _props.Add(p);
             }
+        }
+
+        private static TextureAddressMode ParseTextureAddressMode(string mode) =>
+            Enum.TryParse<TextureAddressMode>(mode, true, out var addressMode)
+                ? addressMode
+                : TextureAddressMode.Wrap;
+
+        private static Dictionary<string, PropData> LoadPropDefinitions(JsonSerializerOptions options)
+        {
+            var definitionsPath = Path.Combine(AppContext.BaseDirectory, "Content", "props.json");
+            if (!File.Exists(definitionsPath))
+                throw new FileNotFoundException($"Prop definitions file was not found: {definitionsPath}");
+
+            var definitionsData = JsonSerializer.Deserialize<MapData>(
+                File.ReadAllText(definitionsPath), options);
+            if (definitionsData?.Props == null)
+                throw new InvalidDataException("Prop definitions file does not contain any props.");
+
+            var definitions = new Dictionary<string, PropData>(StringComparer.OrdinalIgnoreCase);
+            foreach (var definition in definitionsData.Props)
+            {
+                if (string.IsNullOrWhiteSpace(definition.Name))
+                    throw new InvalidDataException("Every prop definition must have a name.");
+                if (!definitions.TryAdd(definition.Name, definition))
+                    throw new InvalidDataException($"Duplicate prop definition name '{definition.Name}'.");
+            }
+
+            return definitions;
         }
 
         private static Vector3 DegreesToRadians(Vector3 degrees) =>

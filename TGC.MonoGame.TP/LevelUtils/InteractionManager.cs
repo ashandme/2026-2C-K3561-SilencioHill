@@ -21,7 +21,7 @@ namespace TGC.MonoGame.TP.LevelUtils
             _candidates.Clear();
             if (level == null) { _selected = null; return; }
 
-            foreach (var prop in level.GetProps())
+            foreach (var prop in level.EnumerateProps())
             {
                 if (prop is InteractiveProp interactive &&
                     Vector3.Distance(playerPosition, interactive.Position) <= MaxInteractDistance)
@@ -55,7 +55,7 @@ namespace TGC.MonoGame.TP.LevelUtils
             if (_selected == null || player == null) return false;
 
             var consumed = _selected.OnInteract(player);
-            if (consumed)
+            if (consumed && _selected.RemoveAfterInteraction)
             {
                 level?.RemoveProp(_selected);
                 _candidates.Remove(_selected);

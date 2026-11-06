@@ -29,6 +29,7 @@ float attenuationLinear;
 float attenuationQuadratic;
 float upwardLightScale;
 float3 eyePosition; // Camera position
+float2 TextureScale;
 
 texture baseTexture;
 sampler2D textureSampler = sampler_state
@@ -36,8 +37,6 @@ sampler2D textureSampler = sampler_state
     Texture = (baseTexture);
     MagFilter = Linear;
     MinFilter = Linear;
-    AddressU = Clamp;
-    AddressV = Clamp;
 };
 
 struct VertexShaderInput
@@ -62,7 +61,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
     output.Position = mul(input.Position, WorldViewProjection);
     output.WorldPosition = mul(input.Position, World);
     output.Normal = mul(input.Normal, InverseTransposeWorld);
-    output.TextureCoordinates = input.TextureCoordinates;
+    output.TextureCoordinates = input.TextureCoordinates * TextureScale;
 
     return output;
 }

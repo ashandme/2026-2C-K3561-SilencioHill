@@ -45,15 +45,19 @@ internal sealed class PlayingState : IGameState
         _debugEnabled = debugEnabled;
         _graphics = context.GraphicsDevice;
         _input = context.Input;
-        _projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, _graphics.Viewport.AspectRatio, 1, 2000);
+        _projection = Matrix.CreatePerspectiveFieldOfView(
+            MathHelper.PiOver4,
+            _graphics.Viewport.AspectRatio,
+            Camera.DefaultNearPlaneDistance,
+            2000f);
         _effect = context.Content.Load<Effect>("Effects/BlinnPhong");
 
         _levelManager = new LevelManager();
-        _levelManager.AddLevel("outside", new Level("outside", [new Map(), new MapJson { filePath = "Content/props.json" }], skyboxSettings: new SkyboxSettings
+        _levelManager.AddLevel("outside", new Level("outside", [new Map(), new MapJson { filePath = "Content/outsidemap.json" }], skyboxSettings: new SkyboxSettings
         {
             TextureAsset = "Textures/gradient_sky-night"
         }));
-        _levelManager.AddLevel("inside", new Level("inside", [new MapJson { filePath = "Content/insideprops.json" }]));
+        _levelManager.AddLevel("inside", new Level("inside", [new MapJson { filePath = "Content/insidemap.json" }]));
         var center = new Point(_graphics.Viewport.Width / 2, _graphics.Viewport.Height / 2);
         _player = new Player(_graphics.Viewport.AspectRatio, new Vector3(0, 10, 50), center);
         _spectator = new FreeCamera(_graphics.Viewport.AspectRatio, new Vector3(0, 50, 150), center);
@@ -118,7 +122,7 @@ internal sealed class PlayingState : IGameState
         SceneLighting.SpotInnerCosine = 0.94f;
         SceneLighting.SpotOuterCosine = 0.82f;
         SceneLighting.Attenuation = new Vector3(1f, 0.002f, 0.00002f);
-        SceneLighting.LightColor = Vector3.One;
+        SceneLighting.LightColor = Vector3.Zero;
         bool isInside = _levelManager.CurrentName?.Equals("inside", StringComparison.OrdinalIgnoreCase) == true;
         SceneLighting.AmbientIntensity = isInside ? 0.24f : 0.08f;
         SceneLighting.DiffuseIntensity = isInside ? 0.58f : 1f;
@@ -130,6 +134,7 @@ internal sealed class PlayingState : IGameState
         {
             SceneLighting.FlashlightEnabled = true;
             SceneLighting.IsSpotlight = true;
+            SceneLighting.LightColor = Vector3.One;
             SceneLighting.SpotInnerCosine = 0.98f;
             SceneLighting.SpotOuterCosine = 0.88f;
             SceneLighting.LightPosition = _player.CameraPosition;
@@ -293,7 +298,12 @@ internal sealed class PlayingState : IGameState
     internal void RefreshCollisions()
     {
         var colliders = new List<CollisionShape>();
-        foreach (var prop in _levelManager.Current?.GetProps() ?? Array.Empty<PropUtils.Prop>()) colliders.AddRange(prop.Colliders);
+        var currentLevel = _levelManager.Current;
+        if (currentLevel != null)
+        {
+            foreach (var prop in currentLevel.EnumerateProps())
+                colliders.AddRange(prop.Colliders);
+        }
         _collisionHandler.Rebuild(colliders);
     }
 }

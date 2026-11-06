@@ -8,6 +8,7 @@ namespace TGC.MonoGame.TP.PropUtils
     {
         public string Id { get; }
         public virtual int Priority => 0;
+        public virtual bool RemoveAfterInteraction => true;
 
         public InteractiveProp(Model model, Effect effect, Vector3 position, string id, Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
             : base(model, effect, position, rotation, scale, color)
@@ -85,6 +86,7 @@ namespace TGC.MonoGame.TP.PropUtils
         }
 
         public override int Priority => 8;
+        public override bool RemoveAfterInteraction => false;
 
         public override bool OnInteract(Player player)
         {

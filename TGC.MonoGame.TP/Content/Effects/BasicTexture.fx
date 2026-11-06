@@ -11,6 +11,7 @@
 float4x4 World;
 float4x4 View;
 float4x4 Projection;
+float2 TextureScale;
 
 struct VertexShaderInput
 {
@@ -30,8 +31,6 @@ sampler2D textureSampler = sampler_state
     Texture = (ModelTexture);
     MagFilter = Point;
     MinFilter = Linear;
-    AddressU = Wrap;
-    AddressV = Wrap;
 };
 
 VertexShaderOutput MainVS(in VertexShaderInput input)
@@ -45,7 +44,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
     output.Position = mul(viewPosition, Projection);
 
 	// Propagate texture coordinates
-    output.TextureCoordinate = input.TextureCoordinate;
+    output.TextureCoordinate = input.TextureCoordinate * TextureScale;
 
     return output;
 }

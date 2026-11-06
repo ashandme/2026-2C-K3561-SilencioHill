@@ -55,8 +55,6 @@ internal class Level
         {
             System.Diagnostics.Debug.WriteLine($"Level[{Name}].LoadContent: enemy creation failed: " + ex.Message);
             Enemy = null;
-        _skybox?.Dispose();
-        _skybox = null;
         }
     }
 
@@ -72,6 +70,8 @@ internal class Level
         }
         catch { }
         Enemy = null;
+        _skybox?.Dispose();
+        _skybox = null;
     }
 
     public void Draw(Matrix view, Matrix projection)
@@ -89,11 +89,17 @@ internal class Level
     public IReadOnlyList<Prop> GetProps()
     {
         List<Prop> allProps = new List<Prop>();
+        allProps.AddRange(EnumerateProps());
+        return allProps;
+    }
+
+    public IEnumerable<Prop> EnumerateProps()
+    {
         for (int i = 0; i < _maps.Length; i++)
         {
-            allProps.AddRange(_maps[i].GetProps());
+            foreach (var prop in _maps[i].EnumerateProps())
+                yield return prop;
         }
-        return allProps;
     }
 
     public bool RemoveProp(Prop prop)

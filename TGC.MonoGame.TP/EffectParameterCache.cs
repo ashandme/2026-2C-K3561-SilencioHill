@@ -25,6 +25,7 @@ namespace TGC.MonoGame.TP
         public readonly EffectParameter Texture;
         public readonly EffectParameter DiffuseMap;
         public readonly EffectParameter BaseTexture;
+        public readonly EffectParameter TextureScale;
 
         public readonly EffectParameter DiffuseColor;
 
@@ -60,6 +61,7 @@ namespace TGC.MonoGame.TP
             Texture = effect.Parameters["Texture"];
             DiffuseMap = effect.Parameters["DiffuseMap"];
             BaseTexture = effect.Parameters["baseTexture"];
+            TextureScale = effect.Parameters["TextureScale"];
 
             DiffuseColor = effect.Parameters["DiffuseColor"];
 

@@ -10,6 +10,7 @@ namespace TGC.MonoGame.TP{
         private EffectParameterCache? _paramCache;
         private readonly Matrix[] _boneTransforms;
         private readonly BoundingSphere _localBoundingSphere;
+        private const float FrustumCullingSphereScale = 1.25f;
         private static readonly Dictionary<Model, BoundingSphere> BoundingSphereCache = new();
 
         private static readonly Random _random = new Random();
@@ -40,6 +41,20 @@ namespace TGC.MonoGame.TP{
             get => Material.Texture;
             set => Material.Texture = value;
         }
+        public Vector2 TextureScale
+        {
+            get => Material.TextureScale;
+            set => Material.TextureScale = value;
+        }
+        public TextureAddressMode TextureAddressMode
+        {
+            get => Material.TextureAddressMode;
+            set => Material.TextureAddressMode = value;
+        }
+
+        private static readonly SamplerState WrapSamplerState = new() { AddressU = TextureAddressMode.Wrap, AddressV = TextureAddressMode.Wrap };
+        private static readonly SamplerState ClampSamplerState = new() { AddressU = TextureAddressMode.Clamp, AddressV = TextureAddressMode.Clamp };
+        private static readonly SamplerState MirrorSamplerState = new() { AddressU = TextureAddressMode.Mirror, AddressV = TextureAddressMode.Mirror };
 
         public GameMesh(Model model, Effect effect, Vector3 position, Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
         {
@@ -63,6 +78,7 @@ namespace TGC.MonoGame.TP{
             var world = GetWorldMatrix();
             var localSphere = _localBoundingSphere;
             localSphere.Transform(ref world, out var worldSphere);
+            worldSphere.Radius *= FrustumCullingSphereScale;
             return frustum.Intersects(worldSphere);
         }
 
@@ -110,6 +126,7 @@ namespace TGC.MonoGame.TP{
             _paramCache.View?.SetValue(view);
             _paramCache.Projection?.SetValue(projection);
             _paramCache.DiffuseColor?.SetValue(Color);
+            _paramCache.TextureScale?.SetValue(TextureScale);
 
             if (Texture != null)
             {
@@ -120,7 +137,20 @@ namespace TGC.MonoGame.TP{
             }
 
             SetLightingParameters();
+            SetTextureSamplerState();
             DrawMeshes(world, view, projection);
+        }
+
+        private void SetTextureSamplerState()
+        {
+            var samplerState = TextureAddressMode switch
+            {
+                TextureAddressMode.Clamp => ClampSamplerState,
+                TextureAddressMode.Mirror => MirrorSamplerState,
+                _ => WrapSamplerState
+            };
+
+            Effect.GraphicsDevice.SamplerStates[0] = samplerState;
         }
 
         private void SetLightingParameters()

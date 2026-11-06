@@ -8,6 +8,8 @@ internal sealed class PropMaterial
 {
     public Effect Effect { get; set; }
     public Texture2D? Texture { get; set; }
+    public Vector2 TextureScale { get; set; } = Vector2.One;
+    public TextureAddressMode TextureAddressMode { get; set; } = TextureAddressMode.Wrap;
     public Vector3 Color { get; set; } = Vector3.One;
     public Vector3 AmbientColor { get; set; } = new(0.2f, 0.2f, 0.2f);
     public Vector3 DiffuseColor { get; set; } = new(0.7f, 0.7f, 0.7f);

@@ -1,143 +1,1130 @@
 {
-  "Props": [
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/metal",
-      "Position": [ 10.0, 0.0, 435.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 2.0, 2.0, 2.0 ],
-      "Color": [ 1.0, 0.65, 0.2 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -30.0, 0.0, -25.4 ], "Max": [ 30.0, 54.5, 20.0 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/treeA",
-      "Position": [ 15.0, 0.0, 1000.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 0.0, 1.0, 0.0 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -6.0, 0.0, -6.0 ], "Max": [ 6.0, 40.0, 6.0 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/planks",
-        "EffectPath": "Effects/BasicTexture",
-        "TexturePath": "Textures/planks",
-      "Position": [ 545.0, 0.0, 1300.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 1.0, 0.0, 0.0 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -56.5, 0.0, -28.5 ], "Max": [ 56.5, 20.0, 28.5 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/pallet",
-        "EffectPath": "Effects/BasicTexture",
-        "TexturePath": "Textures/planks",
-      "Position": [ 445.0, 0.0, 1300.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 1.0, 0.0, 0.0 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -50.0, 0.0, -50.0 ], "Max": [ 50.0, 20.0, 50.0 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-large",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/treeA",
-      "Position": [ 400.0, 0.0, 1000.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 1.0, 1.0, 1.0 ],
-      "Color": [ 0.0, 1.0, 0.0 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -8.0, 0.0, -8.0 ], "Max": [ 8.0, 170.0, 8.0 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/wall-a",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/wall",
-      "Position": [ 200.0, 0.0, 300.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 2.0, 3.0, 1.0 ],
-      "Color": [ 1.0, 0.0, 0.0 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -50.0, 0.0, -50.0 ], "Max": [ 50.0, 100.0, 50.0 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/wall_lines",
-      "Position": [ 750.0, 0.0, 750.0 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 9, 11, 9 ],
-      "Color": [ 0.5, 0.5, 0.55 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -25.0, 0.0, -25.0 ], "Max": [ 25.0, 50.0, 25.0 ] } ]
-    },
-    {
-        "ModelPath": "Models/kenney_retro-urban-kit/wall-a-door",
-        "EffectPath": "Effects/BasicTexture",
-        "TexturePath": "Textures/door",
-        "Position": [ 520.0, 0.0, 750.0 ],
-        "Rotation": [ 0.0, 90.0, 0.0 ],
-        "Scale": [ 1, 1, 0.2 ],
-        "Color": [ 0.6, 0.4, 0.1 ],
-        "InteractiveType": "door",
-        "Id": "outside_door",
-        "TargetLevel": "inside",
-        "TeleportPosition": [ 150.0, 10.0, -280.0 ],
-        "TeleportRotation": [ 0.0, 180.0, 0.0 ],
-        "Collisions": [
-            {
-                "Type": "aabb",
-                "Min": [ -50.0, 0.0, -50.0 ],
-                "Max": [ 50.0, 100.0, 50.0 ]
-            }
-        ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/roof",
-      "Position": [ 750.0, 500, 750.0 ],
-      "Rotation": [ 0.0, 0, 0.0 ],
-      "Scale": [ 6, 4, 6 ],
-      "Color": [ 0.35, 0.2, 0.2 ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/wall",
-      "Position": [ 750.0, 0.0, 350 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 5.0, 4, 9 ],
-      "Color": [ 0.5, 0.6, 0.5 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -25.0, 0.0, -25.0 ], "Max": [ 25.0, 50.0, 25.0 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",
-        "EffectPath": "Effects/BasicTexture",
-        "TexturePath": "Textures/roof",
-      "Position": [ 750.0, 200, 350 ],
-      "Rotation": [ 0.0, 270, 0.0 ],
-      "Scale": [ 5, 3, 3 ],
-      "Color": [ 0.35, 0.2, 0.2 ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-        "EffectPath": "Effects/BasicTexture",
-        "TexturePath": "Textures/wall",
-      "Position": [ 750.0, 0.0, 1150 ],
-      "Rotation": [ 0.0, 0.0, 0.0 ],
-      "Scale": [ 5.0, 4, 9 ],
-      "Color": [ 0.5, 0.6, 0.5 ],
-      "Collisions": [ { "Type": "aabb", "Min": [ -25.0, 0.0, -25.0 ], "Max": [ 25.0, 50.0, 25.0 ] } ]
-    },
-    {
-      "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",
-      "EffectPath": "Effects/BasicTexture",
-      "TexturePath": "Textures/roof",
-      "Position": [ 750.0, 200, 1150 ],
-      "Rotation": [ 0.0, 90, 0.0 ],
-      "Scale": [ 5, 3, 3 ],
-      "Color": [ 0.35, 0.2, 0.2 ]
-    }
-  ]
+    "Props": [
+        {
+            "Name": "inside_01",
+            "ModelPath": "Models/Assets/Inside",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/tiles",
+            "Color": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "AlwaysVisible": true,
+            "Collisions": [
+                {
+                    "Type": "plane",
+                    "Point": [
+                        2900,
+                        0.0,
+                        -2900.0
+                    ],
+                    "Normal": [
+                        1.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "Type": "plane",
+                    "Point": [
+                        2900,
+                        0.0,
+                        -2900.0
+                    ],
+                    "Normal": [
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
+                },
+                {
+                    "Type": "plane",
+                    "Point": [
+                        -2900,
+                        0.0,
+                        7900.0
+                    ],
+                    "Normal": [
+                        1.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "Type": "plane",
+                    "Point": [
+                        -2900,
+                        0.0,
+                        7900.0
+                    ],
+                    "Normal": [
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -900,
+                        0.0,
+                        100
+                    ],
+                    "Max": [
+                        -2900,
+                        1000.0,
+                        -100
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -100,
+                        0.0,
+                        100
+                    ],
+                    "Max": [
+                        2900,
+                        1000.0,
+                        -100
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        1100,
+                        0.0,
+                        2900
+                    ],
+                    "Max": [
+                        -2900,
+                        1000.0,
+                        3100
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        1900,
+                        0.0,
+                        2900
+                    ],
+                    "Max": [
+                        2900,
+                        1000.0,
+                        3100
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        100,
+                        0.0,
+                        5900
+                    ],
+                    "Max": [
+                        -2900,
+                        2000.0,
+                        7900.0
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -1100,
+                        0.0,
+                        3400
+                    ],
+                    "Max": [
+                        -900,
+                        1000.0,
+                        3100
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -1100,
+                        0.0,
+                        3600
+                    ],
+                    "Max": [
+                        -900,
+                        1000.0,
+                        5900
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        1900,
+                        0.0,
+                        -100
+                    ],
+                    "Max": [
+                        -50,
+                        3000.0,
+                        -900
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -110,
+                        1350.0,
+                        -1100
+                    ],
+                    "Max": [
+                        2100,
+                        2600.0,
+                        -1000
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -900,
+                        1350.0,
+                        -1100
+                    ],
+                    "Max": [
+                        -3000,
+                        2600.0,
+                        -1000
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -2000,
+                        1350.0,
+                        -100
+                    ],
+                    "Max": [
+                        2080,
+                        2600.0,
+                        100
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        2000,
+                        1350.0,
+                        -1100
+                    ],
+                    "Max": [
+                        1900,
+                        2600.0,
+                        7900
+                    ]
+                },
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -1800,
+                        1350.0,
+                        -100
+                    ],
+                    "Max": [
+                        -2000,
+                        2600.0,
+                        5900
+                    ]
+                }
+            ],
+            "TextureScale": [
+                0.1,
+                0.1
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_02",
+            "ModelPath": "Models/kenney_furniture-kit/floorFull",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/Horror_Floor_04",
+            "Color": [
+                0.2,
+                0.8,
+                0.3
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_03",
+            "ModelPath": "Models/kenney_furniture-kit/chair",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Color": [
+                1.0,
+                0.2,
+                0.2
+            ],
+            "TextureScale": [
+                0.1,
+                0.1
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_04",
+            "ModelPath": "Models/kenney_furniture-kit/televisionModern",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Color": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "TextureScale": [
+                0.1,
+                0.1
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_05",
+            "ModelPath": "Models/kenney_furniture-kit/table",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Color": [
+                0.4,
+                0.0,
+                0.3
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -8.0,
+                        5.0,
+                        5.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_06",
+            "ModelPath": "Models/kenney_furniture-kit/lampRoundFloor",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Color": [
+                0.9,
+                0.9,
+                0.4
+            ],
+            "TextureScale": [
+                0.1,
+                0.1
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_07",
+            "ModelPath": "Models/kenney_furniture-kit/loungeSofa",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/dirt",
+            "Color": [
+                0.4,
+                0.0,
+                0.3
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -10.0,
+                        5.0,
+                        5.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_08",
+            "ModelPath": "Models/kenney_furniture-kit/pottedPlant",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/dirt",
+            "Color": [
+                0.1,
+                0.9,
+                0.3
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -2.0,
+                        5.0,
+                        2.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_09",
+            "ModelPath": "Models/kenney_furniture-kit/kitchenBar",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Color": [
+                0.9,
+                0.8,
+                0.2
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -5.0,
+                        2.0,
+                        1.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_10",
+            "ModelPath": "Models/kenney_furniture-kit/kitchenFridgeLarge",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Color": [
+                0.9,
+                0.8,
+                0.2
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "Max": [
+                        -5.0,
+                        5.0,
+                        3.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_11",
+            "ModelPath": "Models/kenney_furniture-kit/kitchenStoveElectric",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Color": [
+                0.9,
+                0.8,
+                0.2
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        -2.0
+                    ],
+                    "Max": [
+                        -5.0,
+                        5.0,
+                        3.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_12",
+            "ModelPath": "Models/kenney_furniture-kit/chair",
+            "EffectPath": "Effects/BasicShader",
+            "Color": [
+                0.2,
+                0.3,
+                1.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "Max": [
+                        -5.0,
+                        5.0,
+                        3.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_13",
+            "ModelPath": "Models/kenney_furniture-kit/bathtub",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/Horror_Wall_02",
+            "Color": [
+                0.2,
+                0.2,
+                1.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -12.0,
+                        5.0,
+                        6.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_14",
+            "ModelPath": "Models/kenney_furniture-kit/toilet",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/Horror_Wall_02",
+            "Color": [
+                0.2,
+                0.2,
+                1.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -3.0,
+                        5.0,
+                        -6.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_15",
+            "ModelPath": "Models/kenney_furniture-kit/bathroomSink",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/Horror_Wall_02",
+            "Color": [
+                0.2,
+                0.2,
+                1.0
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_16",
+            "ModelPath": "Models/kenney_furniture-kit/bathroomMirror",
+            "EffectPath": "Effects/BasicShader",
+            "Color": [
+                0.2,
+                0.2,
+                1.0
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_bed",
+            "InteractiveType": "hiding",
+            "Id": "inside_bed",
+            "ModelPath": "Models/kenney_furniture-kit/bedSingle",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/Horror_Wall_13",
+            "Color": [
+                0.6,
+                0.2,
+                0.8
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_18",
+            "ModelPath": "Models/kenney_furniture-kit/tableRound",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Color": [
+                0.5,
+                0.3,
+                0.1
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        -25.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -8.0,
+                        0.0,
+                        8.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_19",
+            "ModelPath": "Models/kenney_furniture-kit/table",
+            "EffectPath": "Effects/BasicShader",
+            "Color": [
+                0.2,
+                0.8,
+                0.3
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "Max": [
+                        -5.0,
+                        5.0,
+                        3.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_20",
+            "ModelPath": "Models/kenney_furniture-kit/stairs",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "TargetPosition": [
+                -10.0,
+                135.0,
+                -50.0
+            ],
+            "AnimationDuration": 2.0,
+            "Color": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "InteractiveType": "stairs",
+            "Id": "inside-stairs-up",
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_21",
+            "ModelPath": "Models/kenney_furniture-kit/stairs",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "TargetPosition": [
+                195.0,
+                0.0,
+                -50.0
+            ],
+            "AnimationDuration": 2.0,
+            "Color": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "InteractiveType": "stairs",
+            "Id": "inside-stairs-down",
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_01",
+            "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/metal",
+            "Color": [
+                1.0,
+                0.65,
+                0.2
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -30.0,
+                        0.0,
+                        -25.4
+                    ],
+                    "Max": [
+                        30.0,
+                        54.5,
+                        20.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_02",
+            "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/treeA",
+            "Color": [
+                0.0,
+                1.0,
+                0.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -6.0,
+                        0.0,
+                        -6.0
+                    ],
+                    "Max": [
+                        6.0,
+                        40.0,
+                        6.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_03",
+            "ModelPath": "Models/kenney_retro-urban-kit/planks",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/planks",
+            "Color": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -56.5,
+                        0.0,
+                        -28.5
+                    ],
+                    "Max": [
+                        56.5,
+                        20.0,
+                        28.5
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_04",
+            "ModelPath": "Models/kenney_retro-urban-kit/pallet",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/planks",
+            "Color": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -50.0,
+                        0.0,
+                        -50.0
+                    ],
+                    "Max": [
+                        50.0,
+                        20.0,
+                        50.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_05",
+            "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-large",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/treeA",
+            "Color": [
+                0.0,
+                1.0,
+                0.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -8.0,
+                        0.0,
+                        -8.0
+                    ],
+                    "Max": [
+                        8.0,
+                        170.0,
+                        8.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_06",
+            "ModelPath": "Models/kenney_retro-urban-kit/wall-a",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/wall",
+            "Color": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -50.0,
+                        0.0,
+                        -50.0
+                    ],
+                    "Max": [
+                        50.0,
+                        100.0,
+                        50.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_07",
+            "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/wall_lines",
+            "Color": [
+                0.5,
+                0.5,
+                0.55
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -25.0,
+                        0.0,
+                        -25.0
+                    ],
+                    "Max": [
+                        25.0,
+                        50.0,
+                        25.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_08",
+            "ModelPath": "Models/kenney_retro-urban-kit/wall-a-door",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/door",
+            "Color": [
+                0.6,
+                0.4,
+                0.1
+            ],
+            "InteractiveType": "door",
+            "Id": "outside_door",
+            "TargetLevel": "inside",
+            "TeleportPosition": [
+                150.0,
+                10.0,
+                -280.0
+            ],
+            "TeleportRotation": [
+                0.0,
+                180.0,
+                0.0
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -50.0,
+                        0.0,
+                        -50.0
+                    ],
+                    "Max": [
+                        50.0,
+                        100.0,
+                        50.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_09",
+            "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/roof",
+            "Color": [
+                0.35,
+                0.2,
+                0.2
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_10",
+            "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/wall",
+            "Color": [
+                0.5,
+                0.6,
+                0.5
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -25.0,
+                        0.0,
+                        -25.0
+                    ],
+                    "Max": [
+                        25.0,
+                        50.0,
+                        25.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_11",
+            "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/roof",
+            "Color": [
+                0.35,
+                0.2,
+                0.2
+            ],
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_12",
+            "ModelPath": "Models/Assets/rock",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/rock",
+            "Color": [
+                0.5,
+                0.5,
+                0.5
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -80.0,
+                        0.0,
+                        -80.0
+                    ],
+                    "Max": [
+                        80.0,
+                        80.0,
+                        80.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                0.8,
+                0.8
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "outside_13",
+            "ModelPath": "Models/Assets/Skull",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/rock",
+            "Color": [
+                0.5,
+                0.5,
+                0.5
+            ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        -40.0,
+                        0.0,
+                        -40.0
+                    ],
+                    "Max": [
+                        40.0,
+                        40.0,
+                        40.0
+                    ]
+                }
+            ],
+            "TextureScale": [
+                0.8,
+                0.8
+            ],
+            "TextureAddressMode": "Wrap"
+        }
+    ]
 }
-
