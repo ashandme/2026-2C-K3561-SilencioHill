@@ -151,4 +151,26 @@ namespace TGC.MonoGame.TP
             return $"Flashlight: {state}  {time}";
         }
     }
+    internal class CameraItem : Item
+{
+    public event Action? Flash;
+    public CameraItem(Model model, Texture2D texture, Effect effect) : base("Camera", model)
+    {
+        if (Mesh != null)
+        {
+            Mesh.Texture = texture;
+            Mesh.Effect = effect;
+        }
+        HandScale = Vector3.One * 3.5f; 
+    }
+
+        public override void Use(Player player)
+    {
+        Audio.Play("camera");
+        Flash?.Invoke();
+    }
+
+    public override bool AttachToCamera => false;
+    public override Vector3 CameraLocalOffset => new Vector3(0.4f, -0.45f, 1.15f);
+}
 }
