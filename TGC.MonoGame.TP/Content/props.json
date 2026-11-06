@@ -665,7 +665,8 @@
         {
             "Name": "inside_19",
             "ModelPath": "Models/kenney_furniture-kit/table",
-            "EffectPath": "Effects/BasicShader",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
             "Color": [
                 0.2,
                 0.8,
@@ -710,6 +711,32 @@
             ],
             "InteractiveType": "stairs",
             "Id": "inside-stairs-up",
+            "TextureScale": [
+                1.0,
+                1.0
+            ],
+            "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "inside_loungeChairRelax",
+            "ModelPath": "Models/kenney_furniture-kit/LoungeChairRelax",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "Max": [
+                        -10.0,
+                        10.0,
+                        10.0
+                    ]
+                }
+            ],
             "TextureScale": [
                 1.0,
                 1.0
