@@ -58,7 +58,7 @@ public class PropData
             AlwaysVisible = AlwaysVisible,
             Collisions = Collisions,
             InteractiveType = InteractiveType,
-            Id = Id,
+            Id = string.IsNullOrWhiteSpace(instance.Id) ? Id : instance.Id,
             TargetLevel = TargetLevel,
             TeleportPosition = TeleportPosition,
             TeleportRotation = TeleportRotation,

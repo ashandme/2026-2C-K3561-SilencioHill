@@ -1264,6 +1264,56 @@
                 0.8
             ],
             "TextureAddressMode": "Wrap"
+        },
+        {
+            "Name": "evidence_magazine",
+            "ModelPath": "Models/Assets/Magazine1",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/crosstone",
+            "Color": [ 1.0, 0.9, 0.5 ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "evidence"
+        },
+        {
+            "Name": "evidence_ivbag",
+            "ModelPath": "Models/Assets/IV_Bag",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/crosstone",
+            "Color": [ 0.9, 0.2, 0.2 ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "evidence"
+        },
+        {
+            "Name": "evidence_gravestone",
+            "ModelPath": "Models/Assets/crossstone",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/crosstone",
+            "Color": [ 1.0, 1.0, 1.0 ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "evidence"
+        },
+        {
+            "Name": "evidence_cleaver",
+            "ModelPath": "Models/Assets/Cleaver",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Models/Assets/CleaverAlbedo",
+            "Color": [ 0.7, 0.7, 0.75 ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "evidence"
+        },
+        {
+            "Name": "evidence_sickle",
+            "ModelPath": "Models/Assets/sickle",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/crosstone",
+            "Color": [ 0.7, 0.7, 0.75 ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "evidence"
         }
     ]
 }

@@ -59,7 +59,12 @@ namespace TGC.MonoGame.TP
                 var interactionText = "";
                 if (interactionManager?.Selected != null)
                 {
-                    interactionText = $"E: Agarrar '{interactionManager.Selected.Id}'";
+                    if (interactionManager.Selected is TGC.MonoGame.TP.PropUtils.EvidenceProp)
+                        interactionText = player?.CurrentItem is CameraItem
+                            ? "E: Fotografiar"
+                            : "Equipa la camara (3) para fotografiar";
+                    else
+                        interactionText = $"E: Agarrar '{interactionManager.Selected.Id}'";
                     if (interactionManager.CandidateCount > 1)
                     {
                         interactionText += " | Tab: Alternar";
