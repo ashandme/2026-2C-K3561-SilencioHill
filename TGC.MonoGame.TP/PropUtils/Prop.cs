@@ -68,6 +68,11 @@ internal class Prop
         Mesh.Draw(view, projection);
     }
 
+    public void DrawShadow(Matrix viewProjection, Effect shadowEffect)
+    {
+        Mesh.DrawShadow(viewProjection, shadowEffect);
+    }
+
     public void DrawWireframeNoState(Matrix view, Matrix projection)
     {
         Mesh.DrawWireframeNoState(view, projection);

@@ -22,6 +22,12 @@ namespace TGC.MonoGame.TP.LevelUtils
             return _props.Remove(prop);
         }
 
+        public void DrawShadow(Matrix viewProjection, Effect shadowEffect)
+        {
+            foreach (var prop in _props)
+                prop.DrawShadow(viewProjection, shadowEffect);
+        }
+
         protected readonly List<Prop> _props = new();
         protected readonly Dictionary<string, Model> _loadedModels = new();
         protected readonly Dictionary<string, Effect> _loadedEffects = new();

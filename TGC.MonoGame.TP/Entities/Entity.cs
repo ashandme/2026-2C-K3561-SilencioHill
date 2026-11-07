@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using TGC.MonoGame.TP.Collisions;
 
 namespace TGC.MonoGame.TP.Entities;
@@ -125,6 +126,12 @@ internal class Entity
     {
         if (Visible)
             Mesh.Draw(GetWorldMatrix(), view, projection);
+    }
+
+    public void DrawShadow(Matrix viewProjection, Effect shadowEffect)
+    {
+        if (Visible)
+            Mesh.DrawShadow(viewProjection, shadowEffect);
     }
 
     private Matrix GetWorldMatrix()

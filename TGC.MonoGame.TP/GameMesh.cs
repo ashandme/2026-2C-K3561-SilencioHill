@@ -12,6 +12,7 @@ namespace TGC.MonoGame.TP{
         private readonly BoundingSphere _localBoundingSphere;
         private const float FrustumCullingSphereScale = 1.25f;
         private static readonly Dictionary<Model, BoundingSphere> BoundingSphereCache = new();
+        private static readonly Dictionary<Effect, int> FogFrameByEffect = new();
 
         private static readonly Random _random = new Random();
 
@@ -141,6 +142,17 @@ namespace TGC.MonoGame.TP{
             DrawMeshes(world, view, projection);
         }
 
+        public void DrawShadow(Matrix viewProjection, Effect shadowEffect)
+        {
+            foreach (var mesh in Model.Meshes)
+            {
+                var worldBone = _boneTransforms[mesh.ParentBone.Index] * GetWorldMatrix();
+                shadowEffect.Parameters["WorldViewProjection"]?.SetValue(worldBone * viewProjection);
+                foreach (var part in mesh.MeshParts) part.Effect = shadowEffect;
+                mesh.Draw();
+            }
+        }
+
         private void SetTextureSamplerState()
         {
             var samplerState = TextureAddressMode switch
@@ -151,12 +163,27 @@ namespace TGC.MonoGame.TP{
             };
 
             Effect.GraphicsDevice.SamplerStates[0] = samplerState;
+            // Shadow map (s1) must not be filtered or wrapped.
+            Effect.GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;
         }
 
         private void SetLightingParameters()
         {
             var eyePos = SceneLighting.EyePosition;
             Effect.Parameters["eyePosition"]?.SetValue(eyePos);
+            Effect.Parameters["lightViewProjection"]?.SetValue(SceneLighting.LightViewProjection);
+            Effect.Parameters["shadowsEnabled"]?.SetValue(SceneLighting.ShadowsEnabled ? 1f : 0f);
+            Effect.Parameters["shadowMapSize"]?.SetValue(SceneLighting.ShadowMapSize);
+            Effect.Parameters["shadowMap"]?.SetValue(SceneLighting.ShadowMap);
+            if (!FogFrameByEffect.TryGetValue(Effect, out var fogFrame) || fogFrame != SceneLighting.RenderFrame)
+            {
+                Effect.Parameters["fogEnabled"]?.SetValue(SceneLighting.FogEnabled ? 1f : 0f);
+                Effect.Parameters["fogColor"]?.SetValue(SceneLighting.FogColor);
+                Effect.Parameters["fogStart"]?.SetValue(SceneLighting.FogStartDistance);
+                Effect.Parameters["fogEnd"]?.SetValue(SceneLighting.FogEndDistance);
+                Effect.Parameters["fogDensity"]?.SetValue(SceneLighting.FogDensity);
+                FogFrameByEffect[Effect] = SceneLighting.RenderFrame;
+            }
             _paramCache?.LightDirection?.SetValue(SceneLighting.LightDirection);
             _paramCache?.LightIsDirectional?.SetValue(SceneLighting.IsDirectional ? 1f : 0f);
             _paramCache?.LightIsSpotlight?.SetValue(SceneLighting.IsSpotlight ? 1f : 0f);

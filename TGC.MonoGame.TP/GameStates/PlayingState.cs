@@ -22,6 +22,9 @@ internal sealed class PlayingState : IGameState
     private readonly InputManager _input;
     private readonly Matrix _projection;
     private readonly Effect _effect;
+    private readonly Effect _enemyNoiseEffect;
+    private readonly Effect _shadowEffect;
+    private readonly RenderTarget2D _shadowRenderTarget;
     private readonly LevelManager _levelManager;
     private readonly Player _player;
     private readonly FreeCamera _spectator;
@@ -32,6 +35,7 @@ internal sealed class PlayingState : IGameState
     private readonly InteractionManager _interactionManager;
     private float _flashAlpha;
     private float _cameraFlashRemaining;
+    private float _noiseIntensity;
     private readonly Texture2D _crosshairPixel;
     private Enemy _enemy;
     private bool _playerMode = true;
@@ -53,12 +57,26 @@ internal sealed class PlayingState : IGameState
             Camera.DefaultNearPlaneDistance,
             2000f);
         _effect = context.Content.Load<Effect>("Effects/BlinnPhong");
+        _enemyNoiseEffect = context.Content.Load<Effect>("Effects/EnemyNoise");
+        _shadowEffect = context.Content.Load<Effect>("Effects/ShadowMap");
+        _shadowEffect.CurrentTechnique = _shadowEffect.Techniques["DepthPass"];
 
         _levelManager = new LevelManager();
         _levelManager.AddLevel("outside", new Level("outside", [new Map(), new MapJson { filePath = "Content/outsidemap.json" }], skyboxSettings: new SkyboxSettings
         {
-            TextureAsset = "Textures/gradient_sky-night"
-        }));
+            Mode = SkyboxMode.Cube,
+            TextureAsset = "Textures/Cubemap_Sky_12"
+        }, fog: new FogSettings
+        {
+            Color = new Color(0.24f, 0.22f, 0.30f),
+            StartDistance = 80f,
+            EndDistance = 350f,
+            Density = 0.01f,
+            Enabled = true
+        })
+        {
+            BackgroundColor = new Color(0.24f, 0.22f, 0.30f)
+        });
         _levelManager.AddLevel("inside", new Level("inside", [new MapJson { filePath = "Content/insidemap.json" }]));
         var center = new Point(_graphics.Viewport.Width / 2, _graphics.Viewport.Height / 2);
         _player = new Player(_graphics.Viewport.AspectRatio, new Vector3(0, 10, 50), center);
@@ -87,6 +105,7 @@ internal sealed class PlayingState : IGameState
         cameraItem.Flash += TriggerCameraFlash;
         _fullScreenQuad = new FullScreenQuad(_graphics);
         _sceneRenderTarget = new RenderTarget2D(_graphics, _graphics.Viewport.Width, _graphics.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
+        _shadowRenderTarget = new RenderTarget2D(_graphics, 1024, 1024, false, SurfaceFormat.Single, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
         _hud = new HudRenderer(context.SpriteBatch, context.Font, _graphics);
         _interactionManager = new InteractionManager();
         _crosshairPixel = new Texture2D(_graphics, 1, 1);
@@ -133,6 +152,7 @@ internal sealed class PlayingState : IGameState
 
         var current = _player.CurrentItem;
         SceneLighting.FlashlightEnabled = false;
+        SceneLighting.CastsShadows = false;
         SceneLighting.IsDirectional = false;
         SceneLighting.IsSpotlight = false;
         SceneLighting.SpotInnerCosine = 0.94f;
@@ -153,6 +173,7 @@ internal sealed class PlayingState : IGameState
             SceneLighting.LightColor = new Vector3(4f, 3.8f, 3.4f);
             SceneLighting.Attenuation = new Vector3(1f, 0.0005f, 0.000001f);
         }
+
         else if (current is FlashlightItem light && light.IsOn && light.AttachToCamera)
         {
             SceneLighting.FlashlightEnabled = true;
@@ -160,9 +181,16 @@ internal sealed class PlayingState : IGameState
             SceneLighting.LightColor = Vector3.One;
             SceneLighting.SpotInnerCosine = 0.98f;
             SceneLighting.SpotOuterCosine = 0.88f;
-            SceneLighting.LightPosition = _player.CameraPosition;
+            // Held in the right hand, below the eye. A light exactly at the eye hides
+            // every shadow behind its caster, so the offset is what makes shadows visible.
+            SceneLighting.LightPosition = _player.CameraPosition
+                + _player.RightDirection * 4f
+                - _player.UpDirection * 5f;
             // This is the direction the flashlight rays travel from the camera.
             SceneLighting.LightDirection = _player.FrontDirection;
+            SceneLighting.CastsShadows = true;
+            // Slightly wider than the spot cone (outer cosine 0.88 ~ 56 degrees).
+            SceneLighting.ShadowFieldOfView = 70f;
         }
         else if (current is CandleItem candle && candle.IsLit)
         {
@@ -172,8 +200,14 @@ internal sealed class PlayingState : IGameState
                 + _player.UpDirection * candle.CameraLocalOffset.Y
                 + _player.FrontDirection * candle.CameraLocalOffset.Z;
             SceneLighting.LightColor = new Vector3(1f, 0.65f, 0.12f);
+            // A candle is a point light; one wide frustum along the view direction covers
+            // what the player can see (cheaper than a 6-face cube shadow map).
+            SceneLighting.LightDirection = _player.FrontDirection;
+            SceneLighting.CastsShadows = true;
+            SceneLighting.ShadowFieldOfView = 120f;
         }
 
+        UpdateEnemyNoise(elapsedSeconds);
         _enemy?.Update(gameTime, _player);
         if (_player.State == PlayerState.Caught && !_caughtOverlayShown)
         {
@@ -183,6 +217,7 @@ internal sealed class PlayingState : IGameState
                 () => new MainMenuState(_context, () => new PlayingState(_context))));
             return;
         }
+        UpdateEnemyNoise(elapsedSeconds);
         _hud.Update(gameTime);
         _interactionManager.UpdateCandidates(_player.Position, _levelManager.Current);
         if (_playerMode)
@@ -196,6 +231,28 @@ internal sealed class PlayingState : IGameState
                     _interactionManager.Interact(_player, _levelManager.Current);
             }
         }
+    }
+
+    private void UpdateEnemyNoise(float elapsedSeconds)
+    {
+        var target = 0f;
+        if (_enemy != null && _enemy.State != EnemyState.Invisible)
+        {
+            var distance = Vector3.Distance(_player.Position, _enemy.Position);
+            var proximity = 1f - MathHelper.Clamp(distance / _enemy.NoiseRange, 0f, 1f);
+            proximity *= proximity * (3f - 2f * proximity);
+            var stateBoost = _enemy.State switch
+            {
+                EnemyState.Staring => 0.18f,
+                EnemyState.Chasing => 0.28f,
+                EnemyState.Attacking => 0.4f,
+                _ => 0f
+            };
+            target = MathHelper.Clamp(proximity + stateBoost, 0f, 1f);
+        }
+
+        var smoothing = 1f - MathF.Exp(-elapsedSeconds * 6f);
+        _noiseIntensity = MathHelper.Lerp(_noiseIntensity, target, smoothing);
     }
 
     private void PlayLevelAmbience() => Audio.PlayMusic(_levelManager.CurrentName == "inside" ? "IndoorAmbience" : "NighttimeForestAmbience");
@@ -226,19 +283,28 @@ internal sealed class PlayingState : IGameState
 
     public void Draw(GameTime gameTime)
     {
+        RenderShadowMap();
         _graphics.SetRenderTarget(_sceneRenderTarget);
         _graphics.DepthStencilState = DepthStencilState.Default;
         _graphics.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, _levelManager.Current?.BackgroundColor ?? new Color(0.0f, 0f, 0.0f), 1f, 0);
         UpdatePlayerCameraView();
         var view = ActiveCamera.View;
         SceneLighting.EyePosition = Matrix.Invert(view).Translation;
+        SceneLighting.RenderFrame++;
+        var fog = _levelManager.Current?.Fog;
+        SceneLighting.FogEnabled = fog?.Enabled == true;
+        SceneLighting.FogColor = fog?.Color.ToVector3() ?? Vector3.Zero;
+        SceneLighting.FogStartDistance = fog?.StartDistance ?? 0f;
+        SceneLighting.FogEndDistance = MathF.Max(fog?.EndDistance ?? 1f, SceneLighting.FogStartDistance + 0.001f);
+        SceneLighting.FogDensity = MathF.Max(fog?.Density ?? 0f, 0f);
         _levelManager.Current?.Draw(view, _projection);
         if (_playerMode) _player.DrawHeldItem(_effect, _projection, _graphics);
         _graphics.SetRenderTarget(null);
         _graphics.DepthStencilState = DepthStencilState.None;
-        _context.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
-        _context.SpriteBatch.Draw(_sceneRenderTarget, _graphics.Viewport.Bounds, Color.White);
-        _context.SpriteBatch.End();
+        _enemyNoiseEffect.Parameters["baseTexture"]?.SetValue(_sceneRenderTarget);
+        _enemyNoiseEffect.Parameters["time"]?.SetValue((float)gameTime.TotalGameTime.TotalSeconds);
+        _enemyNoiseEffect.Parameters["intensity"]?.SetValue(_noiseIntensity);
+        _fullScreenQuad.Draw(_enemyNoiseEffect);
         _graphics.DepthStencilState = DepthStencilState.Default;
         _hud.UpdateState(_player, _interactionManager);
         _hud.Draw();
@@ -250,6 +316,49 @@ internal sealed class PlayingState : IGameState
         }
         if (_playerMode)
             _player.DrawCenterDot(_context.SpriteBatch, _crosshairPixel);
+    }
+
+    private void RenderShadowMap()
+    {
+        if (!SceneLighting.FlashlightEnabled || !SceneLighting.CastsShadows)
+        {
+            SceneLighting.ShadowsEnabled = false;
+            SceneLighting.ShadowMap = null;
+            return;
+        }
+
+        var lightPosition = SceneLighting.LightPosition;
+        var lightDirection = SceneLighting.LightDirection;
+        if (lightDirection.LengthSquared() < 0.0001f)
+            lightDirection = Vector3.Forward;
+        lightDirection.Normalize();
+
+        var lightUp = MathF.Abs(Vector3.Dot(lightDirection, Vector3.Up)) > 0.99f ? Vector3.Forward : Vector3.Up;
+        var lightView = Matrix.CreateLookAt(lightPosition, lightPosition + lightDirection * 500f, lightUp);
+        var lightProjection = Matrix.CreatePerspectiveFieldOfView(
+            MathHelper.ToRadians(SceneLighting.ShadowFieldOfView), 1f, 1f, SceneLighting.ShadowFar);
+        SceneLighting.LightViewProjection = lightView * lightProjection;
+        SceneLighting.ShadowMapSize = new Vector2(_shadowRenderTarget.Width, _shadowRenderTarget.Height);
+
+        var previousTarget = _graphics.GetRenderTargets();
+        var previousDepth = _graphics.DepthStencilState;
+        var previousRasterizer = _graphics.RasterizerState;
+        try
+        {
+            _graphics.SetRenderTarget(_shadowRenderTarget);
+            _graphics.DepthStencilState = DepthStencilState.Default;
+            _graphics.RasterizerState = RasterizerState.CullNone;
+            _graphics.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, Color.White, 1f, 0);
+            _levelManager.Current?.DrawShadow(SceneLighting.LightViewProjection, _shadowEffect);
+            SceneLighting.ShadowMap = _shadowRenderTarget;
+            SceneLighting.ShadowsEnabled = true;
+        }
+        finally
+        {
+            _graphics.SetRenderTargets(previousTarget);
+            _graphics.DepthStencilState = previousDepth;
+            _graphics.RasterizerState = previousRasterizer;
+        }
     }
 
     private void UpdatePlayerCameraView()

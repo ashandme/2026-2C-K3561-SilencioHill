@@ -29,14 +29,37 @@ float attenuationLinear;
 float attenuationQuadratic;
 float upwardLightScale;
 float3 eyePosition; // Camera position
+float fogEnabled;
+float3 fogColor;
+float fogStart;
+float fogEnd;
+float fogDensity;
 float2 TextureScale;
+float4x4 lightViewProjection;
+float shadowsEnabled;
+float2 shadowMapSize;
+
+// Same bias constants as ShadowMap.fx (depth is stored as z/w by its DepthPass technique).
+static const float modulatedEpsilon = 0.000041200182749889791011810302734375;
+static const float maxEpsilon = 0.000023200045689009130001068115234375;
 
 texture baseTexture;
-sampler2D textureSampler = sampler_state
+sampler2D textureSampler : register(s0) = sampler_state
 {
     Texture = (baseTexture);
     MagFilter = Linear;
     MinFilter = Linear;
+};
+
+texture shadowMap;
+sampler2D shadowSampler : register(s1) = sampler_state
+{
+    Texture = (shadowMap);
+    MagFilter = Point;
+    MinFilter = Point;
+    MipFilter = Point;
+    AddressU = Clamp;
+    AddressV = Clamp;
 };
 
 struct VertexShaderInput
@@ -52,6 +75,7 @@ struct VertexShaderOutput
     float2 TextureCoordinates : TEXCOORD0;
     float4 WorldPosition : TEXCOORD1;
     float4 Normal : TEXCOORD2;
+    float4 ShadowPosition : TEXCOORD3;
 };
 
 VertexShaderOutput MainVS(in VertexShaderInput input)
@@ -61,6 +85,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
     output.Position = mul(input.Position, WorldViewProjection);
     output.WorldPosition = mul(input.Position, World);
     output.Normal = mul(input.Normal, InverseTransposeWorld);
+    output.ShadowPosition = mul(output.WorldPosition, lightViewProjection);
     output.TextureCoordinates = input.TextureCoordinates * TextureScale;
 
     return output;
@@ -112,8 +137,34 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     float3 specularLight = sign(NdotL) * KSpecular * specularColor
         * pow(saturate(NdotH), shininess) * lightFactor * upwardFactor;
 
+    // Shadow test, mirroring ShadowedPCFPS in ShadowMap.fx (3x3 PCF, slope-scaled bias).
+    float3 shadowUv = input.ShadowPosition.xyz / max(input.ShadowPosition.w, 0.0001);
+    shadowUv.xy = shadowUv.xy * 0.5 + 0.5;
+    shadowUv.y = 1.0 - shadowUv.y;
+    float notInShadow = 1.0;
+    if (shadowsEnabled > 0.5 && input.ShadowPosition.w > 0.0
+        && shadowUv.x >= 0.0 && shadowUv.x <= 1.0
+        && shadowUv.y >= 0.0 && shadowUv.y <= 1.0)
+    {
+        float inclinationBias = max(modulatedEpsilon * (1.0 - dot(normal, normalize(toLight))), maxEpsilon);
+        float2 texelSize = 1.0 / shadowMapSize;
+        notInShadow = 0.0;
+        for (int x = -1; x <= 1; x++)
+            for (int y = -1; y <= 1; y++)
+            {
+                float pcfDepth = tex2D(shadowSampler, shadowUv.xy + float2(x, y) * texelSize).r + inclinationBias;
+                notInShadow += step(shadowUv.z, pcfDepth) / 9.0;
+            }
+    }
+    float shadowed = lerp(0.15, 1.0, notInShadow);
+    diffuseLight *= shadowed;
+    specularLight *= shadowed;
+
     // Final calculation
     float4 finalColor = float4(saturate(ambientColor * KAmbient + diffuseLight) * texelColor.rgb + specularLight, 1.0);
+    float fogFactor = saturate((length(input.WorldPosition.xyz - eyePosition) - fogStart) / max(fogEnd - fogStart, 0.001));
+    fogFactor = fogEnabled > 0.5 ? fogFactor : 0.0;
+    finalColor.rgb = lerp(finalColor.rgb, fogColor, fogFactor);
     return finalColor;
 
 }

@@ -12,6 +12,11 @@ float4x4 World;
 float4x4 View;
 float4x4 Projection;
 float2 TextureScale;
+float3 eyePosition;
+float fogEnabled;
+float3 fogColor;
+float fogStart;
+float fogEnd;
 
 struct VertexShaderInput
 {
@@ -23,6 +28,7 @@ struct VertexShaderOutput
 {
     float4 Position : SV_POSITION;
     float2 TextureCoordinate : TEXCOORD1;
+    float3 WorldPosition : TEXCOORD2;
 };
 
 texture ModelTexture;
@@ -45,6 +51,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
 
 	// Propagate texture coordinates
     output.TextureCoordinate = input.TextureCoordinate * TextureScale;
+    output.WorldPosition = worldPosition.xyz;
 
     return output;
 }
@@ -59,6 +66,8 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     // sin escribir nada en el Depth Buffer (Z-Buffer).
     clip(textureColor.a - 0.5f);
 
+    float fogFactor = saturate((length(input.WorldPosition - eyePosition) - fogStart) / max(fogEnd - fogStart, 0.001));
+    textureColor.rgb = lerp(textureColor.rgb, fogColor, fogEnabled > 0.5 ? fogFactor : 0.0);
     return textureColor;
 }
 

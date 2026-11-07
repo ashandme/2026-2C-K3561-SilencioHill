@@ -7,6 +7,6 @@ sealed class SkyboxSettings
     public SkyboxMode Mode { get; set; } = SkyboxMode.Gradient;
     public string TextureAsset { get; set; } = string.Empty;
     public Color Tint { get; set; } = Color.White;
-    public float Brightness { get; set; } = 1f;
+    public float Brightness { get; set; } = 1.5f;
     public string EffectAsset { get; set; } = "Effects/Skybox";
 }

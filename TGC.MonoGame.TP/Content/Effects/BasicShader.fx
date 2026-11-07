@@ -18,6 +18,11 @@ float4x4 View;
 float4x4 Projection;
 
 float3 DiffuseColor;
+float3 eyePosition;
+float fogEnabled;
+float3 fogColor;
+float fogStart;
+float fogEnd;
 
 float Time = 0;
 
@@ -29,6 +34,7 @@ struct VertexShaderInput
 struct VertexShaderOutput
 {
 	float4 Position : SV_POSITION;
+	float3 WorldPosition : TEXCOORD0;
 };
 
 VertexShaderOutput MainVS(in VertexShaderInput input)
@@ -41,13 +47,17 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
     float4 viewPosition = mul(worldPosition, View);	
 	// View space to Projection space
     output.Position = mul(viewPosition, Projection);
+	output.WorldPosition = worldPosition.xyz;
 
     return output;
 }
 
 float4 MainPS(VertexShaderOutput input) : COLOR
 {
-    return float4(DiffuseColor, 0.4);
+	float4 color = float4(DiffuseColor, 0.4);
+	float fogFactor = saturate((length(input.WorldPosition - eyePosition) - fogStart) / max(fogEnd - fogStart, 0.001));
+	color.rgb = lerp(color.rgb, fogColor, fogEnabled > 0.5 ? fogFactor : 0.0);
+	return color;
 }
 
 technique BasicColorDrawing

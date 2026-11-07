@@ -55,13 +55,32 @@ namespace TGC.MonoGame.Samples.Geometries
 
         public void Draw(Effect effect)
         {
+            var previousBlend = _device.BlendState;
+            var previousDepth = _device.DepthStencilState;
+            var previousRasterizer = _device.RasterizerState;
+            var previousSampler = _device.SamplerStates[0];
+
+            _device.BlendState = BlendState.Opaque;
+            _device.DepthStencilState = DepthStencilState.None;
+            _device.RasterizerState = RasterizerState.CullNone;
+            _device.SamplerStates[0] = SamplerState.LinearClamp;
             _device.SetVertexBuffer(_vertexBuffer);
             _device.Indices = _indexBuffer;
 
-            foreach (var pass in effect.CurrentTechnique.Passes)
+            try
             {
-                pass.Apply();
-                _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 2);
+                foreach (var pass in effect.CurrentTechnique.Passes)
+                {
+                    pass.Apply();
+                    _device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 2);
+                }
+            }
+            finally
+            {
+                _device.BlendState = previousBlend;
+                _device.DepthStencilState = previousDepth;
+                _device.RasterizerState = previousRasterizer;
+                _device.SamplerStates[0] = previousSampler;
             }
         }
 

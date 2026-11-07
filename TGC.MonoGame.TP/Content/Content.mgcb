@@ -25,6 +25,12 @@
 /processorParam:DebugMode=Auto
 /build:Effects/BasicTexture.fx
 
+#begin Effects/EnemyNoise.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/EnemyNoise.fx
+
 #begin Effects/BlinnPhong.fx
 /importer:EffectImporter
 /processor:EffectProcessor
@@ -36,6 +42,12 @@
 /processor:EffectProcessor
 /processorParam:DebugMode=Auto
 /build:Effects/Skybox.fx
+
+#begin Effects/ShadowMap.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/ShadowMap.fx
 
 #begin Effects/TextureMerge.fx
 /importer:EffectImporter
@@ -5732,6 +5744,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/concrete.png
+
+#begin Textures/Cubemap_Sky_12.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Cubemap_Sky_12.png
 
 #begin Textures/dirt.png
 /importer:TextureImporter

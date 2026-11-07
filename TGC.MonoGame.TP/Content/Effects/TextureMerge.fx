@@ -59,9 +59,7 @@ float4 MergePS(VertexShaderOutput input) : COLOR
     float4 overlayColor = tex2D(overlayTextureSampler, input.TextureCoordinates);
 
     float timeFactor = sin(time * 2.0) * 0.5 + 0.5;
-    float4 finalColor = float4(lerp(baseColor.rgb, overlayColor.rgb, overlayColor.a * timeFactor), 1.0);
-
-    return finalColor;
+    return float4(lerp(baseColor.rgb, overlayColor.rgb, overlayColor.a * timeFactor), 1.0);
 }
 
 technique Merge

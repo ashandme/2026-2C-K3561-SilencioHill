@@ -17,18 +17,20 @@ internal class Level
     // TODO: REFACTOR make a single class for Entities (props, enemies, etc.) and have a single list of entities instead of separate maps for props and enemies.
     private readonly string _enemyRoute;
     private readonly SkyboxSettings? _skyboxSettings;
+    public FogSettings? Fog { get; }
     private Skybox? _skybox;
     public Enemy Enemy { get; private set; }
     public Skybox? Skybox => _skybox;
 
     // A simple identifier
     public string Name { get; }
-    public Level(string name, Map[] maps, string enemyRoute = "Content/enemyRoute.json", SkyboxSettings? skyboxSettings = null)
+    public Level(string name, Map[] maps, string enemyRoute = "Content/enemyRoute.json", SkyboxSettings? skyboxSettings = null, FogSettings? fog = null)
     {
         Name = name ?? "unnamed";
         _maps = maps ?? new Map[0];
         _enemyRoute = enemyRoute;
         _skyboxSettings = skyboxSettings;
+        Fog = fog;
     }
     public void LoadLevelContent(ContentManager content, GraphicsDevice graphics)
     {
@@ -84,6 +86,13 @@ internal class Level
         }
 
         Enemy?.Draw(view, projection);
+    }
+
+    public void DrawShadow(Matrix viewProjection, Effect shadowEffect)
+    {
+        for (int i = 0; i < _maps.Length; i++)
+            _maps[i].DrawShadow(viewProjection, shadowEffect);
+        Enemy?.DrawShadow(viewProjection, shadowEffect);
     }
 
     public IReadOnlyList<Prop> GetProps()

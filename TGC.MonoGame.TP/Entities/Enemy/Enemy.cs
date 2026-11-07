@@ -50,6 +50,7 @@ namespace TGC.MonoGame.TP.Entities.Enemy
         private readonly ConeCollisionShape _frontSight = new(Vector3.Zero, Vector3.Forward, 400f, 15f);
         private readonly ConeCollisionShape _rearSight = new(Vector3.Zero, Vector3.Backward, 400f, 67.5f, invertDirection: true);
         private readonly ConeCollisionShape _playerSight = new(Vector3.Zero, Vector3.Forward, 400f, 30f);
+        public float NoiseRange => _frontSight.Distance;
 
         // --- Velocidades ---
         private const float RoamSpeed = 25f;
