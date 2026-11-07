@@ -485,6 +485,63 @@
                 0,
                 0
             ]
+        },
+        {
+            "Name": "evidence_magazine",
+            "Id": "ev_2",
+            "Position": [
+                60.0,
+                0.5,
+                120.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                0.6,
+                0.6,
+                0.6
+            ]
+        },
+        {
+            "Name": "evidence_ivbag",
+            "Id": "ev_3",
+            "Position": [
+                -60.0,
+                2.0,
+                100.0
+            ],
+            "Rotation": [
+                43.45,
+                0.0,
+                90.0
+            ],
+            "Scale": [
+                0.3,
+                0.3,
+                0.3
+            ]
+        },
+        {
+            "Name": "evidence_sickle",
+            "Id": "ev_5",
+            "Position": [
+                -200.0,
+                0.5,
+                480.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                0.6,
+                0.6,
+                0.6
+            ]
         }
     ]
 }

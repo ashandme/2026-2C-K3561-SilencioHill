@@ -36,6 +36,8 @@ internal sealed class PlayingState : IGameState
     private float _flashAlpha;
     private float _cameraFlashRemaining;
     private float _noiseIntensity;
+    private const int TotalEvidence = 5; 
+    private readonly HashSet<string> _photographed = new();
     private readonly Texture2D _crosshairPixel;
     private Enemy _enemy;
     private bool _playerMode = true;
@@ -227,6 +229,14 @@ internal sealed class PlayingState : IGameState
             {
                 if (_interactionManager.Selected is DoorProp door)
                     UseDoor(door);
+                else 
+                if (_interactionManager.Selected is EvidenceProp evidence)
+                {
+                    if (_player.CurrentItem is not CameraItem)
+                        _hud.SetStatus("Equipa la camara (tecla 3)", 2.0);
+                    else if (_cameraFlashRemaining <= 0f && _interactionManager.Interact(_player, _levelManager.Current))
+                        CollectEvidence(evidence);
+                }
                 else
                     _interactionManager.Interact(_player, _levelManager.Current);
             }
@@ -308,6 +318,7 @@ internal sealed class PlayingState : IGameState
         _graphics.DepthStencilState = DepthStencilState.Default;
         _hud.UpdateState(_player, _interactionManager);
         _hud.Draw();
+        DrawEvidenceCounter();
         if (_flashAlpha > 0f)
         {
             _context.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
@@ -433,8 +444,36 @@ internal sealed class PlayingState : IGameState
             _enemy.SetScale(_enemy.Scale * 3f);
     }
 
+    private void CollectEvidence(EvidenceProp evidence)
+    {
+        if (!_photographed.Add(evidence.Id)) return;
+        Audio.Play("camera");
+        _cameraFlashRemaining = 1f;
+        _flashAlpha = 1f;
+        _hud.SetStatus($"Prueba fotografiada ({_photographed.Count}/{TotalEvidence})", 3.0);
+    }
+
+    private void RemovePhotographedProps()
+    {
+        var level = _levelManager.Current;
+        if (level == null) return;
+        foreach (var prop in level.GetProps())
+            if (prop is EvidenceProp evidence && _photographed.Contains(evidence.Id))
+                level.RemoveProp(evidence);
+    }
+
+    private void DrawEvidenceCounter()
+    {
+        var text = $"Pruebas: {_photographed.Count}/{TotalEvidence}";
+        var size = _context.Font.MeasureString(text);
+        var position = new Vector2((_graphics.Viewport.Width - size.X) * 0.5f, 10f);
+        _context.SpriteBatch.Begin();
+        _context.SpriteBatch.DrawString(_context.Font, text, position, Color.White);
+        _context.SpriteBatch.End();
+    }
     internal void RefreshCollisions()
     {
+        RemovePhotographedProps();
         var colliders = new List<CollisionShape>();
         var currentLevel = _levelManager.Current;
         if (currentLevel != null)

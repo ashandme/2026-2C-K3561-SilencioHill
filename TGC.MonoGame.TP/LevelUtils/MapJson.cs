@@ -110,6 +110,10 @@ namespace TGC.MonoGame.TP.LevelUtils
                             rotationRadians, item.ScaleVector, color,
                             item.PositionVector + Vector3.Transform(item.HideOffsetVector * item.ScaleVector,
                                 Matrix.CreateFromYawPitchRoll(rotationRadians.Y, rotationRadians.X, rotationRadians.Z)))
+                    : item.InteractiveType.Equals("evidence", StringComparison.OrdinalIgnoreCase)
+                        ? new EvidenceProp(model, effect, item.PositionVector,
+                            string.IsNullOrWhiteSpace(item.Id) ? "evidence" : item.Id,
+                            rotationRadians, item.ScaleVector, color)
                     : new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);
