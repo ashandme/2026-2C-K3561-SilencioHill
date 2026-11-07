@@ -106,7 +106,10 @@ namespace TGC.MonoGame.TP.LevelUtils
                     : item.InteractiveType.Equals("stairs", StringComparison.OrdinalIgnoreCase)
                         ? new Stairs(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "stairs" : item.Id, item.TargetPositionVector)
                     : item.InteractiveType.Equals("hiding", StringComparison.OrdinalIgnoreCase)
-                        ? new HidingSpotProp(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "hiding" : item.Id)
+                        ? new HidingSpotProp(model, effect, item.PositionVector, string.IsNullOrWhiteSpace(item.Id) ? "hiding" : item.Id,
+                            rotationRadians, item.ScaleVector, color,
+                            item.PositionVector + Vector3.Transform(item.HideOffsetVector * item.ScaleVector,
+                                Matrix.CreateFromYawPitchRoll(rotationRadians.Y, rotationRadians.X, rotationRadians.Z)))
                     : new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);

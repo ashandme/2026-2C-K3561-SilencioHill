@@ -22,6 +22,7 @@ public class PropData
     public float[]? Rotation { get; set; }
     public float[]? Scale { get; set; }
     public float[]? Color { get; set; }
+    public float[]? HideOffset { get; set; }
     public float[]? TextureScale { get; set; }
     public string TextureAddressMode { get; set; } = "Wrap";
     public bool AlwaysVisible { get; set; }
@@ -51,6 +52,7 @@ public class PropData
             Rotation = instance.Rotation,
             Scale = instance.Scale,
             Color = Color,
+            HideOffset = HideOffset,
             TextureScale = TextureScale,
             TextureAddressMode = TextureAddressMode,
             AlwaysVisible = AlwaysVisible,
@@ -85,6 +87,11 @@ public class PropData
     public Vector3? ColorVector => Color is { Length: >= 3 }
         ? new Vector3(Color[0], Color[1], Color[2])
         : null;
+
+    [JsonIgnore]
+    public Vector3 HideOffsetVector => HideOffset is { Length: >= 3 }
+        ? new Vector3(HideOffset[0], HideOffset[1], HideOffset[2])
+        : Vector3.Zero;
 
     [JsonIgnore]
     public Vector3 TeleportPositionVector => TeleportPosition is { Length: >= 3 }

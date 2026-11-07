@@ -31,6 +31,7 @@ internal sealed class PlayingState : IGameState
     private readonly HudRenderer _hud;
     private readonly InteractionManager _interactionManager;
     private float _flashAlpha;
+    private float _cameraFlashRemaining;
     private readonly Texture2D _crosshairPixel;
     private Enemy _enemy;
     private bool _playerMode = true;
@@ -83,13 +84,19 @@ internal sealed class PlayingState : IGameState
         _player.LoadHorrorOverlay(context.Content.Load<Texture2D>("Textures/overlay"), context.Content.Load<Effect>("Effects/TextureMerge"));
         var cameraItem = new CameraItem(cameraModel, texture, textureEffect); 
         _player.PickupItem(cameraItem);
-        cameraItem.Flash += () => _flashAlpha = 1f;
+        cameraItem.Flash += TriggerCameraFlash;
         _fullScreenQuad = new FullScreenQuad(_graphics);
         _sceneRenderTarget = new RenderTarget2D(_graphics, _graphics.Viewport.Width, _graphics.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
         _hud = new HudRenderer(context.SpriteBatch, context.Font, _graphics);
         _interactionManager = new InteractionManager();
         _crosshairPixel = new Texture2D(_graphics, 1, 1);
         _crosshairPixel.SetData(new[] { Color.White });
+    }
+
+    private void TriggerCameraFlash()
+    {
+        _cameraFlashRemaining = 1f;
+        _flashAlpha = 1f;
     }
 
     public void Enter()
@@ -117,6 +124,10 @@ internal sealed class PlayingState : IGameState
 
     internal void UpdateGameplay(GameTime gameTime)
     {
+        var elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        _cameraFlashRemaining = MathF.Max(0f, _cameraFlashRemaining - elapsedSeconds);
+        _flashAlpha = MathF.Max(0f, _flashAlpha - elapsedSeconds);
+
         if (_playerMode) { _player.Update(gameTime); _player.UpdateItems(gameTime); }
         else _spectator.Update(gameTime);
 
@@ -135,7 +146,14 @@ internal sealed class PlayingState : IGameState
         SceneLighting.LightPosition = _player.CameraPosition + new Vector3(0f, 50f, 50f);
         SceneLighting.LightDirection = _player.FrontDirection;
 
-        if (current is FlashlightItem light && light.IsOn && light.AttachToCamera)
+        if (current is CameraItem && _cameraFlashRemaining > 0f)
+        {
+            SceneLighting.FlashlightEnabled = true;
+            SceneLighting.LightPosition = _player.CameraPosition;
+            SceneLighting.LightColor = new Vector3(4f, 3.8f, 3.4f);
+            SceneLighting.Attenuation = new Vector3(1f, 0.0005f, 0.000001f);
+        }
+        else if (current is FlashlightItem light && light.IsOn && light.AttachToCamera)
         {
             SceneLighting.FlashlightEnabled = true;
             SceneLighting.IsSpotlight = true;
@@ -166,7 +184,6 @@ internal sealed class PlayingState : IGameState
             return;
         }
         _hud.Update(gameTime);
-        _flashAlpha = MathF.Max(0f, _flashAlpha - (float)gameTime.ElapsedGameTime.TotalSeconds * 2f);
         _interactionManager.UpdateCandidates(_player.Position, _levelManager.Current);
         if (_playerMode)
         {

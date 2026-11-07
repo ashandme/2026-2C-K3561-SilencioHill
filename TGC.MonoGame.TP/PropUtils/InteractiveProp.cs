@@ -7,6 +7,7 @@ namespace TGC.MonoGame.TP.PropUtils
     internal class InteractiveProp : Prop
     {
         public string Id { get; }
+        public virtual Vector3 InteractionPosition => Position;
         public virtual int Priority => 0;
         public virtual bool RemoveAfterInteraction => true;
 
@@ -98,10 +99,13 @@ namespace TGC.MonoGame.TP.PropUtils
     {
         // Punto donde se para el jugador al esconderse (afuera del mesh, no en el centro del prop)
         public Vector3 HideStandPoint { get; set; }
-        public HidingSpotProp(Model model, Effect effect, Vector3 position, string id)
-            : base(model, effect, position, id)
+        public override Vector3 InteractionPosition => HideStandPoint;
+        public HidingSpotProp(Model model, Effect effect, Vector3 position, string id,
+            Vector3? rotation = null, Vector3? scale = null, Vector3? color = null,
+            Vector3? hideStandPoint = null)
+            : base(model, effect, position, id, rotation, scale, color)
         {
-            HideStandPoint = position; // por defecto, ajustalo al crearlo en Map.cs
+            HideStandPoint = hideStandPoint ?? position;
         }
 
         public override int Priority => 5; // entre pila (0) y puerta (10), ajustable
