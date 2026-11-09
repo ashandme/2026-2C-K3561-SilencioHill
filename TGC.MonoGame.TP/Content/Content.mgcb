@@ -6161,3 +6161,15 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Models/Assets/CleaverAlbedo.png
+
+#begin SFX/CarEngine.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/CarEngine.mp3
+
+#begin SFX/CinematicBoom.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/CinematicBoom.mp3

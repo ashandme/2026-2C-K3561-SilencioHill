@@ -43,6 +43,14 @@ internal sealed class PlayingState : IGameState
     private Enemy _enemy;
     private bool _playerMode = true;
     private bool _caughtOverlayShown;
+    private bool _escaping;
+    private bool _endShown;
+    private float _escapeTimer;
+    private float _elapsed;
+    private float _introTimer;
+    private const float TimeLimitSeconds = 360f;
+    private float _timeRemaining = TimeLimitSeconds;
+    private const float EscapeFadeSeconds = 3f;
     private readonly bool _debugEnabled;
 
     public bool DrawsStatesBelow => false;
@@ -91,6 +99,7 @@ internal sealed class PlayingState : IGameState
         RefreshCollisions();
         ConfigureEnemyForCurrentLevel();
         PlayLevelAmbience();
+        Audio.Play("CinematicBoom");
 
         var candle = context.Content.Load<Model>("Models/Assets/Candle");
         var flashlight = context.Content.Load<Model>("Models/Assets/Linterna");
@@ -147,6 +156,37 @@ internal sealed class PlayingState : IGameState
     internal void UpdateGameplay(GameTime gameTime)
     {
         var elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        _elapsed += elapsedSeconds;
+        _introTimer += elapsedSeconds;
+        if (_escaping)
+        {
+            _escapeTimer += elapsedSeconds;
+            if (_escapeTimer >= EscapeFadeSeconds + 1f && !_endShown)
+            {
+                _endShown = true;
+                var total = (int)_elapsed;
+                _context.States.Push(new EndState(_context, true,
+                    $"Tiempo: {total / 60:00}:{total % 60:00}",
+                    () => new PlayingState(_context),
+                    () => new MainMenuState(_context, () => new PlayingState(_context))));
+            }
+            return;
+        }
+        if (!_endShown)
+        {
+            _timeRemaining = MathF.Max(0f, _timeRemaining - elapsedSeconds);
+            if (_timeRemaining <= 0f)
+            {
+                _endShown = true;
+                Audio.StopMusic();
+                _context.States.Push(new EndState(_context, false,
+                    "No lograste escapar a tiempo",
+                    () => new PlayingState(_context),
+                    () => new MainMenuState(_context, () => new PlayingState(_context))));
+                return;
+            }
+        }
+
         _cameraFlashRemaining = MathF.Max(0f, _cameraFlashRemaining - elapsedSeconds);
         _flashAlpha = MathF.Max(0f, _flashAlpha - elapsedSeconds);
 
@@ -228,6 +268,8 @@ internal sealed class PlayingState : IGameState
         UpdateEnemyNoise(elapsedSeconds);
         _hud.Update(gameTime);
         _interactionManager.UpdateCandidates(_player.Position, _levelManager.Current);
+        if (_interactionManager.Selected is CarProp car)
+            car.Unlocked = _photographed.Count >= TotalEvidence;
         if (_playerMode)
         {
             if (_input.IsCyclePressed()) _interactionManager.CycleSelection();
@@ -243,6 +285,9 @@ internal sealed class PlayingState : IGameState
                     else if (_cameraFlashRemaining <= 0f && _interactionManager.Interact(_player, _levelManager.Current))
                         CollectEvidence(evidence);
                 }
+                else 
+                if (_interactionManager.Selected is CarProp)
+                    TryEscape();
                 else
                     _interactionManager.Interact(_player, _levelManager.Current);
             }
@@ -270,7 +315,8 @@ internal sealed class PlayingState : IGameState
         var smoothing = 1f - MathF.Exp(-elapsedSeconds * 6f);
         _noiseIntensity = MathHelper.Lerp(_noiseIntensity, target, smoothing);
         var lightActive = _player.CurrentItem is FlashlightItem { IsOn: true } or CandleItem { IsLit: true };
-        var noDistortion = lightActive || _player.CurrentItem is CameraItem;
+        var inside = _levelManager.CurrentName?.Equals("inside", StringComparison.OrdinalIgnoreCase) == true;
+        var noDistortion = !inside || lightActive || _player.CurrentItem is CameraItem;
         _distortion = MathHelper.Lerp(_distortion, noDistortion ? 0f : 1f, smoothing);
     }
 
@@ -289,6 +335,7 @@ internal sealed class PlayingState : IGameState
                 if (door.TargetLevel.Equals("inside", StringComparison.OrdinalIgnoreCase))
                     destination.Y += InsidePlayerHeightOffset;
                 _player.Position = destination;
+                _player.SetGroundHeight(0f);
             }
             ConfigureEnemyForCurrentLevel();
             RefreshCollisions();
@@ -329,6 +376,7 @@ internal sealed class PlayingState : IGameState
         _hud.UpdateState(_player, _interactionManager);
         _hud.Draw();
         DrawEvidenceCounter();
+        DrawIntroBanner();
         if (_flashAlpha > 0f)
         {
             _context.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
@@ -337,6 +385,14 @@ internal sealed class PlayingState : IGameState
         }
         if (_playerMode)
             _player.DrawCenterDot(_context.SpriteBatch, _crosshairPixel);
+        
+        if (_escaping)
+        {
+            var fade = MathHelper.Clamp(_escapeTimer / EscapeFadeSeconds, 0f, 1f);
+            _context.SpriteBatch.Begin();
+            _context.SpriteBatch.Draw(_crosshairPixel, _graphics.Viewport.Bounds, Color.Black * fade);
+            _context.SpriteBatch.End();
+        }
     }
 
     private void RenderShadowMap()
@@ -454,6 +510,18 @@ internal sealed class PlayingState : IGameState
             _enemy.SetScale(_enemy.Scale * 3f);
     }
 
+    private void TryEscape()
+    {
+        if (_photographed.Count < TotalEvidence)
+        {
+            _hud.SetStatus($"Faltan pruebas ({_photographed.Count}/{TotalEvidence})", 2.0);
+            return;
+        }
+        _escaping = true;
+        _escapeTimer = 0f;
+        Audio.StopMusic();
+        Audio.Play("CarEngine");
+    }
     private void CollectEvidence(EvidenceProp evidence)
     {
         if (!_photographed.Add(evidence.Id)) return;
@@ -472,13 +540,44 @@ internal sealed class PlayingState : IGameState
                 level.RemoveProp(evidence);
     }
 
+    private void DrawIntroBanner()
+    {
+        const float fadeIn = 0.4f, hold = 2.6f, fadeOut = 2.0f;
+        if (_introTimer >= fadeIn + hold + fadeOut) return;
+
+        var alpha = _introTimer < fadeIn ? _introTimer / fadeIn
+            : _introTimer < fadeIn + hold ? 1f
+            : 1f - (_introTimer - fadeIn - hold) / fadeOut;
+
+        var viewport = _graphics.Viewport;
+        var font = _context.Font;
+        const string text = "RECOLECTA LA EVIDENCIA";
+        var baseSize = font.MeasureString(text);
+        var scale = viewport.Width * 0.55f / baseSize.X;
+        var size = baseSize * scale;
+        var position = new Vector2((viewport.Width - size.X) * 0.5f, viewport.Height * 0.3f);
+        var shadow = Math.Max(2f, scale * 1.5f);
+
+        _context.SpriteBatch.Begin();
+        _context.SpriteBatch.DrawString(font, text, position + new Vector2(shadow, shadow),
+            Color.Black * alpha, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        _context.SpriteBatch.DrawString(font, text, position,
+            new Color(200, 30, 30) * alpha, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        _context.SpriteBatch.End();
+    }
     private void DrawEvidenceCounter()
     {
         var text = $"Pruebas: {_photographed.Count}/{TotalEvidence}";
         var size = _context.Font.MeasureString(text);
         var position = new Vector2((_graphics.Viewport.Width - size.X) * 0.5f, 10f);
+        var seconds = (int)MathF.Ceiling(_timeRemaining);
+        var timeText = $"Tiempo: {seconds / 60:00}:{seconds % 60:00}";
+        var timeSize = _context.Font.MeasureString(timeText);
+        var timePosition = new Vector2((_graphics.Viewport.Width - timeSize.X) * 0.5f, 10f + size.Y);
+        var timeColor = _timeRemaining <= 60f ? Color.Red : Color.White;
         _context.SpriteBatch.Begin();
         _context.SpriteBatch.DrawString(_context.Font, text, position, Color.White);
+        _context.SpriteBatch.DrawString(_context.Font, timeText, timePosition, timeColor);
         _context.SpriteBatch.End();
     }
     internal void RefreshCollisions()

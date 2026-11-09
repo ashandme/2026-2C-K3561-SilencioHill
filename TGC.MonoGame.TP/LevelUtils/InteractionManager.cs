@@ -24,7 +24,7 @@ namespace TGC.MonoGame.TP.LevelUtils
             foreach (var prop in level.EnumerateProps())
             {
                 if (prop is InteractiveProp interactive &&
-                    Vector3.Distance(playerPosition, interactive.InteractionPosition) <= MaxInteractDistance)
+                    Vector3.Distance(playerPosition, interactive.InteractionPosition) <= interactive.InteractionRange)
                 {
                     _candidates.Add(interactive);
                 }

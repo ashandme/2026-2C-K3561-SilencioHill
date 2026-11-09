@@ -114,6 +114,10 @@ namespace TGC.MonoGame.TP.LevelUtils
                         ? new EvidenceProp(model, effect, item.PositionVector,
                             string.IsNullOrWhiteSpace(item.Id) ? "evidence" : item.Id,
                             rotationRadians, item.ScaleVector, color)
+                    : item.InteractiveType.Equals("car", StringComparison.OrdinalIgnoreCase)
+                        ? new CarProp(model, effect, item.PositionVector,
+                            string.IsNullOrWhiteSpace(item.Id) ? "car" : item.Id,
+                            rotationRadians, item.ScaleVector, color)
                     : new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);

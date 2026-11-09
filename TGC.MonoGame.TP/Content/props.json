@@ -1314,6 +1314,36 @@
             "TextureScale": [ 1.0, 1.0 ],
             "TextureAddressMode": "Wrap",
             "InteractiveType": "evidence"
+        },
+        {
+            "Name": "escape_car",
+            "ModelPath": "Models/kenney_retro-urban-kit/truck-green",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/truck",
+            "Color": [ 1.0, 1.0, 1.0 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ -41.5, 0.0, -82.2 ],
+                    "Max": [ 41.5, 100.6, 82.2 ]
+                }
+            ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "car"
+        },
+        {
+            "Name": "inside_exit",
+            "ModelPath": "Models/kenney_retro-urban-kit/door-type-a",
+            "EffectPath": "Effects/BasicTexture",
+            "TexturePath": "Textures/door",
+            "Color": [ 0.6, 0.4, 0.1 ],
+            "InteractiveType": "door",
+            "Id": "salir",
+            "TargetLevel": "outside",
+            "TeleportPosition": [ 490.0, 10.0, 750.0 ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap"
         }
     ]
 }

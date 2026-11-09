@@ -9,6 +9,7 @@ namespace TGC.MonoGame.TP.PropUtils
         public string Id { get; }
         public virtual Vector3 InteractionPosition => Position;
         public virtual int Priority => 0;
+        public virtual float InteractionRange => 45f;
         public virtual bool RemoveAfterInteraction => true;
 
         public InteractiveProp(Model model, Effect effect, Vector3 position, string id, Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
@@ -115,5 +116,28 @@ namespace TGC.MonoGame.TP.PropUtils
             player.ToggleHiding(HideStandPoint);
             return false; // reutilizable: no se saca del mapa como la pila
         }
+        
+    }
+    internal class CarProp : InteractiveProp
+    {
+        public bool Unlocked { get; set; }
+
+        public CarProp(Model model, Effect effect, Vector3 position, string id,
+            Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
+            : base(model, effect, position, id, rotation, scale, color) { }
+
+        public override int Priority => 2;
+        public override float InteractionRange => 115f * Scale.X;
+        public override bool RemoveAfterInteraction => false;
+        public override bool OnInteract(Player player) => true;
+    }
+        internal class EvidenceProp : InteractiveProp
+    {
+        public EvidenceProp(Model model, Effect effect, Vector3 position, string id,
+            Vector3? rotation = null, Vector3? scale = null, Vector3? color = null)
+            : base(model, effect, position, id, rotation, scale, color) { }
+
+        public override int Priority => 3;
+        public override bool OnInteract(Player player) => true; // el conteo lo hace PlayingState
     }
 }

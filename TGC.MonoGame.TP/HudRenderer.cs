@@ -63,6 +63,12 @@ namespace TGC.MonoGame.TP
                         interactionText = player?.CurrentItem is CameraItem
                             ? "E: Fotografiar"
                             : "Equipa la camara (3) para fotografiar";
+                    else 
+                    if (interactionManager.Selected is TGC.MonoGame.TP.PropUtils.CarProp car)
+                        interactionText = car.Unlocked ? "E: Escapar" : "Necesitas las 5 pruebas para escapar";
+                    else 
+                    if (interactionManager.Selected is TGC.MonoGame.TP.PropUtils.DoorProp)
+                        interactionText = "E: Abrir puerta";
                     else
                         interactionText = $"E: Agarrar '{interactionManager.Selected.Id}'";
                     if (interactionManager.CandidateCount > 1)
