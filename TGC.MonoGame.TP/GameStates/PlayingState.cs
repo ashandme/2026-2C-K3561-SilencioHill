@@ -36,6 +36,7 @@ internal sealed class PlayingState : IGameState
     private float _flashAlpha;
     private float _cameraFlashRemaining;
     private float _noiseIntensity;
+    private float _distortion;
     private const int TotalEvidence = 5; 
     private readonly HashSet<string> _photographed = new();
     private readonly Texture2D _crosshairPixel;
@@ -159,8 +160,8 @@ internal sealed class PlayingState : IGameState
         SceneLighting.IsSpotlight = false;
         SceneLighting.SpotInnerCosine = 0.94f;
         SceneLighting.SpotOuterCosine = 0.82f;
-        SceneLighting.Attenuation = new Vector3(1f, 0.002f, 0.00002f);
-        SceneLighting.LightColor = Vector3.Zero;
+        SceneLighting.Attenuation = new Vector3(1f, 0.008f, 0.0001f);
+        SceneLighting.LightColor = new Vector3(0.16f, 0.16f, 0.22f);
         bool isInside = _levelManager.CurrentName?.Equals("inside", StringComparison.OrdinalIgnoreCase) == true;
         SceneLighting.AmbientIntensity = isInside ? 0.24f : 0.08f;
         SceneLighting.DiffuseIntensity = isInside ? 0.58f : 1f;
@@ -268,6 +269,9 @@ internal sealed class PlayingState : IGameState
 
         var smoothing = 1f - MathF.Exp(-elapsedSeconds * 6f);
         _noiseIntensity = MathHelper.Lerp(_noiseIntensity, target, smoothing);
+        var lightActive = _player.CurrentItem is FlashlightItem { IsOn: true } or CandleItem { IsLit: true };
+        var noDistortion = lightActive || _player.CurrentItem is CameraItem;
+        _distortion = MathHelper.Lerp(_distortion, noDistortion ? 0f : 1f, smoothing);
     }
 
     private void PlayLevelAmbience() => Audio.PlayMusic(_levelManager.CurrentName == "inside" ? "IndoorAmbience" : "NighttimeForestAmbience");
@@ -319,6 +323,7 @@ internal sealed class PlayingState : IGameState
         _enemyNoiseEffect.Parameters["baseTexture"]?.SetValue(_sceneRenderTarget);
         _enemyNoiseEffect.Parameters["time"]?.SetValue((float)gameTime.TotalGameTime.TotalSeconds);
         _enemyNoiseEffect.Parameters["intensity"]?.SetValue(_noiseIntensity);
+        _enemyNoiseEffect.Parameters["distortion"]?.SetValue(_distortion);
         _fullScreenQuad.Draw(_enemyNoiseEffect);
         _graphics.DepthStencilState = DepthStencilState.Default;
         _hud.UpdateState(_player, _interactionManager);

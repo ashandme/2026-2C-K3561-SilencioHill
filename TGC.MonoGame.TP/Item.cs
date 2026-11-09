@@ -81,7 +81,7 @@ namespace TGC.MonoGame.TP
             IsLit = false;
             HandScale = Vector3.One * 0.007f;
             MaxDurationSeconds = 120f; // default 2 minutes of burn time
-            RemainingSeconds = MaxDurationSeconds;
+            RemainingSeconds = 5f;
         }
 
         public override void Use(Player player)
