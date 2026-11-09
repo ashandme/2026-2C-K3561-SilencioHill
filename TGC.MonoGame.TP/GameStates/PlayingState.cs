@@ -172,8 +172,9 @@ internal sealed class PlayingState : IGameState
         {
             SceneLighting.FlashlightEnabled = true;
             SceneLighting.LightPosition = _player.CameraPosition;
-            SceneLighting.LightColor = new Vector3(4f, 3.8f, 3.4f);
-            SceneLighting.Attenuation = new Vector3(1f, 0.0005f, 0.000001f);
+            float flash = _cameraFlashRemaining * _cameraFlashRemaining;
+            SceneLighting.LightColor = new Vector3(4f, 3.8f, 3.4f) * flash;
+            SceneLighting.Attenuation = new Vector3(1f, 0.004f, 0.00005f);
         }
 
         else if (current is FlashlightItem light && light.IsOn && light.AttachToCamera)
@@ -201,7 +202,11 @@ internal sealed class PlayingState : IGameState
                 + _player.RightDirection * candle.CameraLocalOffset.X
                 + _player.UpDirection * candle.CameraLocalOffset.Y
                 + _player.FrontDirection * candle.CameraLocalOffset.Z;
-            SceneLighting.LightColor = new Vector3(1f, 0.65f, 0.12f);
+            SceneLighting.LightColor = new Vector3(3f, 1.95f, 0.36f);
+            SceneLighting.Attenuation = new Vector3(1f, 0.03f, 0.0008f);
+            SceneLighting.AmbientIntensity = 0.01f;
+            SceneLighting.DiffuseIntensity = 1f;
+            SceneLighting.UpwardLightScale = 0.8f;
             // A candle is a point light; one wide frustum along the view direction covers
             // what the player can see (cheaper than a 6-face cube shadow map).
             SceneLighting.LightDirection = _player.FrontDirection;
