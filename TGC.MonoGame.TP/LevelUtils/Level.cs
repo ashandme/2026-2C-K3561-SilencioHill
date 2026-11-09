@@ -18,22 +18,25 @@ internal class Level
     private readonly string _enemyRoute;
     private readonly SkyboxSettings? _skyboxSettings;
     public FogSettings? Fog { get; }
+    public BlinnPhongSettings BlinnPhong { get; }
     private Skybox? _skybox;
     public Enemy Enemy { get; private set; }
     public Skybox? Skybox => _skybox;
 
     // A simple identifier
     public string Name { get; }
-    public Level(string name, Map[] maps, string enemyRoute = "Content/enemyRoute.json", SkyboxSettings? skyboxSettings = null, FogSettings? fog = null)
+    public Level(string name, Map[] maps, string enemyRoute = "Content/enemyRoute.json", SkyboxSettings? skyboxSettings = null, FogSettings? fog = null, BlinnPhongSettings? blinnPhong = null)
     {
         Name = name ?? "unnamed";
         _maps = maps ?? new Map[0];
         _enemyRoute = enemyRoute;
         _skyboxSettings = skyboxSettings;
         Fog = fog;
+        BlinnPhong = blinnPhong ?? new BlinnPhongSettings();
     }
     public void LoadLevelContent(ContentManager content, GraphicsDevice graphics)
     {
+        BlinnPhong.Apply();
         _skybox = _skyboxSettings == null ? null : new Skybox(_skyboxSettings, graphics, content);
         for (int i = 0; i < _maps.Length; i++)
         {

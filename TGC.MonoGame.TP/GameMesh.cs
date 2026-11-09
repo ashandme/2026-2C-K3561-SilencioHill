@@ -197,10 +197,10 @@ namespace TGC.MonoGame.TP{
             Effect.Parameters["ambientColor"]?.SetValue(new Vector3(SceneLighting.AmbientIntensity) * lightColor);
             Effect.Parameters["diffuseColor"]?.SetValue(lightColor * SceneLighting.DiffuseIntensity);
             Effect.Parameters["specularColor"]?.SetValue(lightColor * SceneLighting.DiffuseIntensity);
-            Effect.Parameters["KAmbient"]?.SetValue(1f);
-            Effect.Parameters["KDiffuse"]?.SetValue(1f);
-            Effect.Parameters["KSpecular"]?.SetValue(0.35f);
-            Effect.Parameters["shininess"]?.SetValue(16f);
+            Effect.Parameters["KAmbient"]?.SetValue(SceneLighting.KAmbient);
+            Effect.Parameters["KDiffuse"]?.SetValue(SceneLighting.KDiffuse);
+            Effect.Parameters["KSpecular"]?.SetValue(SceneLighting.KSpecular);
+            Effect.Parameters["shininess"]?.SetValue(SceneLighting.Shininess);
             if (Effect.Parameters["lightCount"] != null)
             {
                 _paramCache?.LightCount?.SetValue(1);

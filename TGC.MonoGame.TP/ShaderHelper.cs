@@ -68,6 +68,7 @@ namespace TGC.MonoGame.TP
             TrySetFloatParameter(effect, "KDiffuse", material.DiffuseCoefficient);
             TrySetFloatParameter(effect, "KSpecular", material.SpecularCoefficient);
             TrySetFloatParameter(effect, "shininess", material.Shininess);
+            
         }
 
         // Prepare a Blinn-Phong style effect: clone, set texture (if provided) and sensible
@@ -103,7 +104,7 @@ namespace TGC.MonoGame.TP
             TrySetFloatParameter(effect, "KDiffuse", 0.8f);
             TrySetFloatParameter(effect, "KSpecular", 0.7f);
             TrySetFloatParameter(effect, "shininess", 16f);
-
+            TrySetFloatParameter(effect, "alphaCutoff", 0.05f);
             // Initialize first light slot and set lightCount to 1 for shaders that support multiple lights
             try
             {

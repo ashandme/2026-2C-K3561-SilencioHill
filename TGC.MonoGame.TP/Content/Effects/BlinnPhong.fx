@@ -38,7 +38,7 @@ float2 TextureScale;
 float4x4 lightViewProjection;
 float shadowsEnabled;
 float2 shadowMapSize;
-
+float alphaCutoff;
 // Same bias constants as ShadowMap.fx (depth is stored as z/w by its DepthPass technique).
 static const float modulatedEpsilon = 0.000041200182749889791011810302734375;
 static const float maxEpsilon = 0.000023200045689009130001068115234375;
@@ -47,8 +47,11 @@ texture baseTexture;
 sampler2D textureSampler : register(s0) = sampler_state
 {
     Texture = (baseTexture);
-    MagFilter = Linear;
-    MinFilter = Linear;
+        MagFilter = Point;
+        MinFilter = Point;
+        MipFilter = Point;
+        AddressU = Wrap;
+        AddressV = Wrap;
 };
 
 texture shadowMap;
@@ -124,9 +127,10 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     float3 viewDirection = normalize(eyePosition - input.WorldPosition.xyz);
     float3 halfVector = normalize(surfaceToLight + viewDirection);
 
-	// Get the texture texel
+	// CAMBIO
     float4 texelColor = tex2D(textureSampler, input.TextureCoordinates);
-
+    clip(texelColor.a - alphaCutoff);
+        
 	// Calculate the diffuse light
     float NdotL = saturate(dot(normal, surfaceToLight));
     float upwardFactor = lerp(1.0, upwardLightScale, saturate(normal.y));
@@ -159,7 +163,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     float shadowed = lerp(0.15, 1.0, notInShadow);
     diffuseLight *= shadowed;
     specularLight *= shadowed;
-
+    
     // Final calculation
     float4 finalColor = float4(saturate(ambientColor * KAmbient + diffuseLight) * texelColor.rgb + specularLight, 1.0);
     float fogFactor = saturate((length(input.WorldPosition.xyz - eyePosition) - fogStart) / max(fogEnd - fogStart, 0.001));

@@ -84,6 +84,13 @@ internal sealed class PlayingState : IGameState
             EndDistance = 350f,
             Density = 0.01f,
             Enabled = true
+        }, blinnPhong: new BlinnPhongSettings
+        {
+            // Outside is lit by the night sky, so it reads brighter than the inside.
+            KAmbient = 8f,
+            KDiffuse = 1.5f,
+            KSpecular = 0.5f,
+            Shininess = 16f
         })
         {
             BackgroundColor = new Color(0.24f, 0.22f, 0.30f)

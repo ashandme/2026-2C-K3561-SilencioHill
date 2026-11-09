@@ -882,7 +882,7 @@
         {
             "Name": "outside_01",
             "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/metal",
             "Color": [
                 1.0,
@@ -913,7 +913,7 @@
         {
             "Name": "outside_02",
             "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-small",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/treeA",
             "Color": [
                 0.0,
@@ -944,7 +944,7 @@
         {
             "Name": "outside_03",
             "ModelPath": "Models/kenney_retro-urban-kit/planks",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/planks",
             "Color": [
                 1.0,
@@ -975,7 +975,7 @@
         {
             "Name": "outside_04",
             "ModelPath": "Models/kenney_retro-urban-kit/pallet",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/planks",
             "Color": [
                 1.0,
@@ -1006,7 +1006,7 @@
         {
             "Name": "outside_05",
             "ModelPath": "Models/kenney_retro-urban-kit/tree-pine-large",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/treeA",
             "Color": [
                 0.0,
@@ -1037,7 +1037,7 @@
         {
             "Name": "outside_06",
             "ModelPath": "Models/kenney_retro-urban-kit/wall-a",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/wall",
             "Color": [
                 1.0,
@@ -1068,7 +1068,7 @@
         {
             "Name": "outside_07",
             "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/wall_lines",
             "Color": [
                 0.5,
@@ -1099,8 +1099,8 @@
         {
             "Name": "outside_08",
             "ModelPath": "Models/kenney_retro-urban-kit/wall-a-door",
-            "EffectPath": "Effects/BasicTexture",
-            "TexturePath": "Textures/door",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/doors",
             "Color": [
                 0.6,
                 0.4,
@@ -1143,7 +1143,7 @@
         {
             "Name": "outside_09",
             "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/roof",
             "Color": [
                 0.35,
@@ -1159,7 +1159,7 @@
         {
             "Name": "outside_10",
             "ModelPath": "Models/kenney_retro-urban-kit/detail-block",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/wall",
             "Color": [
                 0.5,
@@ -1190,7 +1190,7 @@
         {
             "Name": "outside_11",
             "ModelPath": "Models/kenney_retro-urban-kit/wall-a-roof-slant",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/roof",
             "Color": [
                 0.35,
@@ -1206,7 +1206,7 @@
         {
             "Name": "outside_12",
             "ModelPath": "Models/Assets/rock",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/rock",
             "Color": [
                 0.5,
@@ -1237,7 +1237,7 @@
         {
             "Name": "outside_13",
             "ModelPath": "Models/Assets/Skull",
-            "EffectPath": "Effects/BasicTexture",
+            "EffectPath": "Effects/BlinnPhong",
             "TexturePath": "Textures/rock",
             "Color": [
                 0.5,

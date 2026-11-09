@@ -18,6 +18,11 @@ namespace TGC.MonoGame.TP
         public static Vector3 LightColor { get; set; } = new Vector3(1f, 1f, 1f);
         public static float AmbientIntensity { get; set; } = 0.08f;
         public static float DiffuseIntensity { get; set; } = 1f;
+        // Blinn-Phong coefficients of the active level (set by Level on load).
+        public static float KAmbient { get; set; } = 1f;
+        public static float KDiffuse { get; set; } = 1f;
+        public static float KSpecular { get; set; } = 0.35f;
+        public static float Shininess { get; set; } = 16f;
         // Camera (eye) position computed once per frame by the game
         public static Vector3 EyePosition { get; set; } = Vector3.Zero;
         public static Vector3 FogColor { get; set; } = Vector3.Zero;

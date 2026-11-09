@@ -40,8 +40,7 @@ namespace TGC.MonoGame.TP.LevelUtils
         internal virtual void LoadContent(ContentManager content)
         {
             // Cargas los shaders y modelos UNA sola vez
-            var shader = content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicShader");
-            var basicTextureShader = content.Load<Effect>(TGCGame.ContentFolderEffects + "BasicTexture");
+            var blinnPhongShader = content.Load<Effect>(TGCGame.ContentFolderEffects + "BlinnPhong");
 
             var treeModel = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/tree-pine-small");
             var treeModelLarge = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/tree-pine-large");
@@ -59,12 +58,11 @@ namespace TGC.MonoGame.TP.LevelUtils
             Texture2D treeATexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "treeA");
             Texture2D treeBTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "treeB");
             Texture2D wallTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "wall");
-            var baseEffect = basicTextureShader ?? shader;
 
-            Effect? wallEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, wallTexture);
-            Effect? grassEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, grassTexture);
-            Effect? treeAEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, treeATexture);
-            Effect? treeBEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, treeBTexture);
+            Effect? wallEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, wallTexture);
+            Effect? grassEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, grassTexture);
+            Effect? treeAEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, treeATexture);
+            Effect? treeBEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, treeBTexture);
 
             int gridSize = 16;
             float grassSize = 100f;
@@ -117,8 +115,7 @@ namespace TGC.MonoGame.TP.LevelUtils
 
                 if (batteryModel != null)
                 {
-                    // Use BasicTexture shader if available, otherwise fallback to base shader
-                    var batteryEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, metalTexture);
+                    var batteryEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, metalTexture);
 
                     // Place the battery somewhere in the scene (adjust coordinates as needed)
                     var batteryPos = new Vector3(30f, 0f, 30f);
@@ -146,7 +143,7 @@ namespace TGC.MonoGame.TP.LevelUtils
 
                 if (hidingModel != null)
                 {
-                    var hidingEffect = ShaderHelper.PrepareEffectWithTexture(basicTextureShader ?? shader, metalTexture);
+                    var hidingEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, metalTexture);
                     var hidingPos = new Vector3(510f, 0f, 600f);
                     var hidingSpot = new HidingSpotProp(hidingModel, hidingEffect, hidingPos, "hiding_01");
                     hidingSpot.Scale *= 0.6f;
