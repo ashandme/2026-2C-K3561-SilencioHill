@@ -31,6 +31,14 @@ internal sealed class PlayingState : IGameState
     private readonly CollisionHandler _collisionHandler = new();
     private readonly FullScreenQuad _fullScreenQuad;
     private readonly RenderTarget2D _sceneRenderTarget;
+    private readonly Effect _bloomEffect;
+    private readonly RenderTarget2D _bloomRenderTarget;
+    private readonly RenderTarget2D _bloomBlurRenderTarget;
+    private readonly RenderTarget2D _bloomCompositeRenderTarget;
+    private static readonly Vector3 GhostBloomColor = new(0.55f, 0.8f, 1f);
+    private const float GhostBloomIntensity = 1.3f;
+    private const float GhostBloomBlurSpacing = 1.5f;
+    private const int GhostBloomBlurIterations = 2;
     private readonly HudRenderer _hud;
     private readonly InteractionManager _interactionManager;
     private float _flashAlpha;
@@ -71,6 +79,7 @@ internal sealed class PlayingState : IGameState
         _enemyNoiseEffect = context.Content.Load<Effect>("Effects/EnemyNoise");
         _shadowEffect = context.Content.Load<Effect>("Effects/ShadowMap");
         _shadowEffect.CurrentTechnique = _shadowEffect.Techniques["DepthPass"];
+        _bloomEffect = context.Content.Load<Effect>("Effects/Bloom");
 
         _levelManager = new LevelManager();
         _levelManager.AddLevel("outside", new Level("outside", [new Map(), new MapJson { filePath = "Content/outsidemap.json" }], skyboxSettings: new SkyboxSettings
@@ -95,7 +104,7 @@ internal sealed class PlayingState : IGameState
         {
             BackgroundColor = new Color(0.24f, 0.22f, 0.30f)
         });
-        _levelManager.AddLevel("inside", new Level("inside", [new MapJson { filePath = "Content/insidemap.json" }]));
+        _levelManager.AddLevel("inside", new Level("inside", [new MapJson { filePath = "Content/insidemap.json" }], enemyRoute: "Content/insideRoute.json"));
         var center = new Point(_graphics.Viewport.Width / 2, _graphics.Viewport.Height / 2);
         _player = new Player(_graphics.Viewport.AspectRatio, new Vector3(0, 10, 50), center);
         _spectator = new FreeCamera(_graphics.Viewport.AspectRatio, new Vector3(0, 50, 150), center);
@@ -124,6 +133,11 @@ internal sealed class PlayingState : IGameState
         cameraItem.Flash += TriggerCameraFlash;
         _fullScreenQuad = new FullScreenQuad(_graphics);
         _sceneRenderTarget = new RenderTarget2D(_graphics, _graphics.Viewport.Width, _graphics.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
+        int bloomWidth = Math.Max(1, _graphics.Viewport.Width / 2);
+        int bloomHeight = Math.Max(1, _graphics.Viewport.Height / 2);
+        _bloomRenderTarget = new RenderTarget2D(_graphics, bloomWidth, bloomHeight, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
+        _bloomBlurRenderTarget = new RenderTarget2D(_graphics, bloomWidth, bloomHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
+        _bloomCompositeRenderTarget = new RenderTarget2D(_graphics, _graphics.Viewport.Width, _graphics.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
         _shadowRenderTarget = new RenderTarget2D(_graphics, 1024, 1024, false, SurfaceFormat.Single, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
         _hud = new HudRenderer(context.SpriteBatch, context.Font, _graphics);
         _interactionManager = new InteractionManager();
@@ -372,9 +386,11 @@ internal sealed class PlayingState : IGameState
         SceneLighting.FogDensity = MathF.Max(fog?.Density ?? 0f, 0f);
         _levelManager.Current?.Draw(view, _projection);
         if (_playerMode) _player.DrawHeldItem(_effect, _projection, _graphics);
+        // Bloom is composited before EnemyNoise so the distortion also warps the glow.
+        var postSource = RenderGhostBloom(view) ? _bloomCompositeRenderTarget : _sceneRenderTarget;
         _graphics.SetRenderTarget(null);
         _graphics.DepthStencilState = DepthStencilState.None;
-        _enemyNoiseEffect.Parameters["baseTexture"]?.SetValue(_sceneRenderTarget);
+        _enemyNoiseEffect.Parameters["baseTexture"]?.SetValue(postSource);
         _enemyNoiseEffect.Parameters["time"]?.SetValue((float)gameTime.TotalGameTime.TotalSeconds);
         _enemyNoiseEffect.Parameters["intensity"]?.SetValue(_noiseIntensity);
         _enemyNoiseEffect.Parameters["distortion"]?.SetValue(_distortion);
@@ -399,6 +415,73 @@ internal sealed class PlayingState : IGameState
             _context.SpriteBatch.Begin();
             _context.SpriteBatch.Draw(_crosshairPixel, _graphics.Viewport.Bounds, Color.Black * fade);
             _context.SpriteBatch.End();
+        }
+    }
+
+    // Renders the ghost's glow and composites it over the scene into _bloomCompositeRenderTarget.
+    // Returns false (and draws nothing) when the ghost isn't on screen.
+    private bool RenderGhostBloom(Matrix view)
+    {
+        var level = _levelManager.Current;
+        if (level == null || _enemy == null || !_enemy.Visible || _enemy.State == EnemyState.Invisible)
+            return false;
+
+        var viewProjection = view * _projection;
+        if (new BoundingFrustum(viewProjection).Contains(new BoundingSphere(_enemy.Position, 60f)) == ContainmentType.Disjoint)
+            return false;
+
+        var previousBlend = _graphics.BlendState;
+        var previousDepth = _graphics.DepthStencilState;
+        var previousRasterizer = _graphics.RasterizerState;
+        try
+        {
+            // 1. Level geometry writes depth (in black) so walls hide the ghost's glow.
+            _graphics.SetRenderTarget(_bloomRenderTarget);
+            _graphics.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, Color.Black, 1f, 0);
+            _graphics.BlendState = BlendState.Opaque;
+            _graphics.DepthStencilState = DepthStencilState.Default;
+            _graphics.RasterizerState = RasterizerState.CullCounterClockwise;
+            _bloomEffect.CurrentTechnique = _bloomEffect.Techniques["Occluder"];
+            level.DrawOccluders(viewProjection, _bloomEffect);
+
+            // 2. The ghost in its glow color, faded by the level fog.
+            _bloomEffect.CurrentTechnique = _bloomEffect.Techniques["BloomPass"];
+            _bloomEffect.Parameters["bloomColor"]?.SetValue(GhostBloomColor);
+            _bloomEffect.Parameters["fogEnabled"]?.SetValue(SceneLighting.FogEnabled ? 1f : 0f);
+            _bloomEffect.Parameters["fogStart"]?.SetValue(SceneLighting.FogStartDistance);
+            _bloomEffect.Parameters["fogEnd"]?.SetValue(SceneLighting.FogEndDistance);
+            _enemy.DrawShadow(viewProjection, _bloomEffect);
+
+            // 3. Separable gaussian blur, ping-ponging between the two half-res targets.
+            _bloomEffect.CurrentTechnique = _bloomEffect.Techniques["Blur"];
+            var texel = new Vector2(1f / _bloomRenderTarget.Width, 1f / _bloomRenderTarget.Height) * GhostBloomBlurSpacing;
+            for (int i = 0; i < GhostBloomBlurIterations; i++)
+            {
+                _graphics.SetRenderTarget(_bloomBlurRenderTarget);
+                _bloomEffect.Parameters["baseTexture"]?.SetValue(_bloomRenderTarget);
+                _bloomEffect.Parameters["blurDirection"]?.SetValue(new Vector2(texel.X, 0f));
+                _fullScreenQuad.Draw(_bloomEffect);
+
+                _graphics.SetRenderTarget(_bloomRenderTarget);
+                _bloomEffect.Parameters["baseTexture"]?.SetValue(_bloomBlurRenderTarget);
+                _bloomEffect.Parameters["blurDirection"]?.SetValue(new Vector2(0f, texel.Y));
+                _fullScreenQuad.Draw(_bloomEffect);
+            }
+
+            // 4. Scene + glow.
+            _graphics.SetRenderTarget(_bloomCompositeRenderTarget);
+            _bloomEffect.CurrentTechnique = _bloomEffect.Techniques["Integrate"];
+            _bloomEffect.Parameters["baseTexture"]?.SetValue(_sceneRenderTarget);
+            _bloomEffect.Parameters["bloomTexture"]?.SetValue(_bloomRenderTarget);
+            _bloomEffect.Parameters["bloomIntensity"]?.SetValue(GhostBloomIntensity);
+            _fullScreenQuad.Draw(_bloomEffect);
+            return true;
+        }
+        finally
+        {
+            _graphics.BlendState = previousBlend;
+            _graphics.DepthStencilState = previousDepth;
+            _graphics.RasterizerState = previousRasterizer;
         }
     }
 

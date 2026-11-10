@@ -98,6 +98,13 @@ internal class Level
         Enemy?.DrawShadow(viewProjection, shadowEffect);
     }
 
+    // Draws only the map geometry (no enemy) with the given effect; used to occlude the ghost bloom.
+    public void DrawOccluders(Matrix viewProjection, Effect effect)
+    {
+        for (int i = 0; i < _maps.Length; i++)
+            _maps[i].DrawShadow(viewProjection, effect);
+    }
+
     public IReadOnlyList<Prop> GetProps()
     {
         List<Prop> allProps = new List<Prop>();

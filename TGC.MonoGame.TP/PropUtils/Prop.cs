@@ -43,6 +43,11 @@ internal class Prop
         get => Mesh.TextureAddressMode;
         set => Mesh.TextureAddressMode = value;
     }
+    public BlinnPhongMaterialData? BlinnPhong
+    {
+        get => Mesh.Material.BlinnPhong;
+        set => Mesh.Material.BlinnPhong = value;
+    }
     public Texture2D? Texture
     {
         get => Mesh.Texture;

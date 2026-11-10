@@ -138,6 +138,7 @@ namespace TGC.MonoGame.TP.LevelUtils
                     stairs.AnimationDuration = item.AnimationDuration;
                 }
                 p.AlwaysVisible = item.AlwaysVisible;
+                p.BlinnPhong = item.Material;
                 p.TextureScale = item.TextureScaleVector;
                 p.TextureAddressMode = ParseTextureAddressMode(item.TextureAddressMode);
                 if (texture != null) p.Texture = texture;

@@ -49,7 +49,8 @@ sampler2D textureSampler : register(s0) = sampler_state
     Texture = (baseTexture);
         MagFilter = Point;
         MinFilter = Point;
-        MipFilter = Point;
+        // Blend between mip levels so distant textures don't shimmer; Mag stays Point for the pixel look.
+        MipFilter = Linear;
         AddressU = Wrap;
         AddressV = Wrap;
 };

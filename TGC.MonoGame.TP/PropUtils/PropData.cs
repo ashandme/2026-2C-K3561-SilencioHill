@@ -26,6 +26,7 @@ public class PropData
     public float[]? TextureScale { get; set; }
     public string TextureAddressMode { get; set; } = "Wrap";
     public bool AlwaysVisible { get; set; }
+    public BlinnPhongMaterialData? Material { get; set; }
     public List<CollisionShapeData> Collisions { get; set; } = new();
     public string InteractiveType { get; set; } = string.Empty;
     public string Id { get; set; } = string.Empty;
@@ -56,6 +57,7 @@ public class PropData
             TextureScale = TextureScale,
             TextureAddressMode = TextureAddressMode,
             AlwaysVisible = AlwaysVisible,
+            Material = Material,
             Collisions = Collisions,
             InteractiveType = InteractiveType,
             Id = string.IsNullOrWhiteSpace(instance.Id) ? Id : instance.Id,

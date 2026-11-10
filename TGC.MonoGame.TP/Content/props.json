@@ -243,6 +243,32 @@
               "Max": [
                 1900,
                 2600.0,
+                4200
+              ]
+            },
+            {
+              "Type": "aabb",
+              "Min": [
+                2000,
+                1350.0,
+                4600
+              ],
+              "Max": [
+                1900,
+                2600.0,
+                6200
+              ]
+            },
+            {
+              "Type": "aabb",
+              "Min": [
+                2000,
+                1350.0,
+                6600
+              ],
+              "Max": [
+                1900,
+                2600.0,
                 7900
               ]
             },
@@ -270,6 +296,19 @@
                 1980,
                 2600.0,
                 4060
+              ]
+            },
+            {
+              "Type": "aabb",
+              "Min": [
+                -1940,
+                1350.0,
+                5900
+              ],
+              "Max": [
+                1980,
+                2600.0,
+                6000
               ]
             },
             {
@@ -355,8 +394,8 @@
                 0.3
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.3,
+                0.3
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -401,6 +440,11 @@
                 0.0,
                 0.0
             ],
+            "Material": {
+              "KDiffuse": 1.1,
+              "KSpecular": 1.6,
+              "Shininess": 96.0
+            },
             "TextureScale": [
                 0.1,
                 0.1
@@ -433,8 +477,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -480,8 +524,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -511,8 +555,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -542,8 +586,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -557,6 +601,11 @@
                 0.8,
                 0.2
             ],
+            "Material": {
+              "KDiffuse": 1.1,
+              "KSpecular": 1.6,
+              "Shininess": 96.0
+            },
             "Collisions": [
                 {
                     "Type": "aabb",
@@ -573,8 +622,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -604,8 +653,8 @@
             }
           ],
           "TextureScale": [
-            1.0,
-            1.0
+            0.1,
+            0.1
           ],
           "TextureAddressMode": "Wrap"
         },
@@ -619,6 +668,11 @@
                 0.8,
                 0.2
             ],
+            "Material": {
+              "KDiffuse": 1.1,
+              "KSpecular": 1.6,
+              "Shininess": 80.0
+            },
             "Collisions": [
                 {
                     "Type": "aabb",
@@ -635,8 +689,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -674,6 +728,11 @@
             "Name": "inside_13",
             "ModelPath": "Models/kenney_furniture-kit/bathtub",
             "EffectPath": "Effects/BlinnPhong",
+            "Material": {
+                "KDiffuse": 1.1,
+                "KSpecular": 1.6,
+                "Shininess": 96.0
+            },
             "TexturePath": "Textures/Horror_Wall_02",
             "Color": [
                 0.2,
@@ -696,8 +755,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap",
             "InteractiveType": "hiding",
@@ -712,6 +771,11 @@
             "Name": "inside_14",
             "ModelPath": "Models/kenney_furniture-kit/toilet",
             "EffectPath": "Effects/BlinnPhong",
+            "Material": {
+                "KDiffuse": 1.1,
+                "KSpecular": 1.6,
+                "Shininess": 96.0
+            },
             "TexturePath": "Textures/Horror_Wall_02",
             "Color": [
                 0.2,
@@ -734,8 +798,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },
@@ -743,6 +807,11 @@
             "Name": "inside_15",
             "ModelPath": "Models/kenney_furniture-kit/bathroomSink",
             "EffectPath": "Effects/BlinnPhong",
+            "Material": {
+                "KDiffuse": 1.1,
+                "KSpecular": 1.6,
+                "Shininess": 96.0
+            },
             "TexturePath": "Textures/Horror_Wall_02",
             "Color": [
                 0.2,
@@ -750,8 +819,8 @@
                 1.0
             ],
             "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },

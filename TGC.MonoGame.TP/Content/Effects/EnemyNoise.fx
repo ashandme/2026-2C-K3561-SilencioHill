@@ -7,6 +7,8 @@
 #define PS_SHADERMODEL ps_4_0_level_9_1
 #endif
 // RES: THE BOOK OF SHADERS
+// https://thebookofshaders.com/11/
+
 texture baseTexture;
 sampler2D textureSampler = sampler_state
 {
@@ -40,7 +42,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input)
     output.TextureCoordinates = input.TextureCoordinates;
     return output;
 }
-
+// pseudo-random hash numeros magicos
 float4 MainPS(VertexShaderOutput input) : COLOR
 {
     float2 uv = input.TextureCoordinates;

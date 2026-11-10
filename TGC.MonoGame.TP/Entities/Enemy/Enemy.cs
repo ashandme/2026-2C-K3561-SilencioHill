@@ -63,7 +63,10 @@ namespace TGC.MonoGame.TP.Entities.Enemy
         private const float ChaseGiveUpDistance = 600f;      // si te alejas mas que esto durante la persecucion, abandona
 
         // --- Roaming ---
-        private readonly List<Vector3> _waypoints = new();
+        // Una ruta por piso; _waypoints apunta a la del piso actual del enemigo.
+        private readonly List<(float MinPlayerY, List<Vector3> Waypoints)> _routes = new();
+        private int _routeIndex;
+        private List<Vector3> _waypoints = new();
         private int _currentWaypointIndex;
         private const float WaypointReachDistance = 5f;
         private const float WaypointWaitSeconds = 1.5f;
@@ -91,11 +94,12 @@ namespace TGC.MonoGame.TP.Entities.Enemy
             AddSensor(_hidingSpotRange);
             AddSensor(_frontSight);
             AddSensor(_rearSight);
-            LoadWaypoints(waypointsJsonPath);
-            SetPosition(_waypoints.Count > 0 ? _waypoints[0] : Vector3.Zero);
+            var spawn = LoadWaypoints(waypointsJsonPath);
+            SetPosition(spawn ?? (_waypoints.Count > 0 ? _waypoints[0] : Vector3.Zero));
         }
 
-        private void LoadWaypoints(string filePath)
+        // Carga las rutas y devuelve el punto de aparicion (si el JSON lo define).
+        private Vector3? LoadWaypoints(string filePath)
         {
             var fullPath = Path.Combine(AppContext.BaseDirectory, filePath);
             if (!File.Exists(fullPath))
@@ -107,21 +111,69 @@ namespace TGC.MonoGame.TP.Entities.Enemy
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var routeData = JsonSerializer.Deserialize<RouteData>(jsonText, options);
 
-            _waypoints.Clear();
-            if (routeData?.Waypoints == null) return;
-
-            foreach (var point in routeData.Waypoints)
+            _routes.Clear();
+            _routes.Add((float.MinValue, ToVectors(routeData?.Waypoints)));
+            if (routeData?.Floors != null)
             {
-                if (point is { Length: >= 3 })
+                foreach (var floor in routeData.Floors)
                 {
-                    _waypoints.Add(new Vector3(point[0], point[1], point[2]));
+                    var points = ToVectors(floor.Waypoints);
+                    if (points.Count > 0) _routes.Add((floor.MinPlayerY, points));
                 }
             }
+            UseRoute(0);
+
+            return routeData?.Spawn is { Length: >= 3 } s ? new Vector3(s[0], s[1], s[2]) : null;
+        }
+
+        private static List<Vector3> ToVectors(List<float[]>? points)
+        {
+            var result = new List<Vector3>();
+            if (points == null) return result;
+            foreach (var point in points)
+            {
+                if (point is { Length: >= 3 })
+                    result.Add(new Vector3(point[0], point[1], point[2]));
+            }
+            return result;
+        }
+
+        // Ruta del piso donde esta el jugador: la de mayor MinPlayerY que no supere su altura.
+        private int RouteIndexFor(float playerY)
+        {
+            var best = 0;
+            for (int i = 1; i < _routes.Count; i++)
+            {
+                if (playerY >= _routes[i].MinPlayerY && _routes[i].MinPlayerY >= _routes[best].MinPlayerY)
+                    best = i;
+            }
+            return best;
+        }
+
+        private void UseRoute(int index)
+        {
+            _routeIndex = index;
+            _waypoints = _routes[index].Waypoints;
+            _currentWaypointIndex = 0;
+            _waitTimer = 0f;
+        }
+
+        // El enemigo no sube escaleras: si el jugador cambia de piso, desaparece
+        // y reaparece mas tarde en la ruta del piso del jugador.
+        private void FollowPlayerFloor(Player player)
+        {
+            var playerRoute = RouteIndexFor(player.Position.Y);
+            if (playerRoute == _routeIndex) return;
+
+            UseRoute(playerRoute);
+            if (State != EnemyState.Invisible)
+                Vanish(player.Position);
         }
 
         public void Update(GameTime gameTime, Player player)
         {
             var elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            FollowPlayerFloor(player);
             // Si el jugador esta escondido, esto manda; si no, corre la maquina de estados normal
             if (!ReactToHiddenPlayer(elapsedTime, player))
             {

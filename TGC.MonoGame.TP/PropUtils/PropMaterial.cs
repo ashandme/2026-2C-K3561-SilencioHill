@@ -18,6 +18,8 @@ internal sealed class PropMaterial
     public float DiffuseCoefficient { get; set; } = 0.8f;
     public float SpecularCoefficient { get; set; } = 0.7f;
     public float Shininess { get; set; } = 16f;
+    // Per-prop K overrides; null fields use the level's values from SceneLighting.
+    public BlinnPhongMaterialData? BlinnPhong { get; set; }
 
     public PropMaterial(Effect effect, Texture2D? texture = null, Vector3? color = null)
     {
