@@ -374,6 +374,21 @@
                 0.1,
                 0.1
             ],
+          "Collisions": [
+            {
+              "Type": "aabb",
+              "Min": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Max": [
+                -2.0,
+                5.0,
+                2.0
+              ]
+            }
+          ],
             "TextureAddressMode": "Wrap"
         },
         {
@@ -564,6 +579,37 @@
             "TextureAddressMode": "Wrap"
         },
         {
+          "Name": "inside_33",
+          "ModelPath": "Models/kenney_furniture-kit/bookcaseOpen",
+          "EffectPath": "Effects/BlinnPhong",
+          "TexturePath": "Textures/metal",
+          "Color": [
+            0.9,
+            0.8,
+            0.2
+          ],
+          "Collisions": [
+            {
+              "Type": "aabb",
+              "Min": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "Max": [
+                -5.0,
+                5.0,
+                3.0
+              ]
+            }
+          ],
+          "TextureScale": [
+            1.0,
+            1.0
+          ],
+          "TextureAddressMode": "Wrap"
+        },
+        {
             "Name": "inside_11",
             "ModelPath": "Models/kenney_furniture-kit/kitchenStoveElectric",
             "EffectPath": "Effects/BlinnPhong",
@@ -737,8 +783,8 @@
           0.8
         ],
         "TextureScale": [
-          1.0,
-          1.0
+          0.1,
+          0.1
         ],
         "TextureAddressMode": "Wrap",
         "HideOffset": [-6.0, 0.0, 3.0]
@@ -769,39 +815,8 @@
                 }
             ],
             "TextureScale": [
-                1.0,
-                1.0
-            ],
-            "TextureAddressMode": "Wrap"
-        },
-        {
-            "Name": "inside_19",
-            "ModelPath": "Models/kenney_furniture-kit/table",
-            "EffectPath": "Effects/BlinnPhong",
-            "TexturePath": "Textures/planks",
-            "Color": [
-                0.2,
-                0.8,
-                0.3
-            ],
-            "Collisions": [
-                {
-                    "Type": "aabb",
-                    "Min": [
-                        0.0,
-                        0.0,
-                        -1.0
-                    ],
-                    "Max": [
-                        -5.0,
-                        5.0,
-                        3.0
-                    ]
-                }
-            ],
-            "TextureScale": [
-                1.0,
-                1.0
+                0.1,
+                0.1
             ],
             "TextureAddressMode": "Wrap"
         },

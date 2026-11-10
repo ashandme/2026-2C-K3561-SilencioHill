@@ -6,7 +6,7 @@
 #define SV_SHADERMODEL vs_4_0_level_9_1
 #define PS_SHADERMODEL ps_4_0_level_9_1
 #endif
-
+// RES: THE BOOK OF SHADERS
 texture baseTexture;
 sampler2D textureSampler = sampler_state
 {
@@ -53,7 +53,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     float3 randomColor = float3(redNoise, greenNoise, blueNoise);
     float scanline = 0.96 + 0.04 * sin(input.TextureCoordinates.y * 1400.0);
     float amount = saturate(intensity);
-    color.rgb = lerp(color.rgb, color.rgb * (0.72 + randomColor * 0.56) * scanline, amount);
+    color.rgb = lerp(color.rgb, color.rgb * (0.72 + randomColor * 1.9) * scanline, amount);
     return color;
 }
 
