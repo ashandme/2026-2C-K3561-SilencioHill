@@ -138,7 +138,7 @@ internal sealed class PlayingState : IGameState
         _bloomRenderTarget = new RenderTarget2D(_graphics, bloomWidth, bloomHeight, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
         _bloomBlurRenderTarget = new RenderTarget2D(_graphics, bloomWidth, bloomHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
         _bloomCompositeRenderTarget = new RenderTarget2D(_graphics, _graphics.Viewport.Width, _graphics.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
-        _shadowRenderTarget = new RenderTarget2D(_graphics, 1024, 1024, false, SurfaceFormat.Single, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
+        _shadowRenderTarget = new RenderTarget2D(_graphics, 2048, 2048, false, SurfaceFormat.Single, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
         _hud = new HudRenderer(context.SpriteBatch, context.Font, _graphics);
         _interactionManager = new InteractionManager();
         _crosshairPixel = new Texture2D(_graphics, 1, 1);
@@ -276,7 +276,6 @@ internal sealed class PlayingState : IGameState
             SceneLighting.ShadowFieldOfView = 120f;
         }
 
-        UpdateEnemyNoise(elapsedSeconds);
         _enemy?.Update(gameTime, _player);
         if (_player.State == PlayerState.Caught && !_caughtOverlayShown)
         {
@@ -394,6 +393,7 @@ internal sealed class PlayingState : IGameState
         _enemyNoiseEffect.Parameters["time"]?.SetValue((float)gameTime.TotalGameTime.TotalSeconds);
         _enemyNoiseEffect.Parameters["intensity"]?.SetValue(_noiseIntensity);
         _enemyNoiseEffect.Parameters["distortion"]?.SetValue(_distortion);
+        _enemyNoiseEffect.Parameters["screenSize"]?.SetValue(new Vector2(postSource.Width, postSource.Height));
         _fullScreenQuad.Draw(_enemyNoiseEffect);
         _graphics.DepthStencilState = DepthStencilState.Default;
         _hud.UpdateState(_player, _interactionManager);
@@ -596,6 +596,7 @@ internal sealed class PlayingState : IGameState
     private void ConfigureEnemyForCurrentLevel()
     {
         _enemy = _levelManager.Current?.Enemy;
+        _enemy?.SetCollisionHandler(_collisionHandler);
         if (_enemy != null && _levelManager.CurrentName?.Equals("inside", StringComparison.OrdinalIgnoreCase) == true)
             _enemy.SetScale(_enemy.Scale * 3f);
     }

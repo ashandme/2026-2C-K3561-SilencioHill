@@ -22,6 +22,7 @@ sampler2D textureSampler = sampler_state
 float time;
 float intensity;
 float distortion;
+float2 screenSize; // resolucion del render target, para que el ruido por pixel escale con ella
 
 struct VertexShaderInput
 {
@@ -48,7 +49,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     float2 uv = input.TextureCoordinates;
     uv.x += sin(uv.y * 6.0 + time * 1.5) * 0.004 * saturate(distortion);
     float4 color = tex2D(textureSampler, uv);
-    float2 pixel = floor(input.TextureCoordinates * float2(1280.0, 720.0));
+    float2 pixel = floor(input.TextureCoordinates * screenSize);
     float redNoise = frac(sin(dot(pixel + time * 17.0, float2(12.9898, 78.233))) * 43758.5453);
     float greenNoise = frac(sin(dot(pixel + time * 23.0, float2(39.3468, 11.1351))) * 24634.6345);
     float blueNoise = frac(sin(dot(pixel + time * 31.0, float2(73.156, 41.271))) * 15731.743);

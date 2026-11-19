@@ -39,6 +39,6 @@ namespace TGC.MonoGame.TP
         public static bool CastsShadows { get; set; }
         // Field of view of the shadow frustum, in degrees, pointed along LightDirection.
         public static float ShadowFieldOfView { get; set; } = 70f;
-        public static Vector2 ShadowMapSize { get; set; } = new Vector2(1024f, 1024f);
+        public static Vector2 ShadowMapSize { get; set; } = new Vector2(2048f, 2048f);
     }
 }

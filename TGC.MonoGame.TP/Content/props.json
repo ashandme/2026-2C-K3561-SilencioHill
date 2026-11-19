@@ -1417,6 +1417,34 @@
             "InteractiveType": "car"
         },
         {
+            "Name": "battery",
+            "ModelPath": "Models/Assets/battery",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Color": [ 1.0, 1.0, 1.0 ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "battery",
+            "AddSeconds": 30.0
+        },
+        {
+            "Name": "outside_dumpster_hiding",
+            "ModelPath": "Models/kenney_retro-urban-kit/detail-dumpster-closed",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/metal",
+            "Color": [ 1.0, 1.0, 1.0 ],
+            "Collisions": [
+                {
+                    "Type": "aabb",
+                    "Min": [ -30.0, 0.0, -25.3 ],
+                    "Max": [ 30.0, 54.5, 20.0 ]
+                }
+            ],
+            "TextureScale": [ 1.0, 1.0 ],
+            "TextureAddressMode": "Wrap",
+            "InteractiveType": "hiding"
+        },
+        {
             "Name": "inside_exit",
             "ModelPath": "Models/kenney_retro-urban-kit/door-type-a",
             "EffectPath": "Effects/BasicTexture",

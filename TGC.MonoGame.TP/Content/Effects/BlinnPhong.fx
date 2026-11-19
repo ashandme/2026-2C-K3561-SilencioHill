@@ -41,6 +41,7 @@ float2 shadowMapSize;
 float alphaCutoff;
 // Same bias constants as ShadowMap.fx (depth is stored as z/w by its DepthPass technique).
 static const float modulatedEpsilon = 0.000041200182749889791011810302734375;
+static const float shadowBiasScale = 0.004; // tuned for 2048 shadow map
 static const float maxEpsilon = 0.000023200045689009130001068115234375;
 
 texture baseTexture;
@@ -151,7 +152,11 @@ float4 MainPS(VertexShaderOutput input) : COLOR
         && shadowUv.x >= 0.0 && shadowUv.x <= 1.0
         && shadowUv.y >= 0.0 && shadowUv.y <= 1.0)
     {
-        float inclinationBias = max(modulatedEpsilon * (1.0 - dot(normal, normalize(toLight))), maxEpsilon);
+        // Bias proportional to the shadow texel footprint: depth is z/w (near ~1), so a world-space
+        // bias b maps to b / w^2, and the texel size grows linearly with w -> bias ~ k / w.
+        // The slope term grows it on surfaces seen at grazing angles to the light.
+        float slope = 1.0 - saturate(dot(normal, normalize(toLight)));
+        float inclinationBias = shadowBiasScale * (1.0 + 2.0 * slope) / max(input.ShadowPosition.w, 1.0);
         float2 texelSize = 1.0 / shadowMapSize;
         notInShadow = 0.0;
         for (int x = -1; x <= 1; x++)

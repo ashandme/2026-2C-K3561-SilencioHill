@@ -108,7 +108,7 @@ float4 ShadowedPS(in ShadowedVertexShaderOutput input) : COLOR
 
     float3 normal = normalize(input.Normal.rgb);
     float3 lightDirection = normalize(lightPosition - input.WorldSpacePosition.xyz);
-    float inclinationBias = max(modulatedEpsilon * (1.0 - dot(normal, lightDirection)), maxEpsilon);
+    float inclinationBias = 0.004 * (1.0 + 2.0 * (1.0 - saturate(dot(normal, lightDirection)))) / max(input.LightSpacePosition.w, 1.0);
 
     float shadowMapDepth = tex2D(shadowMapSampler, shadowMapTextureCoordinates).r + inclinationBias;
 
@@ -129,7 +129,7 @@ float4 ShadowedPCFPS(in ShadowedVertexShaderOutput input) : COLOR
 
     float3 normal = normalize(input.Normal.rgb);
     float3 lightDirection = normalize(lightPosition - input.WorldSpacePosition.xyz);
-    float inclinationBias = max(modulatedEpsilon * (1.0 - dot(normal, lightDirection)), maxEpsilon);
+    float inclinationBias = 0.004 * (1.0 + 2.0 * (1.0 - saturate(dot(normal, lightDirection)))) / max(input.LightSpacePosition.w, 1.0);
 
 	// Sample and smooth the shadowmap
 	// Also perform the comparison inside the loop and average the result

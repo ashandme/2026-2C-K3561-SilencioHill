@@ -35,6 +35,8 @@ namespace TGC.MonoGame.TP.Entities.Enemy
         }
         // --- Deteccion ---
         private const float SneakNoiseDistance = 150f;         // dentro del cono trasero, si se acerca mas que esto hace ruido
+        private const float SneakNoiseInterval = 2.5f;        // segundos entre ruidos de aviso
+        private float _sneakNoiseCooldown;
         private const float SearchAtHidingSpotDuration = 3f; // Tiempo que vigila el escondite antes de desaparecer
         private const float SearchStandDistance = 60f; // se detiene a esta distancia del escondite
         private float _searchTimer;
@@ -71,10 +73,38 @@ namespace TGC.MonoGame.TP.Entities.Enemy
         private const float WaypointReachDistance = 5f;
         private const float WaypointWaitSeconds = 1.5f;
         private float _waitTimer;
+        private const float MaxStuckSeconds = 2f;   // bloqueado este tiempo yendo a un waypoint: pasa al siguiente
+        private float _stuckTimer;
 
         // --- Fleeing ---
         private const float FleeDuration = 4f;
         private float _fleeTimer;
+
+        // --- Colisiones ---
+        private CollisionHandler? _collisionHandler;
+        private const float CollisionRadiusPerScale = 50f;   // radio de colision por unidad de escala del modelo
+
+        public void SetCollisionHandler(CollisionHandler? collisionHandler) => _collisionHandler = collisionHandler;
+
+        // Mueve al enemigo resolviendo colisiones contra paredes y muebles (solo en XZ).
+        // Devuelve false si el movimiento quedo totalmente bloqueado.
+        private bool MoveWithCollisions(Vector3 delta)
+        {
+            if (_collisionHandler == null)
+            {
+                Move(delta);
+                return true;
+            }
+
+            var radius = CollisionRadiusPerScale * MathF.Max(Scale.X, 0.01f);
+            var lift = new Vector3(0f, radius, 0f);   // la esfera se apoya sobre el piso en vez de centrarse en el
+            var resolution = _collisionHandler.ResolveSphereMovement(
+                Position + lift, Position + lift + new Vector3(delta.X, 0f, delta.Z), radius, resolveVertical: false);
+            var newPosition = resolution.Position - lift;
+            var moved = (newPosition - Position).LengthSquared() > 1e-6f;
+            if (moved) SetPosition(newPosition);
+            return moved;
+        }
 
         // Aplana un vector al plano XZ (ignora diferencias de altura) y lo normaliza
         private static Vector3 FlattenXZ(Vector3 v)
@@ -266,7 +296,7 @@ namespace TGC.MonoGame.TP.Entities.Enemy
             FaceDirection(flat);
             if (toSpot.Length() > SearchStandDistance)
             {
-                Move(flat * ChaseSpeed * elapsedTime);
+                MoveWithCollisions(flat * ChaseSpeed * elapsedTime);
             }
         }
         private void UpdateRoaming(float elapsedTime, Player player)
@@ -301,7 +331,20 @@ namespace TGC.MonoGame.TP.Entities.Enemy
 
             var direction = Vector3.Normalize(toTarget);
             FaceDirection(direction);
-            Move(direction * RoamSpeed * elapsedTime);
+            if (!MoveWithCollisions(direction * RoamSpeed * elapsedTime))
+            {
+                // Bloqueado por una pared/mueble: tras un rato salta al siguiente waypoint
+                _stuckTimer += elapsedTime;
+                if (_stuckTimer >= MaxStuckSeconds)
+                {
+                    _stuckTimer = 0f;
+                    _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Count;
+                }
+            }
+            else
+            {
+                _stuckTimer = 0f;
+            }
         }
 
         private void UpdateStaring(float elapsedTime, Player player)
@@ -356,13 +399,19 @@ namespace TGC.MonoGame.TP.Entities.Enemy
                 return;
             }
 
-            // TODO: cuando haya audio, emitir el ruido de aviso cuando distance <= SneakNoiseDistance
+            // Cerca del jugador hace ruido de aviso, cada tanto
+            _sneakNoiseCooldown -= elapsedTime;
+            if (distance <= SneakNoiseDistance && _sneakNoiseCooldown <= 0f)
+            {
+                Audio.Play("Ps");
+                _sneakNoiseCooldown = SneakNoiseInterval;
+            }
 
             var flatDirection = FlattenXZ(toPlayer);
             if (flatDirection != Vector3.Zero)
             {
                 FaceDirection(flatDirection);
-                Move(flatDirection * SneakSpeed * elapsedTime);
+                MoveWithCollisions(flatDirection * SneakSpeed * elapsedTime);
             }
         }
         private void UpdateChasing(float elapsedTime, Player player)
@@ -388,7 +437,7 @@ namespace TGC.MonoGame.TP.Entities.Enemy
             if (flatDirection != Vector3.Zero)
             {
                 FaceDirection(flatDirection);
-                Move(flatDirection * ChaseSpeed * elapsedTime);
+                MoveWithCollisions(flatDirection * ChaseSpeed * elapsedTime);
             }
         }
         private void UpdateAttacking(Player player)
@@ -406,7 +455,7 @@ namespace TGC.MonoGame.TP.Entities.Enemy
             if (flatDirection != Vector3.Zero)
             {
                 FaceDirection(-flatDirection);
-                Move(flatDirection * FleeSpeed * elapsedTime);
+                MoveWithCollisions(flatDirection * FleeSpeed * elapsedTime);
             }
 
             if (_fleeTimer >= FleeDuration)

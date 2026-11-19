@@ -90,69 +90,6 @@ namespace TGC.MonoGame.TP.LevelUtils
                 edgeBandHighMax,
                 treeAEffect,
                 treeBEffect);
-
-            // Add a battery interactive pickup to the world
-            Texture2D metalTexture = null;
-            try
-            {
-                metalTexture = content.Load<Texture2D>(TGCGame.ContentFolderTextures + "metal");
-            }
-            catch (Exception)
-            {
-                metalTexture = null;
-            }
-            try
-            {
-                Model batteryModel = null;
-                try
-                {
-                    batteryModel = content.Load<Model>(TGCGame.ContentFolder3D + "Assets/battery");
-                }
-                catch (Exception)
-                {
-                    batteryModel = null;
-                }
-
-                if (batteryModel != null)
-                {
-                    var batteryEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, metalTexture);
-
-                    // Place the battery somewhere in the scene (adjust coordinates as needed)
-                    var batteryPos = new Vector3(30f, 0f, 30f);
-                    var battery = new BatteryProp(batteryModel, batteryEffect, batteryPos, "battery_01", addSeconds: 30f);
-                    _props.Add(battery);
-
-                    var battery2Pos = new Vector3(40f, 0f, 30f);
-                    var battery2 = new BatteryProp(batteryModel, batteryEffect, battery2Pos, "battery_02", addSeconds: 30f);
-                    _props.Add(battery2);
-                }
-            }
-            catch { }
-            try
-            {
-                Model hidingModel = null;
-                try
-                {
-                    hidingModel = content.Load<Model>(TGCGame.ContentFolder3D + "kenney_retro-urban-kit/detail-dumpster-closed");
-
-                }
-                catch (Exception)
-                {
-                    hidingModel = null;
-                }
-
-                if (hidingModel != null)
-                {
-                    var hidingEffect = ShaderHelper.PrepareBlinnPhong(blinnPhongShader, metalTexture);
-                    var hidingPos = new Vector3(510f, 0f, 600f);
-                    var hidingSpot = new HidingSpotProp(hidingModel, hidingEffect, hidingPos, "hiding_01");
-                    hidingSpot.Scale *= 0.6f;
-                    hidingSpot.Rotation = new Vector3(0f, MathHelper.ToRadians(90f), 0f);
-                    hidingSpot.Colliders.Add(new AabbCollisionShape(new Vector3(494.8f, 0f, 582f), new Vector3(522f, 32.7f, 618f)));
-                    _props.Add(hidingSpot);
-                }
-            }
-            catch { }
         }
 
         public void Draw(Matrix view, Matrix projection, BoundingFrustum? frustum = null)

@@ -35,6 +35,8 @@ public class PropData
     public float[]? TeleportRotation { get; set; }
     public float[]? TargetPosition { get; set; }
     public float AnimationDuration { get; set; } = 1f;
+    // Segundos de bateria que agrega un prop "battery"
+    public float AddSeconds { get; set; } = 30f;
 
     [JsonIgnore]
     public Vector2 TextureScaleVector => TextureScale is { Length: >= 2 }
@@ -65,7 +67,8 @@ public class PropData
             TeleportPosition = TeleportPosition,
             TeleportRotation = TeleportRotation,
             TargetPosition = TargetPosition,
-            AnimationDuration = AnimationDuration
+            AnimationDuration = AnimationDuration,
+            AddSeconds = AddSeconds
         };
     }
 

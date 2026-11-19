@@ -101,7 +101,7 @@ namespace TGC.MonoGame.TP{
         public bool IntersectsRay(Ray ray, out float distance)
         {
             distance = 0f;
-            var sphere = TGC.MonoGame.Samples.Collisions.BoundingVolumesExtensions.CreateSphereFrom(Model);
+            var sphere = _localBoundingSphere;
             var world = GetWorldMatrix();
             var center = Vector3.Transform(sphere.Center, world);
             var scaleX = new Vector3(world.M11, world.M12, world.M13).Length();

@@ -110,6 +110,9 @@ namespace TGC.MonoGame.TP.LevelUtils
                             rotationRadians, item.ScaleVector, color,
                             item.PositionVector + Vector3.Transform(item.HideOffsetVector * item.ScaleVector,
                                 Matrix.CreateFromYawPitchRoll(rotationRadians.Y, rotationRadians.X, rotationRadians.Z)))
+                    : item.InteractiveType.Equals("battery", StringComparison.OrdinalIgnoreCase)
+                        ? new BatteryProp(model, effect, item.PositionVector,
+                            string.IsNullOrWhiteSpace(item.Id) ? "battery" : item.Id, item.AddSeconds)
                     : item.InteractiveType.Equals("evidence", StringComparison.OrdinalIgnoreCase)
                         ? new EvidenceProp(model, effect, item.PositionVector,
                             string.IsNullOrWhiteSpace(item.Id) ? "evidence" : item.Id,
@@ -129,6 +132,12 @@ namespace TGC.MonoGame.TP.LevelUtils
                     door.TargetLevel = item.TargetLevel;
                     door.TeleportPosition = item.TeleportPositionVector;
                     door.TeleportRotation = DegreesToRadians(item.TeleportRotationVector);
+                }
+                if (p is BatteryProp battery)
+                {
+                    battery.Rotation = rotationRadians;
+                    battery.Scale = item.ScaleVector;
+                    battery.Color = color;
                 }
                 if (p is Stairs stairs)
                 {
