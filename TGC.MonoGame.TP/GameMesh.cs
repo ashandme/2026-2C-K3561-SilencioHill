@@ -198,6 +198,9 @@ namespace TGC.MonoGame.TP{
             Effect.Parameters["diffuseColor"]?.SetValue(lightColor * SceneLighting.DiffuseIntensity);
             Effect.Parameters["specularColor"]?.SetValue(lightColor * SceneLighting.DiffuseIntensity);
             var k = Material.BlinnPhong;
+            Effect.Parameters["moonEnabled"]?.SetValue(SceneLighting.MoonEnabled ? 1f : 0f);
+            Effect.Parameters["moonDirection"]?.SetValue(SceneLighting.MoonDirection);
+            Effect.Parameters["moonColor"]?.SetValue(SceneLighting.MoonColor);
             Effect.Parameters["KAmbient"]?.SetValue(k?.KAmbient ?? SceneLighting.KAmbient);
             Effect.Parameters["KDiffuse"]?.SetValue(k?.KDiffuse ?? SceneLighting.KDiffuse);
             Effect.Parameters["KSpecular"]?.SetValue(k?.KSpecular ?? SceneLighting.KSpecular);

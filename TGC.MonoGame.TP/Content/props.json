@@ -827,7 +827,9 @@
         {
             "Name": "inside_16",
             "ModelPath": "Models/kenney_furniture-kit/bathroomMirror",
-            "EffectPath": "Effects/BasicShader",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/Horror_Wall_02",
+            "InteractiveType": "mirror",
             "Color": [
                 0.2,
                 0.2,
@@ -1446,15 +1448,15 @@
         },
         {
             "Name": "inside_exit",
-            "ModelPath": "Models/kenney_retro-urban-kit/door-type-a",
-            "EffectPath": "Effects/BasicTexture",
-            "TexturePath": "Textures/door",
+            "ModelPath": "Models/kenney_furniture-kit/doorway",
+            "EffectPath": "Effects/BlinnPhong",
+            "TexturePath": "Textures/planks",
             "Color": [ 0.6, 0.4, 0.1 ],
             "InteractiveType": "door",
             "Id": "salir",
             "TargetLevel": "outside",
             "TeleportPosition": [ 490.0, 10.0, 750.0 ],
-            "TextureScale": [ 1.0, 1.0 ],
+            "TextureScale": [ 0.1, 0.1 ],
             "TextureAddressMode": "Wrap"
         }
     ]

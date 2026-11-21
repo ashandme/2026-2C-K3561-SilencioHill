@@ -220,8 +220,10 @@ namespace TGC.MonoGame.Samples.Collisions
                 }
             }
 
-            var difference = (maxPoint - minPoint) * 0.5f;
-            return new BoundingSphere(difference, difference.Length());
+            // The center is the middle of the AABB (min + half extents), not the half extents alone:
+            // otherwise the sphere is displaced by min whenever the model is not anchored at its min corner.
+            var halfExtents = (maxPoint - minPoint) * 0.5f;
+            return new BoundingSphere(minPoint + halfExtents, halfExtents.Length());
         }
     }
 }

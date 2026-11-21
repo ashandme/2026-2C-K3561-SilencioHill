@@ -24,6 +24,7 @@ internal sealed class PlayingState : IGameState
     private readonly Effect _effect;
     private readonly Effect _enemyNoiseEffect;
     private readonly Effect _shadowEffect;
+    private readonly PlanarReflection _planarReflection;
     private readonly RenderTarget2D _shadowRenderTarget;
     private readonly LevelManager _levelManager;
     private readonly Player _player;
@@ -99,7 +100,10 @@ internal sealed class PlayingState : IGameState
             KAmbient = 8f,
             KDiffuse = 1.5f,
             KSpecular = 0.5f,
-            Shininess = 16f
+            Shininess = 16f,
+            // "Sun"
+            GlobalLightDirection = new Vector3(-1f, -0.5f, 0f),
+            GlobalLightColor = new Vector3(0.5f, 0.5f, 0.4f)
         })
         {
             BackgroundColor = new Color(0.24f, 0.22f, 0.30f)
@@ -132,6 +136,8 @@ internal sealed class PlayingState : IGameState
         _player.PickupItem(cameraItem);
         cameraItem.Flash += TriggerCameraFlash;
         _fullScreenQuad = new FullScreenQuad(_graphics);
+        _planarReflection = new PlanarReflection(_graphics, context.Content.Load<Effect>("Effects/PlanarReflections"),
+            _graphics.Viewport.Width, _graphics.Viewport.Height);
         _sceneRenderTarget = new RenderTarget2D(_graphics, _graphics.Viewport.Width, _graphics.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24, 0, RenderTargetUsage.DiscardContents);
         int bloomWidth = Math.Max(1, _graphics.Viewport.Width / 2);
         int bloomHeight = Math.Max(1, _graphics.Viewport.Height / 2);
@@ -370,9 +376,6 @@ internal sealed class PlayingState : IGameState
     public void Draw(GameTime gameTime)
     {
         RenderShadowMap();
-        _graphics.SetRenderTarget(_sceneRenderTarget);
-        _graphics.DepthStencilState = DepthStencilState.Default;
-        _graphics.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, _levelManager.Current?.BackgroundColor ?? new Color(0.0f, 0f, 0.0f), 1f, 0);
         UpdatePlayerCameraView();
         var view = ActiveCamera.View;
         SceneLighting.EyePosition = Matrix.Invert(view).Translation;
@@ -383,7 +386,17 @@ internal sealed class PlayingState : IGameState
         SceneLighting.FogStartDistance = fog?.StartDistance ?? 0f;
         SceneLighting.FogEndDistance = MathF.Max(fog?.EndDistance ?? 1f, SceneLighting.FogStartDistance + 0.001f);
         SceneLighting.FogDensity = MathF.Max(fog?.Density ?? 0f, 0f);
-        _levelManager.Current?.Draw(view, _projection);
+        var level = _levelManager.Current;
+        var backgroundColor = level?.BackgroundColor ?? new Color(0.0f, 0f, 0.0f);
+        // The mirror reflection renders into its own target first; the scene target is cleared after.
+        if (level != null)
+            _planarReflection.Render(level.EnumerateProps(), SceneLighting.EyePosition, view, _projection,
+                backgroundColor, level.Draw);
+        _graphics.SetRenderTarget(_sceneRenderTarget);
+        _graphics.DepthStencilState = DepthStencilState.Default;
+        _graphics.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, backgroundColor, 1f, 0);
+        level?.Draw(view, _projection);
+        _planarReflection.DrawSurface(view, _projection);
         if (_playerMode) _player.DrawHeldItem(_effect, _projection, _graphics);
         // Bloom is composited before EnemyNoise so the distortion also warps the glow.
         var postSource = RenderGhostBloom(view) ? _bloomCompositeRenderTarget : _sceneRenderTarget;

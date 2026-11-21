@@ -19,6 +19,10 @@ namespace TGC.MonoGame.TP
         public static float AmbientIntensity { get; set; } = 0.08f;
         public static float DiffuseIntensity { get; set; } = 1f;
         // Blinn-Phong coefficients of the active level (set by Level on load).
+        // Global directional light (the moon). MoonDirection points from the surface toward the moon.
+        public static bool MoonEnabled { get; set; }
+        public static Vector3 MoonDirection { get; set; } = Vector3.Up;
+        public static Vector3 MoonColor { get; set; } = Vector3.Zero;
         public static float KAmbient { get; set; } = 1f;
         public static float KDiffuse { get; set; } = 1f;
         public static float KSpecular { get; set; } = 0.35f;

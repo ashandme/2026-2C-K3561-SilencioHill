@@ -121,6 +121,8 @@ namespace TGC.MonoGame.TP.LevelUtils
                         ? new CarProp(model, effect, item.PositionVector,
                             string.IsNullOrWhiteSpace(item.Id) ? "car" : item.Id,
                             rotationRadians, item.ScaleVector, color)
+                    : item.InteractiveType.Equals("mirror", StringComparison.OrdinalIgnoreCase)
+                        ? new MirrorProp(model, effect, item.PositionVector, rotationRadians, item.ScaleVector, color)
                     : new Prop(model, effect, item.PositionVector,
                     rotationRadians,
                     item.ScaleVector, color);

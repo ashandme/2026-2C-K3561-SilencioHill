@@ -39,6 +39,9 @@ float4x4 lightViewProjection;
 float shadowsEnabled;
 float2 shadowMapSize;
 float alphaCutoff;
+float moonEnabled;
+float3 moonDirection; // Direction from a surface toward the moon (global directional light)
+float3 moonColor;
 // Same bias constants as ShadowMap.fx (depth is stored as z/w by its DepthPass technique).
 static const float modulatedEpsilon = 0.000041200182749889791011810302734375;
 static const float shadowBiasScale = 0.004; // tuned for 2048 shadow map
@@ -169,6 +172,18 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     float shadowed = lerp(0.15, 1.0, notInShadow);
     diffuseLight *= shadowed;
     specularLight *= shadowed;
+
+    // Global moonlight: directional, no attenuation, not shadowed, added on top of the local light.
+    if (moonEnabled > 0.5)
+    {
+        float3 moonDir = normalize(moonDirection);
+        float moonNdotL = saturate(dot(normal, moonDir));
+        float moonUpward = lerp(1.0, upwardLightScale, saturate(normal.y));
+        diffuseLight += KDiffuse * moonColor * moonNdotL * moonUpward;
+        float3 moonHalf = normalize(moonDir + viewDirection);
+        specularLight += sign(moonNdotL) * KSpecular * moonColor
+            * pow(saturate(dot(normal, moonHalf)), shininess);
+    }
     
     // Final calculation
     float4 finalColor = float4(saturate(ambientColor * KAmbient + diffuseLight) * texelColor.rgb + specularLight, 1.0);
