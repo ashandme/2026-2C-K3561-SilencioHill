@@ -124,7 +124,7 @@ namespace TGC.MonoGame.TP.Entities
             if (State == PlayerState.Caught || State == PlayerState.Undetectable) return;
             State = PlayerState.Caught;
             _caughtTimer = CaughtDuration;
-            Audio.Play("Stab");
+            SoundManager.Play("Stab");
         }
         // Alterna entre escondido/no escondido. Lo llama HidingSpotProp via InteractionManager.
         private Vector3 _preHidePosition;
@@ -316,7 +316,7 @@ namespace TGC.MonoGame.TP.Entities
         public void DrawCenterDot(SpriteBatch spriteBatch, Texture2D pixel)
         {
             var viewport = spriteBatch.GraphicsDevice.Viewport;
-            const int dotSize = 4;
+            var dotSize = Math.Max(2, (int)MathF.Round(4f * UiScale.Of(viewport)));
             var bounds = new Rectangle(
                 viewport.Width / 2 - dotSize / 2,
                 viewport.Height / 2 - dotSize / 2,

@@ -119,7 +119,7 @@ internal sealed class PlayingState : IGameState
         RefreshCollisions();
         ConfigureEnemyForCurrentLevel();
         PlayLevelAmbience();
-        Audio.Play("CinematicBoom");
+        SoundManager.Play("CinematicBoom");
 
         var candle = context.Content.Load<Model>("Models/Assets/Candle");
         var flashlight = context.Content.Load<Model>("Models/Assets/Linterna");
@@ -205,7 +205,7 @@ internal sealed class PlayingState : IGameState
             if (_timeRemaining <= 0f)
             {
                 _endShown = true;
-                Audio.StopMusic();
+                SoundManager.StopMusic();
                 _context.States.Push(new EndState(_context, false,
                     "No lograste escapar a tiempo",
                     () => new PlayingState(_context),
@@ -346,7 +346,7 @@ internal sealed class PlayingState : IGameState
         _distortion = MathHelper.Lerp(_distortion, noDistortion ? 0f : 1f, smoothing);
     }
 
-    private void PlayLevelAmbience() => Audio.PlayMusic(_levelManager.CurrentName == "inside" ? "IndoorAmbience" : "NighttimeForestAmbience");
+    private void PlayLevelAmbience() => SoundManager.PlayMusic(_levelManager.CurrentName == "inside" ? "IndoorAmbience" : "NighttimeForestAmbience");
     private void UseDoor(DoorProp door)
     {
         if (string.IsNullOrWhiteSpace(door.TargetLevel)) return;
@@ -354,7 +354,7 @@ internal sealed class PlayingState : IGameState
         try
         {
             _levelManager.LoadLevel(door.TargetLevel, _context.Content, _graphics);
-            Audio.Play("Door");
+            SoundManager.Play("Door");
             if (door.TeleportPosition != Vector3.Zero)
             {
                 var destination = door.TeleportPosition;
@@ -623,13 +623,13 @@ internal sealed class PlayingState : IGameState
         }
         _escaping = true;
         _escapeTimer = 0f;
-        Audio.StopMusic();
-        Audio.Play("CarEngine");
+        SoundManager.StopMusic();
+        SoundManager.Play("CarEngine");
     }
     private void CollectEvidence(EvidenceProp evidence)
     {
         if (!_photographed.Add(evidence.Id)) return;
-        Audio.Play("camera");
+        SoundManager.Play("camera");
         _cameraFlashRemaining = 1f;
         _flashAlpha = 1f;
         _hud.SetStatus($"Prueba fotografiada ({_photographed.Count}/{TotalEvidence})", 3.0);
@@ -671,17 +671,20 @@ internal sealed class PlayingState : IGameState
     }
     private void DrawEvidenceCounter()
     {
+        var viewport = _graphics.Viewport;
+        var scale = UiScale.Of(viewport);
+        var margin = 10f * scale;
         var text = $"Pruebas: {_photographed.Count}/{TotalEvidence}";
-        var size = _context.Font.MeasureString(text);
-        var position = new Vector2((_graphics.Viewport.Width - size.X) * 0.5f, 10f);
+        var size = _context.Font.MeasureString(text) * scale;
+        var position = new Vector2((viewport.Width - size.X) * 0.5f, margin);
         var seconds = (int)MathF.Ceiling(_timeRemaining);
         var timeText = $"Tiempo: {seconds / 60:00}:{seconds % 60:00}";
-        var timeSize = _context.Font.MeasureString(timeText);
-        var timePosition = new Vector2((_graphics.Viewport.Width - timeSize.X) * 0.5f, 10f + size.Y);
+        var timeSize = _context.Font.MeasureString(timeText) * scale;
+        var timePosition = new Vector2((viewport.Width - timeSize.X) * 0.5f, margin + size.Y);
         var timeColor = _timeRemaining <= 60f ? Color.Red : Color.White;
         _context.SpriteBatch.Begin();
-        _context.SpriteBatch.DrawString(_context.Font, text, position, Color.White);
-        _context.SpriteBatch.DrawString(_context.Font, timeText, timePosition, timeColor);
+        _context.SpriteBatch.DrawString(_context.Font, text, position, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        _context.SpriteBatch.DrawString(_context.Font, timeText, timePosition, timeColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         _context.SpriteBatch.End();
     }
     internal void RefreshCollisions()

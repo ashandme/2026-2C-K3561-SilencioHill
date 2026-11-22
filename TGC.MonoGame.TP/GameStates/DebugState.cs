@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace TGC.MonoGame.TP.GameStates;
@@ -54,7 +55,9 @@ internal sealed class DebugState : IGameState
         }
 
         _context.SpriteBatch.Begin();
-        _context.SpriteBatch.DrawString(_context.Font, text, new Vector2(20f, 20f), Color.White);
+        var scale = UiScale.Of(_context.GraphicsDevice);
+        _context.SpriteBatch.DrawString(_context.Font, text, new Vector2(20f, 20f) * scale, Color.White,
+            0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         _context.SpriteBatch.End();
     }
 }

@@ -12,7 +12,7 @@ namespace TGC.MonoGame.TP
         private readonly SpriteBatch _spriteBatch;
         private readonly SpriteFont _font;
         private readonly GraphicsDevice _graphicsDevice;
-        private readonly int _margin;
+        private readonly int _baseMargin;
         private readonly Color _leftColor;
         private readonly Color _rightColor;
         private readonly string _defaultRightText;
@@ -30,13 +30,22 @@ namespace TGC.MonoGame.TP
             _spriteBatch = spriteBatch ?? throw new ArgumentNullException(nameof(spriteBatch));
             _font = font ?? throw new ArgumentNullException(nameof(font));
             _graphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
-            _margin = margin;
+            _baseMargin = margin;
             _leftColor = leftColor ?? Color.White;
             _rightColor = rightColor ?? Color.Lime;
             _defaultRightText = defaultRightText;
             _pixel = new Texture2D(_graphicsDevice, 1, 1);
             _pixel.SetData(new[] { Color.White });
         }
+
+        // UI scale and margin for the current viewport (reference sizes are for 1280x720).
+        private float Scale => UiScale.Of(_graphicsDevice);
+        private float Margin => _baseMargin * Scale;
+
+        private void DrawText(string text, Vector2 position, Color color) =>
+            _spriteBatch.DrawString(_font, text, position, color, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+
+        private float LineHeight => _font.LineSpacing * Scale;
 
         public void SetStatus(string text, double durationSeconds)
         {
@@ -114,19 +123,20 @@ namespace TGC.MonoGame.TP
 
         private void DrawItemProgressBars(ref float y)
         {
-            const int barWidth = 150;
-            const int barHeight = 10;
-            const int spacing = 8;
+            var scale = Scale;
+            var barWidth = (int)(150 * scale);
+            var barHeight = Math.Max(2, (int)(10 * scale));
+            var spacing = 8f * scale;
             var viewportWidth = _graphicsDevice.Viewport.Width;
 
             foreach (var item in _itemProgress)
             {
-                var labelSize = _font.MeasureString(item.Name);
-                var labelX = MathF.Max(_margin, viewportWidth - _margin - barWidth);
+                var labelSize = _font.MeasureString(item.Name) * scale;
+                var labelX = MathF.Max(Margin, viewportWidth - Margin - barWidth);
                 var labelY = y;
-                var barY = labelY + labelSize.Y + 2f;
+                var barY = labelY + labelSize.Y + 2f * scale;
 
-                _spriteBatch.DrawString(_font, item.Name, new Vector2(labelX, labelY), _rightColor);
+                DrawText(item.Name, new Vector2(labelX, labelY), _rightColor);
                 _spriteBatch.Draw(
                     _pixel,
                     new Rectangle((int)labelX, (int)barY, barWidth, barHeight),
@@ -150,50 +160,43 @@ namespace TGC.MonoGame.TP
             if (!string.IsNullOrEmpty(_leftText))
             {
                 var lines = _leftText.Split(new[] { '\n' }, StringSplitOptions.None);
-                var x = _margin;
-                var y = _margin;
+                var x = Margin;
+                var y = Margin;
                 foreach (var line in lines)
                 {
-                    _spriteBatch.DrawString(_font, line, new Vector2(x, y), _leftColor);
-                    y += _font.LineSpacing;
+                    DrawText(line, new Vector2(x, y), _leftColor);
+                    y += LineHeight;
                 }
             }
 
             // Right HUD: status + item indicators appended below status
             var rightText = string.IsNullOrEmpty(_status) ? _defaultRightText : _status;
-            var viewportWidth = _graphicsDevice.Viewport.Width;
-            var yRight = (float)_margin;
+            var yRight = Margin;
 
             if (!string.IsNullOrEmpty(rightText))
-            {
-                var lines = rightText.Split(new[] { '\n' }, StringSplitOptions.None);
-                foreach (var line in lines)
-                {
-                    var size = _font.MeasureString(line);
-                    var x = MathF.Max(_margin, viewportWidth - _margin - size.X);
-                    _spriteBatch.DrawString(_font, line, new Vector2(x, yRight), _rightColor);
-                    yRight += _font.LineSpacing;
-                }
-            }
+                DrawRightAligned(rightText, ref yRight);
 
             // Additional per-item status lines are provided via RightOverlay
             if (!string.IsNullOrEmpty(RightOverlay))
-            {
-                var lines = RightOverlay.Split(new[] { '\n' }, StringSplitOptions.None);
-                foreach (var line in lines)
-                {
-                    var size = _font.MeasureString(line);
-                    var x = MathF.Max(_margin, viewportWidth - _margin - size.X);
-                    _spriteBatch.DrawString(_font, line, new Vector2(x, yRight), _rightColor);
-                    yRight += _font.LineSpacing;
-                }
-            }
+                DrawRightAligned(RightOverlay, ref yRight);
 
             DrawItemProgressBars(ref yRight);
 
             _spriteBatch.End();
 
             _graphicsDevice.DepthStencilState = prevDepth;
+        }
+
+        private void DrawRightAligned(string text, ref float y)
+        {
+            var viewportWidth = _graphicsDevice.Viewport.Width;
+            foreach (var line in text.Split(new[] { '\n' }, StringSplitOptions.None))
+            {
+                var size = _font.MeasureString(line) * Scale;
+                var x = MathF.Max(Margin, viewportWidth - Margin - size.X);
+                DrawText(line, new Vector2(x, y), _rightColor);
+                y += LineHeight;
+            }
         }
 
         public void SetRightOverlayFromInventory(System.Collections.Generic.IEnumerable<Item> inventory)

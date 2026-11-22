@@ -29,8 +29,8 @@ namespace TGC.MonoGame.TP.Entities.Enemy
             {
                 if (_state == value) return;
                 _state = value;
-                if (value == EnemyState.Staring) Audio.Play("Giggle");
-                else if (value == EnemyState.Sneaking) Audio.Play("Ps");
+                if (value == EnemyState.Staring) SoundManager.Play("Giggle");
+                else if (value == EnemyState.Sneaking) SoundManager.Play("Ps");
             }
         }
         // --- Deteccion ---
@@ -403,7 +403,7 @@ namespace TGC.MonoGame.TP.Entities.Enemy
             _sneakNoiseCooldown -= elapsedTime;
             if (distance <= SneakNoiseDistance && _sneakNoiseCooldown <= 0f)
             {
-                Audio.Play("Ps");
+                SoundManager.Play("Ps");
                 _sneakNoiseCooldown = SneakNoiseInterval;
             }
 

@@ -10,6 +10,7 @@ internal sealed class PauseState : IGameState
     private readonly GameStateContext _context;
     private readonly MenuScreen _menu;
     private readonly Texture2D _pixel;
+    private bool _optionsOpen;
 
     public bool DrawsStatesBelow => true;
 
@@ -19,6 +20,7 @@ internal sealed class PauseState : IGameState
         _menu = new MenuScreen(context, new[]
         {
             ("Resume", () => context.States.Pop()),
+            ("Opciones", OpenOptions),
             ("Restart", () => context.States.Replace(restart())),
             ("Main Menu", () =>
             {
@@ -31,7 +33,17 @@ internal sealed class PauseState : IGameState
         _pixel.SetData(new[] { Color.White });
     }
 
-    public void Enter() => _context.SetMouseVisible(true);
+    public void Enter()
+    {
+        _optionsOpen = false;
+        _context.SetMouseVisible(true);
+    }
+
+    private void OpenOptions()
+    {
+        _optionsOpen = true;
+        _context.States.Push(new OptionsState(_context));
+    }
     public void Exit() => _context.SetMouseVisible(false);
 
     public void Update(GameTime gameTime)
@@ -51,6 +63,6 @@ internal sealed class PauseState : IGameState
         _context.SpriteBatch.Begin();
         _context.SpriteBatch.Draw(_pixel, viewport.Bounds, Color.Black * 0.65f);
         _context.SpriteBatch.End();
-        _menu.Draw();
+        if (!_optionsOpen) _menu.Draw();
     }
 }

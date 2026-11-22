@@ -48,15 +48,17 @@ internal sealed class EndState : IGameState
         spriteBatch.Begin();
         spriteBatch.Draw(_pixel, viewport.Bounds, Color.Black * 0.7f);
 
-        var titleSize = font.MeasureString(_title) * 2f;
+        var uiScale = UiScale.Of(viewport);
+        var titleScale = 2f * uiScale;
+        var titleSize = font.MeasureString(_title) * titleScale;
         spriteBatch.DrawString(font, _title,
             new Vector2((viewport.Width - titleSize.X) * 0.5f, viewport.Height * 0.2f),
-            _titleColor, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+            _titleColor, 0f, Vector2.Zero, titleScale, SpriteEffects.None, 0f);
 
-        var subSize = font.MeasureString(_subtitle);
+        var subSize = font.MeasureString(_subtitle) * uiScale;
         spriteBatch.DrawString(font, _subtitle,
-            new Vector2((viewport.Width - subSize.X) * 0.5f, viewport.Height * 0.2f + titleSize.Y + 10f),
-            Color.White);
+            new Vector2((viewport.Width - subSize.X) * 0.5f, viewport.Height * 0.2f + titleSize.Y + 10f * uiScale),
+            Color.White, 0f, Vector2.Zero, uiScale, SpriteEffects.None, 0f);
         spriteBatch.End();
 
         _menu.Draw();

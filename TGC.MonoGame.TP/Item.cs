@@ -166,7 +166,7 @@ namespace TGC.MonoGame.TP
 
         public override void Use(Player player)
     {
-        Audio.Play("camera");
+        SoundManager.Play("camera");
         Flash?.Invoke();
     }
 

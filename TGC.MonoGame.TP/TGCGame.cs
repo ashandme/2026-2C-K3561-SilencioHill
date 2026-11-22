@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using TGC.MonoGame.TP.GameStates;
 
 namespace TGC.MonoGame.TP;
@@ -17,8 +18,9 @@ public class TGCGame : Game
     public TGCGame()
     {
         _graphics = new GraphicsDeviceManager(this);
-        _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 100;
-        _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height - 100;
+        // Fullscreen at the saved resolution (the monitor native one by default).
+        // All UI is laid out relative to the viewport (see UiScale), so any resolution works.
+        DisplaySettings.Init(_graphics);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
@@ -32,7 +34,7 @@ public class TGCGame : Game
 
     protected override void LoadContent()
     {
-        Audio.Init(Content);
+        SoundManager.Init(Content);
         var spriteBatch = new SpriteBatch(GraphicsDevice);
         var font = Content.Load<SpriteFont>("SpriteFonts/CascadiaCode/CascadiaCodePL");
         _states = new GameStateManager();
@@ -52,6 +54,7 @@ public class TGCGame : Game
     protected override void Update(GameTime gameTime)
     {
         _input.Update(gameTime);
+        if (_input.IsKeyPressed(Keys.F11)) DisplaySettings.ToggleFullScreen();
         _states.Update(gameTime);
         base.Update(gameTime);
     }
