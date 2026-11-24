@@ -7,8 +7,7 @@
 [#BuiltWithMonoGame](https://monogame.net/) and [.NET Core](https://dotnet.microsoft.com)
 
 ## Descripción
-
-Proyecto plantilla para los trabajos prácticos de la asignatura electiva [Técnicas de Gráficos por Computadora](https://tgc-utn.github.io/) (TGC) en la carrera de Ingeniería en Sistemas de Información. Universidad Tecnológica Nacional, Facultad Regional Buenos Aires (UTN-FRBA).
+Un juego de sigilo y terror en primera persona, ambientado en una casa abandonada, la luz es escasa y cada sombra importa. Tu objetivo es explorar el lugar, recolectar los 5 objectivos y escapar sin ser atrapado por el enemigo que patrulla los pasillos siguiendo rutas predefinidas.
 
 ## Configuración del entorno de desarrollo
 
@@ -20,9 +19,9 @@ Los recursos usados se almacenan utilizando [Git LFS](https://git-lfs.github.com
 
 ## Integrantes
 
-TGC, Tgcito  |  Soleto, Oscar
+Farret, Felipe |  Soleto, Oscar
 ------------ | -------------
-| <img src="https://github.com/tgc-utn/tgc-utn.github.io/blob/main/images/robotgc.png" height="500"> | <img src="https://github.com/tgc-utn/tgc-utn.github.io/blob/main/images/trofeotp.png" height="500"> |
+| <img src="https://github.com/tgc-utn/tgc-utn.github.io/blob/main/images/robotgc.png" height="500"> | <img src="https://ashand.me/res/face.jpg" height="500"> |
 
 ## Capturas
 
